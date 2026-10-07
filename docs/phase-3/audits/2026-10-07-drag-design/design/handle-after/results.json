@@ -1,0 +1,66 @@
+{
+  "runAt": "2026-10-07T09:05:34.473Z",
+  "checks": [
+    {
+      "viewportWidth": 320,
+      "kind": "known",
+      "width": 44,
+      "height": 44,
+      "insidePicture": true,
+      "avoidsContent": true,
+      "handleTouchAction": "none",
+      "pictureTouchAction": "auto"
+    },
+    {
+      "viewportWidth": 320,
+      "kind": "unknown-picture",
+      "width": 44,
+      "height": 44,
+      "insidePicture": true,
+      "avoidsContent": true,
+      "handleTouchAction": "none",
+      "pictureTouchAction": "auto"
+    },
+    {
+      "viewportWidth": 320,
+      "kind": "unknown-warning",
+      "width": 44,
+      "height": 44,
+      "insidePicture": true,
+      "avoidsContent": true,
+      "handleTouchAction": "none",
+      "pictureTouchAction": "auto"
+    },
+    {
+      "viewportWidth": 1440,
+      "kind": "known",
+      "width": 44,
+      "height": 44,
+      "insidePicture": true,
+      "avoidsContent": true,
+      "handleTouchAction": "none",
+      "pictureTouchAction": "auto"
+    },
+    {
+      "viewportWidth": 1440,
+      "kind": "unknown-picture",
+      "width": 44,
+      "height": 44,
+      "insidePicture": true,
+      "avoidsContent": true,
+      "handleTouchAction": "none",
+      "pictureTouchAction": "auto"
+    },
+    {
+      "viewportWidth": 1440,
+      "kind": "unknown-warning",
+      "width": 44,
+      "height": 44,
+      "insidePicture": true,
+      "avoidsContent": true,
+      "handleTouchAction": "none",
+      "pictureTouchAction": "auto"
+    }
+  ],
+  "errors": []
+}

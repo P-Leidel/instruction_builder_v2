@@ -1,0 +1,2284 @@
+{
+  "runAt": "2026-10-07T10:22:54.902Z",
+  "browser": "153.0.8010.12",
+  "checks": {
+    "INITIAL_VIEWPORT_HAS_PICTURE_320": true,
+    "INSERTED_PICTURE_FOCUS_320": true,
+    "NO_GLOBAL_SHRINK_320": true,
+    "BOUNDED_LOCAL_TILE_SIZE_320": true,
+    "PAPER_SIZE_STABLE_AFTER_LONG_GROUP_320": true,
+    "CANONICAL_A4_PHYSICAL_DIMENSIONS_320": true,
+    "SEQUENCE_NUMBERS_320": true,
+    "NO_DOT_DRAG_HANDLES_320": true,
+    "CONTROL_MINIMA_320": true,
+    "NO_HORIZONTAL_OVERFLOW_320": true,
+    "GROUP_ADD_INSIDE_VIEWPORT_320": true,
+    "PANEL_MODALITY_320": true,
+    "PANEL_PRESERVES_PHYSICAL_GEOMETRY_320": true,
+    "NO_RESULTS_320": true,
+    "ESCAPE_FOCUS_RETURN_320": true,
+    "PANEL_IS_NOT_HISTORY_320": true,
+    "VIEWPORT_PRESERVES_PHYSICAL_GEOMETRY_320": true,
+    "TEXT_ZOOM_200_WRAP_320": true,
+    "RECIPIENT_HAS_NO_EDITOR_320": true,
+    "LONG_GROUP_20_320": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_390": true,
+    "INSERTED_PICTURE_FOCUS_390": true,
+    "NO_GLOBAL_SHRINK_390": true,
+    "BOUNDED_LOCAL_TILE_SIZE_390": true,
+    "PAPER_SIZE_STABLE_AFTER_LONG_GROUP_390": true,
+    "CANONICAL_A4_PHYSICAL_DIMENSIONS_390": true,
+    "SEQUENCE_NUMBERS_390": true,
+    "NO_DOT_DRAG_HANDLES_390": true,
+    "CONTROL_MINIMA_390": true,
+    "NO_HORIZONTAL_OVERFLOW_390": true,
+    "GROUP_ADD_INSIDE_VIEWPORT_390": true,
+    "PANEL_MODALITY_390": true,
+    "PANEL_PRESERVES_PHYSICAL_GEOMETRY_390": true,
+    "NO_RESULTS_390": true,
+    "ESCAPE_FOCUS_RETURN_390": true,
+    "PANEL_IS_NOT_HISTORY_390": true,
+    "VIEWPORT_PRESERVES_PHYSICAL_GEOMETRY_390": true,
+    "TEXT_ZOOM_200_WRAP_390": true,
+    "LONG_GROUP_20_390": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_768": true,
+    "INSERTED_PICTURE_FOCUS_768": true,
+    "NO_GLOBAL_SHRINK_768": true,
+    "BOUNDED_LOCAL_TILE_SIZE_768": true,
+    "PAPER_SIZE_STABLE_AFTER_LONG_GROUP_768": true,
+    "CANONICAL_A4_PHYSICAL_DIMENSIONS_768": true,
+    "SEQUENCE_NUMBERS_768": true,
+    "NO_DOT_DRAG_HANDLES_768": true,
+    "CONTROL_MINIMA_768": true,
+    "NO_HORIZONTAL_OVERFLOW_768": true,
+    "GROUP_ADD_INSIDE_VIEWPORT_768": true,
+    "PANEL_MODALITY_768": true,
+    "PANEL_PRESERVES_PHYSICAL_GEOMETRY_768": true,
+    "NO_RESULTS_768": true,
+    "ESCAPE_FOCUS_RETURN_768": true,
+    "PANEL_IS_NOT_HISTORY_768": true,
+    "VIEWPORT_PRESERVES_PHYSICAL_GEOMETRY_768": true,
+    "TEXT_ZOOM_200_WRAP_768": true,
+    "LONG_GROUP_20_768": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_1440": true,
+    "INSERTED_PICTURE_FOCUS_1440": true,
+    "NO_GLOBAL_SHRINK_1440": true,
+    "BOUNDED_LOCAL_TILE_SIZE_1440": true,
+    "PAPER_SIZE_STABLE_AFTER_LONG_GROUP_1440": true,
+    "CANONICAL_A4_PHYSICAL_DIMENSIONS_1440": true,
+    "SEQUENCE_NUMBERS_1440": true,
+    "NO_DOT_DRAG_HANDLES_1440": true,
+    "CONTROL_MINIMA_1440": true,
+    "NO_HORIZONTAL_OVERFLOW_1440": true,
+    "GROUP_ADD_INSIDE_VIEWPORT_1440": true,
+    "PANEL_MODALITY_1440": true,
+    "PANEL_PRESERVES_PHYSICAL_GEOMETRY_1440": true,
+    "NO_RESULTS_1440": true,
+    "ESCAPE_FOCUS_RETURN_1440": true,
+    "PANEL_IS_NOT_HISTORY_1440": true,
+    "VIEWPORT_PRESERVES_PHYSICAL_GEOMETRY_1440": true,
+    "TEXT_ZOOM_200_WRAP_1440": true,
+    "RECIPIENT_HAS_NO_EDITOR_1440": true,
+    "LONG_GROUP_20_1440": true,
+    "NO_CONSOLE_OR_PAGE_ERRORS": true
+  },
+  "observations": [
+    {
+      "width": 320,
+      "firstVisible": {
+        "x": 34.890625,
+        "y": 735.796875,
+        "width": 83.140625,
+        "height": 75.578125
+      },
+      "before": {
+        "x": 34.890625,
+        "y": 682.890625,
+        "width": 359.046875,
+        "height": 128.5
+      },
+      "after": {
+        "x": 34.890625,
+        "y": 682.890625,
+        "width": 359.046875,
+        "height": 128.5
+      },
+      "paperBefore": {
+        "x": 16,
+        "y": 611.09375,
+        "width": 396.84375,
+        "height": 561.25
+      },
+      "paperAfter": {
+        "x": 16,
+        "y": 611.09375,
+        "width": 396.84375,
+        "height": 561.25
+      },
+      "geometryBeforePanel": [
+        {
+          "width": 396.84375,
+          "height": 561.25,
+          "groups": [
+            {
+              "id": "group-0",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 71.796875,
+              "width": 359.046875,
+              "height": 128.5
+            },
+            {
+              "id": "group-1",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 207.859375,
+              "width": 359.046875,
+              "height": 128.5
+            },
+            {
+              "id": "group-2",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 343.921875,
+              "width": 359.046875,
+              "height": 128.5
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-0-0",
+              "x": 18.890625,
+              "y": 124.703125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "picture-1-0",
+              "x": 18.890625,
+              "y": 260.765625,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "picture-2-0",
+              "x": 18.890625,
+              "y": 396.828125,
+              "width": 83.140625,
+              "height": 75.578125
+            }
+          ]
+        },
+        {
+          "width": 396.84375,
+          "height": 561.25,
+          "groups": [
+            {
+              "id": "group-3",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 18.890625,
+              "width": 359.046875,
+              "height": 128.5
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-3-0",
+              "x": 18.890625,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            }
+          ]
+        },
+        {
+          "width": 396.84375,
+          "height": 561.25,
+          "groups": [
+            {
+              "id": "group-4",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 18.890625,
+              "width": 359.046875,
+              "height": 461.09375
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-4-0",
+              "x": 18.890625,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-1",
+              "x": 109.59375,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-2",
+              "x": 200.296875,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-3",
+              "x": 291.015625,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-4",
+              "x": 18.890625,
+              "y": 154.953125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-5",
+              "x": 109.59375,
+              "y": 154.953125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-6",
+              "x": 200.296875,
+              "y": 154.953125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-7",
+              "x": 291.015625,
+              "y": 154.953125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-8",
+              "x": 18.890625,
+              "y": 238.09375,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-9",
+              "x": 109.59375,
+              "y": 238.09375,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-10",
+              "x": 200.296875,
+              "y": 238.09375,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-11",
+              "x": 291.015625,
+              "y": 238.09375,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-12",
+              "x": 18.890625,
+              "y": 321.25,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-13",
+              "x": 109.59375,
+              "y": 321.25,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-14",
+              "x": 200.296875,
+              "y": 321.25,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-15",
+              "x": 291.015625,
+              "y": 321.25,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-16",
+              "x": 18.890625,
+              "y": 404.390625,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-17",
+              "x": 109.59375,
+              "y": 404.390625,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-18",
+              "x": 200.296875,
+              "y": 404.390625,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-19",
+              "x": 291.015625,
+              "y": 404.390625,
+              "width": 83.140625,
+              "height": 75.578125
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 91.421875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 53.03125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 57.359375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 304,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 304,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Paper format",
+            "width": 147.203125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Page orientation",
+            "width": 147.203125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Canvas zoom",
+            "width": 147.203125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 1: Group 1",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 1: Group 1",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Wash hands",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 2: Group 2",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 2: Group 2",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 3: Group 3",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 3: Group 3",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 4: Group 4",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 4: Group 4",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 5: Group 5",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 5: Group 5",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 390,
+      "firstVisible": {
+        "x": 34.890625,
+        "y": 735.796875,
+        "width": 83.140625,
+        "height": 75.578125
+      },
+      "before": {
+        "x": 34.890625,
+        "y": 682.890625,
+        "width": 359.046875,
+        "height": 128.5
+      },
+      "after": {
+        "x": 34.890625,
+        "y": 682.890625,
+        "width": 359.046875,
+        "height": 128.5
+      },
+      "paperBefore": {
+        "x": 16,
+        "y": 611.09375,
+        "width": 396.84375,
+        "height": 561.25
+      },
+      "paperAfter": {
+        "x": 16,
+        "y": 611.09375,
+        "width": 396.84375,
+        "height": 561.25
+      },
+      "geometryBeforePanel": [
+        {
+          "width": 396.84375,
+          "height": 561.25,
+          "groups": [
+            {
+              "id": "group-0",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 71.796875,
+              "width": 359.046875,
+              "height": 128.5
+            },
+            {
+              "id": "group-1",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 207.859375,
+              "width": 359.046875,
+              "height": 128.5
+            },
+            {
+              "id": "group-2",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 343.921875,
+              "width": 359.046875,
+              "height": 128.5
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-0-0",
+              "x": 18.890625,
+              "y": 124.703125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "picture-1-0",
+              "x": 18.890625,
+              "y": 260.765625,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "picture-2-0",
+              "x": 18.890625,
+              "y": 396.828125,
+              "width": 83.140625,
+              "height": 75.578125
+            }
+          ]
+        },
+        {
+          "width": 396.84375,
+          "height": 561.25,
+          "groups": [
+            {
+              "id": "group-3",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 18.890625,
+              "width": 359.046875,
+              "height": 128.5
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-3-0",
+              "x": 18.890625,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            }
+          ]
+        },
+        {
+          "width": 396.84375,
+          "height": 561.25,
+          "groups": [
+            {
+              "id": "group-4",
+              "segment": "0",
+              "x": 18.890625,
+              "y": 18.890625,
+              "width": 359.046875,
+              "height": 461.09375
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-4-0",
+              "x": 18.890625,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-1",
+              "x": 109.59375,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-2",
+              "x": 200.296875,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-3",
+              "x": 291.015625,
+              "y": 71.796875,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-4",
+              "x": 18.890625,
+              "y": 154.953125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-5",
+              "x": 109.59375,
+              "y": 154.953125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-6",
+              "x": 200.296875,
+              "y": 154.953125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-7",
+              "x": 291.015625,
+              "y": 154.953125,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-8",
+              "x": 18.890625,
+              "y": 238.09375,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-9",
+              "x": 109.59375,
+              "y": 238.09375,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-10",
+              "x": 200.296875,
+              "y": 238.09375,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-11",
+              "x": 291.015625,
+              "y": 238.09375,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-12",
+              "x": 18.890625,
+              "y": 321.25,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-13",
+              "x": 109.59375,
+              "y": 321.25,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-14",
+              "x": 200.296875,
+              "y": 321.25,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-15",
+              "x": 291.015625,
+              "y": 321.25,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-16",
+              "x": 18.890625,
+              "y": 404.390625,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-17",
+              "x": 109.59375,
+              "y": 404.390625,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-18",
+              "x": 200.296875,
+              "y": 404.390625,
+              "width": 83.140625,
+              "height": 75.578125
+            },
+            {
+              "id": "long-19",
+              "x": 291.015625,
+              "y": 404.390625,
+              "width": 83.140625,
+              "height": 75.578125
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 91.421875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 53.03125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 57.359375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 374,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 374,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Paper format",
+            "width": 182.203125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Page orientation",
+            "width": 182.203125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Canvas zoom",
+            "width": 182.203125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 1: Group 1",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 1: Group 1",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Wash hands",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 2: Group 2",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 2: Group 2",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 3: Group 3",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 3: Group 3",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 4: Group 4",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 4: Group 4",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 5: Group 5",
+            "width": 245.640625,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 5: Group 5",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 768,
+      "firstVisible": {
+        "x": 69.78125,
+        "y": 600.765625,
+        "width": 166.296875,
+        "height": 151.171875
+      },
+      "before": {
+        "x": 69.78125,
+        "y": 494.953125,
+        "width": 718.109375,
+        "height": 257
+      },
+      "after": {
+        "x": 69.78125,
+        "y": 494.953125,
+        "width": 718.109375,
+        "height": 257
+      },
+      "paperBefore": {
+        "x": 32,
+        "y": 351.34375,
+        "width": 793.6875,
+        "height": 1122.515625
+      },
+      "paperAfter": {
+        "x": 32,
+        "y": 351.34375,
+        "width": 793.6875,
+        "height": 1122.515625
+      },
+      "geometryBeforePanel": [
+        {
+          "width": 793.6875,
+          "height": 1122.515625,
+          "groups": [
+            {
+              "id": "group-0",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 143.609375,
+              "width": 718.109375,
+              "height": 257
+            },
+            {
+              "id": "group-1",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 415.734375,
+              "width": 718.109375,
+              "height": 257
+            },
+            {
+              "id": "group-2",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 687.859375,
+              "width": 718.109375,
+              "height": 257
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-0-0",
+              "x": 37.78125,
+              "y": 249.421875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "picture-1-0",
+              "x": 37.78125,
+              "y": 521.546875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "picture-2-0",
+              "x": 37.78125,
+              "y": 793.671875,
+              "width": 166.296875,
+              "height": 151.171875
+            }
+          ]
+        },
+        {
+          "width": 793.6875,
+          "height": 1122.515625,
+          "groups": [
+            {
+              "id": "group-3",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 37.78125,
+              "width": 718.109375,
+              "height": 257
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-3-0",
+              "x": 37.78125,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            }
+          ]
+        },
+        {
+          "width": 793.6875,
+          "height": 1122.515625,
+          "groups": [
+            {
+              "id": "group-4",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 37.78125,
+              "width": 718.109375,
+              "height": 922.203125
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-4-0",
+              "x": 37.78125,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-1",
+              "x": 219.1875,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-2",
+              "x": 400.609375,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-3",
+              "x": 582.03125,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-4",
+              "x": 37.78125,
+              "y": 309.90625,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-5",
+              "x": 219.1875,
+              "y": 309.90625,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-6",
+              "x": 400.609375,
+              "y": 309.90625,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-7",
+              "x": 582.03125,
+              "y": 309.90625,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-8",
+              "x": 37.78125,
+              "y": 476.203125,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-9",
+              "x": 219.1875,
+              "y": 476.203125,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-10",
+              "x": 400.609375,
+              "y": 476.203125,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-11",
+              "x": 582.03125,
+              "y": 476.203125,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-12",
+              "x": 37.78125,
+              "y": 642.5,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-13",
+              "x": 219.1875,
+              "y": 642.5,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-14",
+              "x": 400.609375,
+              "y": 642.5,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-15",
+              "x": 582.03125,
+              "y": 642.5,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-16",
+              "x": 37.78125,
+              "y": 808.796875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-17",
+              "x": 219.1875,
+              "y": 808.796875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-18",
+              "x": 400.609375,
+              "y": 808.796875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-19",
+              "x": 582.03125,
+              "y": 808.796875,
+              "width": 166.296875,
+              "height": 151.171875
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 96.203125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 57.8125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 154.78125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 400,
+            "height": 44.09375,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 320,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Paper format",
+            "width": 237.328125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Page orientation",
+            "width": 237.34375,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Canvas zoom",
+            "width": 237.328125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 1: Group 1",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 1: Group 1",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Wash hands",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 2: Group 2",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 2: Group 2",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 3: Group 3",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 3: Group 3",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 4: Group 4",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 4: Group 4",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 5: Group 5",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 5: Group 5",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 1440,
+      "firstVisible": {
+        "x": 353.4375,
+        "y": 600.765625,
+        "width": 166.296875,
+        "height": 151.171875
+      },
+      "before": {
+        "x": 353.4375,
+        "y": 494.953125,
+        "width": 718.109375,
+        "height": 257
+      },
+      "after": {
+        "x": 353.4375,
+        "y": 494.953125,
+        "width": 718.109375,
+        "height": 257
+      },
+      "paperBefore": {
+        "x": 315.65625,
+        "y": 351.34375,
+        "width": 793.6875,
+        "height": 1122.515625
+      },
+      "paperAfter": {
+        "x": 315.65625,
+        "y": 351.34375,
+        "width": 793.6875,
+        "height": 1122.515625
+      },
+      "geometryBeforePanel": [
+        {
+          "width": 793.6875,
+          "height": 1122.515625,
+          "groups": [
+            {
+              "id": "group-0",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 143.609375,
+              "width": 718.109375,
+              "height": 257
+            },
+            {
+              "id": "group-1",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 415.734375,
+              "width": 718.109375,
+              "height": 257
+            },
+            {
+              "id": "group-2",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 687.859375,
+              "width": 718.109375,
+              "height": 257
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-0-0",
+              "x": 37.78125,
+              "y": 249.421875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "picture-1-0",
+              "x": 37.78125,
+              "y": 521.546875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "picture-2-0",
+              "x": 37.78125,
+              "y": 793.671875,
+              "width": 166.296875,
+              "height": 151.171875
+            }
+          ]
+        },
+        {
+          "width": 793.6875,
+          "height": 1122.515625,
+          "groups": [
+            {
+              "id": "group-3",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 37.78125,
+              "width": 718.109375,
+              "height": 257
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-3-0",
+              "x": 37.78125,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            }
+          ]
+        },
+        {
+          "width": 793.6875,
+          "height": 1122.515625,
+          "groups": [
+            {
+              "id": "group-4",
+              "segment": "0",
+              "x": 37.78125,
+              "y": 37.78125,
+              "width": 718.109375,
+              "height": 922.203125
+            }
+          ],
+          "pictures": [
+            {
+              "id": "picture-4-0",
+              "x": 37.78125,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-1",
+              "x": 219.1875,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-2",
+              "x": 400.609375,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-3",
+              "x": 582.03125,
+              "y": 143.59375,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-4",
+              "x": 37.78125,
+              "y": 309.90625,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-5",
+              "x": 219.1875,
+              "y": 309.90625,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-6",
+              "x": 400.609375,
+              "y": 309.90625,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-7",
+              "x": 582.03125,
+              "y": 309.90625,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-8",
+              "x": 37.78125,
+              "y": 476.203125,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-9",
+              "x": 219.1875,
+              "y": 476.203125,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-10",
+              "x": 400.609375,
+              "y": 476.203125,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-11",
+              "x": 582.03125,
+              "y": 476.203125,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-12",
+              "x": 37.78125,
+              "y": 642.5,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-13",
+              "x": 219.1875,
+              "y": 642.5,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-14",
+              "x": 400.609375,
+              "y": 642.5,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-15",
+              "x": 582.03125,
+              "y": 642.5,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-16",
+              "x": 37.78125,
+              "y": 808.796875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-17",
+              "x": 219.1875,
+              "y": 808.796875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-18",
+              "x": 400.609375,
+              "y": 808.796875,
+              "width": 166.296875,
+              "height": 151.171875
+            },
+            {
+              "id": "long-19",
+              "x": 582.03125,
+              "y": 808.796875,
+              "width": 166.296875,
+              "height": 151.171875
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "overflow": -15,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 96.203125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 57.8125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 154.78125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 1057,
+            "height": 44.09375,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 320,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Paper format",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Page orientation",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Canvas zoom",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 1: Group 1",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 1: Group 1",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Wash hands",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 2: Group 2",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 2: Group 2",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 3: Group 3",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 3: Group 3",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 4: Group 4",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 4: Group 4",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 5: Group 5",
+            "width": 604.703125,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 5: Group 5",
+            "width": 105.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": -15
+    }
+  ],
+  "errors": []
+}

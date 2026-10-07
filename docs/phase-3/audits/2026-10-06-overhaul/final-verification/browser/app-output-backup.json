@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "title": "Output integration current",
+    "domain": "recipe",
+    "createdAt": "2026-10-06T00:00:00Z",
+    "presentation": "board"
+  },
+  "steps": [
+    {
+      "id": "group-0",
+      "title": "Group 1",
+      "tokens": [
+        {
+          "id": "picture-0-0",
+          "iconId": "routines.action.wash-hands",
+          "category": "action",
+          "label": "Updated authored meaning",
+          "quantity": {
+            "iconId": "quantity.amount",
+            "amount": 4,
+            "unit": "cups",
+            "label": " "
+          },
+          "time": {
+            "iconId": "time.duration",
+            "seconds": 90,
+            "label": ""
+          },
+          "warning": {
+            "iconId": "custom-warning",
+            "label": "Stay clear"
+          }
+        }
+      ],
+      "time": {
+        "iconId": "time.duration",
+        "seconds": 120,
+        "label": " "
+      }
+    },
+    {
+      "id": "group-1",
+      "title": "Group 2",
+      "tokens": [
+        {
+          "id": "book",
+          "iconId": "learning.object.book",
+          "category": "object",
+          "label": "Full authored book meaning"
+        }
+      ]
+    }
+  ]
+}

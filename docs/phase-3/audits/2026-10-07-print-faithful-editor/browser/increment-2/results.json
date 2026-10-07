@@ -1,0 +1,349 @@
+{
+  "runAt": "2026-10-07T09:49:59.860Z",
+  "checks": {
+    "physical_page_regions_exist": true,
+    "paper_format_control_reachable": true,
+    "canvas_zoom_control_reachable": true,
+    "new_session_defaults_a4_portrait": true,
+    "new_session_zoom_is_explicit_100_percent": true,
+    "a4_viewbox_is_210_by_297_mm": true,
+    "a4_screen_width_96_css_pixels_per_inch": true,
+    "a4_screen_height_96_css_pixels_per_inch": true,
+    "all_ten_pictures_have_finite_cells": true,
+    "every_picture_has_same_fixed_cell_size": true,
+    "pictures_fill_horizontally_before_wrapping": true,
+    "fixed_row_pitch": true,
+    "no_six_dot_drag_controls": true,
+    "header_add_picture_group-0": true,
+    "header_add_picture_44px_group-0": true,
+    "header_add_picture_group-1": true,
+    "header_add_picture_44px_group-1": true,
+    "header_add_picture_group-2": true,
+    "header_add_picture_44px_group-2": true,
+    "opening_overlay_panel_keeps_all_cell_positions": true,
+    "opening_overlay_panel_keeps_paper_scale": true,
+    "adding_quantity_warning_time_keeps_all_cell_positions": true,
+    "changing_quantity_warning_time_keeps_all_cell_positions": true,
+    "structured_attachment_values_preserved": true,
+    "viewport_resize_keeps_all_cell_positions": true,
+    "viewport_resize_keeps_physical_paper_width": true,
+    "only_explicit_zoom_changes_paper_scale": true,
+    "explicit_zoom_scales_same_physical_cells": true,
+    "output_uses_shared_a4_format": true,
+    "actual_download_has_a4_physical_dimensions": true,
+    "editor_and_actual_download_have_identical_physical_vectors": true,
+    "output_mode_change_reaches_editor_without_geometry_drift": true,
+    "changed_mode_editor_matches_actual_download": true,
+    "physical_svg_contains_no_editor_buttons": true,
+    "browser_errors_empty": true
+  },
+  "errors": [],
+  "measurements": {
+    "baseline": {
+      "papers": [
+        {
+          "index": "0",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        },
+        {
+          "index": "1",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        }
+      ],
+      "pictures": [
+        {
+          "id": "picture-0-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-1",
+          "page": "0",
+          "x": 219.1875,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-2",
+          "page": "0",
+          "x": 400.609375,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-3",
+          "page": "0",
+          "x": 582.03125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-4",
+          "page": "0",
+          "x": 37.78125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-5",
+          "page": "0",
+          "x": 219.1875,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-6",
+          "page": "0",
+          "x": 400.609375,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-7",
+          "page": "0",
+          "x": 582.03125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-8",
+          "page": "0",
+          "x": 37.78125,
+          "y": 582.03125,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-1-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 854.15625,
+          "width": 166.296875,
+          "height": 151.171875
+        }
+      ]
+    },
+    "attachmentsAdded": {
+      "papers": [
+        {
+          "index": "0",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        },
+        {
+          "index": "1",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        }
+      ],
+      "pictures": [
+        {
+          "id": "picture-0-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-1",
+          "page": "0",
+          "x": 219.1875,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-2",
+          "page": "0",
+          "x": 400.609375,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-3",
+          "page": "0",
+          "x": 582.03125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-4",
+          "page": "0",
+          "x": 37.78125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-5",
+          "page": "0",
+          "x": 219.1875,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-6",
+          "page": "0",
+          "x": 400.609375,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-7",
+          "page": "0",
+          "x": 582.03125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-8",
+          "page": "0",
+          "x": 37.78125,
+          "y": 582.03125,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-1-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 854.15625,
+          "width": 166.296875,
+          "height": 151.171875
+        }
+      ]
+    },
+    "attachmentsChanged": {
+      "papers": [
+        {
+          "index": "0",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        },
+        {
+          "index": "1",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        }
+      ],
+      "pictures": [
+        {
+          "id": "picture-0-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-1",
+          "page": "0",
+          "x": 219.1875,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-2",
+          "page": "0",
+          "x": 400.609375,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-3",
+          "page": "0",
+          "x": 582.03125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-4",
+          "page": "0",
+          "x": 37.78125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-5",
+          "page": "0",
+          "x": 219.1875,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-6",
+          "page": "0",
+          "x": 400.609375,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-7",
+          "page": "0",
+          "x": 582.03125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-8",
+          "page": "0",
+          "x": 37.78125,
+          "y": 582.03125,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-1-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 854.15625,
+          "width": 166.296875,
+          "height": 151.171875
+        }
+      ]
+    }
+  }
+}

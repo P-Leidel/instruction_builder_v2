@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Scoped compact form proof</title></head><body><div id="app"></div>
+<script type="module">
+import { h, render } from "preact";
+import { documentSession } from "/src/state/document.ts";
+import { preferences } from "/src/state/preferences.ts";
+import { authoring, capturePanelOpener } from "/src/state/ui.ts";
+import { AuthoringPanel } from "/src/components/AuthoringPanel/AuthoringPanel.tsx";
+import "/src/styles/global.css";
+import "/src/components/InstructionEditor/editor.css";
+function FormsHarness() {
+  const source = documentSession.document.value;
+  document.documentElement.dataset.theme = preferences.value.theme;
+  return h("div", { class: "app" }, [
+    h("h1", { class: "app-brand" }, "Scoped compact form proof"),
+    h("main", null, h("div", { class: "editor-layout" }, [
+      h("section", { class: "instruction-editor", "aria-label": "Form target fixtures" }, source.steps.map(group => h("section", { key: group.id }, [
+        h("h2", null, group.title),
+        ...group.tokens.map(token => h("button", { key: token.id, type: "button", "data-editor-picture": token.id, onClick: () => { capturePanelOpener(); authoring.openPicture(group.id, token.id); } }, token.label)),
+        h("button", { type: "button", "data-add-picture": group.id }, "Surviving group control"),
+      ]))),
+      h(AuthoringPanel, { session: documentSession }),
+    ])),
+  ]);
+}
+render(h(FormsHarness), document.getElementById("app"));
+</script></body></html>

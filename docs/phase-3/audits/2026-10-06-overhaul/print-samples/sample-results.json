@@ -1,0 +1,358 @@
+{
+  "runAt": "2026-10-06T16:16:22.497Z",
+  "browser": "153.0.8010.12",
+  "status": "Digitally generated and reopened; physical/participant acceptance pending",
+  "errors": [],
+  "records": [
+    {
+      "name": "workplace-label",
+      "widthMm": 50,
+      "heightMm": 30,
+      "pageCount": 1,
+      "pages": [
+        {
+          "svg": "workplace-label-page-1.svg",
+          "rendered": "workplace-label-page-1.png"
+        }
+      ],
+      "mainPictures": 1,
+      "mode": "labels",
+      "pdf": "workplace-label.pdf",
+      "options": {
+        "preset": "label",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0"
+        ],
+        "metadata": {
+          "documentTitle": false,
+          "groupTitles": false,
+          "stepNumbers": false,
+          "totalTime": false
+        }
+      }
+    },
+    {
+      "name": "workplace-a6",
+      "widthMm": 105,
+      "heightMm": 148,
+      "pageCount": 3,
+      "pages": [
+        {
+          "svg": "workplace-a6-page-1.svg",
+          "rendered": "workplace-a6-page-1.png"
+        },
+        {
+          "svg": "workplace-a6-page-2.svg",
+          "rendered": "workplace-a6-page-2.png"
+        },
+        {
+          "svg": "workplace-a6-page-3.svg",
+          "rendered": "workplace-a6-page-3.png"
+        }
+      ],
+      "mainPictures": 4,
+      "mode": "labels",
+      "pdf": "workplace-a6.pdf",
+      "options": {
+        "preset": "card",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0",
+          "group-1",
+          "group-2"
+        ],
+        "metadata": {
+          "documentTitle": false,
+          "groupTitles": true,
+          "stepNumbers": true,
+          "totalTime": false
+        }
+      }
+    },
+    {
+      "name": "workplace-a4",
+      "widthMm": 210,
+      "heightMm": 297,
+      "pageCount": 1,
+      "pages": [
+        {
+          "svg": "workplace-a4-page-1.svg",
+          "rendered": "workplace-a4-page-1.png"
+        }
+      ],
+      "mainPictures": 4,
+      "mode": "labels",
+      "pdf": "workplace-a4.pdf",
+      "options": {
+        "preset": "sheet",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0",
+          "group-1",
+          "group-2"
+        ],
+        "metadata": {
+          "documentTitle": true,
+          "groupTitles": true,
+          "stepNumbers": true,
+          "totalTime": true
+        }
+      }
+    },
+    {
+      "name": "workplace-a3",
+      "widthMm": 297,
+      "heightMm": 420,
+      "pageCount": 1,
+      "pages": [
+        {
+          "svg": "workplace-a3-page-1.svg",
+          "rendered": "workplace-a3-page-1.png"
+        }
+      ],
+      "mainPictures": 4,
+      "mode": "labels",
+      "pdf": "workplace-a3.pdf",
+      "options": {
+        "preset": "large",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0",
+          "group-1",
+          "group-2"
+        ],
+        "metadata": {
+          "documentTitle": true,
+          "groupTitles": true,
+          "stepNumbers": true,
+          "totalTime": true
+        }
+      }
+    },
+    {
+      "name": "workplace-custom",
+      "widthMm": 180,
+      "heightMm": 250,
+      "pageCount": 1,
+      "pages": [
+        {
+          "svg": "workplace-custom-page-1.svg",
+          "rendered": "workplace-custom-page-1.png"
+        }
+      ],
+      "mainPictures": 4,
+      "mode": "labels",
+      "pdf": "workplace-custom.pdf",
+      "options": {
+        "preset": "custom",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0",
+          "group-1",
+          "group-2"
+        ],
+        "customSize": {
+          "widthMm": 180,
+          "heightMm": 250
+        },
+        "metadata": {
+          "documentTitle": true,
+          "groupTitles": true,
+          "stepNumbers": true,
+          "totalTime": true
+        }
+      }
+    },
+    {
+      "name": "routine-label",
+      "widthMm": 50,
+      "heightMm": 30,
+      "pageCount": 1,
+      "pages": [
+        {
+          "svg": "routine-label-page-1.svg",
+          "rendered": "routine-label-page-1.png"
+        }
+      ],
+      "mainPictures": 1,
+      "mode": "labels",
+      "pdf": "routine-label.pdf",
+      "options": {
+        "preset": "label",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0"
+        ],
+        "metadata": {
+          "documentTitle": false,
+          "groupTitles": false,
+          "stepNumbers": false,
+          "totalTime": false
+        }
+      }
+    },
+    {
+      "name": "routine-a6",
+      "widthMm": 105,
+      "heightMm": 148,
+      "pageCount": 3,
+      "pages": [
+        {
+          "svg": "routine-a6-page-1.svg",
+          "rendered": "routine-a6-page-1.png"
+        },
+        {
+          "svg": "routine-a6-page-2.svg",
+          "rendered": "routine-a6-page-2.png"
+        },
+        {
+          "svg": "routine-a6-page-3.svg",
+          "rendered": "routine-a6-page-3.png"
+        }
+      ],
+      "mainPictures": 3,
+      "mode": "labels",
+      "pdf": "routine-a6.pdf",
+      "options": {
+        "preset": "card",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0",
+          "group-1",
+          "group-2"
+        ],
+        "metadata": {
+          "documentTitle": false,
+          "groupTitles": true,
+          "stepNumbers": true,
+          "totalTime": false
+        }
+      }
+    },
+    {
+      "name": "routine-a4",
+      "widthMm": 210,
+      "heightMm": 297,
+      "pageCount": 1,
+      "pages": [
+        {
+          "svg": "routine-a4-page-1.svg",
+          "rendered": "routine-a4-page-1.png"
+        }
+      ],
+      "mainPictures": 3,
+      "mode": "labels",
+      "pdf": "routine-a4.pdf",
+      "options": {
+        "preset": "sheet",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0",
+          "group-1",
+          "group-2"
+        ],
+        "metadata": {
+          "documentTitle": true,
+          "groupTitles": true,
+          "stepNumbers": true,
+          "totalTime": true
+        }
+      }
+    },
+    {
+      "name": "routine-a3",
+      "widthMm": 297,
+      "heightMm": 420,
+      "pageCount": 1,
+      "pages": [
+        {
+          "svg": "routine-a3-page-1.svg",
+          "rendered": "routine-a3-page-1.png"
+        }
+      ],
+      "mainPictures": 3,
+      "mode": "labels",
+      "pdf": "routine-a3.pdf",
+      "options": {
+        "preset": "large",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0",
+          "group-1",
+          "group-2"
+        ],
+        "metadata": {
+          "documentTitle": true,
+          "groupTitles": true,
+          "stepNumbers": true,
+          "totalTime": true
+        }
+      }
+    },
+    {
+      "name": "routine-custom",
+      "widthMm": 180,
+      "heightMm": 250,
+      "pageCount": 1,
+      "pages": [
+        {
+          "svg": "routine-custom-page-1.svg",
+          "rendered": "routine-custom-page-1.png"
+        }
+      ],
+      "mainPictures": 3,
+      "mode": "labels",
+      "pdf": "routine-custom.pdf",
+      "options": {
+        "preset": "custom",
+        "locale": "en",
+        "orientation": "portrait",
+        "mode": "labels",
+        "background": "white",
+        "selectedStepIds": [
+          "group-0",
+          "group-1",
+          "group-2"
+        ],
+        "customSize": {
+          "widthMm": 180,
+          "heightMm": 250
+        },
+        "metadata": {
+          "documentTitle": true,
+          "groupTitles": true,
+          "stepNumbers": true,
+          "totalTime": true
+        }
+      }
+    }
+  ]
+}

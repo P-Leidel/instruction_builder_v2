@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "title": "日本語",
+    "presentation": "sequence",
+    "domain": "proof",
+    "createdAt": "2026-10-06T00:00:00Z"
+  },
+  "steps": [
+    {
+      "id": "kitchen-group",
+      "title": "Kitchen group",
+      "tokens": [
+        {
+          "id": "kitchen-token",
+          "category": "action",
+          "iconId": "action.chop",
+          "label": "Chop"
+        }
+      ]
+    },
+    {
+      "id": "routine-group",
+      "title": "Routine group",
+      "tokens": [
+        {
+          "id": "routine-token",
+          "category": "action",
+          "iconId": "routines.action.wash-hands",
+          "label": "Wash hands"
+        }
+      ]
+    },
+    {
+      "id": "learning-group",
+      "title": "Learning group",
+      "tokens": [
+        {
+          "id": "learning-token",
+          "category": "action",
+          "iconId": "learning.action.count",
+          "label": "Count"
+        }
+      ]
+    }
+  ]
+}

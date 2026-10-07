@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "title": "Cold JSON guide",
+    "domain": "proof",
+    "presentation": "sequence",
+    "createdAt": "2026-10-06T00:00:00Z"
+  },
+  "steps": [
+    {
+      "id": "cold-group",
+      "title": "Three libraries",
+      "time": {
+        "iconId": "time.duration",
+        "label": "1m",
+        "seconds": 60
+      },
+      "tokens": [
+        {
+          "id": "cold-kitchen",
+          "category": "action",
+          "iconId": "action.chop",
+          "label": "Chop",
+          "quantity": {
+            "iconId": "quantity.amount",
+            "amount": 2,
+            "unit": "kg",
+            "label": "2 kg"
+          },
+          "warning": {
+            "iconId": "warning.sharp",
+            "label": "Sharp"
+          }
+        },
+        {
+          "id": "cold-routines",
+          "category": "action",
+          "iconId": "routines.action.wash-hands",
+          "label": "Wash hands"
+        },
+        {
+          "id": "cold-learning",
+          "category": "action",
+          "iconId": "learning.action.count",
+          "label": "Count",
+          "note": "日本語 remains editable in JSON"
+        }
+      ]
+    }
+  ]
+}

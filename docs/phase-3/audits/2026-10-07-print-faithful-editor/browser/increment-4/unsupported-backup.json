@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "title": "unsupported repair",
+    "domain": "recipe",
+    "createdAt": "2026-10-06T00:00:00Z",
+    "presentation": "sequence"
+  },
+  "steps": [
+    {
+      "id": "group-0",
+      "title": "Group 1",
+      "tokens": [
+        {
+          "id": "repair-picture",
+          "iconId": "object.banana",
+          "category": "object",
+          "label": "日本語"
+        }
+      ]
+    }
+  ]
+}

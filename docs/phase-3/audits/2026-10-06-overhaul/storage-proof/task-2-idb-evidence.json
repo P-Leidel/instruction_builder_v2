@@ -1,0 +1,215 @@
+{
+  "runAt": "2026-10-06T15:05:37.270Z",
+  "browser": "153.0.8010.12",
+  "url": "http://127.0.0.1:31201/",
+  "checks": [
+    {
+      "check": "two simultaneous first launches",
+      "result": "PASS",
+      "guideId": "4a4fd315-2bb9-4eca-b891-e7870c86c3ea",
+      "transactions": "one atomic legacy read + guide creation + marker commit; each caller then lists"
+    },
+    {
+      "check": "simultaneous same-guide writers, sticky conflict/pagehide, exportable loser, explicit reload",
+      "result": "PASS",
+      "outcomes": [
+        {
+          "ok": false,
+          "reason": "conflict"
+        },
+        {
+          "ok": true,
+          "guideId": "4a4fd315-2bb9-4eca-b891-e7870c86c3ea"
+        }
+      ]
+    },
+    {
+      "check": "summary refresh preserves raw baseline, even with unchanged revision",
+      "result": "PASS"
+    },
+    {
+      "check": "different-guide concurrent commits",
+      "result": "PASS",
+      "revisions": [
+        4,
+        2
+      ]
+    },
+    {
+      "check": "tombstone blocks stale resurrection and stale restore",
+      "result": "PASS",
+      "tombstoneRevision": 5
+    },
+    {
+      "check": "changed legacy and malformed guide isolated with exact raw recovery",
+      "result": "PASS",
+      "notices": [
+        {
+          "code": "legacy-changed",
+          "sourceKey": "instruction-builder:document",
+          "recoveryKey": "instruction-builder:recovery:2026-10-06T15:05:32.896Z:830bd897-2d45-499f-b929-38866ee3677c",
+          "guideId": "4a4fd315-2bb9-4eca-b891-e7870c86c3ea"
+        },
+        {
+          "code": "guide-recovered",
+          "sourceKey": "instruction-builder:guide:broken",
+          "recoveryKey": "instruction-builder:recovery:2026-10-06T15:05:32.898Z:3ae1cad4-bf3d-4fb4-8237-b6f1fb7588f1",
+          "guideId": "broken"
+        }
+      ]
+    },
+    {
+      "check": "latest queued snapshot drains before navigation; truthful pending/saving/saved",
+      "result": {
+        "ok": true,
+        "guideId": "f705c029-11d3-4c79-8615-d35796e4f891"
+      },
+      "states": [
+        "loading",
+        "saved",
+        "pending",
+        "saving",
+        "pending",
+        "saved"
+      ],
+      "writes": [
+        {
+          "id": "8c84abcd-4210-4e6a-904c-f93c51b0a7ad",
+          "title": "Earlier snapshot"
+        },
+        {
+          "id": "8c84abcd-4210-4e6a-904c-f93c51b0a7ad",
+          "title": "Latest during write"
+        }
+      ],
+      "source": {
+        "title": "Latest during write",
+        "revision": 3
+      },
+      "target": {
+        "title": "Navigation B",
+        "revision": 1
+      },
+      "sourceId": "8c84abcd-4210-4e6a-904c-f93c51b0a7ad",
+      "targetId": "f705c029-11d3-4c79-8615-d35796e4f891"
+    },
+    {
+      "check": "pagehide cannot write against an unadopted reload baseline",
+      "result": "PASS",
+      "transactions": "native same-revision external mutation; load commit adopts raw baseline; all new saves blocked until explicit document adoption",
+      "trigger": "pagehide",
+      "stateDuringLoad": "pending",
+      "flushResult": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "reloadResult": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "diskRevision": 1,
+      "diskTitle": "Same-revision disk winner",
+      "localTitle": "Exportable edit during reload",
+      "writesBeforeRecovery": 0,
+      "resumedAfterSuccessfulAdoption": true
+    },
+    {
+      "check": "visibilitychange cannot write against an unadopted reload baseline",
+      "result": "PASS",
+      "transactions": "native same-revision external mutation; load commit adopts raw baseline; all new saves blocked until explicit document adoption",
+      "trigger": "visibilitychange",
+      "stateDuringLoad": "pending",
+      "flushResult": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "reloadResult": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "diskRevision": 1,
+      "diskTitle": "Same-revision disk winner",
+      "localTitle": "Exportable edit during reload",
+      "writesBeforeRecovery": 0,
+      "resumedAfterSuccessfulAdoption": true
+    },
+    {
+      "check": "direct cannot write against an unadopted reload baseline",
+      "result": "PASS",
+      "transactions": "native same-revision external mutation; load commit adopts raw baseline; all new saves blocked until explicit document adoption",
+      "trigger": "direct",
+      "stateDuringLoad": "pending",
+      "flushResult": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "reloadResult": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "diskRevision": 1,
+      "diskTitle": "Same-revision disk winner",
+      "localTitle": "Exportable edit during reload",
+      "writesBeforeRecovery": 0,
+      "resumedAfterSuccessfulAdoption": true
+    },
+    {
+      "check": "reload awaits an existing native write without starting newer queued snapshots",
+      "result": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "writes": 1,
+      "first": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "flushed": {
+        "ok": false,
+        "reason": "cancelled"
+      },
+      "local": "New edit while reload waits",
+      "state": "conflict",
+      "diskTitle": "Write already in flight",
+      "diskRevision": 2
+    },
+    {
+      "check": "an aborted mutation never advances the committed baseline/revision",
+      "result": "PASS",
+      "failed": {
+        "ok": false,
+        "reason": "unavailable"
+      },
+      "retried": true,
+      "revision": 2
+    },
+    {
+      "check": "unique cyclic/future raw backups retained after fallback creation",
+      "result": "PASS",
+      "copyCount": 2,
+      "unique": 2,
+      "exactCycles": true,
+      "sourcePreserved": true,
+      "copiesRetained": true,
+      "created": true
+    },
+    {
+      "check": "backup failure prevents fallback replacement",
+      "result": "PASS",
+      "transactions": "native readwrite abort; no marker or guide commits"
+    },
+    {
+      "check": "marker failure rolls back already-queued guide write",
+      "result": "PASS",
+      "transactions": "native readwrite abort; no marker or guide commits"
+    },
+    {
+      "check": "legacy observer shutdown drains its pending edit; only new observer saves afterward",
+      "result": "PASS",
+      "legacy": "Old observer queued edit",
+      "current": "New observer edit",
+      "state": "saved"
+    }
+  ],
+  "uncaughtBrowserErrors": []
+}

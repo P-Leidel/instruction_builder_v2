@@ -1,0 +1,4093 @@
+{
+  "runAt": "2026-10-07T10:53:30.348Z",
+  "baselineRun": false,
+  "checks": {
+    "a4-portrait_plain_all_pictures_rendered": true,
+    "a4-portrait_plain_equal_fixed_cell_dimensions": true,
+    "a4-portrait_plain_every_pictogram_centered_horizontally": true,
+    "a4-portrait_plain_every_pictogram_centered_vertically": true,
+    "a4-portrait_plain_annotations_do_not_overlap_picture_or_each_other": true,
+    "a4-portrait_plain_annotations_inside_their_fixed_cell": true,
+    "a4-portrait_correct_physical_page_and_css_scale": true,
+    "a4-portrait_fields_do_not_move_resize_or_rewrap_cells": true,
+    "a4-portrait_fields_do_not_move_or_resize_pictogram_anchors": true,
+    "a4-portrait_required_fields_rendered": true,
+    "a4-portrait_fields_all_pictures_rendered": true,
+    "a4-portrait_fields_equal_fixed_cell_dimensions": true,
+    "a4-portrait_fields_every_pictogram_centered_horizontally": true,
+    "a4-portrait_fields_every_pictogram_centered_vertically": true,
+    "a4-portrait_fields_annotations_do_not_overlap_picture_or_each_other": true,
+    "a4-portrait_fields_annotations_inside_their_fixed_cell": true,
+    "a4-portrait_fields_token_time_directly_below_pictogram": true,
+    "a4-portrait_wrap_1_starts_bottom_center": true,
+    "a4-portrait_wrap_1_ends_top_center": true,
+    "a4-portrait_wrap_1_clean_orthogonal_route": true,
+    "a4-portrait_wrap_1_final_arrow_points_down": true,
+    "a4-portrait_wrap_1_arrowhead_wings_point_up_from_tip": true,
+    "a4-portrait_wrap_2_starts_bottom_center": true,
+    "a4-portrait_wrap_2_ends_top_center": true,
+    "a4-portrait_wrap_2_clean_orthogonal_route": true,
+    "a4-portrait_wrap_2_final_arrow_points_down": true,
+    "a4-portrait_wrap_2_arrowhead_wings_point_up_from_tip": true,
+    "a4-portrait_exercises_cross_row_wrap": true,
+    "a4-portrait_actual_download_identical_physical_geometry": true,
+    "a4-portrait_mobile_preserves_physical_cells": true,
+    "mobile_all_pictures_rendered": true,
+    "mobile_equal_fixed_cell_dimensions": true,
+    "mobile_every_pictogram_centered_horizontally": true,
+    "mobile_every_pictogram_centered_vertically": true,
+    "mobile_annotations_do_not_overlap_picture_or_each_other": true,
+    "mobile_annotations_inside_their_fixed_cell": true,
+    "mobile_token_time_directly_below_pictogram": true,
+    "a4-landscape_plain_all_pictures_rendered": true,
+    "a4-landscape_plain_equal_fixed_cell_dimensions": true,
+    "a4-landscape_plain_every_pictogram_centered_horizontally": true,
+    "a4-landscape_plain_every_pictogram_centered_vertically": true,
+    "a4-landscape_plain_annotations_do_not_overlap_picture_or_each_other": true,
+    "a4-landscape_plain_annotations_inside_their_fixed_cell": true,
+    "a4-landscape_correct_physical_page_and_css_scale": true,
+    "a4-landscape_fields_do_not_move_resize_or_rewrap_cells": true,
+    "a4-landscape_fields_do_not_move_or_resize_pictogram_anchors": true,
+    "a4-landscape_required_fields_rendered": true,
+    "a4-landscape_fields_all_pictures_rendered": true,
+    "a4-landscape_fields_equal_fixed_cell_dimensions": true,
+    "a4-landscape_fields_every_pictogram_centered_horizontally": true,
+    "a4-landscape_fields_every_pictogram_centered_vertically": true,
+    "a4-landscape_fields_annotations_do_not_overlap_picture_or_each_other": true,
+    "a4-landscape_fields_annotations_inside_their_fixed_cell": true,
+    "a4-landscape_fields_token_time_directly_below_pictogram": true,
+    "a4-landscape_wrap_1_starts_bottom_center": true,
+    "a4-landscape_wrap_1_ends_top_center": true,
+    "a4-landscape_wrap_1_clean_orthogonal_route": true,
+    "a4-landscape_wrap_1_final_arrow_points_down": true,
+    "a4-landscape_wrap_1_arrowhead_wings_point_up_from_tip": true,
+    "a4-landscape_exercises_cross_row_wrap": true,
+    "a4-landscape_actual_download_identical_physical_geometry": true,
+    "a3-portrait_plain_all_pictures_rendered": true,
+    "a3-portrait_plain_equal_fixed_cell_dimensions": true,
+    "a3-portrait_plain_every_pictogram_centered_horizontally": true,
+    "a3-portrait_plain_every_pictogram_centered_vertically": true,
+    "a3-portrait_plain_annotations_do_not_overlap_picture_or_each_other": true,
+    "a3-portrait_plain_annotations_inside_their_fixed_cell": true,
+    "a3-portrait_correct_physical_page_and_css_scale": true,
+    "a3-portrait_fields_do_not_move_resize_or_rewrap_cells": true,
+    "a3-portrait_fields_do_not_move_or_resize_pictogram_anchors": true,
+    "a3-portrait_required_fields_rendered": true,
+    "a3-portrait_fields_all_pictures_rendered": true,
+    "a3-portrait_fields_equal_fixed_cell_dimensions": true,
+    "a3-portrait_fields_every_pictogram_centered_horizontally": true,
+    "a3-portrait_fields_every_pictogram_centered_vertically": true,
+    "a3-portrait_fields_annotations_do_not_overlap_picture_or_each_other": true,
+    "a3-portrait_fields_annotations_inside_their_fixed_cell": true,
+    "a3-portrait_fields_token_time_directly_below_pictogram": true,
+    "a3-portrait_wrap_1_starts_bottom_center": true,
+    "a3-portrait_wrap_1_ends_top_center": true,
+    "a3-portrait_wrap_1_clean_orthogonal_route": true,
+    "a3-portrait_wrap_1_final_arrow_points_down": true,
+    "a3-portrait_wrap_1_arrowhead_wings_point_up_from_tip": true,
+    "a3-portrait_wrap_2_starts_bottom_center": true,
+    "a3-portrait_wrap_2_ends_top_center": true,
+    "a3-portrait_wrap_2_clean_orthogonal_route": true,
+    "a3-portrait_wrap_2_final_arrow_points_down": true,
+    "a3-portrait_wrap_2_arrowhead_wings_point_up_from_tip": true,
+    "a3-portrait_exercises_cross_row_wrap": true,
+    "a3-portrait_actual_download_identical_physical_geometry": true,
+    "a3-landscape_plain_all_pictures_rendered": true,
+    "a3-landscape_plain_equal_fixed_cell_dimensions": true,
+    "a3-landscape_plain_every_pictogram_centered_horizontally": true,
+    "a3-landscape_plain_every_pictogram_centered_vertically": true,
+    "a3-landscape_plain_annotations_do_not_overlap_picture_or_each_other": true,
+    "a3-landscape_plain_annotations_inside_their_fixed_cell": true,
+    "a3-landscape_correct_physical_page_and_css_scale": true,
+    "a3-landscape_fields_do_not_move_resize_or_rewrap_cells": true,
+    "a3-landscape_fields_do_not_move_or_resize_pictogram_anchors": true,
+    "a3-landscape_required_fields_rendered": true,
+    "a3-landscape_fields_all_pictures_rendered": true,
+    "a3-landscape_fields_equal_fixed_cell_dimensions": true,
+    "a3-landscape_fields_every_pictogram_centered_horizontally": true,
+    "a3-landscape_fields_every_pictogram_centered_vertically": true,
+    "a3-landscape_fields_annotations_do_not_overlap_picture_or_each_other": true,
+    "a3-landscape_fields_annotations_inside_their_fixed_cell": true,
+    "a3-landscape_fields_token_time_directly_below_pictogram": true,
+    "a3-landscape_wrap_1_starts_bottom_center": true,
+    "a3-landscape_wrap_1_ends_top_center": true,
+    "a3-landscape_wrap_1_clean_orthogonal_route": true,
+    "a3-landscape_wrap_1_final_arrow_points_down": true,
+    "a3-landscape_wrap_1_arrowhead_wings_point_up_from_tip": true,
+    "a3-landscape_exercises_cross_row_wrap": true,
+    "a3-landscape_actual_download_identical_physical_geometry": true,
+    "label-portrait_plain_all_pictures_rendered": true,
+    "label-portrait_plain_equal_fixed_cell_dimensions": true,
+    "label-portrait_plain_every_pictogram_centered_horizontally": true,
+    "label-portrait_plain_every_pictogram_centered_vertically": true,
+    "label-portrait_plain_annotations_do_not_overlap_picture_or_each_other": true,
+    "label-portrait_plain_annotations_inside_their_fixed_cell": true,
+    "label-portrait_correct_physical_page_and_css_scale": true,
+    "label-portrait_fields_do_not_move_resize_or_rewrap_cells": true,
+    "label-portrait_fields_do_not_move_or_resize_pictogram_anchors": true,
+    "label-portrait_required_fields_rendered": true,
+    "label-portrait_fields_all_pictures_rendered": true,
+    "label-portrait_fields_equal_fixed_cell_dimensions": true,
+    "label-portrait_fields_every_pictogram_centered_horizontally": true,
+    "label-portrait_fields_every_pictogram_centered_vertically": true,
+    "label-portrait_fields_annotations_do_not_overlap_picture_or_each_other": true,
+    "label-portrait_fields_annotations_inside_their_fixed_cell": true,
+    "label-portrait_fields_token_time_directly_below_pictogram": true,
+    "label-portrait_actual_download_identical_physical_geometry": true,
+    "label-landscape_plain_all_pictures_rendered": true,
+    "label-landscape_plain_equal_fixed_cell_dimensions": true,
+    "label-landscape_plain_every_pictogram_centered_horizontally": true,
+    "label-landscape_plain_every_pictogram_centered_vertically": true,
+    "label-landscape_plain_annotations_do_not_overlap_picture_or_each_other": true,
+    "label-landscape_plain_annotations_inside_their_fixed_cell": true,
+    "label-landscape_correct_physical_page_and_css_scale": true,
+    "label-landscape_fields_do_not_move_resize_or_rewrap_cells": true,
+    "label-landscape_fields_do_not_move_or_resize_pictogram_anchors": true,
+    "label-landscape_required_fields_rendered": true,
+    "label-landscape_fields_all_pictures_rendered": true,
+    "label-landscape_fields_equal_fixed_cell_dimensions": true,
+    "label-landscape_fields_every_pictogram_centered_horizontally": true,
+    "label-landscape_fields_every_pictogram_centered_vertically": true,
+    "label-landscape_fields_annotations_do_not_overlap_picture_or_each_other": true,
+    "label-landscape_fields_annotations_inside_their_fixed_cell": true,
+    "label-landscape_fields_token_time_directly_below_pictogram": true,
+    "label-landscape_actual_download_identical_physical_geometry": true,
+    "board_plain_all_pictures_rendered": true,
+    "board_plain_equal_fixed_cell_dimensions": true,
+    "board_plain_every_pictogram_centered_horizontally": true,
+    "board_plain_every_pictogram_centered_vertically": true,
+    "board_plain_annotations_do_not_overlap_picture_or_each_other": true,
+    "board_plain_annotations_inside_their_fixed_cell": true,
+    "board_correct_physical_page_and_css_scale": true,
+    "board_fields_do_not_move_resize_or_rewrap_cells": true,
+    "board_fields_do_not_move_or_resize_pictogram_anchors": true,
+    "board_required_fields_rendered": true,
+    "board_fields_all_pictures_rendered": true,
+    "board_fields_equal_fixed_cell_dimensions": true,
+    "board_fields_every_pictogram_centered_horizontally": true,
+    "board_fields_every_pictogram_centered_vertically": true,
+    "board_fields_annotations_do_not_overlap_picture_or_each_other": true,
+    "board_fields_annotations_inside_their_fixed_cell": true,
+    "board_fields_token_time_directly_below_pictogram": true,
+    "board_board_has_no_connectors": true,
+    "board_actual_download_identical_physical_geometry": true,
+    "browser_errors_empty": true
+  },
+  "errors": [],
+  "measurements": {
+    "a4-portrait": {
+      "before": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            210,
+            297
+          ],
+          "screenWidth": 793.6875,
+          "screenHeight": 1122.515625,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.996456413890856,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-1",
+              "x": 57.99433026222537,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-2",
+              "x": 105.99633829435388,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-3",
+              "x": 153.9983463264824,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-4",
+              "x": 9.996456413890856,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-5",
+              "x": 57.99433026222537,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-6",
+              "x": 105.99633829435388,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-7",
+              "x": 153.9983463264824,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-8",
+              "x": 9.996456413890856,
+              "y": 153.99632521819018,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 24.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-1",
+              "x": 72.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-2",
+              "x": 120.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-3",
+              "x": 168.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-4",
+              "x": 24.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-5",
+              "x": 72.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-6",
+              "x": 120.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-7",
+              "x": 168.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-8",
+              "x": 24.5,
+              "y": 166.5,
+              "width": 15,
+              "height": 15
+            }
+          ],
+          "fields": [],
+          "connectors": [
+            {
+              "d": "M54.5 86L57.5 86M57.02368602791856 86.275L57.5 86L57.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M102.5 86L105.5 86M105.02368602791856 86.275L105.5 86L105.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M150.5 86L153.5 86M153.02368602791856 86.275L153.5 86L153.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M176 106L176 108L32 108L32 110M31.725 109.52368602791856L32 110L32.275 109.52368602791856",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M54.5 130L57.5 130M57.02368602791856 130.275L57.5 130L57.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M102.5 130L105.5 130M105.02368602791856 130.275L105.5 130L105.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M150.5 130L153.5 130M153.02368602791856 130.275L153.5 130L153.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M176 150L176 152L32 152L32 154M31.725 153.52368602791856L32 154L32.275 153.52368602791856",
+              "stepId": "group-0"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            210,
+            297
+          ],
+          "screenWidth": 793.6875,
+          "screenHeight": 1122.515625,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.996456413890856,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-1",
+              "x": 57.99433026222537,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-2",
+              "x": 105.99633829435388,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-3",
+              "x": 153.9983463264824,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-4",
+              "x": 9.996456413890856,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-5",
+              "x": 57.99433026222537,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-6",
+              "x": 105.99633829435388,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-7",
+              "x": 153.9983463264824,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-8",
+              "x": 9.996456413890856,
+              "y": 153.99632521819018,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 24.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-1",
+              "x": 72.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-2",
+              "x": 120.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-3",
+              "x": 168.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-4",
+              "x": 24.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-5",
+              "x": 72.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-6",
+              "x": 120.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-7",
+              "x": 168.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-8",
+              "x": 24.5,
+              "y": 166.5,
+              "width": 15,
+              "height": 15
+            }
+          ],
+          "fields": [
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.500003229831089,
+              "y": 79.58851774230592,
+              "width": 2.9999963087644694,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.117474724264705,
+              "y": 80.577349850712,
+              "width": 3.657597993075242,
+              "height": 2.774905259531465
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "g",
+              "x": 45.58333287192889,
+              "y": 78.00091510679835,
+              "width": 3.3333310263111264,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 40.78574984681372,
+              "y": 84.058238473243,
+              "width": 4.540246233094141,
+              "height": 2.120889196715664
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "g",
+              "x": 27.89497719739251,
+              "y": 95.58830960036748,
+              "width": 2.9999963087644694,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 32.64580034291578,
+              "y": 96.61522091754709,
+              "width": 3.7179231632412,
+              "height": 2.0256265790078087
+            },
+            {
+              "id": "picture-0-0",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 27.215275393854828,
+              "y": 74.38313189021589,
+              "width": 9.629773690349634,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-0",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.285752384538151,
+              "y": 97.38026096692697,
+              "width": 7.902573068007323,
+              "height": 2.924153795360588
+            },
+            {
+              "id": "picture-0-1",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 76.12332371766477,
+              "y": 74.26246698438217,
+              "width": 7.677147007146232,
+              "height": 2.2415379536058797
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "g",
+              "x": 123.89496404736593,
+              "y": 95.58830960036748,
+              "width": 3.0000124579199148,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 128.5124597655327,
+              "y": 96.57712555983004,
+              "width": 3.8512667397531297,
+              "height": 2.0637219367248507
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.500003229831089,
+              "y": 123.5879615009187,
+              "width": 2.9999963087644694,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.117474724264705,
+              "y": 124.57676131143776,
+              "width": 3.657597993075242,
+              "height": 2.774905259531465
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "g",
+              "x": 45.58333287192889,
+              "y": 122.00035886541112,
+              "width": 3.3333310263111264,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 40.78574984681372,
+              "y": 128.05766608291228,
+              "width": 4.540246233094141,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "g",
+              "x": 27.89497719739251,
+              "y": 139.58775335898025,
+              "width": 2.9999963087644694,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 32.64580034291578,
+              "y": 140.61464852721636,
+              "width": 3.7179231632412,
+              "height": 2.0256265790078087
+            },
+            {
+              "id": "picture-0-4",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 27.215275393854828,
+              "y": 118.38254335094166,
+              "width": 9.629773690349634,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-4",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.285752384538151,
+              "y": 141.37968857659624,
+              "width": 7.902573068007323,
+              "height": 2.924137646417088
+            },
+            {
+              "id": "picture-0-5",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 76.12332371766477,
+              "y": 118.26189459405145,
+              "width": 7.677147007146232,
+              "height": 2.2415218046623795
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "g",
+              "x": 123.89496404736593,
+              "y": 139.58775335898025,
+              "width": 3.0000124579199148,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 128.5124597655327,
+              "y": 140.5765531694993,
+              "width": 3.8512667397531297,
+              "height": 2.0637219367248507
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.500003229831089,
+              "y": 167.58737296164446,
+              "width": 2.9999963087644694,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.117474724264705,
+              "y": 168.57618892110702,
+              "width": 3.657597993075242,
+              "height": 2.774905259531465
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "g",
+              "x": 45.58333287192889,
+              "y": 165.99977032613688,
+              "width": 3.3333310263111264,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 40.78574984681372,
+              "y": 172.05709369258153,
+              "width": 4.540246233094141,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "g",
+              "x": 27.89497719739251,
+              "y": 183.58716481970603,
+              "width": 2.9999963087644694,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 32.64580034291578,
+              "y": 184.61407613688561,
+              "width": 3.7179231632412,
+              "height": 2.0256265790078087
+            },
+            {
+              "id": "picture-0-8",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 27.215275393854828,
+              "y": 162.38197096061094,
+              "width": 9.629773690349634,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-8",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.285752384538151,
+              "y": 185.37911618626552,
+              "width": 7.902573068007323,
+              "height": 2.924153795360588
+            }
+          ],
+          "connectors": [
+            {
+              "d": "M54.5 86L57.5 86M57.02368602791856 86.275L57.5 86L57.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M102.5 86L105.5 86M105.02368602791856 86.275L105.5 86L105.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M150.5 86L153.5 86M153.02368602791856 86.275L153.5 86L153.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M176 106L176 108L32 108L32 110M31.725 109.52368602791856L32 110L32.275 109.52368602791856",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M54.5 130L57.5 130M57.02368602791856 130.275L57.5 130L57.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M102.5 130L105.5 130M105.02368602791856 130.275L105.5 130L105.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M150.5 130L153.5 130M153.02368602791856 130.275L153.5 130L153.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M176 150L176 152L32 152L32 154M31.725 153.52368602791856L32 154L32.275 153.52368602791856",
+              "stepId": "group-0"
+            }
+          ]
+        }
+      ]
+    },
+    "mobile": [
+      {
+        "page": "0",
+        "viewBox": [
+          0,
+          0,
+          210,
+          297
+        ],
+        "screenWidth": 793.6875,
+        "screenHeight": 1122.515625,
+        "cells": [
+          {
+            "id": "picture-0-0",
+            "x": 9.996456413890856,
+            "y": 65.99310978410657,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          },
+          {
+            "id": "picture-0-1",
+            "x": 57.99433026222537,
+            "y": 65.99310978410657,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          },
+          {
+            "id": "picture-0-2",
+            "x": 105.99633829435388,
+            "y": 65.99310978410657,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          },
+          {
+            "id": "picture-0-3",
+            "x": 153.9983463264824,
+            "y": 65.99310978410657,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          },
+          {
+            "id": "picture-0-4",
+            "x": 9.996456413890856,
+            "y": 109.9967845659164,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          },
+          {
+            "id": "picture-0-5",
+            "x": 57.99433026222537,
+            "y": 109.9967845659164,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          },
+          {
+            "id": "picture-0-6",
+            "x": 105.99633829435388,
+            "y": 109.9967845659164,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          },
+          {
+            "id": "picture-0-7",
+            "x": 153.9983463264824,
+            "y": 109.9967845659164,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          },
+          {
+            "id": "picture-0-8",
+            "x": 9.996456413890856,
+            "y": 153.99632521819018,
+            "width": 44.00011811953697,
+            "height": 39.997703261368855
+          }
+        ],
+        "symbols": [
+          {
+            "id": "picture-0-0",
+            "x": 24.5,
+            "y": 78.5,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "id": "picture-0-1",
+            "x": 72.5,
+            "y": 78.5,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "id": "picture-0-2",
+            "x": 120.5,
+            "y": 78.5,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "id": "picture-0-3",
+            "x": 168.5,
+            "y": 78.5,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "id": "picture-0-4",
+            "x": 24.5,
+            "y": 122.5,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "id": "picture-0-5",
+            "x": 72.5,
+            "y": 122.5,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "id": "picture-0-6",
+            "x": 120.5,
+            "y": 122.5,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "id": "picture-0-7",
+            "x": 168.5,
+            "y": 122.5,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "id": "picture-0-8",
+            "x": 24.5,
+            "y": 166.5,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "fields": [
+          {
+            "id": "picture-0-0",
+            "role": "quantity",
+            "tag": "g",
+            "x": 10.500000201864442,
+            "y": 79.58851774230592,
+            "width": 2.9999993367311153,
+            "height": 2.999973085094166
+          },
+          {
+            "id": "picture-0-0",
+            "role": "quantity",
+            "tag": "path",
+            "text": "2 g",
+            "x": 15.117474724264705,
+            "y": 80.577349850712,
+            "width": 3.6576000117196723,
+            "height": 2.774905259531465
+          },
+          {
+            "id": "picture-0-0",
+            "role": "warning",
+            "tag": "g",
+            "x": 45.58333287192889,
+            "y": 78.00091510679835,
+            "width": 3.333335063599988,
+            "height": 2.999973085094166
+          },
+          {
+            "id": "picture-0-0",
+            "role": "warning",
+            "tag": "path",
+            "text": "Hot",
+            "x": 40.78574984681372,
+            "y": 84.058238473243,
+            "width": 4.5402502703830026,
+            "height": 2.120889196715664
+          },
+          {
+            "id": "picture-0-0",
+            "role": "time",
+            "tag": "g",
+            "x": 27.89497517874808,
+            "y": 95.58830960036748,
+            "width": 2.9999983274089,
+            "height": 2.999973085094166
+          },
+          {
+            "id": "picture-0-0",
+            "role": "time",
+            "tag": "path",
+            "text": "1m",
+            "x": 32.64580034291578,
+            "y": 96.61522091754709,
+            "width": 3.7179231632412,
+            "height": 2.0256265790078087
+          },
+          {
+            "id": "picture-0-0",
+            "role": "label",
+            "tag": "path",
+            "text": "Banana",
+            "x": 27.215275393854828,
+            "y": 74.38313189021589,
+            "width": 9.629773690349634,
+            "height": 2.1208730477721636
+          },
+          {
+            "id": "picture-0-0",
+            "role": "note",
+            "tag": "path",
+            "text": "Ready",
+            "x": 10.28575036589372,
+            "y": 97.38026096692697,
+            "width": 7.902573068007323,
+            "height": 2.924153795360588
+          },
+          {
+            "id": "picture-0-1",
+            "role": "label",
+            "tag": "path",
+            "text": "Onion",
+            "x": 76.12332371766477,
+            "y": 74.26246698438217,
+            "width": 7.677147007146232,
+            "height": 2.2415379536058797
+          },
+          {
+            "id": "picture-0-2",
+            "role": "time",
+            "tag": "g",
+            "x": 123.89497212194365,
+            "y": 95.58830960036748,
+            "width": 3.000004383342192,
+            "height": 2.999973085094166
+          },
+          {
+            "id": "picture-0-2",
+            "role": "time",
+            "tag": "path",
+            "text": "2m",
+            "x": 128.51245169095498,
+            "y": 96.57712555983004,
+            "width": 3.8512748143308526,
+            "height": 2.0637219367248507
+          },
+          {
+            "id": "picture-0-4",
+            "role": "quantity",
+            "tag": "g",
+            "x": 10.500000201864442,
+            "y": 123.5879615009187,
+            "width": 2.9999993367311153,
+            "height": 2.999956936150666
+          },
+          {
+            "id": "picture-0-4",
+            "role": "quantity",
+            "tag": "path",
+            "text": "2 g",
+            "x": 15.117474724264705,
+            "y": 124.57676131143776,
+            "width": 3.6576000117196723,
+            "height": 2.774905259531465
+          },
+          {
+            "id": "picture-0-4",
+            "role": "warning",
+            "tag": "g",
+            "x": 45.58333287192889,
+            "y": 122.00035886541112,
+            "width": 3.333335063599988,
+            "height": 2.999956936150666
+          },
+          {
+            "id": "picture-0-4",
+            "role": "warning",
+            "tag": "path",
+            "text": "Hot",
+            "x": 40.78574984681372,
+            "y": 128.05766608291228,
+            "width": 4.5402502703830026,
+            "height": 2.1208730477721636
+          },
+          {
+            "id": "picture-0-4",
+            "role": "time",
+            "tag": "g",
+            "x": 27.89497517874808,
+            "y": 139.58775335898025,
+            "width": 2.9999983274089,
+            "height": 2.999956936150666
+          },
+          {
+            "id": "picture-0-4",
+            "role": "time",
+            "tag": "path",
+            "text": "1m",
+            "x": 32.64580034291578,
+            "y": 140.61466467615986,
+            "width": 3.7179231632412,
+            "height": 2.0255942811208083
+          },
+          {
+            "id": "picture-0-4",
+            "role": "label",
+            "tag": "path",
+            "text": "Banana",
+            "x": 27.215275393854828,
+            "y": 118.38254335094166,
+            "width": 9.629773690349634,
+            "height": 2.1208730477721636
+          },
+          {
+            "id": "picture-0-4",
+            "role": "note",
+            "tag": "path",
+            "text": "Ready",
+            "x": 10.28575036589372,
+            "y": 141.37967242765274,
+            "width": 7.902573068007323,
+            "height": 2.924153795360588
+          },
+          {
+            "id": "picture-0-5",
+            "role": "label",
+            "tag": "path",
+            "text": "Onion",
+            "x": 76.12332371766477,
+            "y": 118.26187844510795,
+            "width": 7.677147007146232,
+            "height": 2.2415379536058797
+          },
+          {
+            "id": "picture-0-6",
+            "role": "time",
+            "tag": "g",
+            "x": 123.89497212194365,
+            "y": 139.58775335898025,
+            "width": 3.000004383342192,
+            "height": 2.999956936150666
+          },
+          {
+            "id": "picture-0-6",
+            "role": "time",
+            "tag": "path",
+            "text": "2m",
+            "x": 128.51245169095498,
+            "y": 140.5765531694993,
+            "width": 3.8512748143308526,
+            "height": 2.0637057877813505
+          },
+          {
+            "id": "picture-0-8",
+            "role": "quantity",
+            "tag": "g",
+            "x": 10.500000201864442,
+            "y": 167.58737296164446,
+            "width": 2.9999993367311153,
+            "height": 2.9999892340376664
+          },
+          {
+            "id": "picture-0-8",
+            "role": "quantity",
+            "tag": "path",
+            "text": "2 g",
+            "x": 15.117474724264705,
+            "y": 168.57617277216352,
+            "width": 3.6576000117196723,
+            "height": 2.774905259531465
+          },
+          {
+            "id": "picture-0-8",
+            "role": "warning",
+            "tag": "g",
+            "x": 45.58333287192889,
+            "y": 165.99977032613688,
+            "width": 3.333335063599988,
+            "height": 2.999956936150666
+          },
+          {
+            "id": "picture-0-8",
+            "role": "warning",
+            "tag": "path",
+            "text": "Hot",
+            "x": 40.78574984681372,
+            "y": 172.05710984152503,
+            "width": 4.5402502703830026,
+            "height": 2.1208730477721636
+          },
+          {
+            "id": "picture-0-8",
+            "role": "time",
+            "tag": "g",
+            "x": 27.89497517874808,
+            "y": 183.58716481970603,
+            "width": 2.9999983274089,
+            "height": 2.9999892340376664
+          },
+          {
+            "id": "picture-0-8",
+            "role": "time",
+            "tag": "path",
+            "text": "1m",
+            "x": 32.64580034291578,
+            "y": 184.61407613688561,
+            "width": 3.7179231632412,
+            "height": 2.0256265790078087
+          },
+          {
+            "id": "picture-0-8",
+            "role": "label",
+            "tag": "path",
+            "text": "Banana",
+            "x": 27.215275393854828,
+            "y": 162.38195481166744,
+            "width": 9.629773690349634,
+            "height": 2.1208730477721636
+          },
+          {
+            "id": "picture-0-8",
+            "role": "note",
+            "tag": "path",
+            "text": "Ready",
+            "x": 10.28575036589372,
+            "y": 185.37911618626552,
+            "width": 7.902573068007323,
+            "height": 2.924153795360588
+          }
+        ],
+        "connectors": [
+          {
+            "d": "M54.5 86L57.5 86M57.02368602791856 86.275L57.5 86L57.02368602791856 85.725",
+            "stepId": "group-0"
+          },
+          {
+            "d": "M102.5 86L105.5 86M105.02368602791856 86.275L105.5 86L105.02368602791856 85.725",
+            "stepId": "group-0"
+          },
+          {
+            "d": "M150.5 86L153.5 86M153.02368602791856 86.275L153.5 86L153.02368602791856 85.725",
+            "stepId": "group-0"
+          },
+          {
+            "d": "M176 106L176 108L32 108L32 110M31.725 109.52368602791856L32 110L32.275 109.52368602791856",
+            "stepId": "group-0"
+          },
+          {
+            "d": "M54.5 130L57.5 130M57.02368602791856 130.275L57.5 130L57.02368602791856 129.725",
+            "stepId": "group-0"
+          },
+          {
+            "d": "M102.5 130L105.5 130M105.02368602791856 130.275L105.5 130L105.02368602791856 129.725",
+            "stepId": "group-0"
+          },
+          {
+            "d": "M150.5 130L153.5 130M153.02368602791856 130.275L153.5 130L153.02368602791856 129.725",
+            "stepId": "group-0"
+          },
+          {
+            "d": "M176 150L176 152L32 152L32 154M31.725 153.52368602791856L32 154L32.275 153.52368602791856",
+            "stepId": "group-0"
+          }
+        ]
+      }
+    ],
+    "a4-landscape": {
+      "before": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            297,
+            210
+          ],
+          "screenWidth": 1122.515625,
+          "screenHeight": 793.6875,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.99632521819017,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-1",
+              "x": 57.9935691318328,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-2",
+              "x": 105.99494717501149,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-3",
+              "x": 153.99632521819018,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-4",
+              "x": 201.9935691318328,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-5",
+              "x": 9.99632521819017,
+              "y": 109.99822820694541,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-6",
+              "x": 57.9935691318328,
+              "y": 109.99822820694541,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-7",
+              "x": 105.99494717501149,
+              "y": 109.99822820694541,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-8",
+              "x": 153.99632521819018,
+              "y": 109.99822820694541,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 24.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-1",
+              "x": 72.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-2",
+              "x": 120.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-3",
+              "x": 168.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-4",
+              "x": 216.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-5",
+              "x": 24.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-6",
+              "x": 72.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-7",
+              "x": 120.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-8",
+              "x": 168.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            }
+          ],
+          "fields": [],
+          "connectors": [
+            {
+              "d": "M54.5 86L57.5 86M57.02368602791856 86.275L57.5 86L57.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M102.5 86L105.5 86M105.02368602791856 86.275L105.5 86L105.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M150.5 86L153.5 86M153.02368602791856 86.275L153.5 86L153.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M198.5 86L201.5 86M201.02368602791856 86.275L201.5 86L201.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M224 106L224 108L32 108L32 110M31.725 109.52368602791856L32 110L32.275 109.52368602791856",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M54.5 130L57.5 130M57.02368602791856 130.275L57.5 130L57.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M102.5 130L105.5 130M105.02368602791856 130.275L105.5 130L105.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M150.5 130L153.5 130M153.02368602791856 130.275L153.5 130L153.02368602791856 129.725",
+              "stepId": "group-0"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            297,
+            210
+          ],
+          "screenWidth": 1122.515625,
+          "screenHeight": 793.6875,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.99632521819017,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-1",
+              "x": 57.9935691318328,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-2",
+              "x": 105.99494717501149,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-3",
+              "x": 153.99632521819018,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-4",
+              "x": 201.9935691318328,
+              "y": 65.99397590361446,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-5",
+              "x": 9.99632521819017,
+              "y": 109.99822820694541,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-6",
+              "x": 57.9935691318328,
+              "y": 109.99822820694541,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-7",
+              "x": 105.99494717501149,
+              "y": 109.99822820694541,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            },
+            {
+              "id": "picture-0-8",
+              "x": 153.99632521819018,
+              "y": 109.99822820694541,
+              "width": 43.99954065227377,
+              "height": 39.99822820694543
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 24.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-1",
+              "x": 72.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-2",
+              "x": 120.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-3",
+              "x": 168.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-4",
+              "x": 216.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-5",
+              "x": 24.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-6",
+              "x": 72.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-7",
+              "x": 120.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-8",
+              "x": 168.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            }
+          ],
+          "fields": [
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.50181137316261,
+              "y": 79.58762439463737,
+              "width": 2.9999609733865413,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.119226304116903,
+              "y": 80.57643718255373,
+              "width": 3.6575499899517685,
+              "height": 2.7749578276340654
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "g",
+              "x": 45.584688648369315,
+              "y": 78.00000092280888,
+              "width": 3.333287278938907,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 40.78716051332108,
+              "y": 84.05738763879044,
+              "width": 4.540194720372072,
+              "height": 2.1209008829435385
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "g",
+              "x": 27.89655704524575,
+              "y": 95.58762624025513,
+              "width": 2.9999650106224163,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 32.64731783991732,
+              "y": 96.61455103502243,
+              "width": 3.7178743683968767,
+              "height": 2.0256531641270965
+            },
+            {
+              "id": "picture-0-0",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 27.216864162264585,
+              "y": 74.38213792670682,
+              "width": 9.629647307073956,
+              "height": 2.120917032098984
+            },
+            {
+              "id": "picture-0-0",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.287563339745063,
+              "y": 97.37960112508858,
+              "width": 7.902469352893891,
+              "height": 2.9241598747932906
+            },
+            {
+              "id": "picture-0-1",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 76.12427060605191,
+              "y": 74.26150373553035,
+              "width": 7.677046250574185,
+              "height": 2.2415512232754544
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "g",
+              "x": 123.89530819361507,
+              "y": 95.58762624025513,
+              "width": 2.999956936150666,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 128.51271101286173,
+              "y": 96.5764390281715,
+              "width": 3.8512323438217733,
+              "height": 2.0637651709780296
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "g",
+              "x": 202.499289446486,
+              "y": 79.58762439463737,
+              "width": 2.999956936150666,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 207.11670841467617,
+              "y": 80.57643718255373,
+              "width": 3.6575419154800186,
+              "height": 2.7749578276340654
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "g",
+              "x": 237.58215864722095,
+              "y": 78.00000092280888,
+              "width": 3.333303427882407,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 232.78463051217273,
+              "y": 84.05738763879044,
+              "width": 4.540210869315572,
+              "height": 2.1209008829435385
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "g",
+              "x": 219.8940431930409,
+              "y": 95.58762624025513,
+              "width": 2.999956936150666,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 224.64480398771246,
+              "y": 96.61455103502243,
+              "width": 3.7178743683968767,
+              "height": 2.0256531641270965
+            },
+            {
+              "id": "picture-0-4",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 219.21435031005973,
+              "y": 74.38213792670682,
+              "width": 9.629647307073956,
+              "height": 2.120917032098984
+            },
+            {
+              "id": "picture-0-4",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 202.28504141306846,
+              "y": 97.37960112508858,
+              "width": 7.902469352893891,
+              "height": 2.9241598747932906
+            },
+            {
+              "id": "picture-0-5",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 28.124903106338998,
+              "y": 118.26149266182375,
+              "width": 7.677046250574185,
+              "height": 2.2415673724308998
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "g",
+              "x": 75.89592454495866,
+              "y": 139.587631315704,
+              "width": 2.9999650106224163,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 80.51334351314883,
+              "y": 140.57644410362036,
+              "width": 3.851224269350023,
+              "height": 2.0637490218225842
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "g",
+              "x": 154.49991387230133,
+              "y": 123.58761332093077,
+              "width": 2.999973085094166,
+              "height": 3.0000124579199148
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 159.1173328404915,
+              "y": 124.57645840715803,
+              "width": 3.657558064423519,
+              "height": 2.77494167847862
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "g",
+              "x": 189.5827830730363,
+              "y": 121.99998984910228,
+              "width": 3.333303427882407,
+              "height": 3.0000124579199148
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 184.78527108693157,
+              "y": 128.05740886339476,
+              "width": 4.540194720372072,
+              "height": 2.1209008829435385
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "g",
+              "x": 171.89466761885623,
+              "y": 139.587631315704,
+              "width": 2.999956936150666,
+              "height": 2.9999963087644694
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 176.64542841352778,
+              "y": 140.61453996131584,
+              "width": 3.7178743683968767,
+              "height": 2.0256531641270965
+            },
+            {
+              "id": "picture-0-8",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 171.21497473587507,
+              "y": 118.38215915131111,
+              "width": 9.629647307073956,
+              "height": 2.1209008829435385
+            },
+            {
+              "id": "picture-0-8",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 154.28568198782727,
+              "y": 141.379590051382,
+              "width": 7.902469352893891,
+              "height": 2.924176023948736
+            }
+          ],
+          "connectors": [
+            {
+              "d": "M54.5 86L57.5 86M57.02368602791856 86.275L57.5 86L57.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M102.5 86L105.5 86M105.02368602791856 86.275L105.5 86L105.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M150.5 86L153.5 86M153.02368602791856 86.275L153.5 86L153.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M198.5 86L201.5 86M201.02368602791856 86.275L201.5 86L201.02368602791856 85.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M224 106L224 108L32 108L32 110M31.725 109.52368602791856L32 110L32.275 109.52368602791856",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M54.5 130L57.5 130M57.02368602791856 130.275L57.5 130L57.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M102.5 130L105.5 130M105.02368602791856 130.275L105.5 130L105.02368602791856 129.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M150.5 130L153.5 130M153.02368602791856 130.275L153.5 130L153.02368602791856 129.725",
+              "stepId": "group-0"
+            }
+          ]
+        }
+      ]
+    },
+    "a3-portrait": {
+      "before": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            297,
+            420
+          ],
+          "screenWidth": 1122.515625,
+          "screenHeight": 1587.390625,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.99632521819017,
+              "y": 81.99659425354109,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-1",
+              "x": 77.99448782728525,
+              "y": 81.99659425354109,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-2",
+              "x": 145.9967845659164,
+              "y": 81.99659425354109,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-3",
+              "x": 213.99494717501148,
+              "y": 81.99659425354109,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-4",
+              "x": 9.99632521819017,
+              "y": 137.99356254860078,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-5",
+              "x": 77.99448782728525,
+              "y": 137.99356254860078,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-6",
+              "x": 145.9967845659164,
+              "y": 137.99356254860078,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-7",
+              "x": 213.99494717501148,
+              "y": 137.99356254860078,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-8",
+              "x": 9.99632521819017,
+              "y": 193.99466498676088,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 29.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-1",
+              "x": 97.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-2",
+              "x": 165.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-3",
+              "x": 233.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-4",
+              "x": 29.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-5",
+              "x": 97.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-6",
+              "x": 165.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-7",
+              "x": 233.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-8",
+              "x": 29.5,
+              "y": 207.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            }
+          ],
+          "fields": [],
+          "connectors": [
+            {
+              "d": "M74.5 108L77.5 108M77.02368602791856 108.275L77.5 108L77.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M142.5 108L145.5 108M145.02368602791856 108.275L145.5 108L145.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M210.5 108L213.5 108M213.02368602791856 108.275L213.5 108L213.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M246 134L246 136L42 136L42 138M41.725 137.52368602791856L42 138L42.275 137.52368602791856",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M74.5 164L77.5 164M77.02368602791856 164.275L77.5 164L77.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M142.5 164L145.5 164M145.02368602791856 164.275L145.5 164L145.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M210.5 164L213.5 164M213.02368602791856 164.275L213.5 164L213.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M246 190L246 192L42 192L42 194M41.725 193.52368602791856L42 194L42.275 193.52368602791856",
+              "stepId": "group-0"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            297,
+            420
+          ],
+          "screenWidth": 1122.515625,
+          "screenHeight": 1587.390625,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.99632521819017,
+              "y": 81.99659425354109,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-1",
+              "x": 77.99448782728525,
+              "y": 81.99659425354109,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-2",
+              "x": 145.9967845659164,
+              "y": 81.99659425354109,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-3",
+              "x": 213.99494717501148,
+              "y": 81.99659425354109,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-4",
+              "x": 9.99632521819017,
+              "y": 137.99356254860078,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-5",
+              "x": 77.99448782728525,
+              "y": 137.99356254860078,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-6",
+              "x": 145.9967845659164,
+              "y": 137.99356254860078,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-7",
+              "x": 213.99494717501148,
+              "y": 137.99356254860078,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            },
+            {
+              "id": "picture-0-8",
+              "x": 9.99632521819017,
+              "y": 193.99466498676088,
+              "width": 63.99632521819017,
+              "height": 51.99925191696278
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 29.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-1",
+              "x": 97.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-2",
+              "x": 165.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-3",
+              "x": 233.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-4",
+              "x": 29.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-5",
+              "x": 97.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-6",
+              "x": 165.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-7",
+              "x": 233.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-8",
+              "x": 29.5,
+              "y": 207.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            }
+          ],
+          "fields": [
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.50045486190859,
+              "y": 97.45016650384376,
+              "width": 2.9999892340376664,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.157071353209693,
+              "y": 98.26859764575315,
+              "width": 4.876783112511484,
+              "height": 3.699928882895475
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "g",
+              "x": 63.08361115497244,
+              "y": 94.99999231000167,
+              "width": 3.3333276512976573,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 55.817805825103356,
+              "y": 101.28598919216874,
+              "width": 5.044703864262747,
+              "height": 2.3565584612128787
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "g",
+              "x": 37.19366530776298,
+              "y": 123.45016388924432,
+              "width": 2.9999892340376664,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 42.02807762976573,
+              "y": 124.3193997740986,
+              "width": 4.957225037322003,
+              "height": 2.7008550662939372
+            },
+            {
+              "id": "picture-0-0",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 34.557463323954984,
+              "y": 89.65000741315838,
+              "width": 14.979598501378044,
+              "height": 3.299191535095922
+            },
+            {
+              "id": "picture-0-0",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.381453297255398,
+              "y": 125.00613584966483,
+              "width": 10.536733463481855,
+              "height": 3.898900668599214
+            },
+            {
+              "id": "picture-0-1",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 103.96975661747818,
+              "y": 89.46233992499482,
+              "width": 11.942192165250345,
+              "height": 3.4868590232594765
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "g",
+              "x": 173.1932203146532,
+              "y": 123.45016388924432,
+              "width": 2.9999892340376664,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 177.84983276871841,
+              "y": 124.26859503115371,
+              "width": 5.135024905259532,
+              "height": 2.7516598092388254
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.50045486190859,
+              "y": 153.4501708102428,
+              "width": 2.9999892340376664,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.157071353209693,
+              "y": 154.2686019521522,
+              "width": 4.876783112511484,
+              "height": 3.699928882895475
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "g",
+              "x": 63.08361115497244,
+              "y": 150.99999661640072,
+              "width": 3.3333276512976573,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 55.817805825103356,
+              "y": 157.2859934985678,
+              "width": 5.044703864262747,
+              "height": 2.3565584612128787
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "g",
+              "x": 37.19366530776298,
+              "y": 179.45016819564339,
+              "width": 2.9999892340376664,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 42.02807762976573,
+              "y": 180.31940408049766,
+              "width": 4.957225037322003,
+              "height": 2.7008550662939372
+            },
+            {
+              "id": "picture-0-4",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 34.557463323954984,
+              "y": 145.65001171955743,
+              "width": 14.979598501378044,
+              "height": 3.299175386099436
+            },
+            {
+              "id": "picture-0-4",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.381453297255398,
+              "y": 181.0061563050604,
+              "width": 10.536733463481855,
+              "height": 3.898884519602728
+            },
+            {
+              "id": "picture-0-5",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 103.96975661747818,
+              "y": 145.46234423139387,
+              "width": 11.942192165250345,
+              "height": 3.48684287426299
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "g",
+              "x": 173.1932203146532,
+              "y": 179.45016819564339,
+              "width": 2.9999892340376664,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 177.84983276871841,
+              "y": 180.26859933755276,
+              "width": 5.135024905259532,
+              "height": 2.7516598092388254
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.50045486190859,
+              "y": 209.4501589676454,
+              "width": 2.9999892340376664,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.157071353209693,
+              "y": 210.26859010955476,
+              "width": 4.876783112511484,
+              "height": 3.699928882895475
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "g",
+              "x": 63.08361115497244,
+              "y": 207.00000092279979,
+              "width": 3.3333276512976573,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 55.817805825103356,
+              "y": 213.28599780496685,
+              "width": 5.044703864262747,
+              "height": 2.3565261632199066
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "g",
+              "x": 37.19366530776298,
+              "y": 235.45017250204245,
+              "width": 2.9999892340376664,
+              "height": 2.9999990772002008
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 42.02807762976573,
+              "y": 236.31937608890374,
+              "width": 4.957225037322003,
+              "height": 2.7008873642869093
+            },
+            {
+              "id": "picture-0-8",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 34.557463323954984,
+              "y": 201.64999987696,
+              "width": 14.979598501378044,
+              "height": 3.299175386099436
+            },
+            {
+              "id": "picture-0-8",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.381453297255398,
+              "y": 237.00612831346646,
+              "width": 10.536733463481855,
+              "height": 3.8989168175957003
+            }
+          ],
+          "connectors": [
+            {
+              "d": "M74.5 108L77.5 108M77.02368602791856 108.275L77.5 108L77.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M142.5 108L145.5 108M145.02368602791856 108.275L145.5 108L145.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M210.5 108L213.5 108M213.02368602791856 108.275L213.5 108L213.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M246 134L246 136L42 136L42 138M41.725 137.52368602791856L42 138L42.275 137.52368602791856",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M74.5 164L77.5 164M77.02368602791856 164.275L77.5 164L77.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M142.5 164L145.5 164M145.02368602791856 164.275L145.5 164L145.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M210.5 164L213.5 164M213.02368602791856 164.275L213.5 164L213.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M246 190L246 192L42 192L42 194M41.725 193.52368602791856L42 194L42.275 193.52368602791856",
+              "stepId": "group-0"
+            }
+          ]
+        }
+      ]
+    },
+    "a3-landscape": {
+      "before": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            420,
+            297
+          ],
+          "screenWidth": 1587.390625,
+          "screenHeight": 1122.515625,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.996358016792495,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-1",
+              "x": 77.99474373234376,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-2",
+              "x": 145.99726359099543,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-3",
+              "x": 213.99564930654668,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-4",
+              "x": 281.99816916519836,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-5",
+              "x": 9.996358016792495,
+              "y": 137.99310978410657,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-6",
+              "x": 77.99474373234376,
+              "y": 137.99310978410657,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-7",
+              "x": 145.99726359099543,
+              "y": 137.99310978410657,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-8",
+              "x": 213.99564930654668,
+              "y": 137.99310978410657,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 29.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-1",
+              "x": 97.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-2",
+              "x": 165.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-3",
+              "x": 233.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-4",
+              "x": 301.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-5",
+              "x": 29.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-6",
+              "x": 97.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-7",
+              "x": 165.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-8",
+              "x": 233.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            }
+          ],
+          "fields": [],
+          "connectors": [
+            {
+              "d": "M74.5 108L77.5 108M77.02368602791856 108.275L77.5 108L77.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M142.5 108L145.5 108M145.02368602791856 108.275L145.5 108L145.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M210.5 108L213.5 108M213.02368602791856 108.275L213.5 108L213.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M278.5 108L281.5 108M281.0236860279186 108.275L281.5 108L281.0236860279186 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M314 134L314 136L42 136L42 138M41.725 137.52368602791856L42 138L42.275 137.52368602791856",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M74.5 164L77.5 164M77.02368602791856 164.275L77.5 164L77.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M142.5 164L145.5 164M145.02368602791856 164.275L145.5 164L145.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M210.5 164L213.5 164M213.02368602791856 164.275L213.5 164L213.02368602791856 163.725",
+              "stepId": "group-0"
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            420,
+            297
+          ],
+          "screenWidth": 1587.390625,
+          "screenHeight": 1122.515625,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.996358016792495,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-1",
+              "x": 77.99474373234376,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-2",
+              "x": 145.99726359099543,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-3",
+              "x": 213.99564930654668,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-4",
+              "x": 281.99816916519836,
+              "y": 81.99632521819017,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-5",
+              "x": 9.996358016792495,
+              "y": 137.99310978410657,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-6",
+              "x": 77.99474373234376,
+              "y": 137.99310978410657,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-7",
+              "x": 145.99726359099543,
+              "y": 137.99310978410657,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            },
+            {
+              "id": "picture-0-8",
+              "x": 213.99564930654668,
+              "y": 137.99310978410657,
+              "width": 63.99653519435394,
+              "height": 51.999081304547545
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 29.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-1",
+              "x": 97.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-2",
+              "x": 165.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-3",
+              "x": 233.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-4",
+              "x": 301.5,
+              "y": 95.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-5",
+              "x": 29.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-6",
+              "x": 97.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-7",
+              "x": 165.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            },
+            {
+              "id": "picture-0-8",
+              "x": 233.5,
+              "y": 151.5,
+              "width": 24.999999046325684,
+              "height": 24.999999046325684
+            }
+          ],
+          "fields": [
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.500000807449824,
+              "y": 97.45033123277446,
+              "width": 2.9999990772002008,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.15663257741675,
+              "y": 98.26877583830961,
+              "width": 4.876801132183073,
+              "height": 3.699916743224621
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "g",
+              "x": 63.08333366656659,
+              "y": 95.00016507808911,
+              "width": 3.33333051366728,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 55.8175004598619,
+              "y": 101.28614133555351,
+              "width": 5.044724453517959,
+              "height": 2.3565507292145154
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "g",
+              "x": 37.19329883548817,
+              "y": 123.45024331074873,
+              "width": 2.9999990772002008,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 42.02773105676572,
+              "y": 124.3194763435921,
+              "width": 4.957233227806049,
+              "height": 2.700846204639412
+            },
+            {
+              "id": "picture-0-0",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 34.55709627662585,
+              "y": 89.65021388378503,
+              "width": 14.97964765042867,
+              "height": 3.2991645613229217
+            },
+            {
+              "id": "picture-0-0",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.380998852344648,
+              "y": 125.00621016593936,
+              "width": 10.536768035199275,
+              "height": 3.898887876090951
+            },
+            {
+              "id": "picture-0-1",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 103.96961327921214,
+              "y": 89.46253086242535,
+              "width": 11.9422394228687,
+              "height": 3.4868475826825907
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "g",
+              "x": 173.19330410313702,
+              "y": 123.45024331074873,
+              "width": 2.9999990772002008,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 177.84993183585482,
+              "y": 124.26867176734038,
+              "width": 5.135041753614914,
+              "height": 2.7516507808911346
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "g",
+              "x": 282.5000153799966,
+              "y": 97.45033123277446,
+              "width": 2.9999990772002008,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 287.15664311271445,
+              "y": 98.26877583830961,
+              "width": 4.876803150807634,
+              "height": 3.699916743224621
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "g",
+              "x": 335.0833442018643,
+              "y": 95.00016507808911,
+              "width": 3.333314364670794,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 327.817490808914,
+              "y": 101.28614133555351,
+              "width": 5.044720416268837,
+              "height": 2.3565507292145154
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "g",
+              "x": 309.1933053335367,
+              "y": 123.45024331074873,
+              "width": 2.9999990772002008,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 314.02773351756514,
+              "y": 124.3194763435921,
+              "width": 4.957225153307807,
+              "height": 2.700846204639412
+            },
+            {
+              "id": "picture-0-4",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 306.5570785511797,
+              "y": 89.65021388378503,
+              "width": 14.979679948421643,
+              "height": 3.2991645613229217
+            },
+            {
+              "id": "picture-0-4",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 282.38099727589497,
+              "y": 125.00621016593936,
+              "width": 10.536768035199275,
+              "height": 3.898887876090951
+            },
+            {
+              "id": "picture-0-5",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 35.9696167012614,
+              "y": 145.4623514297198,
+              "width": 11.942231348370457,
+              "height": 3.4868314337390904
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "g",
+              "x": 105.1932954134389,
+              "y": 179.45006387804318,
+              "width": 2.9999990772002008,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 109.84993122065495,
+              "y": 180.26849233463483,
+              "width": 5.135033679116671,
+              "height": 2.7516507808911346
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "g",
+              "x": 214.49999861580028,
+              "y": 153.4501518000689,
+              "width": 2.9999990772002008,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 219.1566263485181,
+              "y": 154.26858025666056,
+              "width": 4.876803150807634,
+              "height": 3.699932892168121
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "g",
+              "x": 267.0833435866644,
+              "y": 150.99998564538356,
+              "width": 3.333314364670794,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 259.8175063427106,
+              "y": 157.28596190284796,
+              "width": 5.044704267272351,
+              "height": 2.3565507292145154
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "g",
+              "x": 241.19330471833686,
+              "y": 179.45006387804318,
+              "width": 2.9999990772002008,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 246.0277329023653,
+              "y": 180.31929691088655,
+              "width": 4.9572413023042925,
+              "height": 2.700846204639412
+            },
+            {
+              "id": "picture-0-8",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 238.5570940849763,
+              "y": 145.65001830213598,
+              "width": 14.97964765042867,
+              "height": 3.2991645613229217
+            },
+            {
+              "id": "picture-0-8",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 214.3809966606951,
+              "y": 181.0060145842903,
+              "width": 10.536768035199275,
+              "height": 3.898871727147451
+            }
+          ],
+          "connectors": [
+            {
+              "d": "M74.5 108L77.5 108M77.02368602791856 108.275L77.5 108L77.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M142.5 108L145.5 108M145.02368602791856 108.275L145.5 108L145.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M210.5 108L213.5 108M213.02368602791856 108.275L213.5 108L213.02368602791856 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M278.5 108L281.5 108M281.0236860279186 108.275L281.5 108L281.0236860279186 107.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M314 134L314 136L42 136L42 138M41.725 137.52368602791856L42 138L42.275 137.52368602791856",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M74.5 164L77.5 164M77.02368602791856 164.275L77.5 164L77.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M142.5 164L145.5 164M145.02368602791856 164.275L145.5 164L145.02368602791856 163.725",
+              "stepId": "group-0"
+            },
+            {
+              "d": "M210.5 164L213.5 164M213.02368602791856 164.275L213.5 164L213.02368602791856 163.725",
+              "stepId": "group-0"
+            }
+          ]
+        }
+      ]
+    },
+    "label-portrait": {
+      "before": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            50,
+            30
+          ],
+          "screenWidth": 188.96875,
+          "screenHeight": 113.375,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 1.99685794608897,
+              "y": 1.9969680264608602,
+              "width": 45.9980155448983,
+              "height": 25.00137816979052
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 20,
+              "y": 9.5,
+              "width": 9.999999761581421,
+              "height": 9.999999761581421
+            }
+          ],
+          "fields": [],
+          "connectors": []
+        }
+      ],
+      "after": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            50,
+            30
+          ],
+          "screenWidth": 188.96875,
+          "screenHeight": 113.375,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 1.99685794608897,
+              "y": 1.9969680264608602,
+              "width": 45.9980155448983,
+              "height": 25.00137816979052
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 20,
+              "y": 9.5,
+              "width": 9.999999761581421,
+              "height": 9.999999761581421
+            }
+          ],
+          "fields": [
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "g",
+              "x": 2.3762428683644785,
+              "y": 10.96262737303611,
+              "width": 2.2498727416487516,
+              "height": 2.2499967699145538
+            },
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 6.118510470067802,
+              "y": 11.576448585653253,
+              "width": 3.657401784976021,
+              "height": 2.7749502566841238
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "g",
+              "x": 38.24927391681826,
+              "y": 8.874998923304853,
+              "width": 2.4998514242599637,
+              "height": 2.2499967699145538
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 31.285399785017365,
+              "y": 14.057396464994488,
+              "width": 4.540006278939971,
+              "height": 2.1209064050441016
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "g",
+              "x": 21.270183691293205,
+              "y": 21.962626834688535,
+              "width": 2.2498727416487516,
+              "height": 2.2499967699145538
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 25.14579801967918,
+              "y": 22.614546905147467,
+              "width": 3.7177203055234003,
+              "height": 2.025659260439636
+            },
+            {
+              "id": "picture-0-0",
+              "role": "label",
+              "tag": "path",
+              "text": "Egg",
+              "x": 22.849059321771126,
+              "y": 5.382146025702867,
+              "width": 4.549518356209691,
+              "height": 2.794007760818633
+            }
+          ],
+          "connectors": []
+        }
+      ]
+    },
+    "label-landscape": {
+      "before": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            30,
+            50
+          ],
+          "screenWidth": 113.375,
+          "screenHeight": 188.96875,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 1.9969680264608602,
+              "y": 1.99685794608897,
+              "width": 26.00192943770673,
+              "height": 45.9980155448983
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 10,
+              "y": 20,
+              "width": 9.999999761581421,
+              "height": 9.999999761581421
+            }
+          ],
+          "fields": [],
+          "connectors": []
+        }
+      ],
+      "after": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            30,
+            50
+          ],
+          "screenWidth": 113.375,
+          "screenHeight": 188.96875,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 1.9969680264608602,
+              "y": 1.99685794608897,
+              "width": 26.00192943770673,
+              "height": 45.9980155448983
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 10,
+              "y": 20,
+              "width": 9.999999761581421,
+              "height": 9.999999761581421
+            }
+          ],
+          "fields": [
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "g",
+              "x": 2.375001076695149,
+              "y": 3.463809210662312,
+              "width": 2.2499967699145538,
+              "height": 2.2498808164172317
+            },
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 6.117474977604742,
+              "y": 4.077604661919134,
+              "width": 3.657603405802095,
+              "height": 2.774797291012072
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "g",
+              "x": 13.750005383475745,
+              "y": 38.37427133289235,
+              "width": 2.499989233048512,
+              "height": 2.2498727416487516
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 2.285753815807608,
+              "y": 43.556383201380854,
+              "width": 4.540240404492834,
+              "height": 2.120773343186704
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "g",
+              "x": 11.269978078486771,
+              "y": 32.46221654332727,
+              "width": 2.2499967699145538,
+              "height": 2.2498727416487516
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 15.14580605705623,
+              "y": 33.11410875227386,
+              "width": 3.7179252515159873,
+              "height": 2.025539523730776
+            },
+            {
+              "id": "picture-0-0",
+              "role": "label",
+              "tag": "path",
+              "text": "Egg",
+              "x": 12.84894074731257,
+              "y": 15.882649712667439,
+              "width": 4.549769156560089,
+              "height": 2.793853744625434
+            }
+          ],
+          "connectors": []
+        }
+      ]
+    },
+    "board": {
+      "before": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            210,
+            297
+          ],
+          "screenWidth": 793.6875,
+          "screenHeight": 1122.515625,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.996456413890856,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-1",
+              "x": 57.99433026222537,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-2",
+              "x": 105.99633829435388,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-3",
+              "x": 153.9983463264824,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-4",
+              "x": 9.996456413890856,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-5",
+              "x": 57.99433026222537,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-6",
+              "x": 105.99633829435388,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-7",
+              "x": 153.9983463264824,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-8",
+              "x": 9.996456413890856,
+              "y": 153.99632521819018,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 24.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-1",
+              "x": 72.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-2",
+              "x": 120.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-3",
+              "x": 168.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-4",
+              "x": 24.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-5",
+              "x": 72.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-6",
+              "x": 120.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-7",
+              "x": 168.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-8",
+              "x": 24.5,
+              "y": 166.5,
+              "width": 15,
+              "height": 15
+            }
+          ],
+          "fields": [],
+          "connectors": []
+        }
+      ],
+      "after": [
+        {
+          "page": "0",
+          "viewBox": [
+            0,
+            0,
+            210,
+            297
+          ],
+          "screenWidth": 793.6875,
+          "screenHeight": 1122.515625,
+          "cells": [
+            {
+              "id": "picture-0-0",
+              "x": 9.996456413890856,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-1",
+              "x": 57.99433026222537,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-2",
+              "x": 105.99633829435388,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-3",
+              "x": 153.9983463264824,
+              "y": 65.99310978410657,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-4",
+              "x": 9.996456413890856,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-5",
+              "x": 57.99433026222537,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-6",
+              "x": 105.99633829435388,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-7",
+              "x": 153.9983463264824,
+              "y": 109.9967845659164,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            },
+            {
+              "id": "picture-0-8",
+              "x": 9.996456413890856,
+              "y": 153.99632521819018,
+              "width": 44.00011811953697,
+              "height": 39.997703261368855
+            }
+          ],
+          "symbols": [
+            {
+              "id": "picture-0-0",
+              "x": 24.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-1",
+              "x": 72.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-2",
+              "x": 120.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-3",
+              "x": 168.5,
+              "y": 78.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-4",
+              "x": 24.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-5",
+              "x": 72.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-6",
+              "x": 120.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-7",
+              "x": 168.5,
+              "y": 122.5,
+              "width": 15,
+              "height": 15
+            },
+            {
+              "id": "picture-0-8",
+              "x": 24.5,
+              "y": 166.5,
+              "width": 15,
+              "height": 15
+            }
+          ],
+          "fields": [
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.500003229831089,
+              "y": 79.58851774230592,
+              "width": 2.9999963087644694,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-0",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.117474724264705,
+              "y": 80.577349850712,
+              "width": 3.657597993075242,
+              "height": 2.774905259531465
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "g",
+              "x": 45.58333287192889,
+              "y": 78.00091510679835,
+              "width": 3.3333310263111264,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-0",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 40.78574984681372,
+              "y": 84.058238473243,
+              "width": 4.540246233094141,
+              "height": 2.120889196715664
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "g",
+              "x": 27.89497719739251,
+              "y": 95.58830960036748,
+              "width": 2.9999963087644694,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-0",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 32.64580034291578,
+              "y": 96.61522091754709,
+              "width": 3.7179231632412,
+              "height": 2.0256265790078087
+            },
+            {
+              "id": "picture-0-0",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 27.215275393854828,
+              "y": 74.38313189021589,
+              "width": 9.629773690349634,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-0",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.285752384538151,
+              "y": 97.38026096692697,
+              "width": 7.902573068007323,
+              "height": 2.924153795360588
+            },
+            {
+              "id": "picture-0-1",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 76.12332371766477,
+              "y": 74.26246698438217,
+              "width": 7.677147007146232,
+              "height": 2.2415379536058797
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "g",
+              "x": 123.89496404736593,
+              "y": 95.58830960036748,
+              "width": 3.0000124579199148,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-2",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 128.5124597655327,
+              "y": 96.57712555983004,
+              "width": 3.8512667397531297,
+              "height": 2.0637219367248507
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.500003229831089,
+              "y": 123.5879615009187,
+              "width": 2.9999963087644694,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-4",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.117474724264705,
+              "y": 124.57676131143776,
+              "width": 3.657597993075242,
+              "height": 2.774905259531465
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "g",
+              "x": 45.58333287192889,
+              "y": 122.00035886541112,
+              "width": 3.3333310263111264,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-4",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 40.78574984681372,
+              "y": 128.05766608291228,
+              "width": 4.540246233094141,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "g",
+              "x": 27.89497719739251,
+              "y": 139.58775335898025,
+              "width": 2.9999963087644694,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-4",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 32.64580034291578,
+              "y": 140.61464852721636,
+              "width": 3.7179231632412,
+              "height": 2.0256265790078087
+            },
+            {
+              "id": "picture-0-4",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 27.215275393854828,
+              "y": 118.38254335094166,
+              "width": 9.629773690349634,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-4",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.285752384538151,
+              "y": 141.37968857659624,
+              "width": 7.902573068007323,
+              "height": 2.924137646417088
+            },
+            {
+              "id": "picture-0-5",
+              "role": "label",
+              "tag": "path",
+              "text": "Onion",
+              "x": 76.12332371766477,
+              "y": 118.26189459405145,
+              "width": 7.677147007146232,
+              "height": 2.2415218046623795
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "g",
+              "x": 123.89496404736593,
+              "y": 139.58775335898025,
+              "width": 3.0000124579199148,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-6",
+              "role": "time",
+              "tag": "path",
+              "text": "2m",
+              "x": 128.5124597655327,
+              "y": 140.5765531694993,
+              "width": 3.8512667397531297,
+              "height": 2.0637219367248507
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "g",
+              "x": 10.500003229831089,
+              "y": 167.58737296164446,
+              "width": 2.9999963087644694,
+              "height": 2.999973085094166
+            },
+            {
+              "id": "picture-0-8",
+              "role": "quantity",
+              "tag": "path",
+              "text": "2 g",
+              "x": 15.117474724264705,
+              "y": 168.57618892110702,
+              "width": 3.657597993075242,
+              "height": 2.774905259531465
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "g",
+              "x": 45.58333287192889,
+              "y": 165.99977032613688,
+              "width": 3.3333310263111264,
+              "height": 2.999956936150666
+            },
+            {
+              "id": "picture-0-8",
+              "role": "warning",
+              "tag": "path",
+              "text": "Hot",
+              "x": 40.78574984681372,
+              "y": 172.05709369258153,
+              "width": 4.540246233094141,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "g",
+              "x": 27.89497719739251,
+              "y": 183.58716481970603,
+              "width": 2.9999963087644694,
+              "height": 2.9999892340376664
+            },
+            {
+              "id": "picture-0-8",
+              "role": "time",
+              "tag": "path",
+              "text": "1m",
+              "x": 32.64580034291578,
+              "y": 184.61407613688561,
+              "width": 3.7179231632412,
+              "height": 2.0256265790078087
+            },
+            {
+              "id": "picture-0-8",
+              "role": "label",
+              "tag": "path",
+              "text": "Banana",
+              "x": 27.215275393854828,
+              "y": 162.38197096061094,
+              "width": 9.629773690349634,
+              "height": 2.1208730477721636
+            },
+            {
+              "id": "picture-0-8",
+              "role": "note",
+              "tag": "path",
+              "text": "Ready",
+              "x": 10.285752384538151,
+              "y": 185.37911618626552,
+              "width": 7.902573068007323,
+              "height": 2.924153795360588
+            }
+          ],
+          "connectors": []
+        }
+      ]
+    }
+  }
+}

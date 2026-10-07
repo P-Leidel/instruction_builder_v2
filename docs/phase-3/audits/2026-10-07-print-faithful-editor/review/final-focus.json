@@ -1,0 +1,80 @@
+[
+  {
+    "width": 1440,
+    "pasteFocus": {
+      "id": "9ee341d2-72bf-422d-9744-7617521e16d0",
+      "inModal": false
+    },
+    "targets": [
+      {
+        "id": "picture-0-0",
+        "disabled": false,
+        "hidden": null,
+        "width": 132.09375,
+        "height": 128
+      },
+      {
+        "id": "9ee341d2-72bf-422d-9744-7617521e16d0",
+        "disabled": false,
+        "hidden": null,
+        "width": 132.09375,
+        "height": 128
+      }
+    ],
+    "physical": [
+      {
+        "disabled": true,
+        "hidden": "true",
+        "identity": null
+      },
+      {
+        "disabled": true,
+        "hidden": "true",
+        "identity": null
+      }
+    ],
+    "tinyFocus": {
+      "width": 132.09375,
+      "height": 128
+    }
+  },
+  {
+    "width": 390,
+    "pasteFocus": {
+      "id": "05858e6c-f60b-4f9f-b779-230bc00a664f",
+      "inModal": false
+    },
+    "targets": [
+      {
+        "id": "picture-0-0",
+        "disabled": false,
+        "hidden": null,
+        "width": 183,
+        "height": 128
+      },
+      {
+        "id": "05858e6c-f60b-4f9f-b779-230bc00a664f",
+        "disabled": false,
+        "hidden": null,
+        "width": 183,
+        "height": 128
+      }
+    ],
+    "physical": [
+      {
+        "disabled": true,
+        "hidden": "true",
+        "identity": null
+      },
+      {
+        "disabled": true,
+        "hidden": "true",
+        "identity": null
+      }
+    ],
+    "tinyFocus": {
+      "width": 183,
+      "height": 128
+    }
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "checks": {
+    "PREFERENCES_PRESERVE_AUTHORED_CONTENT_AND_HISTORY": true,
+    "REQUIRED_WARNING_VALUES_labels": true,
+    "OPTIONAL_POLICY_labels": true,
+    "ONE_ACCESSIBLE_MAIN_ITEM_labels": true,
+    "BOARD_NO_PROCEDURAL_MEANING_labels": true,
+    "QUANTITY_WARNING_TIME_ORDER_labels": true,
+    "REQUIRED_WARNING_VALUES_pictures": true,
+    "OPTIONAL_POLICY_pictures": true,
+    "ONE_ACCESSIBLE_MAIN_ITEM_pictures": true,
+    "BOARD_NO_PROCEDURAL_MEANING_pictures": true,
+    "QUANTITY_WARNING_TIME_ORDER_pictures": true,
+    "REQUIRED_WARNING_VALUES_detailed": true,
+    "OPTIONAL_POLICY_detailed": true,
+    "ONE_ACCESSIBLE_MAIN_ITEM_detailed": true,
+    "BOARD_NO_PROCEDURAL_MEANING_detailed": true,
+    "QUANTITY_WARNING_TIME_ORDER_detailed": true,
+    "MODAL_SHORTCUTS_SUSPENDED": true,
+    "DEFAULT_LABEL_LANGUAGE_INDEPENDENT": true,
+    "CAPTURED_TARGET_IGNORES_AMBIENT_SELECTION": true,
+    "DELETED_TARGET_CLOSES_WITH_NOTICE": true,
+    "EDITOR_AXE_ZERO": true,
+    "NO_CONSOLE_OR_PAGE_ERRORS": true
+  },
+  "errors": [],
+  "axe": []
+}

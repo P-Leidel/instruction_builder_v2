@@ -1,0 +1,9 @@
+import type { ContentLibrary } from "../../model/library";
+import { catalogEntries } from "../catalog-entries";
+
+export const KITCHEN_LIBRARY: ContentLibrary = Object.freeze({
+  id: "kitchen",
+  names: Object.freeze({"en":"Kitchen","de":"Küche"}),
+  entries: catalogEntries(["action.chop","action.slice","action.stir","action.whisk","action.mix","action.knead","action.bake","action.fry","action.roast","action.boil","action.simmer","action.steam","action.pour","action.drain","action.rinse","action.chill","action.freeze","action.serve","action.add","action.remove","action.wait","action.turn","action.attach","action.detach","action.repeat","action.measure","action.open","action.close","action.check","action.adjust","object.onion","object.garlic","object.egg","object.flour","object.water","object.apple","object.banana","object.grape","object.citrus","object.tomato","object.potato","object.leafy-green","object.herbs","object.beef","object.fish","object.beans","object.nuts","object.milk","object.cheese","object.oil","object.bread","object.wine","object.coffee","object.soup","object.ice","object.salt","object.pepper","object.sugar","object.cherry","object.chicken","object.ham","object.wheat","object.rice","object.pasta","object.butter","object.honey","object.chocolate","object.mushroom","object.corn","object.avocado","object.cucumber","object.cabbage","object.yogurt","tool.pan","tool.knife","tool.oven","tool.blender","tool.fridge","tool.scale","tool.timer","tool.thermometer","tool.container","warning.hot","warning.sharp","shared.action.yes","shared.action.no","shared.action.more","shared.action.finished","shared.action.help","shared.action.stop","routines.action.wash-hands","routines.action.clean-surface","routines.action.bin-waste","routines.tool.gloves","routines.object.bin"]),
+  provenanceIds: Object.freeze(["original-pictograms-2026-10-06"]),
+});

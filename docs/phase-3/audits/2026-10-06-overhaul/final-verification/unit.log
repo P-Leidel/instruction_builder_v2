@@ -1,0 +1,17 @@
+
+> instruction-builder@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.3 D:/worktrees/8f23/instruction_builder
+
+
+ Test Files  35 passed (35)
+      Tests  461 passed (461)
+   Start at  18:54:39
+   Duration  6.08s (import 40%, transform 35%, tests 24%, worker 1%)
+
+  Transform  transforming modules took 12.04s · 35% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

@@ -1,0 +1,701 @@
+{
+  "runAt": "2026-10-06T16:29:50.833Z",
+  "browser": "153.0.8010.12",
+  "cold": [
+    {
+      "format": "svg",
+      "noOutputWarmup": true,
+      "serverRequestsDuringOutput": 0,
+      "loaded": [
+        "/",
+        "/assets/index-B-XSMAtK.js",
+        "/assets/index-D7WSsovr.css",
+        "/fonts/SourceSans3-Regular-3.052.ttf"
+      ]
+    },
+    {
+      "format": "png",
+      "noOutputWarmup": true,
+      "serverRequestsDuringOutput": 0,
+      "loaded": [
+        "/",
+        "/assets/index-B-XSMAtK.js",
+        "/assets/index-D7WSsovr.css",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "http://127.0.0.1:33040/6fafb9b7-605a-4a75-b345-f637d6e0b256",
+        "http://127.0.0.1:33040/4f57e0d6-bc0f-4dcb-8339-ad08f825fe0b",
+        "http://127.0.0.1:33040/b7f37b69-8c87-44a0-8210-28c28462652b",
+        "http://127.0.0.1:33040/03563c05-1837-4692-aec6-654b7f043bfd",
+        "http://127.0.0.1:33040/25f591c3-586a-40f1-bcba-0910141c3ea8",
+        "http://127.0.0.1:33040/78ff2fb8-b6b8-43aa-be1f-80a81d9a22ca",
+        "http://127.0.0.1:33040/cce8e820-3268-46a6-8c59-e7c49cdede4f",
+        "http://127.0.0.1:33040/0d80d205-4cb3-4737-9bfb-da193564b196",
+        "http://127.0.0.1:33040/333acccc-dd90-43b0-94a5-abc8f7df4a3e",
+        "http://127.0.0.1:33040/34b23ec9-39de-4c71-844b-abe29c6d9f0a",
+        "http://127.0.0.1:33040/00ab6b6d-49bc-4cf3-8f4d-98fc7194d7d8",
+        "http://127.0.0.1:33040/b3cc0a0b-3a5c-4fc9-8845-e16cd1290800",
+        "http://127.0.0.1:33040/d9ec2c8b-598b-44a7-b5c7-22d3962dc3d6",
+        "http://127.0.0.1:33040/96d94b9a-8f58-4db8-86e2-67af31432ebd",
+        "http://127.0.0.1:33040/295d20c6-d008-42aa-bba7-7bec1cffce6e",
+        "http://127.0.0.1:33040/0c2b61fe-c218-410b-b372-827fa605f340"
+      ]
+    },
+    {
+      "format": "pdf",
+      "noOutputWarmup": true,
+      "serverRequestsDuringOutput": 0,
+      "loaded": [
+        "/",
+        "/assets/index-B-XSMAtK.js",
+        "/assets/index-D7WSsovr.css",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/assets/svg2pdf.es.min-DrpyVg-e.js",
+        "/assets/jspdf.es.min-BHqa8LVM.js"
+      ]
+    }
+  ],
+  "manifest": {
+    "cacheName": "instruction-builder-v2-c55742539f956af8",
+    "assets": [
+      "/",
+      "/assets/html2canvas-Dor5iEyo.js",
+      "/assets/index-B-XSMAtK.js",
+      "/assets/index-D7WSsovr.css",
+      "/assets/index.es-Bv-ODQQT.js",
+      "/assets/jspdf.es.min-BHqa8LVM.js",
+      "/assets/purify.es-eyZ2HLgt.js",
+      "/assets/svg2pdf.es.min-DrpyVg-e.js",
+      "/fonts/SourceSans3-LICENSE.md",
+      "/fonts/SourceSans3-Regular-3.052.ttf",
+      "/icons/favicon.svg",
+      "/icons/icon-192.png",
+      "/icons/icon-512.png",
+      "/icons/icon-maskable-512.png",
+      "/manifest.webmanifest"
+    ]
+  },
+  "errors": [],
+  "negative": [
+    {
+      "format": "svg",
+      "visibleJapaneseBlocked": true,
+      "omittedJapaneseNotePicturesAllowed": true,
+      "detailedJapaneseNoteBlocked": true,
+      "oversizedHeadingBlocked": true
+    },
+    {
+      "format": "png",
+      "visibleJapaneseBlocked": true,
+      "omittedJapaneseNotePicturesAllowed": true,
+      "detailedJapaneseNoteBlocked": true,
+      "oversizedHeadingBlocked": true,
+      "rasterLimitBlocked": true
+    },
+    {
+      "format": "pdf",
+      "visibleJapaneseBlocked": true,
+      "omittedJapaneseNotePicturesAllowed": true,
+      "detailedJapaneseNoteBlocked": true,
+      "oversizedHeadingBlocked": true
+    }
+  ],
+  "records": [
+    {
+      "fixture": "workplace",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "workplace-page-01.svg",
+      "bytes": 101622,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 4
+    },
+    {
+      "fixture": "routine",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "routine-page-01.svg",
+      "bytes": 82691,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 3
+    },
+    {
+      "fixture": "required-labels",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "required-labels-page-01.svg",
+      "bytes": 136060,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "required-pictures",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "required-pictures-page-01.svg",
+      "bytes": 114934,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "required-detailed",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "required-detailed-page-01.svg",
+      "bytes": 181348,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "board",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "board-page-01.svg",
+      "bytes": 97738,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "selected",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "selected-page-01.svg",
+      "bytes": 70790,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 3
+    },
+    {
+      "fixture": "continuation",
+      "format": "svg",
+      "index": 0,
+      "pages": 3,
+      "file": "continuation-page-01.svg",
+      "bytes": 194278,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 85
+    },
+    {
+      "fixture": "continuation",
+      "format": "svg",
+      "index": 1,
+      "pages": 3,
+      "file": "continuation-page-02.svg",
+      "bytes": 195302,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 85
+    },
+    {
+      "fixture": "continuation",
+      "format": "svg",
+      "index": 2,
+      "pages": 3,
+      "file": "continuation-page-03.svg",
+      "bytes": 65193,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 85
+    },
+    {
+      "fixture": "label-sheet",
+      "format": "svg",
+      "index": 0,
+      "pages": 2,
+      "file": "label-sheet-page-01.svg",
+      "bytes": 182749,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 25
+    },
+    {
+      "fixture": "label-sheet",
+      "format": "svg",
+      "index": 1,
+      "pages": 2,
+      "file": "label-sheet-page-02.svg",
+      "bytes": 8382,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 25
+    },
+    {
+      "fixture": "label",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "label-page-01.svg",
+      "bytes": 6830,
+      "size": {
+        "widthMm": 50,
+        "heightMm": 30
+      },
+      "mainTokens": 1
+    },
+    {
+      "fixture": "transparent",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "transparent-page-01.svg",
+      "bytes": 136013,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "long-heading",
+      "format": "svg",
+      "index": 0,
+      "pages": 1,
+      "file": "long-heading-page-01.svg",
+      "bytes": 132035,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 4
+    },
+    {
+      "fixture": "workplace",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "workplace-page-01.png",
+      "bytes": 100661,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 4
+    },
+    {
+      "fixture": "routine",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "routine-page-01.png",
+      "bytes": 92622,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 3
+    },
+    {
+      "fixture": "required-labels",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "required-labels-page-01.png",
+      "bytes": 103705,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "required-pictures",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "required-pictures-page-01.png",
+      "bytes": 97789,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "required-detailed",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "required-detailed-page-01.png",
+      "bytes": 113639,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "board",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "board-page-01.png",
+      "bytes": 92361,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "selected",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "selected-page-01.png",
+      "bytes": 86533,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 3
+    },
+    {
+      "fixture": "continuation",
+      "format": "png",
+      "index": 0,
+      "pages": 3,
+      "file": "continuation-page-01.png",
+      "bytes": 238300,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 85
+    },
+    {
+      "fixture": "continuation",
+      "format": "png",
+      "index": 1,
+      "pages": 3,
+      "file": "continuation-page-02.png",
+      "bytes": 252919,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 85
+    },
+    {
+      "fixture": "continuation",
+      "format": "png",
+      "index": 2,
+      "pages": 3,
+      "file": "continuation-page-03.png",
+      "bytes": 104889,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 85
+    },
+    {
+      "fixture": "label-sheet",
+      "format": "png",
+      "index": 0,
+      "pages": 2,
+      "file": "label-sheet-page-01.png",
+      "bytes": 158073,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 25
+    },
+    {
+      "fixture": "label-sheet",
+      "format": "png",
+      "index": 1,
+      "pages": 2,
+      "file": "label-sheet-page-02.png",
+      "bytes": 55129,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 25
+    },
+    {
+      "fixture": "label",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "label-page-01.png",
+      "bytes": 6241,
+      "size": {
+        "widthMm": 50,
+        "heightMm": 30
+      },
+      "mainTokens": 1
+    },
+    {
+      "fixture": "label",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "label-page-01-300dpi.png",
+      "bytes": 14915,
+      "size": {
+        "widthMm": 50,
+        "heightMm": 30
+      },
+      "dpi": 300,
+      "raster": {
+        "width": 591,
+        "height": 354
+      }
+    },
+    {
+      "fixture": "transparent",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "transparent-page-01.png",
+      "bytes": 104731,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "long-heading",
+      "format": "png",
+      "index": 0,
+      "pages": 1,
+      "file": "long-heading-page-01.png",
+      "bytes": 120318,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 4
+    },
+    {
+      "fixture": "workplace",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "workplace.pdf",
+      "bytes": 230526,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 4
+    },
+    {
+      "fixture": "routine",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "routine.pdf",
+      "bytes": 186378,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 3
+    },
+    {
+      "fixture": "required-labels",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "required-labels.pdf",
+      "bytes": 297856,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "required-pictures",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "required-pictures.pdf",
+      "bytes": 251167,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "required-detailed",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "required-detailed.pdf",
+      "bytes": 396464,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "board",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "board.pdf",
+      "bytes": 214219,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "selected",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "selected.pdf",
+      "bytes": 161112,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 3
+    },
+    {
+      "fixture": "continuation",
+      "format": "pdf",
+      "index": 0,
+      "pages": 3,
+      "file": "continuation.pdf",
+      "bytes": 913346,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 85
+    },
+    {
+      "fixture": "label-sheet",
+      "format": "pdf",
+      "index": 0,
+      "pages": 2,
+      "file": "label-sheet.pdf",
+      "bytes": 409649,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 25
+    },
+    {
+      "fixture": "label",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "label.pdf",
+      "bytes": 17230,
+      "size": {
+        "widthMm": 50,
+        "heightMm": 30
+      },
+      "mainTokens": 1
+    },
+    {
+      "fixture": "transparent",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "transparent.pdf",
+      "bytes": 297782,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 2
+    },
+    {
+      "fixture": "long-heading",
+      "format": "pdf",
+      "index": 0,
+      "pages": 1,
+      "file": "long-heading.pdf",
+      "bytes": 291907,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "mainTokens": 4
+    }
+  ],
+  "renderer": {
+    "sharp": {
+      "aom": "3.14.1",
+      "archive": "3.8.9",
+      "cairo": "1.18.4",
+      "cgif": "0.5.3",
+      "exif": "0.6.26",
+      "expat": "2.8.3",
+      "ffi": "3.8.0",
+      "fontconfig": "2.18.3",
+      "freetype": "2.14.3",
+      "fribidi": "1.0.16",
+      "glib": "2.89.4",
+      "harfbuzz": "14.3.1",
+      "heif": "1.23.2",
+      "highway": "1.4.0",
+      "imagequant": "2.4.1",
+      "lcms": "2.19.1",
+      "mozjpeg": "0826579",
+      "pango": "1.58.2",
+      "pixman": "0.46.4",
+      "png": "1.6.58",
+      "proxy-libintl": "0.5",
+      "rsvg": "2.62.91",
+      "tiff": "4.7.2",
+      "uhdr": "2.0.2",
+      "vips": "8.18.6",
+      "webp": "1.6.0",
+      "xml2": "2.15.3",
+      "zlib-ng": "2.3.3",
+      "sharp": "0.35.4"
+    },
+    "pdf": "C:\\Users\\Patrick\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin\\pdftoppm.exe"
+  }
+}

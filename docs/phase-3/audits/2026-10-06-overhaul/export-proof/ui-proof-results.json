@@ -1,0 +1,13 @@
+{
+  "runAt": "2026-10-06T16:06:50.225Z",
+  "browser": "153.0.8010.12",
+  "checks": [
+    "named defaults, modal containment, exact visual page and numbered page action at 320px",
+    "source edit blocks downloads until explicit Refresh",
+    "one real captured SVG download, Escape and opener return",
+    "German controls and 200% root text zoom, 44px controls, no global overflow",
+    "custom validation/recovery, retained input focus, empty selection, transparent explanation and selected semantic content",
+    "board controls, canonical 24-cell label-sheet defaults, invalid grid recovery and explicit density action"
+  ],
+  "errors": []
+}

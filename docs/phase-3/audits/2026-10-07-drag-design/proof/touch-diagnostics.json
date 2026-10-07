@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "type": "pointerdown",
+      "target": "Apple",
+      "x": 113.5999984741211,
+      "y": 632.0700073242188,
+      "pointer": "touch",
+      "prevented": false
+    },
+    {
+      "type": "pointerup",
+      "target": "Apple",
+      "x": 113.5999984741211,
+      "y": 632.0700073242188,
+      "pointer": "touch",
+      "prevented": false
+    }
+  ],
+  "scrollY": 509,
+  "height": 900,
+  "sheet": {
+    "x": 19,
+    "y": 184.84375,
+    "width": 352,
+    "height": 530.3125,
+    "top": 184.84375,
+    "right": 371,
+    "bottom": 715.15625,
+    "left": 19
+  }
+}

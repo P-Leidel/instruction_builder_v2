@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "title": "Kitchen picture instructions",
+    "domain": "proof",
+    "presentation": "sequence",
+    "createdAt": "2026-10-07T00:00:00Z"
+  },
+  "steps": [
+    {
+      "id": "kitchen",
+      "tokens": [
+        {
+          "id": "picture-0",
+          "iconId": "object.grape",
+          "category": "object",
+          "label": "Grape"
+        },
+        {
+          "id": "picture-1",
+          "iconId": "object.banana",
+          "category": "object",
+          "label": "Banana",
+          "quantity": {
+            "iconId": "quantity.amount",
+            "label": "5435 g",
+            "amount": 5435,
+            "unit": "g"
+          },
+          "warning": {
+            "iconId": "warning.sharp",
+            "label": "Sharp!"
+          },
+          "time": {
+            "iconId": "time.duration",
+            "label": "9m 3s",
+            "seconds": 543
+          }
+        },
+        {
+          "id": "picture-2",
+          "iconId": "object.potato",
+          "category": "object",
+          "label": "Potato"
+        },
+        {
+          "id": "picture-3",
+          "iconId": "object.apple",
+          "category": "object",
+          "label": "Apple"
+        },
+        {
+          "id": "picture-4",
+          "iconId": "action.simmer",
+          "category": "action",
+          "label": "Simmer"
+        },
+        {
+          "id": "picture-5",
+          "iconId": "action.bake",
+          "category": "action",
+          "label": "Bake"
+        },
+        {
+          "id": "picture-6",
+          "iconId": "action.fry",
+          "category": "action",
+          "label": "Fry"
+        },
+        {
+          "id": "picture-7",
+          "iconId": "object.fish",
+          "category": "object",
+          "label": "Fish"
+        }
+      ]
+    }
+  ]
+}

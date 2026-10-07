@@ -1,0 +1,583 @@
+{
+  "documentTitle": "Kitchen picture instructions",
+  "presentation": "sequence",
+  "options": {
+    "preset": "sheet",
+    "locale": "en",
+    "orientation": "portrait",
+    "mode": "labels",
+    "background": "white",
+    "selectedStepIds": [
+      "kitchen"
+    ],
+    "metadata": {
+      "documentTitle": true,
+      "groupTitles": true,
+      "stepNumbers": true,
+      "totalTime": true
+    }
+  },
+  "pages": [
+    {
+      "index": 0,
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "background": "white",
+      "fragments": [
+        {
+          "kind": "text",
+          "source": {},
+          "role": "heading",
+          "text": "Kitchen picture instructions",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 14,
+          "box": {
+            "xMm": 10,
+            "yMm": 10,
+            "widthMm": 190,
+            "heightMm": 8.050388888888888
+          },
+          "baselineMm": 16.44031111111111
+        },
+        {
+          "kind": "text",
+          "source": {},
+          "role": "time",
+          "text": "Total time: 9m 3s",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 9,
+          "box": {
+            "xMm": 10,
+            "yMm": 20.05038888888889,
+            "widthMm": 190,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 24.190588888888886
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "heading",
+          "text": "Step 1: ",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 14,
+          "box": {
+            "xMm": 10,
+            "yMm": 27.225638888888888,
+            "widthMm": 190,
+            "heightMm": 8.050388888888888
+          },
+          "baselineMm": 33.665949999999995
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "time",
+          "text": "9m 3s",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 9,
+          "box": {
+            "xMm": 10,
+            "yMm": 37.27602777777778,
+            "widthMm": 190,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 41.41622777777778
+        },
+        {
+          "kind": "symbol",
+          "role": "token",
+          "iconId": "object.grape",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-0"
+          },
+          "box": {
+            "xMm": 12.5,
+            "yMm": 44.451277777777776,
+            "widthMm": 15,
+            "heightMm": 15
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-0"
+          },
+          "role": "label",
+          "text": "Grape",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 10,
+          "box": {
+            "xMm": 10,
+            "yMm": 61.451277777777776,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 66.0515
+        },
+        {
+          "kind": "symbol",
+          "role": "token",
+          "iconId": "object.banana",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "box": {
+            "xMm": 61,
+            "yMm": 44.451277777777776,
+            "widthMm": 15,
+            "heightMm": 15
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "role": "label",
+          "text": "Banana",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 10,
+          "box": {
+            "xMm": 58.5,
+            "yMm": 61.451277777777776,
+            "widthMm": 20,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 66.0515
+        },
+        {
+          "kind": "symbol",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "role": "quantity",
+          "iconId": "quantity.amount",
+          "box": {
+            "xMm": 80.5,
+            "yMm": 44.451277777777776,
+            "widthMm": 5,
+            "heightMm": 5
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "role": "quantity",
+          "text": "5435 g",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 9,
+          "box": {
+            "xMm": 86.5,
+            "yMm": 44.451277777777776,
+            "widthMm": 16.5,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 48.591477777777776
+        },
+        {
+          "kind": "symbol",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "role": "warning",
+          "iconId": "warning.sharp",
+          "box": {
+            "xMm": 80.5,
+            "yMm": 50.626527777777774,
+            "widthMm": 5,
+            "heightMm": 5
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "role": "warning",
+          "text": "Warning: ",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 9,
+          "box": {
+            "xMm": 86.5,
+            "yMm": 50.626527777777774,
+            "widthMm": 16.5,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 54.766727777777774
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "role": "warning",
+          "text": "Sharp!",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 9,
+          "box": {
+            "xMm": 86.5,
+            "yMm": 55.80177777777777,
+            "widthMm": 16.5,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 59.94197777777777
+        },
+        {
+          "kind": "symbol",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "role": "time",
+          "iconId": "time.duration",
+          "box": {
+            "xMm": 80.5,
+            "yMm": 61.97702777777778,
+            "widthMm": 5,
+            "heightMm": 5
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-1"
+          },
+          "role": "time",
+          "text": "9m 3s",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 9,
+          "box": {
+            "xMm": 86.5,
+            "yMm": 61.97702777777778,
+            "widthMm": 16.5,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 66.11722777777777
+        },
+        {
+          "kind": "connector",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "context",
+          "from": {
+            "xMm": 55,
+            "yMm": 51.951277777777776
+          },
+          "to": {
+            "xMm": 58,
+            "yMm": 51.951277777777776
+          }
+        },
+        {
+          "kind": "symbol",
+          "role": "token",
+          "iconId": "object.potato",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-2"
+          },
+          "box": {
+            "xMm": 109.5,
+            "yMm": 44.451277777777776,
+            "widthMm": 15,
+            "heightMm": 15
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-2"
+          },
+          "role": "label",
+          "text": "Potato",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 10,
+          "box": {
+            "xMm": 107,
+            "yMm": 61.451277777777776,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 66.0515
+        },
+        {
+          "kind": "connector",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "context",
+          "from": {
+            "xMm": 103.5,
+            "yMm": 51.951277777777776
+          },
+          "to": {
+            "xMm": 106.5,
+            "yMm": 51.951277777777776
+          }
+        },
+        {
+          "kind": "symbol",
+          "role": "token",
+          "iconId": "object.apple",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-3"
+          },
+          "box": {
+            "xMm": 158,
+            "yMm": 44.451277777777776,
+            "widthMm": 15,
+            "heightMm": 15
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-3"
+          },
+          "role": "label",
+          "text": "Apple",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 10,
+          "box": {
+            "xMm": 155.5,
+            "yMm": 61.451277777777776,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 66.0515
+        },
+        {
+          "kind": "connector",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "context",
+          "from": {
+            "xMm": 152,
+            "yMm": 51.951277777777776
+          },
+          "to": {
+            "xMm": 155,
+            "yMm": 51.951277777777776
+          }
+        },
+        {
+          "kind": "connector",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "context",
+          "from": {
+            "xMm": 165.5,
+            "yMm": 67.70155555555556
+          },
+          "to": {
+            "xMm": 20,
+            "yMm": 68.70155555555556
+          }
+        },
+        {
+          "kind": "symbol",
+          "role": "token",
+          "iconId": "action.simmer",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-4"
+          },
+          "box": {
+            "xMm": 12.5,
+            "yMm": 69.20155555555556,
+            "widthMm": 15,
+            "heightMm": 15
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-4"
+          },
+          "role": "label",
+          "text": "Simmer",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 10,
+          "box": {
+            "xMm": 10,
+            "yMm": 86.20155555555556,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 90.80177777777777
+        },
+        {
+          "kind": "symbol",
+          "role": "token",
+          "iconId": "action.bake",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-5"
+          },
+          "box": {
+            "xMm": 61,
+            "yMm": 69.20155555555556,
+            "widthMm": 15,
+            "heightMm": 15
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-5"
+          },
+          "role": "label",
+          "text": "Bake",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 10,
+          "box": {
+            "xMm": 58.5,
+            "yMm": 86.20155555555556,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 90.80177777777777
+        },
+        {
+          "kind": "connector",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "context",
+          "from": {
+            "xMm": 55,
+            "yMm": 76.70155555555556
+          },
+          "to": {
+            "xMm": 58,
+            "yMm": 76.70155555555556
+          }
+        },
+        {
+          "kind": "symbol",
+          "role": "token",
+          "iconId": "action.fry",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-6"
+          },
+          "box": {
+            "xMm": 109.5,
+            "yMm": 69.20155555555556,
+            "widthMm": 15,
+            "heightMm": 15
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-6"
+          },
+          "role": "label",
+          "text": "Fry",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 10,
+          "box": {
+            "xMm": 107,
+            "yMm": 86.20155555555556,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 90.80177777777777
+        },
+        {
+          "kind": "connector",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "context",
+          "from": {
+            "xMm": 103.5,
+            "yMm": 76.70155555555556
+          },
+          "to": {
+            "xMm": 106.5,
+            "yMm": 76.70155555555556
+          }
+        },
+        {
+          "kind": "symbol",
+          "role": "token",
+          "iconId": "object.fish",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-7"
+          },
+          "box": {
+            "xMm": 158,
+            "yMm": 69.20155555555556,
+            "widthMm": 15,
+            "heightMm": 15
+          }
+        },
+        {
+          "kind": "text",
+          "source": {
+            "stepId": "kitchen",
+            "tokenId": "picture-7"
+          },
+          "role": "label",
+          "text": "Fish",
+          "fontId": "source-sans-3-regular-3.052",
+          "fontSizePt": 10,
+          "box": {
+            "xMm": 155.5,
+            "yMm": 86.20155555555556,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 90.80177777777777
+        },
+        {
+          "kind": "connector",
+          "source": {
+            "stepId": "kitchen"
+          },
+          "role": "context",
+          "from": {
+            "xMm": 152,
+            "yMm": 76.70155555555556
+          },
+          "to": {
+            "xMm": 155,
+            "yMm": 76.70155555555556
+          }
+        }
+      ]
+    }
+  ],
+  "notices": []
+}

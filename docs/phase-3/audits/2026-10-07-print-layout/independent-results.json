@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "pdfSizeMm": [
+    210,
+    297
+  ],
+  "pdfPages": 1,
+  "pdfImageXObjects": 0,
+  "actualInkInside10mmBorder": true,
+  "crossRendererInkEdgesWithin2px": true,
+  "renders": {
+    "banana-layout.png": {
+      "size": [
+        1240,
+        1754
+      ],
+      "inkBox": [
+        59,
+        76,
+        1018,
+        541
+      ]
+    },
+    "svg-independent.png": {
+      "size": [
+        1240,
+        1754
+      ],
+      "inkBox": [
+        59,
+        76,
+        1018,
+        541
+      ]
+    },
+    "pdf-independent.png": {
+      "size": [
+        1241,
+        1754
+      ],
+      "inkBox": [
+        59,
+        76,
+        1018,
+        541
+      ]
+    }
+  },
+  "limit": "Digital representative fixture, not physical printer or participant acceptance"
+}

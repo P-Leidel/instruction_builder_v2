@@ -1,0 +1,555 @@
+{
+  "strategy": "same-font-vector-outlines",
+  "fontMetadata": {
+    "bytes": 431196,
+    "sha256": "4644c81b86ec9caaa76b634889968ed3c4f4f52f054855933acc7c2b21e53b0f",
+    "revision": 3.052,
+    "unitsPerEm": 1000,
+    "ascender": 1000,
+    "descender": -326,
+    "head": {
+      "version": 1,
+      "fontRevision": 3.052,
+      "checkSumAdjustment": 3570471141,
+      "magicNumber": 1594834165,
+      "flags": 7,
+      "unitsPerEm": 1000,
+      "created": 1680181512,
+      "modified": 1680578826,
+      "xMin": -614,
+      "yMin": -295,
+      "xMax": 2159,
+      "yMax": 958,
+      "macStyle": 0,
+      "lowestRecPPEM": 3,
+      "fontDirectionHint": 2,
+      "indexToLocFormat": 1,
+      "glyphDataFormat": 0
+    },
+    "cmapCount": 1614
+  },
+  "manifest": {
+    "cacheName": "instruction-builder-v2-05e37bd4fafef9bd",
+    "assets": [
+      "/",
+      "/assets/html2canvas-ClMCbNP5.js",
+      "/assets/index-CkvJ_o8F.js",
+      "/assets/index.es-C3OHtky7.js",
+      "/assets/jspdf.es.min-CW3idjHR.js",
+      "/assets/purify.es-eyZ2HLgt.js",
+      "/assets/svg2pdf.es.min-C610yMLh.js",
+      "/fonts/SourceSans3-LICENSE.md",
+      "/fonts/SourceSans3-Regular-3.052.ttf",
+      "/icons/favicon.svg",
+      "/icons/icon-192.png",
+      "/icons/icon-512.png",
+      "/icons/icon-maskable-512.png",
+      "/manifest.webmanifest"
+    ]
+  },
+  "beforeFirstOutput": {
+    "fontFaceCount": 0,
+    "cached": [
+      {
+        "name": "instruction-builder-v2-05e37bd4fafef9bd",
+        "urls": [
+          "/",
+          "/assets/html2canvas-ClMCbNP5.js",
+          "/assets/index-CkvJ_o8F.js",
+          "/assets/index.es-C3OHtky7.js",
+          "/assets/jspdf.es.min-CW3idjHR.js",
+          "/assets/purify.es-eyZ2HLgt.js",
+          "/assets/svg2pdf.es.min-C610yMLh.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      }
+    ],
+    "controller": true
+  },
+  "firstUseOffline": true,
+  "serverRequestsDuringOutput": 0,
+  "coldBrowserRequests": [
+    "/",
+    "/assets/index-CkvJ_o8F.js",
+    "/fonts/SourceSans3-Regular-3.052.ttf",
+    "31517/6c8a1ad6-40c6-4145-8b1c-845e15300a1b",
+    "/assets/jspdf.es.min-CW3idjHR.js",
+    "/assets/svg2pdf.es.min-C610yMLh.js",
+    "31517/fe1419f0-30f0-4e74-9370-16012f0bab78"
+  ],
+  "coverage": {
+    "fontId": "source-sans-3-regular-3.052",
+    "unsupportedJapanese": [
+      26085,
+      26412,
+      35486
+    ]
+  },
+  "afterFontFaceCount": 1,
+  "runtimes": {
+    "chromium": "153.0.8010.12",
+    "sharp": {
+      "aom": "3.14.1",
+      "archive": "3.8.9",
+      "cairo": "1.18.4",
+      "cgif": "0.5.3",
+      "exif": "0.6.26",
+      "expat": "2.8.3",
+      "ffi": "3.8.0",
+      "fontconfig": "2.18.3",
+      "freetype": "2.14.3",
+      "fribidi": "1.0.16",
+      "glib": "2.89.4",
+      "harfbuzz": "14.3.1",
+      "heif": "1.23.2",
+      "highway": "1.4.0",
+      "imagequant": "2.4.1",
+      "lcms": "2.19.1",
+      "mozjpeg": "0826579",
+      "pango": "1.58.2",
+      "pixman": "0.46.4",
+      "png": "1.6.58",
+      "proxy-libintl": "0.5",
+      "rsvg": "2.62.91",
+      "tiff": "4.7.2",
+      "uhdr": "2.0.2",
+      "vips": "8.18.6",
+      "webp": "1.6.0",
+      "xml2": "2.15.3",
+      "zlib-ng": "2.3.3",
+      "sharp": "0.35.4"
+    }
+  },
+  "artifacts": [
+    {
+      "name": "diagnostic",
+      "size": {
+        "widthMm": 190,
+        "heightMm": 120
+      },
+      "raster": {
+        "width": 1122,
+        "height": 709
+      },
+      "painted": [
+        {
+          "text": "English: prepare 2 small cups",
+          "box": {
+            "xMm": 3,
+            "yMm": 3,
+            "widthMm": 180,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 7.6002222222222215,
+          "sizePt": 10,
+          "measureMm": 42.77077777777777,
+          "bounds": {
+            "x1": 0.3175,
+            "y1": -2.5117777777777777,
+            "x2": 42.657888888888884,
+            "y2": 0.7902222222222222
+          }
+        },
+        {
+          "text": "ÄÖÜ äöü ß ẞ – “Größe” — café déjà vu",
+          "box": {
+            "xMm": 3,
+            "yMm": 11.750277777777777,
+            "widthMm": 180,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 16.350499999999997,
+          "sizePt": 10,
+          "measureMm": 55.58719444444445,
+          "bounds": {
+            "x1": 0.010583333333333333,
+            "y1": -2.8680833333333333,
+            "x2": 55.297916666666666,
+            "y2": 0.7655277777777778
+          }
+        },
+        {
+          "text": "Ä é 0123456789 & < > ’j j",
+          "box": {
+            "xMm": 3,
+            "yMm": 20.500555555555554,
+            "widthMm": 180,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 25.100777777777775,
+          "sizePt": 10,
+          "measureMm": 34.41700000000001,
+          "bounds": {
+            "x1": 0.010583333333333333,
+            "y1": -2.8680833333333333,
+            "x2": 34.17358333333334,
+            "y2": 0.7655277777777778
+          }
+        },
+        {
+          "text": "WWWWWWWWW",
+          "box": {
+            "xMm": 3,
+            "yMm": 29.250833333333333,
+            "widthMm": 25,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 33.851055555555554,
+          "sizePt": 10,
+          "measureMm": 24.955500000000004,
+          "bounds": {
+            "x1": 0.08113888888888889,
+            "y1": -2.314222222222222,
+            "x2": 24.874361111111114,
+            "y2": 0
+          }
+        },
+        {
+          "text": "WWWWWWWWW",
+          "box": {
+            "xMm": 3,
+            "yMm": 35.00111111111111,
+            "widthMm": 25,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 39.60133333333333,
+          "sizePt": 10,
+          "measureMm": 24.955500000000004,
+          "bounds": {
+            "x1": 0.08113888888888889,
+            "y1": -2.314222222222222,
+            "x2": 24.874361111111114,
+            "y2": 0
+          }
+        },
+        {
+          "text": "Donaudampfschifff",
+          "box": {
+            "xMm": 3,
+            "yMm": 43.75138888888888,
+            "widthMm": 30,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 48.351611111111104,
+          "sizePt": 10,
+          "measureMm": 28.391555555555556,
+          "bounds": {
+            "x1": 0.3175,
+            "y1": -2.554111111111111,
+            "x2": 28.391555555555556,
+            "y2": 0.7231944444444445
+          }
+        },
+        {
+          "text": "ahrtsgesellschaft",
+          "box": {
+            "xMm": 3,
+            "yMm": 49.50166666666666,
+            "widthMm": 30,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 54.10188888888888,
+          "sizePt": 10,
+          "measureMm": 25.02605555555556,
+          "bounds": {
+            "x1": 0.17991666666666667,
+            "y1": -2.554111111111111,
+            "x2": 24.980194444444447,
+            "y2": 0.7902222222222222
+          }
+        },
+        {
+          "text": "jÄ café j",
+          "box": {
+            "xMm": 3,
+            "yMm": 58.25194444444443,
+            "widthMm": 180,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 62.852166666666655,
+          "sizePt": 10,
+          "measureMm": 11.380611111111113,
+          "bounds": {
+            "x1": 0,
+            "y1": -2.8680833333333333,
+            "x2": 11.137194444444447,
+            "y2": 0.7655277777777778
+          }
+        },
+        {
+          "text": "jÄÖÜ ß café j",
+          "box": {
+            "xMm": 169.2639722222222,
+            "yMm": 112.24972222222222,
+            "widthMm": 18.736027777777778,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 116.84994444444445,
+          "sizePt": 10,
+          "measureMm": 18.736027777777778,
+          "bounds": {
+            "x1": 0,
+            "y1": -2.8680833333333333,
+            "x2": 18.49261111111111,
+            "y2": 0.7655277777777778
+          }
+        }
+      ],
+      "pdfVector": true
+    },
+    {
+      "name": "composition",
+      "size": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "raster": {
+        "width": 1240,
+        "height": 1754
+      },
+      "painted": [
+        {
+          "text": "ÄÖÜ äöü ß ẞ – “Größe” — café déjà vu",
+          "box": {
+            "xMm": 10,
+            "yMm": 10,
+            "widthMm": 190,
+            "heightMm": 8.050388888888888
+          },
+          "baselineMm": 16.44031111111111,
+          "sizePt": 14,
+          "measureMm": 77.8220722222222,
+          "bounds": {
+            "x1": 0.014816666666666665,
+            "y1": -4.015316666666666,
+            "x2": 77.41708333333332,
+            "y2": 1.0717388888888888
+          }
+        },
+        {
+          "text": "Gesamtzeit: 5m",
+          "box": {
+            "xMm": 10,
+            "yMm": 20.05038888888889,
+            "widthMm": 190,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 24.190588888888886,
+          "sizePt": 9,
+          "measureMm": 20.583525,
+          "bounds": {
+            "x1": 0.1651,
+            "y1": -2.20345,
+            "x2": 20.342225000000003,
+            "y2": 0.038099999999999995
+          }
+        },
+        {
+          "text": "Schritt 1: Fixture group",
+          "box": {
+            "xMm": 10,
+            "yMm": 27.225638888888888,
+            "widthMm": 190,
+            "heightMm": 8.050388888888888
+          },
+          "baselineMm": 33.665949999999995,
+          "sizePt": 14,
+          "measureMm": 47.17626666666666,
+          "bounds": {
+            "x1": 0.2074333333333333,
+            "y1": -3.5164888888888886,
+            "x2": 46.93919999999999,
+            "y2": 1.106311111111111
+          }
+        },
+        {
+          "text": "5m",
+          "box": {
+            "xMm": 10,
+            "yMm": 37.27602777777778,
+            "widthMm": 190,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 41.41622777777778,
+          "sizePt": 9,
+          "measureMm": 4.21005,
+          "bounds": {
+            "x1": 0.079375,
+            "y1": -2.0256499999999997,
+            "x2": 3.96875,
+            "y2": 0.038099999999999995
+          }
+        },
+        {
+          "text": "jWWWWWWWWWWWWWWW",
+          "box": {
+            "xMm": 10,
+            "yMm": 61.451277777777776,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 66.0515,
+          "sizePt": 10,
+          "measureMm": 42.604972222222216,
+          "bounds": {
+            "x1": 0,
+            "y1": -2.4482777777777778,
+            "x2": 42.523833333333336,
+            "y2": 0.7655277777777778
+          }
+        },
+        {
+          "text": "WWWj",
+          "box": {
+            "xMm": 10,
+            "yMm": 67.20155555555556,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 71.80177777777777,
+          "sizePt": 10,
+          "measureMm": 9.189861111111112,
+          "bounds": {
+            "x1": 0.08113888888888889,
+            "y1": -2.4482777777777778,
+            "x2": 8.946444444444445,
+            "y2": 0.7655277777777778
+          }
+        },
+        {
+          "text": "Donaudampfschifffahrtsgesell",
+          "box": {
+            "xMm": 10,
+            "yMm": 72.95183333333333,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 77.55205555555555,
+          "sizePt": 10,
+          "measureMm": 44.44294444444444,
+          "bounds": {
+            "x1": 0.3175,
+            "y1": -2.554111111111111,
+            "x2": 44.30536111111111,
+            "y2": 0.7902222222222222
+          }
+        },
+        {
+          "text": "schaft",
+          "box": {
+            "xMm": 10,
+            "yMm": 78.70211111111111,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 83.30233333333332,
+          "sizePt": 10,
+          "measureMm": 8.879416666666666,
+          "bounds": {
+            "x1": 0.09877777777777777,
+            "y1": -2.554111111111111,
+            "x2": 8.833555555555556,
+            "y2": 0.042333333333333334
+          }
+        },
+        {
+          "text": "2 small cups",
+          "box": {
+            "xMm": 10,
+            "yMm": 93.45238888888889,
+            "widthMm": 44.5,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 97.59258888888888,
+          "sizePt": 9,
+          "measureMm": 16.297275,
+          "bounds": {
+            "x1": 0.117475,
+            "y1": -2.2605999999999997,
+            "x2": 16.195674999999998,
+            "y2": 0.650875
+          }
+        },
+        {
+          "text": "Warnung: Beware: sharp edge — j",
+          "box": {
+            "xMm": 10,
+            "yMm": 107.62763888888888,
+            "widthMm": 44.5,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 111.76783888888887,
+          "sizePt": 9,
+          "measureMm": 44.11344999999999,
+          "bounds": {
+            "x1": 0.07302499999999999,
+            "y1": -2.2605999999999997,
+            "x2": 43.894375,
+            "y2": 0.7111999999999999
+          }
+        },
+        {
+          "text": "5m",
+          "box": {
+            "xMm": 10,
+            "yMm": 121.80288888888889,
+            "widthMm": 44.5,
+            "heightMm": 5.175249999999999
+          },
+          "baselineMm": 125.94308888888888,
+          "sizePt": 9,
+          "measureMm": 4.21005,
+          "bounds": {
+            "x1": 0.079375,
+            "y1": -2.0256499999999997,
+            "x2": 3.96875,
+            "y2": 0.038099999999999995
+          }
+        },
+        {
+          "text": "Ä é ’j café j",
+          "box": {
+            "xMm": 58.5,
+            "yMm": 61.451277777777776,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 66.0515,
+          "sizePt": 10,
+          "measureMm": 15.278805555555557,
+          "bounds": {
+            "x1": 0.010583333333333333,
+            "y1": -2.8680833333333333,
+            "x2": 15.03538888888889,
+            "y2": 0.7655277777777778
+          }
+        },
+        {
+          "text": "Book",
+          "box": {
+            "xMm": 107,
+            "yMm": 61.451277777777776,
+            "widthMm": 44.5,
+            "heightMm": 5.750277777777777
+          },
+          "baselineMm": 66.0515,
+          "sizePt": 10,
+          "measureMm": 7.644694444444443,
+          "bounds": {
+            "x1": 0.3175,
+            "y1": -2.5117777777777777,
+            "x2": 7.612944444444444,
+            "y2": 0.042333333333333334
+          }
+        }
+      ],
+      "pdfVector": true
+    }
+  ]
+}

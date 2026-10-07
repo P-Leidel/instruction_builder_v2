@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "title": "Get ready",
+    "domain": "recipe",
+    "createdAt": "2026-10-06T00:00:00Z",
+    "presentation": "sequence"
+  },
+  "steps": [
+    {
+      "id": "group-0",
+      "title": "Wash hands",
+      "tokens": [
+        {
+          "id": "routine-0",
+          "iconId": "routines.action.wash-hands",
+          "category": "action",
+          "label": "Wash hands"
+        }
+      ]
+    },
+    {
+      "id": "group-1",
+      "title": "Brush teeth",
+      "tokens": [
+        {
+          "id": "routine-1",
+          "iconId": "routines.action.brush-teeth",
+          "category": "action",
+          "label": "Brush teeth"
+        }
+      ]
+    },
+    {
+      "id": "group-2",
+      "title": "Get dressed",
+      "tokens": [
+        {
+          "id": "routine-2",
+          "iconId": "routines.action.dress",
+          "category": "action",
+          "label": "Get dressed"
+        }
+      ]
+    }
+  ]
+}

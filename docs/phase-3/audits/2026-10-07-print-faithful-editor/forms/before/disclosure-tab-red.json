@@ -1,0 +1,19 @@
+{
+  "runAt": "2026-10-07T09:44:22.604Z",
+  "checks": {
+    "en_quantity_immediately_visible": true,
+    "en_warning_immediately_visible": true,
+    "en_readable_duration_parts": true,
+    "en_quiet_actions_closed": true,
+    "en_native_disclosure": true,
+    "en_unknown_warning_label_visible": true,
+    "en_opening_and_unchanged_saves_preserve_imported_data": true,
+    "en_unrelated_commit_keeps_drafts": true,
+    "en_resize_keeps_drafts": true,
+    "en_keyboard_actions": true,
+    "en_quiet_copy_keeps_authored_data": true,
+    "en_closed_actions_summary_is_last_tab_stop": false
+  },
+  "errors": [],
+  "failure": "AssertionError [ERR_ASSERTION]: en_closed_actions_summary_is_last_tab_stop\n\nfalse !== true\n"
+}

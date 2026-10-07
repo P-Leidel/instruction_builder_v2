@@ -1,0 +1,845 @@
+{
+  "dpi": 150,
+  "threshold": 180,
+  "maximumAllowedEdgeDeltaPixels": 2,
+  "comparisons": [
+    {
+      "artifact": "diagnostic",
+      "dimensions": {
+        "image": [
+          1122,
+          709
+        ],
+        "browser": [
+          1122,
+          708
+        ],
+        "independent": [
+          1122,
+          709
+        ],
+        "pdf": [
+          1123,
+          709
+        ]
+      },
+      "lines": [
+        {
+          "text": "English: prepare 2 small cups",
+          "cropPixels": [
+            17,
+            17,
+            1081,
+            52
+          ],
+          "inkBounds": {
+            "image": [
+              2,
+              13,
+              253,
+              33
+            ],
+            "browser": [
+              2,
+              13,
+              253,
+              33
+            ],
+            "independent": [
+              2,
+              13,
+              252,
+              33
+            ],
+            "pdf": [
+              2,
+              13,
+              253,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "\u00c4\u00d6\u00dc \u00e4\u00f6\u00fc \u00df \u1e9e \u2013 \u201cGr\u00f6\u00dfe\u201d \u2014 caf\u00e9 d\u00e9j\u00e0 vu",
+          "cropPixels": [
+            17,
+            69,
+            1081,
+            104
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              11,
+              327,
+              32
+            ],
+            "browser": [
+              1,
+              11,
+              327,
+              32
+            ],
+            "independent": [
+              0,
+              11,
+              327,
+              32
+            ],
+            "pdf": [
+              1,
+              10,
+              328,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "A\u0308 e\u0301 0123456789 & < > \u2019j j",
+          "cropPixels": [
+            17,
+            121,
+            1081,
+            156
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              10,
+              203,
+              32
+            ],
+            "browser": [
+              1,
+              10,
+              202,
+              32
+            ],
+            "independent": [
+              0,
+              10,
+              202,
+              32
+            ],
+            "pdf": [
+              1,
+              10,
+              203,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "WWWWWWWWW",
+          "cropPixels": [
+            17,
+            172,
+            166,
+            207
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              14,
+              148,
+              28
+            ],
+            "browser": [
+              1,
+              14,
+              148,
+              28
+            ],
+            "independent": [
+              0,
+              14,
+              147,
+              28
+            ],
+            "pdf": [
+              1,
+              14,
+              148,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "WWWWWWWWW",
+          "cropPixels": [
+            17,
+            206,
+            166,
+            241
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              14,
+              148,
+              28
+            ],
+            "browser": [
+              1,
+              14,
+              148,
+              28
+            ],
+            "independent": [
+              0,
+              14,
+              147,
+              28
+            ],
+            "pdf": [
+              1,
+              14,
+              148,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Donaudampfschifff",
+          "cropPixels": [
+            17,
+            258,
+            195,
+            293
+          ],
+          "inkBounds": {
+            "image": [
+              2,
+              12,
+              168,
+              32
+            ],
+            "browser": [
+              2,
+              13,
+              168,
+              32
+            ],
+            "independent": [
+              2,
+              12,
+              168,
+              32
+            ],
+            "pdf": [
+              2,
+              12,
+              168,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "ahrtsgesellschaft",
+          "cropPixels": [
+            17,
+            292,
+            195,
+            327
+          ],
+          "inkBounds": {
+            "image": [
+              2,
+              12,
+              148,
+              32
+            ],
+            "browser": [
+              2,
+              13,
+              148,
+              33
+            ],
+            "independent": [
+              1,
+              12,
+              147,
+              32
+            ],
+            "pdf": [
+              2,
+              12,
+              148,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "j\u00c4 caf\u00e9 j",
+          "cropPixels": [
+            17,
+            344,
+            1081,
+            378
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              10,
+              66,
+              32
+            ],
+            "browser": [
+              1,
+              10,
+              67,
+              32
+            ],
+            "independent": [
+              0,
+              10,
+              66,
+              32
+            ],
+            "pdf": [
+              1,
+              10,
+              67,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "j\u00c4\u00d6\u00dc \u00df caf\u00e9 j",
+          "cropPixels": [
+            999,
+            662,
+            1111,
+            697
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              11,
+              110,
+              33
+            ],
+            "browser": [
+              0,
+              12,
+              110,
+              33
+            ],
+            "independent": [
+              0,
+              11,
+              110,
+              33
+            ],
+            "pdf": [
+              1,
+              11,
+              110,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    },
+    {
+      "artifact": "composition",
+      "dimensions": {
+        "image": [
+          1240,
+          1754
+        ],
+        "browser": [
+          1239,
+          1753
+        ],
+        "independent": [
+          1240,
+          1754
+        ],
+        "pdf": [
+          1241,
+          1754
+        ]
+      },
+      "lines": [
+        {
+          "text": "\u00c4\u00d6\u00dc \u00e4\u00f6\u00fc \u00df \u1e9e \u2013 \u201cGr\u00f6\u00dfe\u201d \u2014 caf\u00e9 d\u00e9j\u00e0 vu",
+          "cropPixels": [
+            59,
+            59,
+            1182,
+            107
+          ],
+          "inkBounds": {
+            "image": [
+              0,
+              14,
+              457,
+              45
+            ],
+            "browser": [
+              0,
+              14,
+              458,
+              45
+            ],
+            "independent": [
+              0,
+              14,
+              457,
+              45
+            ],
+            "pdf": [
+              0,
+              14,
+              457,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Gesamtzeit: 5m",
+          "cropPixels": [
+            59,
+            118,
+            1182,
+            149
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "browser": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "independent": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "pdf": [
+              1,
+              12,
+              120,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Fixture group",
+          "cropPixels": [
+            59,
+            160,
+            1182,
+            209
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              18,
+              277,
+              45
+            ],
+            "browser": [
+              1,
+              18,
+              278,
+              46
+            ],
+            "independent": [
+              1,
+              18,
+              277,
+              46
+            ],
+            "pdf": [
+              1,
+              18,
+              277,
+              46
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "5m",
+          "cropPixels": [
+            59,
+            220,
+            1182,
+            251
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "browser": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "independent": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "pdf": [
+              1,
+              12,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "jWWWWWWWWWWWWWWW",
+          "cropPixels": [
+            59,
+            362,
+            322,
+            397
+          ],
+          "inkBounds": {
+            "image": [
+              0,
+              14,
+              251,
+              33
+            ],
+            "browser": [
+              0,
+              14,
+              251,
+              33
+            ],
+            "independent": [
+              0,
+              14,
+              251,
+              33
+            ],
+            "pdf": [
+              0,
+              13,
+              251,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "WWWj",
+          "cropPixels": [
+            59,
+            396,
+            322,
+            431
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              13,
+              53,
+              33
+            ],
+            "browser": [
+              1,
+              14,
+              53,
+              33
+            ],
+            "independent": [
+              1,
+              14,
+              53,
+              33
+            ],
+            "pdf": [
+              1,
+              14,
+              53,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Donaudampfschifffahrtsgesell",
+          "cropPixels": [
+            59,
+            430,
+            322,
+            465
+          ],
+          "inkBounds": {
+            "image": [
+              2,
+              13,
+              262,
+              33
+            ],
+            "browser": [
+              2,
+              13,
+              262,
+              33
+            ],
+            "independent": [
+              2,
+              13,
+              262,
+              33
+            ],
+            "pdf": [
+              2,
+              13,
+              262,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "schaft",
+          "cropPixels": [
+            59,
+            464,
+            322,
+            499
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              13,
+              52,
+              28
+            ],
+            "browser": [
+              1,
+              13,
+              52,
+              29
+            ],
+            "independent": [
+              1,
+              13,
+              52,
+              28
+            ],
+            "pdf": [
+              1,
+              13,
+              52,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "2 small cups",
+          "cropPixels": [
+            59,
+            551,
+            322,
+            583
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              12,
+              96,
+              29
+            ],
+            "browser": [
+              1,
+              12,
+              96,
+              30
+            ],
+            "independent": [
+              1,
+              12,
+              96,
+              29
+            ],
+            "pdf": [
+              1,
+              12,
+              96,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Warnung: Beware: sharp edge \u2014 j",
+          "cropPixels": [
+            59,
+            635,
+            322,
+            667
+          ],
+          "inkBounds": {
+            "image": [
+              0,
+              12,
+              259,
+              29
+            ],
+            "browser": [
+              0,
+              12,
+              259,
+              30
+            ],
+            "independent": [
+              0,
+              12,
+              259,
+              29
+            ],
+            "pdf": [
+              0,
+              11,
+              259,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "5m",
+          "cropPixels": [
+            59,
+            719,
+            322,
+            750
+          ],
+          "inkBounds": {
+            "image": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "browser": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "independent": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "pdf": [
+              1,
+              13,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "A\u0308 e\u0301 \u2019j caf\u00e9 j",
+          "cropPixels": [
+            345,
+            362,
+            609,
+            397
+          ],
+          "inkBounds": {
+            "image": [
+              0,
+              11,
+              89,
+              33
+            ],
+            "browser": [
+              1,
+              11,
+              90,
+              33
+            ],
+            "independent": [
+              1,
+              11,
+              89,
+              33
+            ],
+            "pdf": [
+              1,
+              11,
+              89,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Book",
+          "cropPixels": [
+            631,
+            362,
+            895,
+            397
+          ],
+          "inkBounds": {
+            "image": [
+              3,
+              13,
+              46,
+              28
+            ],
+            "browser": [
+              3,
+              13,
+              46,
+              29
+            ],
+            "independent": [
+              3,
+              13,
+              46,
+              29
+            ],
+            "pdf": [
+              3,
+              13,
+              46,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Task 1 German-search correction — independent fix review
+
+Reviewed frozen head **75f37d3**, scoped to the prior P2 `HEISS` / `Heiß!` search finding and regressions caused by its correction. Read `task-1-review.md`, the final correction section of `task-1-report.md`, and supplied `review-bcdb541..75f37d3.diff` once. Inspected only the named frozen search module and regression-test lines to verify the behavior. This reviewer did not author Task 1. No production/Git edits, child tasks, broad code crawl, repeated full gates, or network calls were made.
+
+**Spec compliance: approved.** `src/lib/library-catalog.ts:20` now lowercases then folds `ß` to `ss` on comparison strings. `Heiß!`, `HEISS`, and `HEIẞ` therefore normalize consistently. Existing NFKD/accent, whitespace, and all-word policies are retained. `findLibraryEntries` still filters the category before matching, reads only `entry.labels[locale]` and `entry.aliases[locale]`, preserves library source order through `filter`, and deduplicates canonical IDs. Search creates strings and does not modify entries, authored labels, aliases, or documents.
+
+**Task quality: approved.** The correction is one bounded normalization change with a focused regression in `src/lib/library-catalog.test.ts:58–70`. Tests pin all three sharp-s spellings, English-locale isolation, warning/action separation, broad multi-result sharp-s/source order, filtered `SS` source order, and the unchanged stored `Heiß!` label. No message, catalog, category, artwork, example, or storage behavior changed. No consequential regression is apparent in this delta.
+
+The author's fresh correction evidence records the expected RED (1 failure / 5 passes), subsequent **6/6 focused passes**, and typecheck/lint exit 0. These checks were not repeated because the supplied delta and source inspection raise no concrete test doubt. Earlier full-package review remains applicable outside this narrowly corrected finding.
+
+**Verdict: approve the Task 1 correction at 75f37d3.** The prior P2 finding is resolved. No remaining findings in this correction. Previously documented physical/recipient/licensing release evidence remains unchanged and is not a new fix-review blocker.

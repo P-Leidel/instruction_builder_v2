@@ -1,0 +1,104 @@
+{
+  "from": {
+    "x": 34.890625,
+    "y": 411.796875,
+    "width": 83.140625,
+    "height": 75.578125
+  },
+  "to": {
+    "x": 125.59375,
+    "y": 411.796875,
+    "width": 83.140625,
+    "height": 75.578125
+  },
+  "before": {
+    "armed": {
+      "groupId": "group-0",
+      "tokenId": "picture-0-0"
+    },
+    "ghost": true,
+    "scrollY": 477,
+    "trace": [
+      {
+        "type": "pointerdown",
+        "y": 477,
+        "x": 0,
+        "pointer": 2,
+        "clientY": 449.5859375,
+        "armed": {
+          "groupId": "group-0",
+          "tokenId": "picture-0-0"
+        }
+      },
+      {
+        "type": "pointermove",
+        "y": 477,
+        "x": 0,
+        "pointer": 2,
+        "clientY": 449.5859375,
+        "armed": {
+          "groupId": "group-0",
+          "tokenId": "picture-0-0"
+        }
+      }
+    ]
+  },
+  "after": {
+    "armed": null,
+    "ghost": false,
+    "scrollY": 348,
+    "trace": [
+      {
+        "type": "pointerdown",
+        "y": 477,
+        "x": 0,
+        "pointer": 2,
+        "clientY": 449.5859375,
+        "armed": {
+          "groupId": "group-0",
+          "tokenId": "picture-0-0"
+        }
+      },
+      {
+        "type": "pointermove",
+        "y": 477,
+        "x": 0,
+        "pointer": 2,
+        "clientY": 449.5859375,
+        "armed": {
+          "groupId": "group-0",
+          "tokenId": "picture-0-0"
+        }
+      },
+      {
+        "type": "resize",
+        "y": 348,
+        "x": 0,
+        "armed": null
+      },
+      {
+        "type": "scroll",
+        "y": 348,
+        "x": 0,
+        "armed": null
+      },
+      {
+        "type": "scroll",
+        "y": 348,
+        "x": 0,
+        "armed": null
+      }
+    ]
+  },
+  "order": [
+    "picture-0-0",
+    "picture-0-1",
+    "picture-0-2",
+    "picture-0-3",
+    "picture-0-4",
+    "picture-0-5",
+    "picture-0-6",
+    "picture-0-7"
+  ],
+  "errors": []
+}

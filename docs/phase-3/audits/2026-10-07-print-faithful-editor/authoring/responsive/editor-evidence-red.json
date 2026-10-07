@@ -1,0 +1,1268 @@
+{
+  "runAt": "2026-10-07T09:56:40.536Z",
+  "browser": "153.0.8010.12",
+  "checks": {
+    "INITIAL_VIEWPORT_HAS_PICTURE_320": false,
+    "NO_GLOBAL_SHRINK_320": true,
+    "BOUNDED_LOCAL_TILE_SIZE_320": true,
+    "PAPER_SIZE_STABLE_AFTER_LONG_GROUP_320": true,
+    "CANONICAL_A4_PHYSICAL_DIMENSIONS_320": true,
+    "SEQUENCE_NUMBERS_320": true,
+    "NO_DOT_DRAG_HANDLES_320": true,
+    "CONTROL_MINIMA_320": false,
+    "NO_HORIZONTAL_OVERFLOW_320": true,
+    "PANEL_MODALITY_320": true,
+    "PANEL_PRESERVES_PHYSICAL_GEOMETRY_320": true,
+    "NO_RESULTS_320": true,
+    "ESCAPE_FOCUS_RETURN_320": true,
+    "PANEL_IS_NOT_HISTORY_320": true,
+    "VIEWPORT_PRESERVES_PHYSICAL_GEOMETRY_320": true,
+    "TEXT_ZOOM_200_WRAP_320": true,
+    "RECIPIENT_HAS_NO_EDITOR_320": true,
+    "LONG_GROUP_20_320": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_390": true,
+    "NO_GLOBAL_SHRINK_390": true,
+    "BOUNDED_LOCAL_TILE_SIZE_390": true,
+    "PAPER_SIZE_STABLE_AFTER_LONG_GROUP_390": true,
+    "CANONICAL_A4_PHYSICAL_DIMENSIONS_390": true,
+    "SEQUENCE_NUMBERS_390": true,
+    "NO_DOT_DRAG_HANDLES_390": true,
+    "CONTROL_MINIMA_390": false,
+    "NO_HORIZONTAL_OVERFLOW_390": true,
+    "PANEL_MODALITY_390": true,
+    "PANEL_PRESERVES_PHYSICAL_GEOMETRY_390": true,
+    "NO_RESULTS_390": true,
+    "ESCAPE_FOCUS_RETURN_390": true,
+    "PANEL_IS_NOT_HISTORY_390": true,
+    "VIEWPORT_PRESERVES_PHYSICAL_GEOMETRY_390": true,
+    "TEXT_ZOOM_200_WRAP_390": true,
+    "LONG_GROUP_20_390": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_768": true,
+    "NO_GLOBAL_SHRINK_768": true,
+    "BOUNDED_LOCAL_TILE_SIZE_768": true,
+    "PAPER_SIZE_STABLE_AFTER_LONG_GROUP_768": true,
+    "CANONICAL_A4_PHYSICAL_DIMENSIONS_768": true,
+    "SEQUENCE_NUMBERS_768": true,
+    "NO_DOT_DRAG_HANDLES_768": true,
+    "CONTROL_MINIMA_768": false,
+    "NO_HORIZONTAL_OVERFLOW_768": true,
+    "PANEL_MODALITY_768": true,
+    "PANEL_PRESERVES_PHYSICAL_GEOMETRY_768": true,
+    "NO_RESULTS_768": true,
+    "ESCAPE_FOCUS_RETURN_768": true,
+    "PANEL_IS_NOT_HISTORY_768": true,
+    "VIEWPORT_PRESERVES_PHYSICAL_GEOMETRY_768": true,
+    "TEXT_ZOOM_200_WRAP_768": true,
+    "LONG_GROUP_20_768": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_1440": true,
+    "NO_GLOBAL_SHRINK_1440": true,
+    "BOUNDED_LOCAL_TILE_SIZE_1440": true,
+    "PAPER_SIZE_STABLE_AFTER_LONG_GROUP_1440": true,
+    "CANONICAL_A4_PHYSICAL_DIMENSIONS_1440": true,
+    "SEQUENCE_NUMBERS_1440": true,
+    "NO_DOT_DRAG_HANDLES_1440": true,
+    "CONTROL_MINIMA_1440": false,
+    "NO_HORIZONTAL_OVERFLOW_1440": true,
+    "PANEL_MODALITY_1440": true,
+    "PANEL_PRESERVES_PHYSICAL_GEOMETRY_1440": true,
+    "NO_RESULTS_1440": true,
+    "ESCAPE_FOCUS_RETURN_1440": true,
+    "PANEL_IS_NOT_HISTORY_1440": true,
+    "VIEWPORT_PRESERVES_PHYSICAL_GEOMETRY_1440": true,
+    "TEXT_ZOOM_200_WRAP_1440": true,
+    "RECIPIENT_HAS_NO_EDITOR_1440": true,
+    "LONG_GROUP_20_1440": true,
+    "NO_CONSOLE_OR_PAGE_ERRORS": true
+  },
+  "observations": [
+    {
+      "width": 320,
+      "before": {
+        "x": 7.890625,
+        "y": 794.46875,
+        "width": 359.046875,
+        "height": 128.5
+      },
+      "after": {
+        "x": 7.890625,
+        "y": 794.46875,
+        "width": 359.046875,
+        "height": 128.5
+      },
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 91.421875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 53.03125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 57.359375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 304,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 304,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Paper format",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Page orientation",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Canvas zoom",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 1: Group 1",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 1: Group 1",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Wash hands",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 2: Group 2",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 2: Group 2",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 3: Group 3",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 3: Group 3",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 4: Group 4",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 4: Group 4",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 5: Group 5",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 5: Group 5",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 390,
+      "before": {
+        "x": 22.890625,
+        "y": 685.296875,
+        "width": 359.046875,
+        "height": 128.5
+      },
+      "after": {
+        "x": 22.890625,
+        "y": 685.296875,
+        "width": 359.046875,
+        "height": 128.5
+      },
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 91.421875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 53.03125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 57.359375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 374,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 374,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Paper format",
+            "width": 181,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Page orientation",
+            "width": 181,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Canvas zoom",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 1: Group 1",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 1: Group 1",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Wash hands",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 2: Group 2",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 2: Group 2",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 3: Group 3",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 3: Group 3",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 4: Group 4",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 4: Group 4",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 5: Group 5",
+            "width": 258.03125,
+            "height": 45.34375,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 5: Group 5",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 83.140625,
+            "height": 75.578125,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 768,
+      "before": {
+        "x": 33.78125,
+        "y": 494.953125,
+        "width": 718.109375,
+        "height": 257
+      },
+      "after": {
+        "x": 33.78125,
+        "y": 494.953125,
+        "width": 718.109375,
+        "height": 257
+      },
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 96.203125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 57.8125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 154.78125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 400,
+            "height": 44.09375,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 320,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Paper format",
+            "width": 237.328125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Page orientation",
+            "width": 237.34375,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Canvas zoom",
+            "width": 237.328125,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 1: Group 1",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 1: Group 1",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Wash hands",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 2: Group 2",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 2: Group 2",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 3: Group 3",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 3: Group 3",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 4: Group 4",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 4: Group 4",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 5: Group 5",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 5: Group 5",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 1440,
+      "before": {
+        "x": 353.4375,
+        "y": 494.953125,
+        "width": 718.109375,
+        "height": 257
+      },
+      "after": {
+        "x": 353.4375,
+        "y": 494.953125,
+        "width": 718.109375,
+        "height": 257
+      },
+      "metrics": {
+        "overflow": -15,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 96.203125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 57.8125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 154.78125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 44,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 1057,
+            "height": 44.09375,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 320,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Paper format",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Page orientation",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Canvas zoom",
+            "width": 288,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 1: Group 1",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 1: Group 1",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Wash hands",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 2: Group 2",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 2: Group 2",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 3: Group 3",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 3: Group 3",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 4: Group 4",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 4: Group 4",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Edit Step 5: Group 5",
+            "width": 617.09375,
+            "height": 90.703125,
+            "font": 16
+          },
+          {
+            "name": "Add picture to Step 5: Group 5",
+            "width": 93.015625,
+            "height": 44,
+            "font": 13.6
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 166.296875,
+            "height": 151.171875,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": -15
+    }
+  ],
+  "errors": []
+}

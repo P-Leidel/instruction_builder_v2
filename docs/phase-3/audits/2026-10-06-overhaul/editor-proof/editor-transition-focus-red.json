@@ -1,0 +1,8 @@
+{
+  "runAt": "2026-10-06T16:11:38.813Z",
+  "checks": {
+    "EMPTY_THIRD_GROUP_READ_RETURN": false
+  },
+  "errors": [],
+  "failure": "AssertionError [ERR_ASSERTION]: EMPTY_THIRD_GROUP_READ_RETURN\n+ actual - expected\n\n+ 'group-0'\n- 'group-2'\n         ^\n"
+}

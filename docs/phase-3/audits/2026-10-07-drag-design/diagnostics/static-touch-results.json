@@ -1,0 +1,140 @@
+[
+  {
+    "name": "fresh",
+    "scroll": false,
+    "delay": 0,
+    "inserted": true,
+    "events": [
+      {
+        "type": "pointerdown",
+        "target": "apple",
+        "prevented": false,
+        "time": 217.5
+      },
+      {
+        "type": "touchstart",
+        "target": "apple",
+        "prevented": false,
+        "time": 217.5
+      },
+      {
+        "type": "pointerup",
+        "target": "apple",
+        "prevented": false,
+        "time": 217.59999999403954
+      },
+      {
+        "type": "touchend",
+        "target": "apple",
+        "prevented": false,
+        "time": 217.59999999403954
+      },
+      {
+        "type": "click",
+        "target": "apple",
+        "prevented": false,
+        "time": 217.59999999403954
+      }
+    ],
+    "scrollY": 0
+  },
+  {
+    "name": "after-cdp-scroll",
+    "scroll": true,
+    "delay": 0,
+    "inserted": false,
+    "events": [
+      {
+        "type": "pointerdown",
+        "target": "apple",
+        "prevented": false,
+        "time": 376.7000000178814
+      },
+      {
+        "type": "touchstart",
+        "target": "apple",
+        "prevented": false,
+        "time": 376.7000000178814
+      },
+      {
+        "type": "pointerup",
+        "target": "apple",
+        "prevented": false,
+        "time": 376.7000000178814
+      },
+      {
+        "type": "touchend",
+        "target": "apple",
+        "prevented": false,
+        "time": 376.7000000178814
+      }
+    ],
+    "scrollY": 285
+  },
+  {
+    "name": "after-cdp-scroll-500ms",
+    "scroll": true,
+    "delay": 500,
+    "inserted": false,
+    "events": [
+      {
+        "type": "pointerdown",
+        "target": "apple",
+        "prevented": false,
+        "time": 844.4000000059605
+      },
+      {
+        "type": "touchstart",
+        "target": "apple",
+        "prevented": false,
+        "time": 844.4000000059605
+      },
+      {
+        "type": "pointerup",
+        "target": "apple",
+        "prevented": false,
+        "time": 844.4000000059605
+      },
+      {
+        "type": "touchend",
+        "target": "apple",
+        "prevented": false,
+        "time": 844.4000000059605
+      }
+    ],
+    "scrollY": 285
+  },
+  {
+    "name": "after-cdp-scroll-1000ms",
+    "scroll": true,
+    "delay": 1000,
+    "inserted": false,
+    "events": [
+      {
+        "type": "pointerdown",
+        "target": "apple",
+        "prevented": false,
+        "time": 1333.5
+      },
+      {
+        "type": "touchstart",
+        "target": "apple",
+        "prevented": false,
+        "time": 1333.5
+      },
+      {
+        "type": "pointerup",
+        "target": "apple",
+        "prevented": false,
+        "time": 1333.5
+      },
+      {
+        "type": "touchend",
+        "target": "apple",
+        "prevented": false,
+        "time": 1333.5
+      }
+    ],
+    "scrollY": 285
+  }
+]

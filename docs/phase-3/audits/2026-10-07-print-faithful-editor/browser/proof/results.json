@@ -1,0 +1,968 @@
+{
+  "runAt": "2026-10-07T10:21:09.789Z",
+  "checks": {
+    "physical_page_regions_exist": true,
+    "paper_format_control_reachable": true,
+    "canvas_zoom_control_reachable": true,
+    "new_session_defaults_a4_portrait": true,
+    "new_session_zoom_is_explicit_100_percent": true,
+    "a4_viewbox_is_210_by_297_mm": true,
+    "a4_screen_width_96_css_pixels_per_inch": true,
+    "a4_screen_height_96_css_pixels_per_inch": true,
+    "all_ten_pictures_have_finite_cells": true,
+    "every_picture_has_same_fixed_cell_size": true,
+    "pictures_fill_horizontally_before_wrapping": true,
+    "fixed_row_pitch": true,
+    "no_six_dot_drag_controls": true,
+    "header_add_picture_group-0": true,
+    "header_add_picture_44px_group-0": true,
+    "header_add_picture_group-1": true,
+    "header_add_picture_44px_group-1": true,
+    "header_add_picture_group-2": true,
+    "header_add_picture_44px_group-2": true,
+    "opening_overlay_panel_keeps_all_cell_positions": true,
+    "opening_overlay_panel_keeps_paper_scale": true,
+    "adding_quantity_warning_time_keeps_all_cell_positions": true,
+    "changing_quantity_warning_time_keeps_all_cell_positions": true,
+    "structured_attachment_values_preserved": true,
+    "viewport_resize_keeps_all_cell_positions": true,
+    "viewport_resize_keeps_physical_paper_width": true,
+    "narrow_320_exercises_horizontal_paper_overflow": true,
+    "add_picture_320_start_fully_horizontally_visible": true,
+    "narrow_320_start_preserves_fixed_paper_and_cells": true,
+    "narrow_320_start_preserves_printed_svg": true,
+    "add_picture_320_end_fully_horizontally_visible": true,
+    "narrow_320_end_preserves_fixed_paper_and_cells": true,
+    "narrow_320_end_preserves_printed_svg": true,
+    "narrow_390_exercises_horizontal_paper_overflow": true,
+    "add_picture_390_start_fully_horizontally_visible": true,
+    "narrow_390_start_preserves_fixed_paper_and_cells": true,
+    "narrow_390_start_preserves_printed_svg": true,
+    "add_picture_390_end_fully_horizontally_visible": true,
+    "narrow_390_end_preserves_fixed_paper_and_cells": true,
+    "narrow_390_end_preserves_printed_svg": true,
+    "only_explicit_zoom_changes_paper_scale": true,
+    "explicit_zoom_scales_same_physical_cells": true,
+    "output_uses_shared_a4_format": true,
+    "actual_download_has_a4_physical_dimensions": true,
+    "editor_and_actual_download_have_identical_physical_vectors": true,
+    "output_mode_change_reaches_editor_without_geometry_drift": true,
+    "changed_mode_editor_matches_actual_download": true,
+    "detailed_mode_keeps_same_fixed_cells": true,
+    "detailed_editor_matches_actual_download": true,
+    "output_subset_hides_excluded_group_on_editor": true,
+    "excluded_groups_have_reveal_control": true,
+    "reveal_all_restores_excluded_picture": true,
+    "physical_svg_contains_no_editor_buttons": true,
+    "browser_errors_empty": true,
+    "label_physical_viewbox": true,
+    "label_physical_screen_size": true,
+    "label_group_add_reachable": true,
+    "card_physical_viewbox": true,
+    "card_physical_screen_size": true,
+    "card_group_add_reachable": true,
+    "sheet_physical_viewbox": true,
+    "sheet_physical_screen_size": true,
+    "sheet_group_add_reachable": true,
+    "large_physical_viewbox": true,
+    "large_physical_screen_size": true,
+    "large_group_add_reachable": true,
+    "custom_physical_viewbox": true,
+    "custom_physical_screen_size": true,
+    "custom_group_add_reachable": true,
+    "custom_landscape_swaps_physical_dimensions": true,
+    "tiny_zoom_keeps_44px_picture_access": true,
+    "invalid_custom_dimension_keeps_repair_target": true,
+    "invalid_custom_dimension_blocks_physical_download": true,
+    "invalid_custom_dimension_keeps_exact_json_backup": true,
+    "unsupported_current_repair_target_remains_reachable": true,
+    "unsupported_repair_target_geometry_is_finite": true,
+    "unsupported_physical_download_blocked": true,
+    "unsupported_authored_data_survives_exact_backup": true,
+    "unsupported_repair_form_opens_current_picture": true,
+    "unsupported_label_can_be_repaired_without_losing_picture": true,
+    "overflow_current_repair_target_remains_reachable": true,
+    "overflow_repair_target_geometry_is_finite": true,
+    "overflow_physical_download_blocked": true,
+    "overflow_authored_data_survives_exact_backup": true,
+    "overflow_repair_form_opens_current_picture": true,
+    "font_current_repair_target_remains_reachable": true,
+    "font_repair_target_geometry_is_finite": true,
+    "font_physical_download_blocked": true,
+    "font_authored_data_survives_exact_backup": true,
+    "font_repair_form_opens_current_picture": true,
+    "phone_initial_zoom_keeps_fixed_a4_paper": true,
+    "phone_has_continuation_segments": true,
+    "phone_no_six_dot_controls": true,
+    "normal_whole_picture_touch_scrolls": true,
+    "normal_touch_scroll_does_not_move_or_open_picture": true,
+    "actions_move_arms_touch_surface_before_gesture": true,
+    "touch_probe_stays_clear_of_auto_scroll_edges": true,
+    "held_touch_preserves_armed_banner": true,
+    "pointerdown_does_not_shift_canvas_during_touch_move": true,
+    "viewport_screenshot_does_not_cancel_held_touch": true,
+    "armed_touch_reorders_whole_picture_once": true,
+    "armed_touch_preserves_all_attachment_data": true,
+    "successful_touch_drop_resets_armed_mode": true,
+    "touch_drop_keeps_details_closed": true,
+    "one_undo_reverts_touch_move": true,
+    "one_redo_restores_touch_move": true,
+    "armed_touch_cancel_preserves_document": true,
+    "armed_touch_cancel_resets_mode_and_ghost": true,
+    "continuation_drop_uses_original_indices_after_picture-0-17": true,
+    "continuation_move_is_single_undo_after_picture-0-17": true,
+    "continuation_drop_uses_original_indices_after_picture-0-3": true,
+    "continuation_move_is_single_undo_after_picture-0-3": true,
+    "untitled_board_group_has_visible_rename_placeholder": true,
+    "untitled_board_svg_does_not_invent_printed_group_heading": true,
+    "untitled_board_visible_placeholder_opens_group_title": true,
+    "untitled_board_rename_overlay_preserves_fixed_geometry": true,
+    "untitled_board_placeholder_keeps_authored_title_absent": true,
+    "all_scenarios_browser_errors_empty": true
+  },
+  "errors": [],
+  "measurements": {
+    "baseline": {
+      "papers": [
+        {
+          "index": "0",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        },
+        {
+          "index": "1",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        }
+      ],
+      "pictures": [
+        {
+          "id": "picture-0-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-1",
+          "page": "0",
+          "x": 219.1875,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-2",
+          "page": "0",
+          "x": 400.609375,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-3",
+          "page": "0",
+          "x": 582.03125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-4",
+          "page": "0",
+          "x": 37.78125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-5",
+          "page": "0",
+          "x": 219.1875,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-6",
+          "page": "0",
+          "x": 400.609375,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-7",
+          "page": "0",
+          "x": 582.03125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-8",
+          "page": "0",
+          "x": 37.78125,
+          "y": 582.03125,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-1-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 854.15625,
+          "width": 166.296875,
+          "height": 151.171875
+        }
+      ]
+    },
+    "attachmentsAdded": {
+      "papers": [
+        {
+          "index": "0",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        },
+        {
+          "index": "1",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        }
+      ],
+      "pictures": [
+        {
+          "id": "picture-0-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-1",
+          "page": "0",
+          "x": 219.1875,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-2",
+          "page": "0",
+          "x": 400.609375,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-3",
+          "page": "0",
+          "x": 582.03125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-4",
+          "page": "0",
+          "x": 37.78125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-5",
+          "page": "0",
+          "x": 219.1875,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-6",
+          "page": "0",
+          "x": 400.609375,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-7",
+          "page": "0",
+          "x": 582.03125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-8",
+          "page": "0",
+          "x": 37.78125,
+          "y": 582.03125,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-1-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 854.15625,
+          "width": 166.296875,
+          "height": 151.171875
+        }
+      ]
+    },
+    "attachmentsChanged": {
+      "papers": [
+        {
+          "index": "0",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        },
+        {
+          "index": "1",
+          "width": 793.6875,
+          "height": 1122.515625,
+          "viewBox": "0 0 210 297",
+          "widthAttribute": "210mm",
+          "heightAttribute": "297mm"
+        }
+      ],
+      "pictures": [
+        {
+          "id": "picture-0-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-1",
+          "page": "0",
+          "x": 219.1875,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-2",
+          "page": "0",
+          "x": 400.609375,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-3",
+          "page": "0",
+          "x": 582.03125,
+          "y": 249.421875,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-4",
+          "page": "0",
+          "x": 37.78125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-5",
+          "page": "0",
+          "x": 219.1875,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-6",
+          "page": "0",
+          "x": 400.609375,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-7",
+          "page": "0",
+          "x": 582.03125,
+          "y": 415.734375,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-0-8",
+          "page": "0",
+          "x": 37.78125,
+          "y": 582.03125,
+          "width": 166.296875,
+          "height": 151.171875
+        },
+        {
+          "id": "picture-1-0",
+          "page": "0",
+          "x": 37.78125,
+          "y": 854.15625,
+          "width": 166.296875,
+          "height": 151.171875
+        }
+      ]
+    },
+    "narrow_320_start": {
+      "bounds": [
+        {
+          "groupId": "group-0",
+          "left": 198.59375,
+          "right": 304,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 312
+        },
+        {
+          "groupId": "group-1",
+          "left": 198.59375,
+          "right": 304,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 312
+        },
+        {
+          "groupId": "group-2",
+          "left": 198.59375,
+          "right": 304,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 312
+        }
+      ],
+      "geometry": {
+        "papers": [
+          {
+            "index": "0",
+            "width": 793.6875,
+            "height": 1122.515625,
+            "viewBox": "0 0 210 297",
+            "widthAttribute": "210mm",
+            "heightAttribute": "297mm"
+          },
+          {
+            "index": "1",
+            "width": 793.6875,
+            "height": 1122.515625,
+            "viewBox": "0 0 210 297",
+            "widthAttribute": "210mm",
+            "heightAttribute": "297mm"
+          }
+        ],
+        "pictures": [
+          {
+            "id": "picture-0-0",
+            "page": "0",
+            "x": 37.78125,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-1",
+            "page": "0",
+            "x": 219.1875,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-2",
+            "page": "0",
+            "x": 400.609375,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-3",
+            "page": "0",
+            "x": 582.03125,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-4",
+            "page": "0",
+            "x": 37.78125,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-5",
+            "page": "0",
+            "x": 219.1875,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-6",
+            "page": "0",
+            "x": 400.609375,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-7",
+            "page": "0",
+            "x": 582.03125,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-8",
+            "page": "0",
+            "x": 37.78125,
+            "y": 582.03125,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-1-0",
+            "page": "0",
+            "x": 37.78125,
+            "y": 854.15625,
+            "width": 166.296875,
+            "height": 151.171875
+          }
+        ]
+      },
+      "scrollLeft": 0
+    },
+    "narrow_320_end": {
+      "bounds": [
+        {
+          "groupId": "group-0",
+          "left": 160.484375,
+          "right": 265.890625,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 312
+        },
+        {
+          "groupId": "group-1",
+          "left": 160.484375,
+          "right": 265.890625,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 312
+        },
+        {
+          "groupId": "group-2",
+          "left": 160.484375,
+          "right": 265.890625,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 312
+        }
+      ],
+      "geometry": {
+        "papers": [
+          {
+            "index": "0",
+            "width": 793.6875,
+            "height": 1122.515625,
+            "viewBox": "0 0 210 297",
+            "widthAttribute": "210mm",
+            "heightAttribute": "297mm"
+          },
+          {
+            "index": "1",
+            "width": 793.6875,
+            "height": 1122.515625,
+            "viewBox": "0 0 210 297",
+            "widthAttribute": "210mm",
+            "heightAttribute": "297mm"
+          }
+        ],
+        "pictures": [
+          {
+            "id": "picture-0-0",
+            "page": "0",
+            "x": 37.78125,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-1",
+            "page": "0",
+            "x": 219.1875,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-2",
+            "page": "0",
+            "x": 400.609375,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-3",
+            "page": "0",
+            "x": 582.03125,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-4",
+            "page": "0",
+            "x": 37.78125,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-5",
+            "page": "0",
+            "x": 219.1875,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-6",
+            "page": "0",
+            "x": 400.609375,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-7",
+            "page": "0",
+            "x": 582.03125,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-8",
+            "page": "0",
+            "x": 37.78125,
+            "y": 582.03125,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-1-0",
+            "page": "0",
+            "x": 37.78125,
+            "y": 854.15625,
+            "width": 166.296875,
+            "height": 151.171875
+          }
+        ]
+      },
+      "scrollLeft": 506
+    },
+    "narrow_390_start": {
+      "bounds": [
+        {
+          "groupId": "group-0",
+          "left": 268.59375,
+          "right": 374,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 382
+        },
+        {
+          "groupId": "group-1",
+          "left": 268.59375,
+          "right": 374,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 382
+        },
+        {
+          "groupId": "group-2",
+          "left": 268.59375,
+          "right": 374,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 382
+        }
+      ],
+      "geometry": {
+        "papers": [
+          {
+            "index": "0",
+            "width": 793.6875,
+            "height": 1122.515625,
+            "viewBox": "0 0 210 297",
+            "widthAttribute": "210mm",
+            "heightAttribute": "297mm"
+          },
+          {
+            "index": "1",
+            "width": 793.6875,
+            "height": 1122.515625,
+            "viewBox": "0 0 210 297",
+            "widthAttribute": "210mm",
+            "heightAttribute": "297mm"
+          }
+        ],
+        "pictures": [
+          {
+            "id": "picture-0-0",
+            "page": "0",
+            "x": 37.78125,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-1",
+            "page": "0",
+            "x": 219.1875,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-2",
+            "page": "0",
+            "x": 400.609375,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-3",
+            "page": "0",
+            "x": 582.03125,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-4",
+            "page": "0",
+            "x": 37.78125,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-5",
+            "page": "0",
+            "x": 219.1875,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-6",
+            "page": "0",
+            "x": 400.609375,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-7",
+            "page": "0",
+            "x": 582.03125,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-8",
+            "page": "0",
+            "x": 37.78125,
+            "y": 582.03125,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-1-0",
+            "page": "0",
+            "x": 37.78125,
+            "y": 854.15625,
+            "width": 166.296875,
+            "height": 151.171875
+          }
+        ]
+      },
+      "scrollLeft": 0
+    },
+    "narrow_390_end": {
+      "bounds": [
+        {
+          "groupId": "group-0",
+          "left": 230.484375,
+          "right": 335.890625,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 382
+        },
+        {
+          "groupId": "group-1",
+          "left": 230.484375,
+          "right": 335.890625,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 382
+        },
+        {
+          "groupId": "group-2",
+          "left": 230.484375,
+          "right": 335.890625,
+          "width": 105.40625,
+          "height": 44,
+          "visibleLeft": 8,
+          "visibleRight": 382
+        }
+      ],
+      "geometry": {
+        "papers": [
+          {
+            "index": "0",
+            "width": 793.6875,
+            "height": 1122.515625,
+            "viewBox": "0 0 210 297",
+            "widthAttribute": "210mm",
+            "heightAttribute": "297mm"
+          },
+          {
+            "index": "1",
+            "width": 793.6875,
+            "height": 1122.515625,
+            "viewBox": "0 0 210 297",
+            "widthAttribute": "210mm",
+            "heightAttribute": "297mm"
+          }
+        ],
+        "pictures": [
+          {
+            "id": "picture-0-0",
+            "page": "0",
+            "x": 37.78125,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-1",
+            "page": "0",
+            "x": 219.1875,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-2",
+            "page": "0",
+            "x": 400.609375,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-3",
+            "page": "0",
+            "x": 582.03125,
+            "y": 249.421875,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-4",
+            "page": "0",
+            "x": 37.78125,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-5",
+            "page": "0",
+            "x": 219.1875,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-6",
+            "page": "0",
+            "x": 400.609375,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-7",
+            "page": "0",
+            "x": 582.03125,
+            "y": 415.734375,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-0-8",
+            "page": "0",
+            "x": 37.78125,
+            "y": 582.03125,
+            "width": 166.296875,
+            "height": 151.171875
+          },
+          {
+            "id": "picture-1-0",
+            "page": "0",
+            "x": 37.78125,
+            "y": 854.15625,
+            "width": 166.296875,
+            "height": 151.171875
+          }
+        ]
+      },
+      "scrollLeft": 436
+    }
+  }
+}

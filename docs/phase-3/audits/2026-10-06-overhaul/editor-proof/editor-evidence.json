@@ -1,0 +1,1224 @@
+{
+  "runAt": "2026-10-06T15:50:45.896Z",
+  "browser": "153.0.8010.12",
+  "checks": {
+    "INITIAL_VIEWPORT_HAS_PICTURE_320": true,
+    "NO_GLOBAL_SHRINK_320": true,
+    "BOUNDED_LOCAL_TILE_SIZE_320": true,
+    "SEQUENCE_NUMBERS_320": true,
+    "CONTROL_MINIMA_320": true,
+    "NO_HORIZONTAL_OVERFLOW_320": true,
+    "PANEL_MODALITY_320": true,
+    "NO_RESULTS_320": true,
+    "ESCAPE_FOCUS_RETURN_320": true,
+    "PANEL_IS_NOT_HISTORY_320": true,
+    "TEXT_ZOOM_200_WRAP_320": true,
+    "RECIPIENT_HAS_NO_EDITOR_320": true,
+    "LONG_GROUP_20_320": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_390": true,
+    "NO_GLOBAL_SHRINK_390": true,
+    "BOUNDED_LOCAL_TILE_SIZE_390": true,
+    "SEQUENCE_NUMBERS_390": true,
+    "CONTROL_MINIMA_390": true,
+    "NO_HORIZONTAL_OVERFLOW_390": true,
+    "PANEL_MODALITY_390": true,
+    "NO_RESULTS_390": true,
+    "ESCAPE_FOCUS_RETURN_390": true,
+    "PANEL_IS_NOT_HISTORY_390": true,
+    "TEXT_ZOOM_200_WRAP_390": true,
+    "LONG_GROUP_20_390": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_768": true,
+    "NO_GLOBAL_SHRINK_768": true,
+    "BOUNDED_LOCAL_TILE_SIZE_768": true,
+    "SEQUENCE_NUMBERS_768": true,
+    "CONTROL_MINIMA_768": true,
+    "NO_HORIZONTAL_OVERFLOW_768": true,
+    "PANEL_MODALITY_768": true,
+    "NO_RESULTS_768": true,
+    "ESCAPE_FOCUS_RETURN_768": true,
+    "PANEL_IS_NOT_HISTORY_768": true,
+    "TEXT_ZOOM_200_WRAP_768": true,
+    "LONG_GROUP_20_768": true,
+    "INITIAL_VIEWPORT_HAS_PICTURE_1440": true,
+    "NO_GLOBAL_SHRINK_1440": true,
+    "BOUNDED_LOCAL_TILE_SIZE_1440": true,
+    "SEQUENCE_NUMBERS_1440": true,
+    "CONTROL_MINIMA_1440": true,
+    "NO_HORIZONTAL_OVERFLOW_1440": true,
+    "PANEL_MODALITY_1440": true,
+    "NO_RESULTS_1440": true,
+    "ESCAPE_FOCUS_RETURN_1440": true,
+    "PANEL_IS_NOT_HISTORY_1440": true,
+    "TEXT_ZOOM_200_WRAP_1440": true,
+    "RECIPIENT_HAS_NO_EDITOR_1440": true,
+    "LONG_GROUP_20_1440": true,
+    "NO_CONSOLE_OR_PAGE_ERRORS": true
+  },
+  "observations": [
+    {
+      "width": 320,
+      "before": {
+        "x": 8,
+        "y": 553.09375,
+        "width": 304,
+        "height": 291.375
+      },
+      "after": {
+        "x": 8,
+        "y": 553.09375,
+        "width": 304,
+        "height": 291.375
+      },
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 104.203125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 69.625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 67.046875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 65.8125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 150.6875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Import JSON",
+            "width": 121.21875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Download JSON backup",
+            "width": 201.171875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 87.640625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 304,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 304,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Wash hands",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 390,
+      "before": {
+        "x": 8,
+        "y": 499.5,
+        "width": 374,
+        "height": 239.78125
+      },
+      "after": {
+        "x": 8,
+        "y": 499.5,
+        "width": 374,
+        "height": 239.78125
+      },
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 104.203125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 69.625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 67.046875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 65.8125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 150.6875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Import JSON",
+            "width": 121.21875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Download JSON backup",
+            "width": 201.171875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 87.640625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 374,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 374,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Wash hands",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 768,
+      "before": {
+        "x": 16,
+        "y": 453.90625,
+        "width": 736,
+        "height": 247.78125
+      },
+      "after": {
+        "x": 16,
+        "y": 453.90625,
+        "width": 736,
+        "height": 247.78125
+      },
+      "metrics": {
+        "overflow": 0,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 104.203125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 69.625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 67.046875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 65.8125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 150.6875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Import JSON",
+            "width": 121.21875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Download JSON backup",
+            "width": 201.171875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 87.640625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 736,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 736,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Wash hands",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": 0
+    },
+    {
+      "width": 1440,
+      "before": {
+        "x": 16,
+        "y": 400.3125,
+        "width": 1393,
+        "height": 247.78125
+      },
+      "after": {
+        "x": 16,
+        "y": 400.3125,
+        "width": 1393,
+        "height": 247.78125
+      },
+      "metrics": {
+        "overflow": -15,
+        "controls": [
+          {
+            "name": "My guides",
+            "width": 104.203125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Undo",
+            "width": 69.625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Redo",
+            "width": 67.046875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Read",
+            "width": 65.8125,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Print / Download",
+            "width": 150.6875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Import JSON",
+            "width": 121.21875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Download JSON backup",
+            "width": 201.171875,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Settings",
+            "width": 87.640625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "text",
+            "width": 1393,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Presentation",
+            "width": 1393,
+            "height": 44.1875,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Wash hands",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Group actions",
+            "width": 129.59375,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Onion",
+            "width": 176,
+            "height": 115.78125,
+            "font": 16
+          },
+          {
+            "name": "Add picture",
+            "width": 113.40625,
+            "height": 44,
+            "font": 16
+          },
+          {
+            "name": "Add step",
+            "width": 94.3125,
+            "height": 44,
+            "font": 16
+          }
+        ]
+      },
+      "zoomOverflow": -15
+    }
+  ],
+  "errors": []
+}

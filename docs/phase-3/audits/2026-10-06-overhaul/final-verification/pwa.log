@@ -1,0 +1,8 @@
+
+> instruction-builder@0.1.0 test:pwa
+> node scripts/check-browser.mjs pwa docs/phase-3/audits/2026-10-06-overhaul/final-verification/pwa
+
+CHECKS_PASSED=45
+COLD_INSTALLED_FORMATS=4; OUTPUT_DIR=D:\worktrees\8f23\instruction_builder\docs\phase-3\audits\2026-10-06-overhaul\final-verification\pwa
+PWA_UPDATE_RETAINS_OLD_CLIENT_EXPORT_AND_ACTIVATES_NEW_BUILD=PASS
+ACTUAL_APP_FIRST_PDF_OLD_AND_NEW_OFFLINE_ACROSS_WAITING_UPDATE=PASS

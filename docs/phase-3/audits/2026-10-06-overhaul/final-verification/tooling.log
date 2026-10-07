@@ -1,0 +1,19 @@
+
+> instruction-builder@0.1.0 test:tooling
+> node --test scripts/*.test.mjs
+
+✔ browser expectations reject false results and identify all failed checks (2.1942ms)
+✔ missing or numeric results cannot silently satisfy boolean expectations (0.4126ms)
+✔ production offline manifest includes lazily loaded export assets and the navigation shell (79.0803ms)
+✔ changed build content uses a different offline cache, while an unchanged build stays stable (282.0296ms)
+✔ reload requests consult the offline cache even with browser-only cache flags (1.9349ms)
+✔ service worker leaves other origins and non-GET requests alone (0.469ms)
+✔ public build assets match despite Origin variants, while other resources keep Vary semantics (4.1655ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 582.5702

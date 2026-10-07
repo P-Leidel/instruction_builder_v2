@@ -1,0 +1,448 @@
+import { describe, it, expect } from "vitest";
+import { migrate } from "./migrate";
+import {
+  CURRENT_SCHEMA_VERSION,
+  createEmptyDocument,
+  type TokenCategory,
+} from "./instruction";
+import { documentTotalTime } from "../lib/duration";
+
+function validDoc(overrides: Record<string, unknown> = {}): Record<string, unknown> {
+  const doc = createEmptyDocument();
+  return { ...doc, ...overrides };
+}
+
+function docWithToken(fields: Record<string, unknown>): Record<string, unknown> {
+  return validDoc({
+    steps: [{ id: "s1", tokens: [{ id: "t1", iconId: "knife", category: "action", ...fields }] }],
+  });
+}
+
+describe("migrate", () => {
+  it("migratesV1ToSequence", () => {
+    const legacy = {
+      schemaVersion: 1,
+      extra: { future: ["retained"] },
+      meta: { title: "Original", domain: "custom", createdAt: "2026-01-01", extra: true },
+      steps: [{ id: "s1", title: "", description: "notes", extra: "step", tokens: [{
+        id: "t1", category: "object", iconId: "unknown", label: "", note: "note",
+        quantity: { iconId: "q", label: "3 custom units", extra: "attachment" },
+        warning: { iconId: "unknown-warning", label: "" },
+        time: { iconId: "clock", label: "5m", seconds: 300 }, metadata: { custom: true }, extra: "token",
+      }] }],
+    };
+    const before = structuredClone(legacy);
+    expect(migrate(legacy)).toEqual({
+      ...legacy, schemaVersion: 2, meta: { ...legacy.meta, presentation: "sequence" },
+      steps: [{ ...legacy.steps[0], tokens: [{ ...legacy.steps[0].tokens[0], quantity: {
+        iconId: "q", label: "3 custom units", amount: 3, unit: "custom units", extra: "attachment",
+      } }] }],
+    });
+    expect(legacy).toEqual(before);
+  });
+
+  it("roundTripsBoardV2", () => {
+    const doc = { ...createEmptyDocument(), schemaVersion: 2, meta: {
+      ...createEmptyDocument().meta, presentation: "board", reservedUnknown: [1, 2],
+    }, steps: [{ id: "group", title: "", description: "", tokens: [{
+      id: "choice", category: "object", iconId: "custom", label: "", note: "",
+      quantity: { iconId: "q", label: "2 cups", amount: 2, unit: "cups" },
+    }] }], custom: { retained: true } };
+    expect(migrate(JSON.parse(JSON.stringify(doc)))).toEqual(doc);
+  });
+
+  it("rejectsInvalidPresentationAndFutureSchema", () => {
+    for (const schemaVersion of [1, 2]) {
+      for (const presentation of ["other", "", null, 3]) {
+        expect(() => migrate({ ...createEmptyDocument(), schemaVersion, meta: {
+          ...createEmptyDocument().meta, presentation,
+        } })).toThrow(/presentation/);
+      }
+    }
+    expect(() => migrate({ ...createEmptyDocument(), schemaVersion: 2, meta: {
+      title: "Title", domain: "custom", createdAt: "date",
+    } })).toThrow(/presentation/);
+    expect(() => migrate({ ...createEmptyDocument(), schemaVersion: 3 })).toThrow(/newer/);
+  });
+
+  it.each(["sequence", "board"])("retains recognized v1 reserved presentation %s", (presentation) => {
+    expect(migrate({ ...createEmptyDocument(), schemaVersion: 1, meta: {
+      ...createEmptyDocument().meta, presentation,
+    } })).toMatchObject({ schemaVersion: 2, meta: { presentation } });
+  });
+
+  it("accepts a current-schema document unchanged", () => {
+    const doc = createEmptyDocument();
+    expect(migrate(doc)).toEqual(doc);
+  });
+
+  it("rejects a schemaVersion newer than this app supports", () => {
+    expect(() => migrate(validDoc({ schemaVersion: CURRENT_SCHEMA_VERSION + 1 }))).toThrow(
+      /newer than this app supports/,
+    );
+  });
+
+  it.each([
+    ["not an object", "just a string"],
+    ["an array", ["not", "a", "document"]],
+    ["null", null],
+  ])("rejects %s", (_label, input) => {
+    expect(() => migrate(input)).toThrow(/Not a valid instruction file/);
+  });
+
+  it("rejects a missing schemaVersion", () => {
+    const doc = validDoc();
+    delete doc.schemaVersion;
+    expect(() => migrate(doc)).toThrow(/missing a schemaVersion/);
+  });
+
+  it.each([0, -1, 0.5, NaN, -Infinity])("rejects unsupported or invalid schemaVersion %s", (schemaVersion) => {
+    expect(() => migrate(validDoc({ schemaVersion }))).toThrow(/schemaVersion/);
+  });
+
+  it.each(["title", "domain", "createdAt"])(
+    "rejects meta missing %s",
+    (field) => {
+      const doc = validDoc();
+      const meta = { ...(doc.meta as Record<string, unknown>) };
+      delete meta[field];
+      expect(() => migrate({ ...doc, meta })).toThrow(/missing or invalid meta/);
+    },
+  );
+
+  it("rejects steps that isn't an array", () => {
+    expect(() => migrate(validDoc({ steps: "not-an-array" }))).toThrow(/missing or invalid steps/);
+  });
+
+  it("rejects a step missing an id", () => {
+    expect(() => migrate(validDoc({ steps: [{ tokens: [] }] }))).toThrow(
+      /missing or invalid steps/,
+    );
+  });
+
+  it("rejects a step whose tokens isn't an array", () => {
+    expect(() => migrate(validDoc({ steps: [{ id: "s1", tokens: "nope" }] }))).toThrow(
+      /missing or invalid steps/,
+    );
+  });
+
+  it("rejects a token missing an id", () => {
+    const doc = validDoc({
+      steps: [{ id: "s1", tokens: [{ iconId: "knife", category: "action" }] }],
+    });
+    expect(() => migrate(doc)).toThrow(/missing or invalid steps/);
+  });
+
+  it("rejects a token missing an iconId", () => {
+    const doc = validDoc({
+      steps: [{ id: "s1", tokens: [{ id: "t1", category: "action" }] }],
+    });
+    expect(() => migrate(doc)).toThrow(/missing or invalid steps/);
+  });
+
+  it("rejects a token with an invalid category", () => {
+    const doc = validDoc({
+      steps: [{ id: "s1", tokens: [{ id: "t1", iconId: "knife", category: "not-a-category" }] }],
+    });
+    expect(() => migrate(doc)).toThrow(/missing or invalid steps/);
+  });
+
+  it("rejects duplicate step ids", () => {
+    const doc = validDoc({
+      steps: [{ id: "s1", tokens: [] }, { id: "s1", tokens: [] }],
+    });
+    expect(() => migrate(doc)).toThrow(/duplicate step id/);
+  });
+
+  it("rejects duplicate token ids within a step", () => {
+    const doc = validDoc({
+      steps: [{
+        id: "s1",
+        tokens: [
+          { id: "t1", iconId: "knife", category: "action" },
+          { id: "t1", iconId: "bowl", category: "object" },
+        ],
+      }],
+    });
+    expect(() => migrate(doc)).toThrow(/duplicate token id/);
+  });
+
+  it("rejects duplicate token ids across steps before they can collide after a move", () => {
+    const doc = validDoc({
+      steps: [
+        { id: "s1", tokens: [{ id: "t1", iconId: "knife", category: "action" }] },
+        { id: "s2", tokens: [{ id: "t1", iconId: "bowl", category: "object" }] },
+      ],
+    });
+    expect(() => migrate(doc)).toThrow(/duplicate token id/);
+  });
+
+  it("preserves a document with distinct step and token ids", () => {
+    const doc = validDoc({
+      steps: [
+        { id: "s1", tokens: [{ id: "t1", iconId: "knife", category: "action" }] },
+        { id: "s2", tokens: [{ id: "t2", iconId: "bowl", category: "object" }] },
+      ],
+    });
+    expect(migrate(doc)).toEqual(doc);
+  });
+
+  describe("consumed optional fields", () => {
+    it("rejects string seconds before token times can concatenate into a 6060-second total", () => {
+      const doc = validDoc({
+        steps: [{
+          id: "s1",
+          tokens: [
+            { id: "t1", iconId: "knife", category: "action", time: { iconId: "clock", label: "1m", seconds: "60" } },
+            { id: "t2", iconId: "bowl", category: "object", time: { iconId: "clock", label: "1m", seconds: 60 } },
+          ],
+        }],
+      });
+      let acceptedTotal: number | undefined;
+      let error: unknown;
+      try {
+        acceptedTotal = documentTotalTime(migrate(doc).steps)?.seconds;
+      } catch (err) {
+        error = err;
+      }
+      expect({ rejected: error instanceof Error, acceptedTotal }).toEqual({
+        rejected: true,
+        acceptedTotal: undefined,
+      });
+      expect(error).toHaveProperty("message", expect.stringMatching(/steps\[0\].tokens\[0\].time/));
+    });
+
+    it.each(["title", "description"])("rejects a non-string step %s", (field) => {
+      expect(() => migrate(validDoc({ steps: [{ id: "s1", tokens: [], [field]: { text: "wrong shape" } }] })))
+        .toThrow(new RegExp(`steps\\[0\\].${field}`));
+    });
+
+    it.each(["label", "note"])("rejects a non-string token %s", (field) => {
+      expect(() => migrate(docWithToken({ [field]: ["wrong shape"] })))
+        .toThrow(new RegExp(`tokens\\[0\\].${field}`));
+    });
+
+    const malformedTimes: [string, unknown][] = [
+      ["null", null],
+      ["an array", []],
+      ["a string", "1m"],
+      ["missing iconId", { label: "1m", seconds: 60 }],
+      ["non-string iconId", { iconId: 42, label: "1m", seconds: 60 }],
+      ["missing label", { iconId: "clock", seconds: 60 }],
+      ["non-string label", { iconId: "clock", label: 60, seconds: 60 }],
+      ["missing seconds", { iconId: "clock", label: "1m" }],
+      ...["60", null, false, 0, -1, 1.5, NaN, Infinity, -Infinity, 8553601].map<[string, unknown]>((seconds) => [
+        `invalid seconds ${String(seconds)}`,
+        { iconId: "clock", label: "1m", seconds },
+      ]),
+    ];
+
+    it.each(malformedTimes)("rejects a step time with %s", (_label, time) => {
+      expect(() => migrate(validDoc({ steps: [{ id: "s1", tokens: [], time }] })))
+        .toThrow(/steps\[0\].time/);
+    });
+
+    it.each(malformedTimes)("rejects a token time with %s", (_label, time) => {
+      expect(() => migrate(docWithToken({ time }))).toThrow(/tokens\[0\].time/);
+    });
+
+    it.each([
+      ["null", null],
+      ["an array", []],
+      ["a string", "sharp"],
+      ["missing iconId", { label: "Sharp" }],
+      ["non-string iconId", { iconId: 4 }],
+      ["non-string label", { iconId: "warning", label: {} }],
+    ])("rejects a warning with %s", (_label, warning) => {
+      expect(() => migrate(docWithToken({ warning }))).toThrow(/tokens\[0\].warning/);
+    });
+
+    it.each([
+      ["null", null],
+      ["an array", []],
+      ["a string", "3 kg"],
+      ["missing iconId", { label: "3 kg", amount: 3, unit: "kg" }],
+      ["non-string iconId", { iconId: 4, label: "3 kg", amount: 3, unit: "kg" }],
+      ["missing label", { iconId: "quantity", amount: 3, unit: "kg" }],
+      ["non-string label", { iconId: "quantity", label: {}, amount: 3, unit: "kg" }],
+      ["missing amount", { iconId: "quantity", label: "3 kg", unit: "kg" }],
+      ["missing unit", { iconId: "quantity", label: "3 kg", amount: 3 }],
+      ["non-string unit", { iconId: "quantity", label: "3 kg", amount: 3, unit: 4 }],
+      ...["3", null, false, 0, -1, 1.5, NaN, Infinity, -Infinity, 100000].map<[string, unknown]>((amount) => [
+        `invalid amount ${String(amount)}`,
+        { iconId: "quantity", label: "3 kg", amount, unit: "kg" },
+      ]),
+    ])("rejects a structured quantity with %s", (_label, quantity) => {
+      expect(() => migrate(docWithToken({ quantity }))).toThrow(/tokens\[0\].quantity/);
+    });
+
+    it.each([
+      ["null", null],
+      ["an array", ["kg"]],
+      ["a string", "kg"],
+      ["a Date", new Date("2026-10-06T12:00:00Z")],
+      ["a Map", new Map([["unit", "kg"]])],
+      ["an object value", { unit: { label: "kg" } }],
+      ["an array value", { unit: ["kg"] }],
+      ["a null value", { unit: null }],
+      ["an undefined value", { unit: undefined }],
+      ["NaN", { amount: NaN }],
+      ["Infinity", { amount: Infinity }],
+      ["negative Infinity", { amount: -Infinity }],
+    ])("rejects metadata containing %s", (_label, metadata) => {
+      expect(() => migrate(docWithToken({ metadata }))).toThrow(/tokens\[0\].metadata/);
+    });
+
+    it("preserves valid optional data, numeric bounds, and lengthy strings", () => {
+      const text = "Detailed imported instructions. ".repeat(10000);
+      const doc = validDoc({
+        meta: { title: text, domain: "custom domain", createdAt: "2026-10-06T12:00:00Z", presentation: "sequence" },
+        steps: [{
+          id: "s1",
+          title: text,
+          description: text,
+          time: { iconId: "custom-clock", label: text, seconds: 8553600 },
+          tokens: [
+            {
+              id: "t1", iconId: "custom-icon", category: "action", label: text, note: text,
+              time: { iconId: "clock", label: "1s", seconds: 1 },
+              quantity: { iconId: "quantity", label: text, amount: 99999, unit: "custom unit with spaces" },
+              warning: { iconId: "custom-warning", label: text },
+              metadata: { text, positive: 2.5, negative: -2, zero: 0, enabled: true, disabled: false },
+            },
+            {
+              id: "t2", iconId: "bowl", category: "object",
+              time: { iconId: "clock", label: "99d", seconds: 8553600 },
+              quantity: { iconId: "quantity", label: "1", amount: 1, unit: "" },
+              warning: { iconId: "warning" },
+              metadata: {},
+            },
+          ],
+        }],
+      });
+      expect(migrate(doc)).toEqual(doc);
+    });
+
+    it("preserves optional fields set to undefined by attachment removal", () => {
+      const doc = validDoc({
+        steps: [{
+          id: "s1", title: undefined, description: undefined, time: undefined,
+          tokens: [{
+            id: "t1", iconId: "knife", category: "action", label: undefined, note: undefined,
+            time: undefined, quantity: undefined, warning: undefined, metadata: undefined,
+          }],
+        }],
+      });
+      expect(migrate(doc)).toEqual(doc);
+    });
+
+    it("rejects malformed data without mutating an earlier legacy quantity", () => {
+      const doc = validDoc({
+        steps: [{
+          id: "s1",
+          tokens: [
+            { id: "t1", iconId: "knife", category: "action", quantity: { iconId: "quantity", label: "3 kg" } },
+            { id: "t2", iconId: "bowl", category: "object", time: { iconId: "clock", label: "1m", seconds: "60" } },
+          ],
+        }],
+      });
+      const before = structuredClone(doc);
+      expect(() => migrate(doc)).toThrow(/tokens\[1\].time/);
+      expect(doc).toEqual(before);
+    });
+  });
+
+  // Every `TokenCategory` member listed here explicitly - if `TokenCategory`
+  // (model/instruction.ts) gains or loses a member without this object being
+  // updated to match, TypeScript itself fails the build (a `Record` literal
+  // requires exactly the union's keys, no more, no less). That makes this
+  // list a compiler-enforced mirror of the type, independent of - and not
+  // copied from - migrate.ts's own internal `TOKEN_CATEGORIES` array.
+  const allTokenCategories: Record<TokenCategory, true> = {
+    action: true,
+    object: true,
+    tool: true,
+    quantity: true,
+    warning: true,
+    time: true,
+  };
+
+  describe("repairLegacyQuantity (2026-09-17 audit remediation)", () => {
+    // Regression tests for the live-production data-corruption window
+    // between 580d5e6 and 9ab8e64: a saved quantity from that window is
+    // label-only ({ iconId, label }), missing the amount/unit fields
+    // QuantityAttachment now requires, but CURRENT_SCHEMA_VERSION never
+    // bumped - see docs/known-issues.md's "Quantity amount/unit
+    // representation" entry and migrate.ts's repairLegacyQuantity.
+
+    it("recovers amount/unit from a label-only legacy quantity", () => {
+      const doc = validDoc({
+        steps: [
+          {
+            id: "s1",
+            tokens: [
+              {
+                id: "t1",
+                iconId: "knife",
+                category: "action",
+                quantity: { iconId: "quantity-icon", label: "3 kg" },
+              },
+            ],
+          },
+        ],
+      });
+      const migrated = migrate(doc);
+      expect(migrated.steps[0].tokens[0].quantity).toEqual({
+        iconId: "quantity-icon",
+        label: "3 kg",
+        amount: 3,
+        unit: "kg",
+      });
+    });
+
+    it("leaves an already-structured quantity unchanged", () => {
+      const quantity = { iconId: "quantity-icon", label: "3 kg", amount: 3, unit: "kg" };
+      const doc = validDoc({
+        steps: [{ id: "s1", tokens: [{ id: "t1", iconId: "knife", category: "action", quantity }] }],
+      });
+      expect(migrate(doc).steps[0].tokens[0].quantity).toEqual(quantity);
+    });
+
+    it("drops a legacy quantity whose label can't be losslessly recovered", () => {
+      const doc = validDoc({
+        steps: [
+          {
+            id: "s1",
+            tokens: [
+              { id: "t1", iconId: "knife", category: "action", quantity: { iconId: "x", label: "a lot" } },
+            ],
+          },
+        ],
+      });
+      expect(migrate(doc).steps[0].tokens[0].quantity).toBeUndefined();
+    });
+
+    it("leaves tokens with no quantity at all unaffected", () => {
+      const doc = validDoc({
+        steps: [{ id: "s1", tokens: [{ id: "t1", iconId: "knife", category: "action" }] }],
+      });
+      expect(migrate(doc).steps[0].tokens[0].quantity).toBeUndefined();
+    });
+  });
+
+  it.each(Object.keys(allTokenCategories) as TokenCategory[])(
+    // Regression test for the still-open known-issues.md item ("token/
+    // attachment vocabulary enumerated in seven places, two of them already
+    // disagreeing"): migrate.ts's own `TOKEN_CATEGORIES` array is hand-copied
+    // from the `TokenCategory` type, so it can silently fall out of sync. If
+    // it ever drops a category `TokenCategory` still declares, this is the
+    // test that catches it - independently of the array above.
+    "accepts a token in category %s",
+    (category) => {
+      const doc = validDoc({
+        steps: [{ id: "s1", tokens: [{ id: "t1", iconId: "some-icon", category }] }],
+      });
+      expect(() => migrate(doc)).not.toThrow();
+    },
+  );
+});

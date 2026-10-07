@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "title": "Required meanings",
+    "presentation": "sequence",
+    "domain": "proof",
+    "createdAt": "2026-10-06T00:00:00Z"
+  },
+  "steps": [
+    {
+      "id": "kitchen-group",
+      "title": "Kitchen group",
+      "tokens": [
+        {
+          "id": "kitchen-token",
+          "category": "action",
+          "iconId": "action.chop",
+          "label": "Chop",
+          "note": "日本語",
+          "quantity": {
+            "iconId": "quantity.amount",
+            "label": "  ",
+            "amount": 2,
+            "unit": "kg"
+          },
+          "time": {
+            "iconId": "time.duration",
+            "label": "",
+            "seconds": 60
+          },
+          "warning": {
+            "iconId": "constructor",
+            "label": "Keep hands clear"
+          }
+        }
+      ],
+      "time": {
+        "iconId": "time.duration",
+        "label": "  ",
+        "seconds": 60
+      },
+      "description": "日本語"
+    }
+  ]
+}

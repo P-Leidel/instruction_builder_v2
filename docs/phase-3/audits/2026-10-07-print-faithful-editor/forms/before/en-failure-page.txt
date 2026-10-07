@@ -1,0 +1,40 @@
+Visual guides
+Saved
+My guides
+Read
+Print / Download
+Guide title
+Presentation
+Sequence
+Choice board
+Step 1: Group 1
+Group actions
+
+Group time: Authored group time
+
+Banana
+Authored quantity
+Warning: Authored warning
+Authored picture time
+
+Review warning reference: future.warning
+
+Wash hands
+Add picture
+Step 2: Group 2
+Group actions
+Onion
+Add picture
+Add step
+Close
+Picture details: Banana
+Picture label
+Move earlier
+Move later
+Move to group
+Move to group
+Group 2
+Duplicate picture
+Copy picture
+Remove picture
+More details

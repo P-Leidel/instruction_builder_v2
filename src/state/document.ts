@@ -1,0 +1,947 @@
+import { signal, computed, batch, type Signal, type ReadonlySignal } from "@preact/signals";
+import {
+  createEmptyDocument,
+  createEmptyStep,
+  newId,
+  type InstructionDocument,
+  type InstructionStep,
+  type InstructionToken,
+  type TokenAttachment,
+  type QuantityAttachment,
+  type DurationAttachment,
+} from "../model/instruction";
+
+/**
+ * The two generic attachment kinds a token can carry via TokenDetails' own
+ * Quantity and Warning fields - see TokenAttachment. Time is deliberately
+ * not one of these: it has its own dedicated shape (DurationAttachment),
+ * its own input UI (DurationField, not TokenDetails' quantity/warning
+ * fields), and can attach to a step as well as a token - see
+ * setTokenTime/setStepTime below.
+ */
+export type AttachmentKind = "quantity" | "warning";
+
+/**
+ * Ties an attachment's `kind` to its payload type at the type level - see
+ * docs/phase-3/reviews/2026-09-17-whole-codebase-audit-evaluation.md, finding
+ * 6/item 8. Before this, `attachToTokenCore` took `kind`/`attachment` as two
+ * independent parameters (`AttachmentKind` and a flat `TokenAttachment |
+ * QuantityAttachment`), so `attachToToken(id, id, "quantity", { iconId: "x"
+ * })` - a bare `TokenAttachment`, missing `amount`/`unit` - type-checked even
+ * though `"quantity"` requires a full `QuantityAttachment`; confirmed against
+ * `document.test.ts`, which called `attachToToken` with a bare
+ * `TokenAttachment` for `"warning"` with no compile error either way, but
+ * would now also fail to compile if it tried that for `"quantity"`. Only
+ * `attachToTokenCore` (the one call that carries a payload) uses this -
+ * `removeTokenAttachmentCore` takes a bare `AttachmentKind` still, since
+ * removal has no payload to mismatch.
+ */
+export type TokenAttachmentSpec =
+  | { kind: "quantity"; value: QuantityAttachment }
+  | { kind: "warning"; value: TokenAttachment };
+
+const MAX_HISTORY = 100;
+/**
+ * Free-text fields (step/token title and notes) call their mutator on every
+ * keystroke (see StepDetails/TokenDetails - no local draft state, unlike
+ * DurationField/QuantityRow), so recording history on every call would
+ * make undo revert one character at a time. Mutators for those fields pass
+ * `coalesce: true` to `setSteps`, which merges a run of calls arriving
+ * within `COALESCE_WINDOW_MS` of each other into the single history entry
+ * already pushed for the first one - so a whole burst of typing (even
+ * across a mid-burst field/token switch, a deliberate simplification) undoes
+ * in one step, and only a pause longer than the window starts a new one.
+ * Every other mutator (add/remove/move/attach/etc.) always pushes its own
+ * entry, since each already represents one discrete user action.
+ */
+const COALESCE_WINDOW_MS = 700;
+
+/**
+ * A document session is a whole editable document plus its undo/redo history
+ * and selection - everything one instance of the app has open at a time.
+ * `createDocumentSession` is the module's seam: the app runs on exactly one
+ * session (the module-level default below, preserved for every existing
+ * caller), but a test - or a future second, embedded instance of the app -
+ * can construct its own, independent of the browser's single JS realm. See
+ * CONTEXT.md for this term and docs/known-issues.md for the module-level-
+ * singleton design debt this replaces.
+ *
+ * The `_lastPushWasCoalesce`/`_lastPushAt` fields are the coalescing clock
+ * (see `COALESCE_WINDOW_MS` above) - mutable bookkeeping private to
+ * `recordHistory`, carried on the session object itself (rather than as a
+ * closure variable) so every session gets its own clock instead of sharing
+ * one across instances.
+ */
+export interface DocumentSession {
+  readonly document: Signal<InstructionDocument>;
+  /**
+   * A token is only ever considered "selected" alongside its (also-selected)
+   * step - see InstructionCanvas's two-stage click behavior: the first click
+   * on a step selects the step, and only a further click on one of its
+   * tokens selects that token. Always go through selectStep/selectToken
+   * rather than assigning these two signals directly, so they can't drift
+   * out of sync (e.g. a token staying "selected" after its step is
+   * deselected).
+   */
+  readonly selectedStepId: Signal<string | null>;
+  readonly selectedTokenId: Signal<string | null>;
+  /**
+   * See CONTEXT.md's "Token clipboard" entry - a single-slot, in-memory copy
+   * of one token, written by `copyToken`, read (and paste-again-able) by
+   * `pasteToken`. Not part of the document, not part of undo/redo history.
+   */
+  readonly copiedToken: Signal<InstructionToken | null>;
+  /**
+   * Task 13 (Undo/Redo): `past`/`future` hold whole prior/subsequent document
+   * snapshots rather than individual diffs - the document is small enough
+   * (a handful of steps/tokens) that snapshotting is simpler and safer than a
+   * command/diff log, and every mutator already produces a fresh immutable
+   * `InstructionDocument` via `setSteps`, so a snapshot is just "the value
+   * `document` held right before this change."
+   */
+  readonly past: Signal<InstructionDocument[]>;
+  readonly future: Signal<InstructionDocument[]>;
+  readonly canUndo: ReadonlySignal<boolean>;
+  readonly canRedo: ReadonlySignal<boolean>;
+  readonly selectedStep: ReadonlySignal<InstructionStep | null>;
+  readonly selectedToken: ReadonlySignal<InstructionToken | null>;
+  /** @internal coalescing clock - only recordHistory reads/writes these. */
+  _lastPushWasCoalesce: boolean;
+  _lastPushAt: number;
+}
+
+/**
+ * Constructs a fresh, independent document session - all mutable app state
+ * lives in signals rather than component state, so the step list, step
+ * builder, and canvas stay in sync without prop-drilling, but nothing here
+ * is bound to a module-level global: two sessions never share a signal.
+ */
+export function createDocumentSession(
+  initial: InstructionDocument = createEmptyDocument(),
+): DocumentSession {
+  const documentSignal = signal<InstructionDocument>(initial);
+  const selectedStepId = signal<string | null>(initial.steps[0]?.id ?? null);
+  const selectedTokenId = signal<string | null>(null);
+  const copiedToken = signal<InstructionToken | null>(null);
+  const past = signal<InstructionDocument[]>([]);
+  const future = signal<InstructionDocument[]>([]);
+  const canUndo = computed(() => past.value.length > 0);
+  const canRedo = computed(() => future.value.length > 0);
+  const selectedStep = computed(
+    () => documentSignal.value.steps.find((s) => s.id === selectedStepId.value) ?? null,
+  );
+  const selectedToken = computed(
+    () => selectedStep.value?.tokens.find((t) => t.id === selectedTokenId.value) ?? null,
+  );
+
+  return {
+    document: documentSignal,
+    selectedStepId,
+    selectedTokenId,
+    copiedToken,
+    past,
+    future,
+    canUndo,
+    canRedo,
+    selectedStep,
+    selectedToken,
+    _lastPushWasCoalesce: false,
+    _lastPushAt: 0,
+  };
+}
+
+function recordHistory(session: DocumentSession, coalesce: boolean): void {
+  const now = Date.now();
+  const withinCoalesceWindow =
+    coalesce && session._lastPushWasCoalesce && now - session._lastPushAt < COALESCE_WINDOW_MS;
+  if (!withinCoalesceWindow) {
+    const next = [...session.past.value, session.document.value];
+    session.past.value = next.length > MAX_HISTORY ? next.slice(next.length - MAX_HISTORY) : next;
+    session.future.value = [];
+  }
+  session._lastPushWasCoalesce = coalesce;
+  session._lastPushAt = now;
+}
+
+/**
+ * Re-resolves the session's selection against `doc`: keeps the currently
+ * selected step if it still exists there (falling back to the document's
+ * first step otherwise), and keeps the currently selected token only if
+ * it's still within that step - clearing it otherwise.
+ *
+ * This is the session's one selection-repair policy, and `setSteps` below
+ * applies it to every steps mutation, so "the selection still points at
+ * something that exists" is a property of mutating the document rather
+ * than something each mutator has to remember (2026-09-20 architecture
+ * review, candidate 2). `restoreDocument` calls it separately only because
+ * undo/redo swaps the whole document without going through `setSteps`.
+ *
+ * The failure it exists to prevent, from the 2026-09-17 audit remediation
+ * (finding 2/B5): dragging the currently-selected token to a different step
+ * used to leave `selectedStepId` pointing at its old step with no repair at
+ * all, so `TokenDetails` and `StepDetails` each ended up reporting "not
+ * selected" for two different, both-wrong reasons (a `null` computed
+ * `selectedToken` in one, a stale-but-still-truthy `selectedTokenId` read
+ * directly in the other). That was fixed then by calling this from one more
+ * mutator; routing it through `setSteps` is what stops the next mutator
+ * from reintroducing it.
+ */
+function repairSelection(session: DocumentSession, doc: InstructionDocument): void {
+  const stepId = doc.steps.some((s) => s.id === session.selectedStepId.value)
+    ? session.selectedStepId.value
+    : doc.steps[0]?.id ?? null;
+  session.selectedStepId.value = stepId;
+  const step = doc.steps.find((s) => s.id === stepId);
+  session.selectedTokenId.value = step?.tokens.some((t) => t.id === session.selectedTokenId.value)
+    ? session.selectedTokenId.value
+    : null;
+}
+
+/**
+ * Restores a history snapshot as the live document, re-resolving selection
+ * against it rather than assigning `selectedStepId`/`selectedTokenId`
+ * directly via `selectStepCore`/`selectTokenCore` (see the note on those
+ * below) - this is the one place that deliberately deviates, because
+ * undo/redo should keep the current selection alive across a change that
+ * didn't touch it (e.g. undoing an edit to a *different* step) instead of
+ * always resetting to "no token selected" the way every other mutation does.
+ */
+function restoreDocument(session: DocumentSession, doc: InstructionDocument): void {
+  batch(() => {
+    session.document.value = doc;
+    repairSelection(session, doc);
+  });
+}
+
+/**
+ * Applies a steps update to the document. Every mutator below goes through
+ * this, so the two invariants that have to hold across *any* change to the
+ * steps both live here rather than in each mutator:
+ *
+ * 1. undo/redo history (see `recordHistory` above) only needs one funnel
+ *    point to watch. `coalesce: true` marks the change as part of a
+ *    continuous edit (free-text typing) that should merge into the last
+ *    history entry instead of pushing its own - see the comment on
+ *    `COALESCE_WINDOW_MS`.
+ * 2. the selection still points at a step and token that exist - see
+ *    `repairSelection` above. `removeStepCore` and `removeTokenFromStepCore`
+ *    used to hand-write their own narrower versions of this and
+ *    `moveTokenCore` called `repairSelection` itself; all three now inherit
+ *    it from here (2026-09-20 architecture review, candidate 2).
+ *
+ * Both writes are batched so no subscriber ever observes the new document
+ * alongside a selection that hasn't been re-resolved against it yet.
+ *
+ * By convention, a caller that can cheaply detect a no-op guards *before*
+ * calling this, so history isn't polluted with entries that changed
+ * nothing - see `updateTokenIn`/`setStepTimeCore`'s `fieldValuesEqual`,
+ * `tokensEqual` and `reorderStepsCore`'s `clamped === fromIndex` below. The
+ * three are deliberately different in shape (a flat-object comparison, an
+ * array-identity comparison, and an arithmetic proof of equality), and
+ * consolidating them behind one comparator-taking helper was considered and
+ * declined - see docs/adr/0002-no-shared-no-op-guard.md.
+ */
+function setSteps(
+  session: DocumentSession,
+  steps: InstructionDocument["steps"],
+  options?: { coalesce?: boolean },
+): void {
+  recordHistory(session, options?.coalesce ?? false);
+  batch(() => {
+    const doc = { ...session.document.value, steps };
+    session.document.value = doc;
+    repairSelection(session, doc);
+  });
+}
+
+/**
+ * `index`/`toIndex` in `moveTokenCore`/`reorderStepsCore` is a drop-before
+ * position computed against the array *before* the dragged item is removed
+ * from it (see `resolveDropTarget`/`resolveStepDropIndex`); removing that
+ * item first shifts everything after it back by one, so a forward move
+ * (`fromIndex < toIndexBeforeRemoval`) must adjust the target down by one to
+ * land where the user actually dropped it. Shared by both call sites below
+ * rather than hand-written twice - the same correction, not a coincidence.
+ */
+function adjustIndexForRemoval(fromIndex: number, toIndexBeforeRemoval: number): number {
+  return fromIndex !== -1 && fromIndex < toIndexBeforeRemoval
+    ? toIndexBeforeRemoval - 1
+    : toIndexBeforeRemoval;
+}
+
+/** Inserts `token` at `index` (clamped), or appends it when `index` is omitted. */
+function insertToken(
+  tokens: InstructionToken[],
+  token: InstructionToken,
+  index?: number,
+): InstructionToken[] {
+  if (index === undefined) return [...tokens, token];
+  const clamped = Math.max(0, Math.min(index, tokens.length));
+  return [...tokens.slice(0, clamped), token, ...tokens.slice(clamped)];
+}
+
+/**
+ * True if `a`/`b` hold the same tokens in the same order - every element in
+ * both arrays is an existing token object (never cloned by `insertToken`'s
+ * slice/spread or `Array.filter`), so identity comparison per slot is enough.
+ * Used by `moveTokenCore`'s no-op guard below (2026-09-17 audit remediation,
+ * finding 2/B5): dropping a token back exactly where it started used to still
+ * record a history entry and wipe redo.
+ */
+function tokensEqual(a: InstructionToken[], b: InstructionToken[]): boolean {
+  return a.length === b.length && a.every((token, i) => token === b[i]);
+}
+
+/**
+ * Shallow value-equality for one field of a token or step. Every field this
+ * is asked about holds either a primitive (`label`, `note`) or one of the
+ * flat, primitive-only attachment shapes (`TokenAttachment`,
+ * `QuantityAttachment`, `DurationAttachment` - see model/instruction.ts), so
+ * comparing own-enumerable-key/value pairs is enough; there are no nested
+ * objects to recurse into. Primitives and a matching pair of `undefined`s
+ * are caught by the identity check before any of that runs.
+ *
+ * Originally `attachmentsEqual`, the guard added for the 2026-09-17 audit
+ * remediation (finding 2/B5) after re-attaching an already-attached
+ * warning/quantity was found to record a history entry and wipe redo. It
+ * now backs `updateTokenIn` below, which applies it to *every* token field
+ * rather than just the two that happened to get it (2026-09-20 architecture
+ * review, candidate 3), and `setStepTimeCore`, which had the same gap one
+ * level up.
+ */
+function fieldValuesEqual(a: unknown, b: unknown): boolean {
+  if (a === b) return true;
+  if (!a || !b || typeof a !== "object" || typeof b !== "object") return false;
+  const aEntries = Object.entries(a);
+  const bRecord = b as Record<string, unknown>;
+  return (
+    aEntries.length === Object.keys(b).length &&
+    aEntries.every(([key, value]) => bRecord[key] === value)
+  );
+}
+
+/**
+ * The one place a single token inside a single step is written. `patch` is
+ * merged onto the token; `null` removes it instead. `options` is handed
+ * straight to `setSteps`, so a caller that is part of a continuous free-text
+ * edit passes `{ coalesce: true }` exactly as it would there.
+ *
+ * Five mutators used to hand-write the identical step-then-token traversal,
+ * and the copies had drifted: `setTokenAttachment` checked its value against
+ * the current one before writing, `setTokenTimeCore` - the same token, the
+ * same `CollapsedField` chrome, one field over - did not, so opening Token
+ * time and pressing Save without changing anything pushed an undo entry and
+ * wiped redo. Folding the traversal into one seam (2026-09-20 architecture
+ * review, candidate 3) makes both of the properties that had drifted
+ * unconditional:
+ *
+ * - a write naming a step or token the document doesn't hold does nothing,
+ *   rather than rebuilding an identical steps array and recording it; and
+ * - a patch whose every field already equals the token's current value does
+ *   nothing, so no token field can be added without a no-op guard again.
+ *
+ * This is de-duplication of one shape, not the shared
+ * `noopGuard(current, next, isEqual)` that docs/adr/0002 declined: the
+ * comparison isn't a parameter here, it is the seam's own. `tokensEqual` and
+ * `reorderStepsCore`'s index arithmetic - the two guards that genuinely
+ * differ in shape - are untouched.
+ */
+function updateTokenIn(
+  session: DocumentSession,
+  stepId: string,
+  tokenId: string,
+  patch: Partial<InstructionToken> | null,
+  options?: { coalesce?: boolean },
+): void {
+  const current = session.document.value.steps.find((s) => s.id === stepId);
+  const token = current?.tokens.find((t) => t.id === tokenId);
+  if (!token) return;
+  if (
+    patch &&
+    Object.entries(patch).every(([key, value]) =>
+      fieldValuesEqual((token as unknown as Record<string, unknown>)[key], value),
+    )
+  ) {
+    return;
+  }
+
+  setSteps(
+    session,
+    session.document.value.steps.map((step) =>
+      step.id === stepId
+        ? {
+            ...step,
+            tokens:
+              patch === null
+                ? step.tokens.filter((t) => t.id !== tokenId)
+                : step.tokens.map((t) => (t.id === tokenId ? { ...t, ...patch } : t)),
+          }
+        : step,
+    ),
+    options,
+  );
+}
+
+/**
+ * Sets or clears one attachment kind on a token - at most one of each kind
+ * at a time, so setting one where a value already exists replaces it,
+ * rather than the token accumulating several of the same kind. The shared
+ * implementation of `attachToTokenCore`/`removeTokenAttachmentCore`; its
+ * traversal and its no-op guard both come from `updateTokenIn` above.
+ */
+function setTokenAttachment(
+  session: DocumentSession,
+  stepId: string,
+  tokenId: string,
+  kind: AttachmentKind,
+  attachment: TokenAttachment | QuantityAttachment | undefined,
+): void {
+  updateTokenIn(session, stepId, tokenId, { [kind]: attachment });
+}
+
+/**
+ * The functions below (suffixed `Core`) are every mutator/query's real
+ * implementation, taking a `DocumentSession` explicitly as their first
+ * argument - the module's actual, constructable interface. They're grouped
+ * into `sessionActions` for callers that construct their own session
+ * (chiefly tests - see document.test.ts). App code should use the
+ * zero-argument exports at the bottom of this file instead, which are these
+ * same functions bound to `defaultSession` - so every existing call site
+ * keeps working unchanged.
+ */
+
+/** Reverts the most recent change (or coalesced run of changes) - a no-op if there's nothing to undo. */
+function undoCore(session: DocumentSession): void {
+  if (session.past.value.length === 0) return;
+  const previous = session.past.value[session.past.value.length - 1];
+  session.past.value = session.past.value.slice(0, -1);
+  session.future.value = [session.document.value, ...session.future.value];
+  session._lastPushWasCoalesce = false;
+  restoreDocument(session, previous);
+}
+
+/** Reapplies the most recently undone change - a no-op if there's nothing to redo. */
+function redoCore(session: DocumentSession): void {
+  if (session.future.value.length === 0) return;
+  const next = session.future.value[0];
+  session.future.value = session.future.value.slice(1);
+  session.past.value = [...session.past.value, session.document.value];
+  session._lastPushWasCoalesce = false;
+  restoreDocument(session, next);
+}
+
+/**
+ * Replaces the entire document - the Import flow (task 19). Unlike
+ * `setSteps` (which only ever replaces `steps` on the existing document),
+ * this swaps `meta`/`schemaVersion` too, since an imported file brings its
+ * own. Still goes through `recordHistory` like every other mutation, so an
+ * accidental import is one `undo()` away from being reverted.
+ */
+function replaceDocumentCore(session: DocumentSession, doc: InstructionDocument): void {
+  recordHistory(session, false);
+  session.document.value = doc;
+  selectStepCore(session, doc.steps[0]?.id ?? null);
+  session.copiedToken.value = null;
+}
+
+/** Opens another guide without carrying history or clipboard across its boundary. */
+export function openDocumentInSession(session: DocumentSession, doc: InstructionDocument): void {
+  batch(() => {
+    session.document.value = doc;
+    session.past.value = [];
+    session.future.value = [];
+    session._lastPushWasCoalesce = false;
+    session._lastPushAt = 0;
+    session.copiedToken.value = null;
+    selectStepCore(session, doc.steps[0]?.id ?? null);
+  });
+}
+
+function setPresentationCore(session: DocumentSession, presentation: "sequence" | "board"): void {
+  if (session.document.value.meta.presentation === presentation) return;
+  recordHistory(session, false);
+  session.document.value = {
+    ...session.document.value,
+    meta: { ...session.document.value.meta, presentation },
+  };
+}
+
+function selectStepCore(session: DocumentSession, stepId: string | null): void {
+  session.selectedStepId.value = stepId;
+  session.selectedTokenId.value = null;
+}
+
+function selectTokenCore(session: DocumentSession, stepId: string, tokenId: string): void {
+  session.selectedStepId.value = stepId;
+  session.selectedTokenId.value = tokenId;
+}
+
+function addStepCore(session: DocumentSession): void {
+  const step = createEmptyStep();
+  setSteps(session, [...session.document.value.steps, step]);
+  selectStepCore(session, step.id);
+}
+
+/**
+ * Drops a step. Nothing here touches the selection: if the removed step was
+ * the selected one, `setSteps`' `repairSelection` falls back to the first
+ * remaining step and clears the token that went with it, and if it wasn't,
+ * the selection is left exactly where it was.
+ */
+function removeStepCore(session: DocumentSession, stepId: string): void {
+  setSteps(
+    session,
+    session.document.value.steps.filter((s) => s.id !== stepId),
+  );
+}
+
+/**
+ * Adds a token to a specific step - the drag-and-drop drop target (task 9),
+ * and, through `addTokenToSelectedStepCore` below, the tap-to-insert and
+ * paste paths as well.
+ *
+ * The guard is here for the drop-target caller. Its `stepId` is resolved
+ * during a drag rather than read off the document at commit time, exactly as
+ * `moveTokenCore`'s destination is, so it carries the same risk of naming a
+ * step the document no longer holds. The consequence is milder than
+ * `moveTokenCore`'s - the map below simply matches nothing, so no token is
+ * destroyed - but `setSteps` would still record an identical steps array as
+ * an undo entry and wipe redo, which is the behaviour `updateTokenIn` was
+ * given a guard against. Same guard, same reason.
+ *
+ * The other caller passes the selected step id, which `repairSelection`
+ * already keeps pointing at a live step, so there the guard is redundant
+ * rather than load-bearing - one `some` on a path that rebuilds the whole
+ * steps array anyway.
+ */
+function addTokenToStepCore(
+  session: DocumentSession,
+  stepId: string,
+  token: InstructionToken,
+  index?: number,
+): void {
+  if (!session.document.value.steps.some((s) => s.id === stepId)) return;
+  setSteps(
+    session,
+    session.document.value.steps.map((step) =>
+      step.id === stepId ? { ...step, tokens: insertToken(step.tokens, token, index) } : step,
+    ),
+  );
+}
+
+/** Adds a token to whichever step is selected - the tap-to-insert path (task 11). */
+function addTokenToSelectedStepCore(session: DocumentSession, token: InstructionToken): void {
+  const stepId = session.selectedStepId.value;
+  if (!stepId) return;
+  addTokenToStepCore(session, stepId, token);
+}
+
+/**
+ * Moves an existing token to `index` within `toStepId`, removing it from
+ * `fromStepId` first - covers both reordering within a step (fromStepId ===
+ * toStepId) and moving between steps, via a drag on the canvas (task 9).
+ *
+ * No-ops (skipping `setSteps`, so no history entry and no redo wipe) when
+ * `fromStepId === toStepId` and the drop resolves back to the token's
+ * current position - finding 2/B5's guard against dropping a token back
+ * exactly where it started. Moving between two different steps is always a
+ * real change (the token relocates either way), so that case skips the
+ * `tokensEqual` check.
+ *
+ * Selection repair after the move - finding 2/B5's fix for the token that
+ * was selected before the move no longer being found under its old step -
+ * comes from `setSteps` now, not from a `repairSelection` call here; see
+ * `repairSelection`'s own comment for the bug it prevents.
+ *
+ * Both step ids are checked against the document before anything is written,
+ * the same property `updateTokenIn` states for its own traversal. The
+ * destination check is the load-bearing one: the map below removes the token
+ * from `fromStepId` in its own branch and re-inserts it in the `toStepId`
+ * branch, so a destination the document doesn't hold ran the removal with no
+ * matching insertion - the token was destroyed, and because a cross-step move
+ * skips the `tokensEqual` guard the destruction was written as a legitimate
+ * undo entry. Both ids reach here from a resolved drop target rather than
+ * from a caller that just read them off the document, so neither is
+ * guaranteed to still name a live step by the time the drop commits.
+ */
+function moveTokenCore(
+  session: DocumentSession,
+  fromStepId: string,
+  tokenId: string,
+  toStepId: string,
+  index: number,
+): void {
+  const fromStep = session.document.value.steps.find((s) => s.id === fromStepId);
+  const token = fromStep?.tokens.find((t) => t.id === tokenId);
+  if (!token) return;
+  if (!session.document.value.steps.some((s) => s.id === toStepId)) return;
+
+  let changed = fromStepId !== toStepId;
+  const steps = session.document.value.steps.map((step) => {
+    if (step.id === fromStepId && step.id === toStepId) {
+      const fromIndex = step.tokens.findIndex((t) => t.id === tokenId);
+      const withoutToken = step.tokens.filter((t) => t.id !== tokenId);
+      const adjustedIndex = adjustIndexForRemoval(fromIndex, index);
+      const tokens = insertToken(withoutToken, token, adjustedIndex);
+      if (!tokensEqual(tokens, step.tokens)) changed = true;
+      return { ...step, tokens };
+    }
+    if (step.id === fromStepId) {
+      return { ...step, tokens: step.tokens.filter((t) => t.id !== tokenId) };
+    }
+    if (step.id === toStepId) {
+      return { ...step, tokens: insertToken(step.tokens, token, index) };
+    }
+    return step;
+  });
+  if (!changed) return;
+
+  setSteps(session, steps);
+}
+
+/** Moves to a destination index measured after removing the source token. */
+function moveTokenToCore(
+  session: DocumentSession,
+  fromStepId: string,
+  tokenId: string,
+  toStepId: string,
+  finalIndex: number,
+): void {
+  const source = session.document.value.steps.find((step) => step.id === fromStepId);
+  const token = source?.tokens.find((item) => item.id === tokenId);
+  const destination = session.document.value.steps.find((step) => step.id === toStepId);
+  if (!source || !token || !destination || Number.isNaN(finalIndex)) return;
+  const remaining = destination.tokens.filter((item) => item.id !== tokenId);
+  const index = Math.max(0, Math.min(Math.trunc(finalIndex), remaining.length));
+  const tokens = insertToken(remaining, token, index);
+  if (source === destination && tokensEqual(tokens, source.tokens)) return;
+  const steps = session.document.value.steps.map((step) => {
+    if (step === destination) return { ...step, tokens };
+    if (step === source) return { ...step, tokens: step.tokens.filter((item) => item.id !== tokenId) };
+    return step;
+  });
+  batch(() => {
+    setSteps(session, steps);
+    selectTokenCore(session, toStepId, tokenId);
+  });
+}
+
+/**
+ * Moves a step from `fromIndex` to `toIndex` - dragging a step's reorder
+ * handle on the canvas (task 9; the standalone StepList panel this
+ * originally served was later folded into InstructionCanvas). `toIndex` is a
+ * pre-removal splice target (see `adjustIndexForRemoval`'s comment), not
+ * "the index it should end up at" - a fact `moveStepUpCore`/`moveStepDownCore`
+ * below exist specifically so no other caller has to rediscover.
+ * `InstructionCanvas.tsx`'s drag handler is the one remaining direct caller,
+ * since its drop index already comes out of `resolveStepDropIndex` in that
+ * same pre-removal convention.
+ *
+ * No-ops (skipping `setSteps`, so no history entry and no redo wipe) when
+ * the drop resolves back to `fromIndex` - finding 2/B5's guard against
+ * dropping a step back exactly where it started. Removing the step at
+ * `fromIndex` and reinserting it at that same index reconstructs the
+ * original order exactly, so `clamped === fromIndex` is a precise stand-in
+ * for a full array-value-equality check, not just an approximation of one.
+ */
+function reorderStepsCore(session: DocumentSession, fromIndex: number, toIndex: number): void {
+  const steps = [...session.document.value.steps];
+  if (fromIndex < 0 || fromIndex >= steps.length) return;
+  const [moved] = steps.splice(fromIndex, 1);
+  const adjustedToIndex = adjustIndexForRemoval(fromIndex, toIndex);
+  const clamped = Math.max(0, Math.min(adjustedToIndex, steps.length));
+  if (clamped === fromIndex) return;
+  steps.splice(clamped, 0, moved);
+  setSteps(session, steps);
+}
+
+/**
+ * Move up/down verbs (task 22's keyboard-operable alternative to dragging a
+ * step) - the seam callers actually want, so they never have to reason
+ * about `reorderStepsCore`'s pre-removal splice-index convention
+ * themselves. A no-op at either end of the list (moving the first step up,
+ * or the last step down) rather than clamping to a no-op reorder -
+ * `InstructionCanvas.tsx` disables the corresponding button at those
+ * positions, but these guard independently in case either is ever called
+ * some other way.
+ */
+function moveStepUpCore(session: DocumentSession, stepId: string): void {
+  const index = session.document.value.steps.findIndex((s) => s.id === stepId);
+  if (index <= 0) return;
+  reorderStepsCore(session, index, index - 1);
+}
+
+/**
+ * Moving one slot *down* means landing just after the next step - which,
+ * expressed as a pre-removal splice target (see `reorderStepsCore`), is two
+ * slots ahead of `index`, not one: removing the moved step first shifts
+ * everything after it back by one, so `index + 1` would land it right back
+ * where it started.
+ */
+function moveStepDownCore(session: DocumentSession, stepId: string): void {
+  const steps = session.document.value.steps;
+  const index = steps.findIndex((s) => s.id === stepId);
+  if (index === -1 || index >= steps.length - 1) return;
+  reorderStepsCore(session, index, index + 2);
+}
+
+/**
+ * Removes a token from a step - the one `updateTokenIn` call that passes
+ * `null` rather than a patch. Like `removeStepCore`, this doesn't touch the
+ * selection itself: `setSteps`' `repairSelection` clears `selectedTokenId`
+ * when the token it names is no longer in the selected step.
+ */
+function removeTokenFromStepCore(session: DocumentSession, stepId: string, tokenId: string): void {
+  updateTokenIn(session, stepId, tokenId, null);
+}
+
+/**
+ * Task 27 (Add Document Title UI): updates `meta.title`, the field every
+ * export filename is derived from (`lib/download.ts`'s `slugify`) -
+ * previously stuck at its creation-time default forever since nothing
+ * wrote to it (see docs/known-issues.md's former "every export downloads
+ * as untitled-instructions" entry). Mirrors `setSteps`'s coalescing but for
+ * `meta` instead of `steps`, since `setSteps` only ever replaces the steps
+ * array.
+ */
+function updateTitleCore(session: DocumentSession, title: string): void {
+  recordHistory(session, true);
+  session.document.value = {
+    ...session.document.value,
+    meta: { ...session.document.value.meta, title },
+  };
+}
+
+function updateStepTitleCore(session: DocumentSession, stepId: string, title: string): void {
+  setSteps(
+    session,
+    session.document.value.steps.map((step) => (step.id === stepId ? { ...step, title } : step)),
+    { coalesce: true },
+  );
+}
+
+function updateStepDescriptionCore(
+  session: DocumentSession,
+  stepId: string,
+  description: string,
+): void {
+  setSteps(
+    session,
+    session.document.value.steps.map((step) =>
+      step.id === stepId ? { ...step, description } : step,
+    ),
+    { coalesce: true },
+  );
+}
+
+function updateTokenLabelCore(
+  session: DocumentSession,
+  stepId: string,
+  tokenId: string,
+  label: string,
+): void {
+  updateTokenIn(session, stepId, tokenId, { label }, { coalesce: true });
+}
+
+function updateTokenNoteCore(
+  session: DocumentSession,
+  stepId: string,
+  tokenId: string,
+  note: string,
+): void {
+  updateTokenIn(session, stepId, tokenId, { note }, { coalesce: true });
+}
+
+/** Attaches `attachment` to a specific token - TokenDetails' click-to-attach path. */
+function attachToTokenCore(
+  session: DocumentSession,
+  stepId: string,
+  tokenId: string,
+  attachment: TokenAttachmentSpec,
+): void {
+  setTokenAttachment(session, stepId, tokenId, attachment.kind, attachment.value);
+}
+
+function removeTokenAttachmentCore(
+  session: DocumentSession,
+  stepId: string,
+  tokenId: string,
+  kind: AttachmentKind,
+): void {
+  setTokenAttachment(session, stepId, tokenId, kind, undefined);
+}
+
+/**
+ * Sets or clears a specific token's own duration - see InstructionToken.time.
+ * The no-op guard this used to be missing now comes from `updateTokenIn`:
+ * re-saving an unchanged Token time records no history entry and leaves redo
+ * alone, matching what the Quantity field beside it already did.
+ */
+function setTokenTimeCore(
+  session: DocumentSession,
+  stepId: string,
+  tokenId: string,
+  time: DurationAttachment | undefined,
+): void {
+  updateTokenIn(session, stepId, tokenId, { time });
+}
+
+/**
+ * Sets or clears a step's own duration estimate - see InstructionStep.time.
+ * The guard is hand-written rather than inherited from a seam because the
+ * step-level traversal is a single `steps.map`, not the nested one
+ * `updateTokenIn` exists to hold - hoisting one line behind an indirection
+ * is what docs/adr/0002 declined. Only the comparator is shared, which that
+ * ADR's revisit clause calls ordinary de-duplication. Without this, Step
+ * time behaved exactly as Token time did before candidate 3: an unchanged
+ * Save pushed an undo entry and wiped redo.
+ */
+function setStepTimeCore(
+  session: DocumentSession,
+  stepId: string,
+  time: DurationAttachment | undefined,
+): void {
+  const current = session.document.value.steps.find((s) => s.id === stepId);
+  if (!current || fieldValuesEqual(current.time, time)) return;
+
+  setSteps(
+    session,
+    session.document.value.steps.map((step) => (step.id === stepId ? { ...step, time } : step)),
+  );
+}
+
+/**
+ * Copies a token into the session's token clipboard (CONTEXT.md) - a full
+ * copy of everything on it (label/note/quantity/warning/time), with a fresh
+ * id so the clipboard always holds a self-contained, valid `InstructionToken`
+ * on its own. Doesn't touch `document`/history/selection - copying isn't a
+ * document mutation.
+ */
+function copyTokenCore(session: DocumentSession, stepId: string, tokenId: string): void {
+  const step = session.document.value.steps.find((s) => s.id === stepId);
+  const token = step?.tokens.find((t) => t.id === tokenId);
+  if (!token) return;
+  session.copiedToken.value = { ...token, id: newId() };
+}
+
+/**
+ * Appends a fresh-id copy of whatever's in the token clipboard onto the
+ * currently selected step - the same "wherever's selected" convention as
+ * `addTokenToSelectedStepCore`, which this delegates to. A no-op if nothing's
+ * been copied yet, or no step is selected. Reuses the clipboard's own token
+ * as-is (deliberately not re-reading it from `document` by id - the source
+ * token may since have been edited or removed, and the clipboard is meant to
+ * paste back what was copied, not "whatever that token currently looks
+ * like"), minting yet another fresh id so repeated pastes never collide.
+ */
+function pasteTokenCore(session: DocumentSession): void {
+  const copied = session.copiedToken.value;
+  if (!copied) return;
+  addTokenToSelectedStepCore(session, { ...copied, id: newId() });
+}
+
+export const sessionActions = {
+  undo: undoCore,
+  redo: redoCore,
+  replaceDocument: replaceDocumentCore,
+  setPresentation: setPresentationCore,
+  selectStep: selectStepCore,
+  selectToken: selectTokenCore,
+  addStep: addStepCore,
+  removeStep: removeStepCore,
+  addTokenToStep: addTokenToStepCore,
+  addTokenToSelectedStep: addTokenToSelectedStepCore,
+  moveToken: moveTokenCore,
+  moveTokenTo: moveTokenToCore,
+  reorderSteps: reorderStepsCore,
+  moveStepUp: moveStepUpCore,
+  moveStepDown: moveStepDownCore,
+  removeTokenFromStep: removeTokenFromStepCore,
+  updateTitle: updateTitleCore,
+  updateStepTitle: updateStepTitleCore,
+  updateStepDescription: updateStepDescriptionCore,
+  updateTokenLabel: updateTokenLabelCore,
+  updateTokenNote: updateTokenNoteCore,
+  attachToToken: attachToTokenCore,
+  removeTokenAttachment: removeTokenAttachmentCore,
+  setTokenTime: setTokenTimeCore,
+  setStepTime: setStepTimeCore,
+  copyToken: copyTokenCore,
+  pasteToken: pasteTokenCore,
+};
+
+type SessionAction = (session: DocumentSession, ...args: never[]) => unknown;
+type BoundSessionActions<T extends Record<string, SessionAction>> = {
+  [K in keyof T]: T[K] extends (session: DocumentSession, ...args: infer A) => infer R
+    ? (...args: A) => R
+    : never;
+};
+
+/** Binds every action in `actions` to `session` as its first argument. */
+function bindActionsToSession<T extends Record<string, SessionAction>>(
+  actions: T,
+  session: DocumentSession,
+): BoundSessionActions<T> {
+  const bound = {} as BoundSessionActions<T>;
+  for (const key in actions) {
+    const action = actions[key];
+    bound[key] = ((...args: unknown[]) =>
+      action(session, ...(args as never[]))) as BoundSessionActions<T>[typeof key];
+  }
+  return bound;
+}
+
+/**
+ * The app's one running document - see `docs/known-issues.md`'s former
+ * "document session tied to module-level singletons" entry (now resolved:
+ * this is the one adapter every existing caller keeps using unchanged; a
+ * test constructs a second, independent one via `createDocumentSession()`
+ * instead of sharing this one).
+ *
+ * Note: `document` below intentionally shadows the DOM's global `document`.
+ * No file in src/ needs both in the same scope today, but if one ever does,
+ * import this one under an alias (e.g. `import { document as doc }`).
+ */
+export const documentSession: DocumentSession = createDocumentSession();
+const defaultSession = documentSession;
+
+export const document = defaultSession.document;
+export const selectedStepId = defaultSession.selectedStepId;
+export const selectedTokenId = defaultSession.selectedTokenId;
+export const copiedToken = defaultSession.copiedToken;
+export const past = defaultSession.past;
+export const future = defaultSession.future;
+export const canUndo = defaultSession.canUndo;
+export const canRedo = defaultSession.canRedo;
+export const selectedStep = defaultSession.selectedStep;
+export const selectedToken = defaultSession.selectedToken;
+
+export const {
+  undo,
+  redo,
+  replaceDocument,
+  setPresentation,
+  selectStep,
+  selectToken,
+  addStep,
+  removeStep,
+  addTokenToStep,
+  addTokenToSelectedStep,
+  moveToken,
+  moveTokenTo,
+  reorderSteps,
+  moveStepUp,
+  moveStepDown,
+  removeTokenFromStep,
+  updateTitle,
+  updateStepTitle,
+  updateStepDescription,
+  updateTokenLabel,
+  updateTokenNote,
+  attachToToken,
+  removeTokenAttachment,
+  setTokenTime,
+  setStepTime,
+  copyToken,
+  pasteToken,
+} = bindActionsToSession(sessionActions, defaultSession);

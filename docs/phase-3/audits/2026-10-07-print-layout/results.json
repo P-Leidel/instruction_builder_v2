@@ -1,0 +1,20 @@
+{
+  "runAt": "2026-10-07T08:05:56.753Z",
+  "checks": {
+    "both_sources_fit": true,
+    "details_do_not_increase_row_spacing": true,
+    "all_eight_main_pictures_once_in_order": true,
+    "details_beside_banana": true,
+    "content_boxes_inside_10mm_padding": true,
+    "svg_nonempty": true,
+    "png_nonempty": true,
+    "pdf_nonempty": true,
+    "preview_explains_10mm_paper_border": true,
+    "fractional_label_sheet_caption_never_overstates_padding": true,
+    "zero_console_and_page_errors": true
+  },
+  "errors": [],
+  "rowSpacingMm": 24.750277777777782,
+  "pages": 1,
+  "practicalAcceptance": "Pending"
+}

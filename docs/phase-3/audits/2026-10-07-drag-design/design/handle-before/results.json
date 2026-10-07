@@ -1,0 +1,25 @@
+{
+  "runAt": "2026-10-07T09:02:16.613Z",
+  "checks": [
+    {
+      "width": 44,
+      "kind": "known",
+      "height": 44,
+      "insidePicture": true,
+      "avoidsContent": true,
+      "handleTouchAction": "none",
+      "pictureTouchAction": "auto"
+    },
+    {
+      "width": 44,
+      "kind": "unknown-picture",
+      "height": 44,
+      "insidePicture": false,
+      "avoidsContent": true,
+      "handleTouchAction": "none",
+      "pictureTouchAction": "auto"
+    }
+  ],
+  "errors": [],
+  "failure": "AssertionError [ERR_ASSERTION]: 320-unknown-picture handle stays within the picture button\n\nfalse !== true\n"
+}

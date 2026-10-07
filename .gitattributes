@@ -1,0 +1,4 @@
+*.pdf binary
+public/fonts/SourceSans3-LICENSE.md -text -whitespace
+# Preserve captured command output, including emitted blank lines, verbatim.
+docs/phase-3/audits/2026-10-06-overhaul/final-verification/*.log -text -whitespace

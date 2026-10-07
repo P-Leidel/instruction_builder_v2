@@ -1,0 +1,8 @@
+{
+  "runAt": "2026-10-07T08:22:48.268Z",
+  "checks": {
+    "file_actions_hidden_until_settings_opened": false
+  },
+  "errors": [],
+  "failure": "AssertionError [ERR_ASSERTION]: file_actions_hidden_until_settings_opened\n\nfalse !== true\n"
+}

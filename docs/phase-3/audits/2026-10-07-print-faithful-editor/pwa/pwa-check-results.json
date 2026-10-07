@@ -1,0 +1,405 @@
+{
+  "runAt": "2026-10-07T10:22:35.288Z",
+  "checks": {
+    "PDF_manifest_reachable": true,
+    "PDF_icons_and_manifest": true,
+    "PDF_font_and_converter_manifest": true,
+    "PDF_complete_cache_before_control": true,
+    "PDF_no_online_output_converter_warmup": true,
+    "PDF_offline_editor_font_from_installed_cache": true,
+    "PDF_guide_survives_offline_reload": true,
+    "PDF_same_selected_preview_sources": true,
+    "PDF_same_selected_semantic_sources": true,
+    "PDF_captured_filename_one_download": true,
+    "PDF_complete_vector_A4": true,
+    "PDF_no_failed_requests": true,
+    "PNG_manifest_reachable": true,
+    "PNG_icons_and_manifest": true,
+    "PNG_font_and_converter_manifest": true,
+    "PNG_complete_cache_before_control": true,
+    "PNG_no_online_output_converter_warmup": true,
+    "PNG_offline_editor_font_from_installed_cache": true,
+    "PNG_guide_survives_offline_reload": true,
+    "PNG_same_selected_preview_sources": true,
+    "PNG_same_selected_semantic_sources": true,
+    "PNG_captured_filename_one_download": true,
+    "PNG_signature_exact_150dpi": true,
+    "PNG_independently_decodes_opaque": true,
+    "PNG_no_failed_requests": true,
+    "SVG_manifest_reachable": true,
+    "SVG_icons_and_manifest": true,
+    "SVG_font_and_converter_manifest": true,
+    "SVG_complete_cache_before_control": true,
+    "SVG_no_online_output_converter_warmup": true,
+    "SVG_offline_editor_font_from_installed_cache": true,
+    "SVG_guide_survives_offline_reload": true,
+    "SVG_same_selected_preview_sources": true,
+    "SVG_same_selected_semantic_sources": true,
+    "SVG_captured_filename_one_download": true,
+    "SVG_portable_exact_content": true,
+    "SVG_no_failed_requests": true,
+    "JSON_manifest_reachable": true,
+    "JSON_icons_and_manifest": true,
+    "JSON_font_and_converter_manifest": true,
+    "JSON_complete_cache_before_control": true,
+    "JSON_no_online_output_converter_warmup": true,
+    "JSON_offline_editor_font_from_installed_cache": true,
+    "JSON_guide_survives_offline_reload": true,
+    "JSON_captured_filename_one_download": true,
+    "JSON_full_editable_independent": true,
+    "JSON_backup_prepares_no_font_or_converter": true,
+    "JSON_no_failed_requests": true,
+    "no_console_or_page_errors": true
+  },
+  "errors": [],
+  "runs": [
+    {
+      "format": "PDF",
+      "loaded": [
+        "/",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/persistence-0xCqpFOx.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/persistence-0xCqpFOx.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/assets/svg2pdf.es.min-DOg7R8vP.js",
+        "/assets/jspdf.es.min-tsWvQROh.js"
+      ],
+      "requestFailures": [],
+      "fontResponses": [
+        {
+          "offline": false,
+          "fromServiceWorker": true,
+          "status": 200
+        },
+        {
+          "offline": true,
+          "fromServiceWorker": true,
+          "status": 200
+        }
+      ],
+      "manifest": {
+        "cacheName": "instruction-builder-v2-6157f4775bfb5dd0",
+        "assets": [
+          "/",
+          "/assets/html2canvas-Bq3NuqJz.js",
+          "/assets/index-BJ-YftkR.css",
+          "/assets/index-DOGpc8q7.js",
+          "/assets/index.es-oBiXhsvU.js",
+          "/assets/jspdf.es.min-tsWvQROh.js",
+          "/assets/persistence-0xCqpFOx.js",
+          "/assets/purify.es-t6o27EpX.js",
+          "/assets/svg2pdf.es.min-DOg7R8vP.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      },
+      "cachedUrls": [
+        "/",
+        "/assets/html2canvas-Bq3NuqJz.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index.es-oBiXhsvU.js",
+        "/assets/jspdf.es.min-tsWvQROh.js",
+        "/assets/persistence-0xCqpFOx.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-DOg7R8vP.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ],
+      "beforeOffline": {
+        "loaded": [
+          "/",
+          "/assets/index-DOGpc8q7.js",
+          "/assets/index-BJ-YftkR.css",
+          "/assets/persistence-0xCqpFOx.js",
+          "/fonts/SourceSans3-Regular-3.052.ttf"
+        ],
+        "fontFaces": 1,
+        "downloads": []
+      },
+      "file": "cold-pdf-guide.pdf",
+      "bytes": 135818
+    },
+    {
+      "format": "PNG",
+      "loaded": [
+        "/",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/persistence-0xCqpFOx.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/persistence-0xCqpFOx.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf"
+      ],
+      "requestFailures": [],
+      "fontResponses": [
+        {
+          "offline": false,
+          "fromServiceWorker": true,
+          "status": 200
+        },
+        {
+          "offline": true,
+          "fromServiceWorker": true,
+          "status": 200
+        }
+      ],
+      "manifest": {
+        "cacheName": "instruction-builder-v2-6157f4775bfb5dd0",
+        "assets": [
+          "/",
+          "/assets/html2canvas-Bq3NuqJz.js",
+          "/assets/index-BJ-YftkR.css",
+          "/assets/index-DOGpc8q7.js",
+          "/assets/index.es-oBiXhsvU.js",
+          "/assets/jspdf.es.min-tsWvQROh.js",
+          "/assets/persistence-0xCqpFOx.js",
+          "/assets/purify.es-t6o27EpX.js",
+          "/assets/svg2pdf.es.min-DOg7R8vP.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      },
+      "cachedUrls": [
+        "/",
+        "/assets/html2canvas-Bq3NuqJz.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index.es-oBiXhsvU.js",
+        "/assets/jspdf.es.min-tsWvQROh.js",
+        "/assets/persistence-0xCqpFOx.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-DOg7R8vP.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ],
+      "beforeOffline": {
+        "loaded": [
+          "/",
+          "/assets/index-DOGpc8q7.js",
+          "/assets/index-BJ-YftkR.css",
+          "/assets/persistence-0xCqpFOx.js",
+          "/fonts/SourceSans3-Regular-3.052.ttf"
+        ],
+        "fontFaces": 1,
+        "downloads": []
+      },
+      "file": "cold-png-guide-page-01-of-01.png",
+      "bytes": 84270,
+      "inspection": {
+        "width": 1240,
+        "height": 1754,
+        "alpha": 255
+      }
+    },
+    {
+      "format": "SVG",
+      "loaded": [
+        "/",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/persistence-0xCqpFOx.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/persistence-0xCqpFOx.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf"
+      ],
+      "requestFailures": [],
+      "fontResponses": [
+        {
+          "offline": false,
+          "fromServiceWorker": true,
+          "status": 200
+        },
+        {
+          "offline": true,
+          "fromServiceWorker": true,
+          "status": 200
+        }
+      ],
+      "manifest": {
+        "cacheName": "instruction-builder-v2-6157f4775bfb5dd0",
+        "assets": [
+          "/",
+          "/assets/html2canvas-Bq3NuqJz.js",
+          "/assets/index-BJ-YftkR.css",
+          "/assets/index-DOGpc8q7.js",
+          "/assets/index.es-oBiXhsvU.js",
+          "/assets/jspdf.es.min-tsWvQROh.js",
+          "/assets/persistence-0xCqpFOx.js",
+          "/assets/purify.es-t6o27EpX.js",
+          "/assets/svg2pdf.es.min-DOg7R8vP.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      },
+      "cachedUrls": [
+        "/",
+        "/assets/html2canvas-Bq3NuqJz.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index.es-oBiXhsvU.js",
+        "/assets/jspdf.es.min-tsWvQROh.js",
+        "/assets/persistence-0xCqpFOx.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-DOg7R8vP.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ],
+      "beforeOffline": {
+        "loaded": [
+          "/",
+          "/assets/index-DOGpc8q7.js",
+          "/assets/index-BJ-YftkR.css",
+          "/assets/persistence-0xCqpFOx.js",
+          "/fonts/SourceSans3-Regular-3.052.ttf"
+        ],
+        "fontFaces": 1,
+        "downloads": []
+      },
+      "file": "cold-svg-guide-page-01-of-01.svg",
+      "bytes": 63774,
+      "inspection": {
+        "width": "210mm",
+        "height": "297mm",
+        "ids": [
+          "cold-kitchen",
+          "cold-routines",
+          "cold-learning"
+        ],
+        "texts": [
+          "Cold SVG guide",
+          "Total time: 1m",
+          "Step 1: Three libraries",
+          "1m",
+          "Chop",
+          "2 kg",
+          "Sharp",
+          "Wash hands",
+          "Count"
+        ],
+        "forbidden": 0
+      }
+    },
+    {
+      "format": "JSON",
+      "loaded": [
+        "/",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/persistence-0xCqpFOx.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/persistence-0xCqpFOx.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf"
+      ],
+      "requestFailures": [],
+      "fontResponses": [
+        {
+          "offline": false,
+          "fromServiceWorker": true,
+          "status": 200
+        },
+        {
+          "offline": true,
+          "fromServiceWorker": true,
+          "status": 200
+        }
+      ],
+      "manifest": {
+        "cacheName": "instruction-builder-v2-6157f4775bfb5dd0",
+        "assets": [
+          "/",
+          "/assets/html2canvas-Bq3NuqJz.js",
+          "/assets/index-BJ-YftkR.css",
+          "/assets/index-DOGpc8q7.js",
+          "/assets/index.es-oBiXhsvU.js",
+          "/assets/jspdf.es.min-tsWvQROh.js",
+          "/assets/persistence-0xCqpFOx.js",
+          "/assets/purify.es-t6o27EpX.js",
+          "/assets/svg2pdf.es.min-DOg7R8vP.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      },
+      "cachedUrls": [
+        "/",
+        "/assets/html2canvas-Bq3NuqJz.js",
+        "/assets/index-BJ-YftkR.css",
+        "/assets/index-DOGpc8q7.js",
+        "/assets/index.es-oBiXhsvU.js",
+        "/assets/jspdf.es.min-tsWvQROh.js",
+        "/assets/persistence-0xCqpFOx.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-DOg7R8vP.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ],
+      "beforeOffline": {
+        "loaded": [
+          "/",
+          "/assets/index-DOGpc8q7.js",
+          "/assets/index-BJ-YftkR.css",
+          "/assets/persistence-0xCqpFOx.js",
+          "/fonts/SourceSans3-Regular-3.052.ttf"
+        ],
+        "fontFaces": 1,
+        "downloads": []
+      },
+      "file": "cold-json-guide.json",
+      "bytes": 1177
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "runAt": "2026-10-07T09:04:28.345Z",
+  "browser": "153.0.8010.12",
+  "manifests": {
+    "old": {
+      "cacheName": "instruction-builder-v2-1bbbf24e43a22be2",
+      "assets": [
+        "/",
+        "/assets/html2canvas-IslQNZy8.js",
+        "/assets/index-CVrgye2J.js",
+        "/assets/index-DlL7nbOG.css",
+        "/assets/index.es-CTBBLg1w.js",
+        "/assets/jspdf.es.min-CaBlHOYG.js",
+        "/assets/persistence-DrWjppAb.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-B84vrmhP.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ]
+    },
+    "new": {
+      "cacheName": "instruction-builder-v2-071e2abf894cdc57",
+      "assets": [
+        "/",
+        "/assets/html2canvas-BKE4yrbt.js",
+        "/assets/index-BZ2qpnDy.js",
+        "/assets/index-DlL7nbOG.css",
+        "/assets/index.es-C7K1D244.js",
+        "/assets/jspdf.es.min-Bc3fBR6e.js",
+        "/assets/persistence-CgUCMaq9.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-Cn6lcOWW.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ]
+    }
+  },
+  "waitingObservationMs": 509,
+  "waiting": {
+    "state": "installed",
+    "sameController": true,
+    "caches": [
+      "instruction-builder-v2-1bbbf24e43a22be2",
+      "other-product-actual-update",
+      "instruction-builder-v2-071e2abf894cdc57"
+    ]
+  },
+  "activeCaches": [
+    "other-product-actual-update",
+    "instruction-builder-v2-071e2abf894cdc57"
+  ],
+  "requests": [
+    {
+      "version": "old",
+      "pathname": "/"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/index-CVrgye2J.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/index-DlL7nbOG.css"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/persistence-DrWjppAb.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/sw.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/offline-assets.json"
+    },
+    {
+      "version": "old",
+      "pathname": "/"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/html2canvas-IslQNZy8.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/index-CVrgye2J.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/index-DlL7nbOG.css"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/index.es-CTBBLg1w.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/jspdf.es.min-CaBlHOYG.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/persistence-DrWjppAb.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/purify.es-t6o27EpX.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/assets/svg2pdf.es.min-B84vrmhP.js"
+    },
+    {
+      "version": "old",
+      "pathname": "/fonts/SourceSans3-LICENSE.md"
+    },
+    {
+      "version": "old",
+      "pathname": "/fonts/SourceSans3-Regular-3.052.ttf"
+    },
+    {
+      "version": "old",
+      "pathname": "/icons/favicon.svg"
+    },
+    {
+      "version": "old",
+      "pathname": "/icons/icon-192.png"
+    },
+    {
+      "version": "old",
+      "pathname": "/icons/icon-512.png"
+    },
+    {
+      "version": "old",
+      "pathname": "/icons/icon-maskable-512.png"
+    },
+    {
+      "version": "old",
+      "pathname": "/manifest.webmanifest"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/jspdf.es.min-CaBlHOYG.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/sw.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/offline-assets.json"
+    },
+    {
+      "version": "new",
+      "pathname": "/"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/html2canvas-BKE4yrbt.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/index-BZ2qpnDy.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/index-DlL7nbOG.css"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/index.es-C7K1D244.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/jspdf.es.min-Bc3fBR6e.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/persistence-CgUCMaq9.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/purify.es-t6o27EpX.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/assets/svg2pdf.es.min-Cn6lcOWW.js"
+    },
+    {
+      "version": "new",
+      "pathname": "/fonts/SourceSans3-LICENSE.md"
+    },
+    {
+      "version": "new",
+      "pathname": "/fonts/SourceSans3-Regular-3.052.ttf"
+    },
+    {
+      "version": "new",
+      "pathname": "/icons/favicon.svg"
+    },
+    {
+      "version": "new",
+      "pathname": "/icons/icon-192.png"
+    },
+    {
+      "version": "new",
+      "pathname": "/icons/icon-512.png"
+    },
+    {
+      "version": "new",
+      "pathname": "/icons/icon-maskable-512.png"
+    },
+    {
+      "version": "new",
+      "pathname": "/manifest.webmanifest"
+    },
+    {
+      "version": "new",
+      "pathname": "/"
+    }
+  ],
+  "runs": [
+    {
+      "version": "old",
+      "beforeOutput": {
+        "loaded": [
+          "/",
+          "/assets/index-CVrgye2J.js",
+          "/assets/index-DlL7nbOG.css",
+          "/assets/persistence-DrWjppAb.js"
+        ],
+        "fontFaces": 0
+      },
+      "filename": "waiting-update-guide.pdf",
+      "bytes": 199198,
+      "sourceIds": [
+        "update-kitchen",
+        "update-routine",
+        "update-learning"
+      ],
+      "vectorPages": 1,
+      "noServerRequests": true,
+      "afterOutputLoaded": [
+        "/",
+        "/assets/index-CVrgye2J.js",
+        "/assets/index-DlL7nbOG.css",
+        "/assets/persistence-DrWjppAb.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/assets/svg2pdf.es.min-B84vrmhP.js",
+        "/assets/jspdf.es.min-CaBlHOYG.js"
+      ]
+    },
+    {
+      "version": "new",
+      "beforeOutput": {
+        "loaded": [
+          "/",
+          "/assets/index-BZ2qpnDy.js",
+          "/assets/index-DlL7nbOG.css",
+          "/assets/persistence-CgUCMaq9.js"
+        ],
+        "fontFaces": 0
+      },
+      "filename": "waiting-update-guide.pdf",
+      "bytes": 199198,
+      "sourceIds": [
+        "update-kitchen",
+        "update-routine",
+        "update-learning"
+      ],
+      "vectorPages": 1,
+      "noServerRequests": true,
+      "afterOutputLoaded": [
+        "/",
+        "/assets/index-BZ2qpnDy.js",
+        "/assets/index-DlL7nbOG.css",
+        "/assets/persistence-CgUCMaq9.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/assets/svg2pdf.es.min-Cn6lcOWW.js",
+        "/assets/jspdf.es.min-Bc3fBR6e.js"
+      ]
+    }
+  ],
+  "failures": [],
+  "errors": [],
+  "oldConverterUnavailableAtServer": true,
+  "oldCacheRemovedOnlyAfterLastClientClosed": true
+}

@@ -1,0 +1,702 @@
+[
+  {
+    "id": "action.chop",
+    "en": "Chop",
+    "de": "Hacken"
+  },
+  {
+    "id": "action.slice",
+    "en": "Slice",
+    "de": "In Scheiben schneiden"
+  },
+  {
+    "id": "action.stir",
+    "en": "Stir",
+    "de": "Rühren"
+  },
+  {
+    "id": "action.whisk",
+    "en": "Whisk",
+    "de": "Verquirlen"
+  },
+  {
+    "id": "action.mix",
+    "en": "Mix",
+    "de": "Mischen"
+  },
+  {
+    "id": "action.knead",
+    "en": "Knead",
+    "de": "Kneten"
+  },
+  {
+    "id": "action.bake",
+    "en": "Bake",
+    "de": "Backen"
+  },
+  {
+    "id": "action.fry",
+    "en": "Fry",
+    "de": "Braten"
+  },
+  {
+    "id": "action.roast",
+    "en": "Roast",
+    "de": "Rösten"
+  },
+  {
+    "id": "action.boil",
+    "en": "Boil",
+    "de": "Kochen"
+  },
+  {
+    "id": "action.simmer",
+    "en": "Simmer",
+    "de": "Köcheln"
+  },
+  {
+    "id": "action.steam",
+    "en": "Steam",
+    "de": "Dämpfen"
+  },
+  {
+    "id": "action.pour",
+    "en": "Pour",
+    "de": "Gießen"
+  },
+  {
+    "id": "action.drain",
+    "en": "Drain",
+    "de": "Abgießen"
+  },
+  {
+    "id": "action.rinse",
+    "en": "Rinse",
+    "de": "Abspülen"
+  },
+  {
+    "id": "action.chill",
+    "en": "Chill",
+    "de": "Kühlen"
+  },
+  {
+    "id": "action.freeze",
+    "en": "Freeze",
+    "de": "Einfrieren"
+  },
+  {
+    "id": "action.serve",
+    "en": "Serve",
+    "de": "Servieren"
+  },
+  {
+    "id": "action.add",
+    "en": "Add",
+    "de": "Hinzufügen"
+  },
+  {
+    "id": "action.remove",
+    "en": "Remove",
+    "de": "Entfernen"
+  },
+  {
+    "id": "action.wait",
+    "en": "Wait",
+    "de": "Warten"
+  },
+  {
+    "id": "action.turn",
+    "en": "Turn",
+    "de": "Drehen"
+  },
+  {
+    "id": "action.attach",
+    "en": "Attach",
+    "de": "Befestigen"
+  },
+  {
+    "id": "action.detach",
+    "en": "Detach",
+    "de": "Lösen"
+  },
+  {
+    "id": "action.repeat",
+    "en": "Repeat",
+    "de": "Wiederholen"
+  },
+  {
+    "id": "action.measure",
+    "en": "Measure",
+    "de": "Messen"
+  },
+  {
+    "id": "action.open",
+    "en": "Open",
+    "de": "Öffnen"
+  },
+  {
+    "id": "action.close",
+    "en": "Close",
+    "de": "Schließen"
+  },
+  {
+    "id": "action.check",
+    "en": "Check",
+    "de": "Prüfen"
+  },
+  {
+    "id": "action.adjust",
+    "en": "Adjust",
+    "de": "Einstellen"
+  },
+  {
+    "id": "object.onion",
+    "en": "Onion",
+    "de": "Zwiebel"
+  },
+  {
+    "id": "object.garlic",
+    "en": "Garlic",
+    "de": "Knoblauch"
+  },
+  {
+    "id": "object.egg",
+    "en": "Egg",
+    "de": "Ei"
+  },
+  {
+    "id": "object.flour",
+    "en": "Flour",
+    "de": "Mehl"
+  },
+  {
+    "id": "object.water",
+    "en": "Water",
+    "de": "Wasser"
+  },
+  {
+    "id": "object.apple",
+    "en": "Apple",
+    "de": "Apfel"
+  },
+  {
+    "id": "object.banana",
+    "en": "Banana",
+    "de": "Banane"
+  },
+  {
+    "id": "object.grape",
+    "en": "Grape",
+    "de": "Traube"
+  },
+  {
+    "id": "object.citrus",
+    "en": "Citrus",
+    "de": "Zitrusfrucht"
+  },
+  {
+    "id": "object.tomato",
+    "en": "Tomato",
+    "de": "Tomate"
+  },
+  {
+    "id": "object.potato",
+    "en": "Potato",
+    "de": "Kartoffel"
+  },
+  {
+    "id": "object.leafy-green",
+    "en": "Leafy Greens",
+    "de": "Blattgemüse"
+  },
+  {
+    "id": "object.herbs",
+    "en": "Herbs",
+    "de": "Kräuter"
+  },
+  {
+    "id": "object.beef",
+    "en": "Beef",
+    "de": "Rindfleisch"
+  },
+  {
+    "id": "object.fish",
+    "en": "Fish",
+    "de": "Fisch"
+  },
+  {
+    "id": "object.beans",
+    "en": "Beans",
+    "de": "Bohnen"
+  },
+  {
+    "id": "object.nuts",
+    "en": "Nuts",
+    "de": "Nüsse"
+  },
+  {
+    "id": "object.milk",
+    "en": "Milk",
+    "de": "Milch"
+  },
+  {
+    "id": "object.cheese",
+    "en": "Cheese",
+    "de": "Käse"
+  },
+  {
+    "id": "object.oil",
+    "en": "Oil",
+    "de": "Öl"
+  },
+  {
+    "id": "object.bread",
+    "en": "Bread",
+    "de": "Brot"
+  },
+  {
+    "id": "object.wine",
+    "en": "Wine",
+    "de": "Wein"
+  },
+  {
+    "id": "object.coffee",
+    "en": "Coffee",
+    "de": "Kaffee"
+  },
+  {
+    "id": "object.soup",
+    "en": "Soup",
+    "de": "Suppe"
+  },
+  {
+    "id": "object.ice",
+    "en": "Ice",
+    "de": "Eis"
+  },
+  {
+    "id": "object.salt",
+    "en": "Salt",
+    "de": "Salz"
+  },
+  {
+    "id": "object.pepper",
+    "en": "Pepper",
+    "de": "Pfeffer"
+  },
+  {
+    "id": "object.sugar",
+    "en": "Sugar",
+    "de": "Zucker"
+  },
+  {
+    "id": "object.cherry",
+    "en": "Cherry",
+    "de": "Kirsche"
+  },
+  {
+    "id": "object.chicken",
+    "en": "Chicken",
+    "de": "Hähnchen"
+  },
+  {
+    "id": "object.ham",
+    "en": "Ham",
+    "de": "Schinken"
+  },
+  {
+    "id": "object.wheat",
+    "en": "Wheat",
+    "de": "Weizen"
+  },
+  {
+    "id": "object.rice",
+    "en": "Rice",
+    "de": "Reis"
+  },
+  {
+    "id": "object.pasta",
+    "en": "Pasta",
+    "de": "Nudeln"
+  },
+  {
+    "id": "object.butter",
+    "en": "Butter",
+    "de": "Butter"
+  },
+  {
+    "id": "object.honey",
+    "en": "Honey",
+    "de": "Honig"
+  },
+  {
+    "id": "object.chocolate",
+    "en": "Chocolate",
+    "de": "Schokolade"
+  },
+  {
+    "id": "object.mushroom",
+    "en": "Mushroom",
+    "de": "Pilz"
+  },
+  {
+    "id": "object.corn",
+    "en": "Corn",
+    "de": "Mais"
+  },
+  {
+    "id": "object.avocado",
+    "en": "Avocado",
+    "de": "Avocado"
+  },
+  {
+    "id": "object.cucumber",
+    "en": "Cucumber",
+    "de": "Gurke"
+  },
+  {
+    "id": "object.cabbage",
+    "en": "Cabbage",
+    "de": "Kohl"
+  },
+  {
+    "id": "object.yogurt",
+    "en": "Yogurt",
+    "de": "Joghurt"
+  },
+  {
+    "id": "tool.pan",
+    "en": "Pan",
+    "de": "Pfanne"
+  },
+  {
+    "id": "tool.knife",
+    "en": "Knife",
+    "de": "Messer"
+  },
+  {
+    "id": "tool.oven",
+    "en": "Oven",
+    "de": "Backofen"
+  },
+  {
+    "id": "tool.blender",
+    "en": "Blender",
+    "de": "Mixer"
+  },
+  {
+    "id": "tool.fridge",
+    "en": "Fridge",
+    "de": "Kühlschrank"
+  },
+  {
+    "id": "tool.scale",
+    "en": "Scale",
+    "de": "Waage"
+  },
+  {
+    "id": "tool.timer",
+    "en": "Timer",
+    "de": "Timer"
+  },
+  {
+    "id": "tool.thermometer",
+    "en": "Thermometer",
+    "de": "Thermometer"
+  },
+  {
+    "id": "tool.container",
+    "en": "Container",
+    "de": "Behälter"
+  },
+  {
+    "id": "warning.hot",
+    "en": "Hot!",
+    "de": "Heiß!"
+  },
+  {
+    "id": "warning.sharp",
+    "en": "Sharp!",
+    "de": "Scharf!"
+  },
+  {
+    "id": "routines.action.wash-hands",
+    "en": "Wash hands",
+    "de": "Hände waschen"
+  },
+  {
+    "id": "routines.action.brush-teeth",
+    "en": "Brush teeth",
+    "de": "Zähne putzen"
+  },
+  {
+    "id": "routines.action.dress",
+    "en": "Get dressed",
+    "de": "Anziehen"
+  },
+  {
+    "id": "routines.action.eat",
+    "en": "Eat",
+    "de": "Essen"
+  },
+  {
+    "id": "routines.action.drink",
+    "en": "Drink",
+    "de": "Trinken"
+  },
+  {
+    "id": "routines.action.use-toilet",
+    "en": "Use toilet",
+    "de": "Zur Toilette gehen"
+  },
+  {
+    "id": "routines.action.rest",
+    "en": "Rest",
+    "de": "Ausruhen"
+  },
+  {
+    "id": "routines.action.clean-surface",
+    "en": "Clean surface",
+    "de": "Fläche reinigen"
+  },
+  {
+    "id": "routines.action.put-away",
+    "en": "Put away",
+    "de": "Wegräumen"
+  },
+  {
+    "id": "routines.action.collect",
+    "en": "Collect items",
+    "de": "Dinge sammeln"
+  },
+  {
+    "id": "routines.action.carry",
+    "en": "Carry",
+    "de": "Tragen"
+  },
+  {
+    "id": "routines.action.bin-waste",
+    "en": "Bin waste",
+    "de": "Abfall entsorgen"
+  },
+  {
+    "id": "routines.object.soap",
+    "en": "Soap",
+    "de": "Seife"
+  },
+  {
+    "id": "routines.object.towel",
+    "en": "Towel",
+    "de": "Handtuch"
+  },
+  {
+    "id": "routines.object.toothbrush",
+    "en": "Toothbrush",
+    "de": "Zahnbürste"
+  },
+  {
+    "id": "routines.object.clothes",
+    "en": "Clothes",
+    "de": "Kleidung"
+  },
+  {
+    "id": "routines.object.cup",
+    "en": "Cup",
+    "de": "Becher"
+  },
+  {
+    "id": "routines.object.plate",
+    "en": "Plate",
+    "de": "Teller"
+  },
+  {
+    "id": "routines.object.chair",
+    "en": "Chair",
+    "de": "Stuhl"
+  },
+  {
+    "id": "routines.object.bed",
+    "en": "Bed",
+    "de": "Bett"
+  },
+  {
+    "id": "routines.tool.cleaning-cloth",
+    "en": "Cleaning cloth",
+    "de": "Putztuch"
+  },
+  {
+    "id": "routines.tool.gloves",
+    "en": "Gloves",
+    "de": "Handschuhe"
+  },
+  {
+    "id": "routines.object.bin",
+    "en": "Bin",
+    "de": "Mülleimer"
+  },
+  {
+    "id": "routines.object.toilet",
+    "en": "Toilet",
+    "de": "Toilette"
+  },
+  {
+    "id": "learning.action.read",
+    "en": "Read",
+    "de": "Lesen"
+  },
+  {
+    "id": "learning.action.write",
+    "en": "Write",
+    "de": "Schreiben"
+  },
+  {
+    "id": "learning.action.draw",
+    "en": "Draw",
+    "de": "Zeichnen"
+  },
+  {
+    "id": "learning.action.paint",
+    "en": "Paint",
+    "de": "Malen"
+  },
+  {
+    "id": "learning.action.cut",
+    "en": "Cut",
+    "de": "Schneiden"
+  },
+  {
+    "id": "learning.action.glue",
+    "en": "Glue",
+    "de": "Kleben"
+  },
+  {
+    "id": "learning.action.listen",
+    "en": "Listen",
+    "de": "Zuhören"
+  },
+  {
+    "id": "learning.action.speak",
+    "en": "Speak",
+    "de": "Sprechen"
+  },
+  {
+    "id": "learning.action.choose",
+    "en": "Choose",
+    "de": "Wählen"
+  },
+  {
+    "id": "learning.action.count",
+    "en": "Count",
+    "de": "Zählen"
+  },
+  {
+    "id": "learning.action.play",
+    "en": "Play",
+    "de": "Spielen"
+  },
+  {
+    "id": "learning.action.tidy",
+    "en": "Tidy",
+    "de": "Aufräumen"
+  },
+  {
+    "id": "learning.object.book",
+    "en": "Book",
+    "de": "Buch"
+  },
+  {
+    "id": "learning.tool.pencil",
+    "en": "Pencil",
+    "de": "Bleistift"
+  },
+  {
+    "id": "learning.object.paper",
+    "en": "Paper",
+    "de": "Papier"
+  },
+  {
+    "id": "learning.tool.scissors",
+    "en": "Scissors",
+    "de": "Schere"
+  },
+  {
+    "id": "learning.tool.glue",
+    "en": "Glue stick",
+    "de": "Klebestift"
+  },
+  {
+    "id": "learning.tool.paintbrush",
+    "en": "Paintbrush",
+    "de": "Pinsel"
+  },
+  {
+    "id": "learning.object.blocks",
+    "en": "Blocks",
+    "de": "Bauklötze"
+  },
+  {
+    "id": "learning.object.desk",
+    "en": "Desk",
+    "de": "Tisch"
+  },
+  {
+    "id": "learning.object.bag",
+    "en": "Bag",
+    "de": "Tasche"
+  },
+  {
+    "id": "learning.object.ball",
+    "en": "Ball",
+    "de": "Ball"
+  },
+  {
+    "id": "learning.object.puzzle",
+    "en": "Puzzle",
+    "de": "Puzzle"
+  },
+  {
+    "id": "learning.object.quiet-space",
+    "en": "Quiet space",
+    "de": "Ruheplatz"
+  },
+  {
+    "id": "shared.action.yes",
+    "en": "Yes",
+    "de": "Ja"
+  },
+  {
+    "id": "shared.action.no",
+    "en": "No",
+    "de": "Nein"
+  },
+  {
+    "id": "shared.action.more",
+    "en": "More",
+    "de": "Mehr"
+  },
+  {
+    "id": "shared.action.finished",
+    "en": "Finished",
+    "de": "Fertig"
+  },
+  {
+    "id": "shared.action.help",
+    "en": "Help",
+    "de": "Hilfe"
+  },
+  {
+    "id": "shared.action.stop",
+    "en": "Stop",
+    "de": "Stopp"
+  },
+  {
+    "id": "quantity.amount",
+    "en": "Quantity",
+    "de": "Menge"
+  },
+  {
+    "id": "time.duration",
+    "en": "Time",
+    "de": "Zeit"
+  }
+]

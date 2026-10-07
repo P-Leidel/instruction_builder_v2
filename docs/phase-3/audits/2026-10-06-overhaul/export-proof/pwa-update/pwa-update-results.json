@@ -1,0 +1,18 @@
+{
+  "runAt": "2026-10-06T15:56:27.485Z",
+  "browser": "153.0.8010.12",
+  "waitingAcrossObservation": true,
+  "oldColdLazyAndFontOffline": true,
+  "newColdLazyAndFontOffline": true,
+  "otherProductCacheRetained": true,
+  "pendingCaches": [
+    "instruction-builder-v2-update-fixture-old",
+    "other-product-fixture",
+    "instruction-builder-v2-update-fixture-new"
+  ],
+  "activeCaches": [
+    "other-product-fixture",
+    "instruction-builder-v2-update-fixture-new"
+  ],
+  "errors": []
+}

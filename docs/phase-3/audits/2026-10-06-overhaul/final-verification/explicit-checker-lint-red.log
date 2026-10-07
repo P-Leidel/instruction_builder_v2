@@ -1,0 +1,20 @@
+
+D:\worktrees\8f23\instruction_builder\.claude\skills\run-instruction-builder\driver.mjs
+   2:8    warning  'assert' is defined but never used  @typescript-eslint/no-unused-vars
+   8:13   error    'process' is not defined            no-undef
+   8:42   error    'process' is not defined            no-undef
+  74:170  error    'Buffer' is not defined             no-undef
+
+D:\worktrees\8f23\instruction_builder\.claude\skills\run-instruction-builder\reliability-check.mjs
+  6:13  error  'process' is not defined  no-undef
+
+D:\worktrees\8f23\instruction_builder\.claude\skills\run-instruction-builder\responsive-editor-check.mjs
+   8:29  error  'process' is not defined  no-undef
+  11:13  error  'process' is not defined  no-undef
+
+D:\worktrees\8f23\instruction_builder\.claude\skills\run-instruction-builder\review-check.mjs
+  8:13  error  'process' is not defined  no-undef
+  8:42  error  'process' is not defined  no-undef
+
+✖ 9 problems (8 errors, 1 warning)
+

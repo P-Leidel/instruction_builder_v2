@@ -1,0 +1,6052 @@
+{
+  "dpi": 150,
+  "maximumAllowedEdgeDeltaPixels": 2,
+  "comparisons": [
+    {
+      "fixture": "workplace",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Prepare the workplace",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              2,
+              17,
+              275,
+              44
+            ],
+            "svg-independent": [
+              2,
+              17,
+              275,
+              44
+            ],
+            "pdf-independent": [
+              2,
+              17,
+              275,
+              44
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Wash hands",
+          "role": "heading",
+          "source": {
+            "stepId": "group-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              261,
+              39
+            ],
+            "svg-independent": [
+              2,
+              18,
+              261,
+              39
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              261,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Wash hands",
+          "role": "label",
+          "source": {
+            "stepId": "group-0",
+            "tokenId": "picture-0-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              104,
+              28
+            ],
+            "svg-independent": [
+              1,
+              12,
+              104,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              104,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Soap",
+          "role": "label",
+          "source": {
+            "stepId": "group-0",
+            "tokenId": "workplace-soap"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              44,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              44,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              44,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 2: Prepare vegetables",
+          "role": "heading",
+          "source": {
+            "stepId": "group-1"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              349,
+              45
+            ],
+            "svg-independent": [
+              1,
+              18,
+              349,
+              46
+            ],
+            "pdf-independent": [
+              1,
+              18,
+              349,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop onion",
+          "role": "label",
+          "source": {
+            "stepId": "group-1",
+            "tokenId": "picture-1-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              99,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              99,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              99,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 3: Store food",
+          "role": "heading",
+          "source": {
+            "stepId": "group-2"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              17,
+              241,
+              39
+            ],
+            "svg-independent": [
+              1,
+              17,
+              241,
+              39
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              241,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Food container",
+          "role": "label",
+          "source": {
+            "stepId": "group-2",
+            "tokenId": "picture-2-0"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              132,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              133,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              133,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    },
+    {
+      "fixture": "routine",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Get ready",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              1,
+              17,
+              117,
+              44
+            ],
+            "svg-independent": [
+              1,
+              17,
+              117,
+              44
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              117,
+              44
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Wash hands",
+          "role": "heading",
+          "source": {
+            "stepId": "group-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              261,
+              39
+            ],
+            "svg-independent": [
+              2,
+              18,
+              261,
+              39
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              261,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Wash hands",
+          "role": "label",
+          "source": {
+            "stepId": "group-0",
+            "tokenId": "routine-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              104,
+              28
+            ],
+            "svg-independent": [
+              1,
+              12,
+              104,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              104,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 2: Brush teeth",
+          "role": "heading",
+          "source": {
+            "stepId": "group-1"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              255,
+              39
+            ],
+            "svg-independent": [
+              1,
+              18,
+              255,
+              39
+            ],
+            "pdf-independent": [
+              1,
+              18,
+              255,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Brush teeth",
+          "role": "label",
+          "source": {
+            "stepId": "group-1",
+            "tokenId": "routine-1"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              100,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              100,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              100,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 3: Get dressed",
+          "role": "heading",
+          "source": {
+            "stepId": "group-2"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              17,
+              257,
+              39
+            ],
+            "svg-independent": [
+              1,
+              17,
+              257,
+              39
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              257,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Get dressed",
+          "role": "label",
+          "source": {
+            "stepId": "group-2",
+            "tokenId": "routine-2"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              101,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              101,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              101,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        }
+      ]
+    },
+    {
+      "fixture": "required-labels",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "\u00c4pfel, \u00d6l und Stra\u00dfe \u2014 Cr\u00e8me br\u00fbl\u00e9e",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "svg-independent": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "pdf-independent": [
+              0,
+              14,
+              442,
+              44
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Gesamtzeit: 1m",
+          "role": "time",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "svg-independent": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              120,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Gr\u00f6\u00dfe pr\u00fcfen",
+          "role": "heading",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "svg-independent": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              275,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              2,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Zwiebel <script> & \u00d6l",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              182,
+              32
+            ],
+            "svg-independent": [
+              1,
+              11,
+              182,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              182,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "2 kg",
+          "role": "quantity",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              32,
+              29
+            ],
+            "svg-independent": [
+              1,
+              11,
+              32,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              32,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Warnung: Scharfes Messer",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              0,
+              11,
+              205,
+              30
+            ],
+            "svg-independent": [
+              0,
+              12,
+              205,
+              30
+            ],
+            "pdf-independent": [
+              0,
+              11,
+              205,
+              30
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Messer",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              14,
+              61,
+              28
+            ],
+            "svg-independent": [
+              2,
+              14,
+              61,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              14,
+              61,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Warnung: Unbekannte Warnung ",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              251,
+              29
+            ],
+            "svg-independent": [
+              1,
+              11,
+              251,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              251,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "(constructor)",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              11,
+              102,
+              28
+            ],
+            "svg-independent": [
+              2,
+              11,
+              102,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              11,
+              102,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        }
+      ]
+    },
+    {
+      "fixture": "required-pictures",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "\u00c4pfel, \u00d6l und Stra\u00dfe \u2014 Cr\u00e8me br\u00fbl\u00e9e",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "svg-independent": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "pdf-independent": [
+              0,
+              14,
+              442,
+              44
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Gesamtzeit: 1m",
+          "role": "time",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "svg-independent": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              120,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Gr\u00f6\u00dfe pr\u00fcfen",
+          "role": "heading",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "svg-independent": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              275,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              2,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "2 kg",
+          "role": "quantity",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              32,
+              29
+            ],
+            "svg-independent": [
+              1,
+              11,
+              32,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              32,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Warnung: Scharfes Messer",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              0,
+              12,
+              205,
+              30
+            ],
+            "svg-independent": [
+              0,
+              12,
+              205,
+              30
+            ],
+            "pdf-independent": [
+              0,
+              12,
+              205,
+              30
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Warnung: Unbekannte Warnung ",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              251,
+              29
+            ],
+            "svg-independent": [
+              1,
+              11,
+              251,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              251,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "(constructor)",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              12,
+              102,
+              28
+            ],
+            "svg-independent": [
+              2,
+              12,
+              102,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              102,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    },
+    {
+      "fixture": "required-detailed",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "\u00c4pfel, \u00d6l und Stra\u00dfe \u2014 Cr\u00e8me br\u00fbl\u00e9e",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "svg-independent": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "pdf-independent": [
+              0,
+              14,
+              442,
+              44
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Gesamtzeit: 1m",
+          "role": "time",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "svg-independent": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              120,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Gr\u00f6\u00dfe pr\u00fcfen",
+          "role": "heading",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "svg-independent": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              275,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Diese Beschreibung bleibt in Detailed.",
+          "role": "description",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              11,
+              295,
+              29
+            ],
+            "svg-independent": [
+              2,
+              11,
+              295,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              295,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Zwiebel <script> & \u00d6l",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              10,
+              182,
+              32
+            ],
+            "svg-independent": [
+              1,
+              10,
+              182,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              10,
+              182,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Vorsichtig schneiden.",
+          "role": "note",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              0,
+              11,
+              166,
+              29
+            ],
+            "svg-independent": [
+              0,
+              11,
+              166,
+              29
+            ],
+            "pdf-independent": [
+              0,
+              11,
+              166,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "2 kg",
+          "role": "quantity",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              32,
+              30
+            ],
+            "svg-independent": [
+              1,
+              12,
+              32,
+              30
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              32,
+              30
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Warnung: Scharfes Messer",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              0,
+              11,
+              205,
+              29
+            ],
+            "svg-independent": [
+              0,
+              11,
+              205,
+              29
+            ],
+            "pdf-independent": [
+              0,
+              11,
+              205,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              2,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Messer",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              14,
+              61,
+              28
+            ],
+            "svg-independent": [
+              2,
+              14,
+              61,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              14,
+              61,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Warnung: Unbekannte Warnung ",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              251,
+              29
+            ],
+            "svg-independent": [
+              1,
+              11,
+              251,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              251,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "(constructor)",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              12,
+              102,
+              29
+            ],
+            "svg-independent": [
+              2,
+              12,
+              102,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              102,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        }
+      ]
+    },
+    {
+      "fixture": "board",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "\u00c4pfel, \u00d6l und Stra\u00dfe \u2014 Cr\u00e8me br\u00fbl\u00e9e",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "svg-independent": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "pdf-independent": [
+              0,
+              14,
+              442,
+              44
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Gr\u00f6\u00dfe pr\u00fcfen",
+          "role": "heading",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              17,
+              160,
+              45
+            ],
+            "svg-independent": [
+              1,
+              17,
+              160,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              160,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              1,
+              13,
+              24,
+              26
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "2 kg",
+          "role": "quantity",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              32,
+              30
+            ],
+            "svg-independent": [
+              1,
+              12,
+              32,
+              30
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              32,
+              30
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Warnung: Scharfes Messer",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              0,
+              11,
+              205,
+              29
+            ],
+            "svg-independent": [
+              0,
+              11,
+              205,
+              29
+            ],
+            "pdf-independent": [
+              0,
+              11,
+              205,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Warnung: Unbekannte Warnung ",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              251,
+              30
+            ],
+            "svg-independent": [
+              1,
+              12,
+              251,
+              30
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              251,
+              30
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "(constructor)",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              11,
+              102,
+              28
+            ],
+            "svg-independent": [
+              2,
+              11,
+              102,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              11,
+              102,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        }
+      ]
+    },
+    {
+      "fixture": "selected",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Prepare the workplace",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              2,
+              17,
+              275,
+              44
+            ],
+            "svg-independent": [
+              2,
+              17,
+              275,
+              44
+            ],
+            "pdf-independent": [
+              2,
+              17,
+              275,
+              44
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Wash hands",
+          "role": "heading",
+          "source": {
+            "stepId": "group-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              261,
+              39
+            ],
+            "svg-independent": [
+              2,
+              18,
+              261,
+              39
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              261,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Wash hands",
+          "role": "label",
+          "source": {
+            "stepId": "group-0",
+            "tokenId": "picture-0-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              104,
+              28
+            ],
+            "svg-independent": [
+              1,
+              12,
+              104,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              104,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Soap",
+          "role": "label",
+          "source": {
+            "stepId": "group-0",
+            "tokenId": "workplace-soap"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              44,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              44,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              44,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 3: Store food",
+          "role": "heading",
+          "source": {
+            "stepId": "group-2"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              241,
+              39
+            ],
+            "svg-independent": [
+              1,
+              18,
+              241,
+              39
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              241,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Food container",
+          "role": "label",
+          "source": {
+            "stepId": "group-2",
+            "tokenId": "picture-2-0"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              132,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              132,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              133,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    },
+    {
+      "fixture": "continuation",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Eighty five pictures",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              2,
+              17,
+              230,
+              45
+            ],
+            "svg-independent": [
+              2,
+              17,
+              230,
+              45
+            ],
+            "pdf-independent": [
+              2,
+              17,
+              230,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Gesamtzeit: 1m",
+          "role": "time",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "svg-independent": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              120,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Gr\u00f6\u00dfe pr\u00fcfen",
+          "role": "heading",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "svg-independent": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              275,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              2,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-1"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-2"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-3"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-4"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-5"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-6"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-7"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-8"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-9"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-10"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-11"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-12"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-13"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-14"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-15"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-16"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-17"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-18"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-19"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-20"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-21"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-22"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-23"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-24"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-25"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-26"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-27"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-28"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-29"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-30"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-31"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-32"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-33"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-34"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-35"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    },
+    {
+      "fixture": "continuation",
+      "page": 2,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Schritt 1: Gr\u00f6\u00dfe pr\u00fcfen (Fortsetzung)",
+          "role": "context",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              17,
+              444,
+              45
+            ],
+            "svg-independent": [
+              1,
+              17,
+              444,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              444,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-36"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-37"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-38"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-39"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-40"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-41"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-42"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              33
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-43"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-44"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-45"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-46"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-47"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-48"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-49"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-50"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-51"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-52"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-53"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-54"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-55"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-56"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-57"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-58"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-59"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-60"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-61"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-62"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-63"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-64"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-65"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-66"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              33
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-67"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-68"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-69"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-70"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-71"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-72"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-73"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-74"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              12,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-75"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    },
+    {
+      "fixture": "continuation",
+      "page": 3,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Schritt 1: Gr\u00f6\u00dfe pr\u00fcfen (Fortsetzung)",
+          "role": "context",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              17,
+              444,
+              45
+            ],
+            "svg-independent": [
+              1,
+              17,
+              444,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              444,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-76"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-77"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-78"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-79"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-80"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-81"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-82"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              46,
+              33
+            ],
+            "svg-independent": [
+              2,
+              13,
+              46,
+              33
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              46,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-83"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "svg-independent": [
+              1,
+              13,
+              45,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              45,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "continuation-84"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              45,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              45,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        }
+      ]
+    },
+    {
+      "fixture": "label-sheet",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Schritt 1: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-0"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              78,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              78,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Schritt 2: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-1"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              78,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              78,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Schritt 3: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-2"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              77,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              77,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              77,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Schritt 4: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-3"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              78,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              78,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Schritt 5: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-4"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              78,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              78,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Schritt 6: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-5"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              77,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              77,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              77,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Schritt 7: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-6"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              78,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 8: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-7"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              78,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 9: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-8"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              77,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              77,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              77,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 10: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-9"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 11: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-10"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 12: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-11"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              87,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 13: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-12"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 14: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-13"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 15: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-14"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              87,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 16: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-15"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 17: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-16"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 18: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-17"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              87,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 19: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-18"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 20: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-19"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 21: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-20"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              87,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 22: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-21"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 23: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-22"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 24: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-23"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              87,
+              28
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              87,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        }
+      ]
+    },
+    {
+      "fixture": "label-sheet",
+      "page": 2,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Schritt 25: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-24"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              88,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              88,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              88,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    },
+    {
+      "fixture": "label",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 50,
+        "heightMm": 30
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          295,
+          177
+        ],
+        "svg-independent": [
+          295,
+          177
+        ],
+        "pdf-independent": [
+          296,
+          178
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "Schritt 1: ",
+          "role": "heading",
+          "source": {
+            "stepId": "cell-0"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              78,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              13,
+              78,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        }
+      ]
+    },
+    {
+      "fixture": "transparent",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "\u00c4pfel, \u00d6l und Stra\u00dfe \u2014 Cr\u00e8me br\u00fbl\u00e9e",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "svg-independent": [
+              0,
+              14,
+              442,
+              44
+            ],
+            "pdf-independent": [
+              0,
+              14,
+              442,
+              44
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Gesamtzeit: 1m",
+          "role": "time",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "svg-independent": [
+              1,
+              12,
+              120,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              120,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Gr\u00f6\u00dfe pr\u00fcfen",
+          "role": "heading",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "svg-independent": [
+              1,
+              18,
+              275,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              275,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              2,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Zwiebel <script> & \u00d6l",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              182,
+              32
+            ],
+            "svg-independent": [
+              1,
+              11,
+              182,
+              33
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              182,
+              33
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "2 kg",
+          "role": "quantity",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              32,
+              29
+            ],
+            "svg-independent": [
+              1,
+              11,
+              32,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              32,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Warnung: Scharfes Messer",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              0,
+              11,
+              205,
+              30
+            ],
+            "svg-independent": [
+              0,
+              12,
+              205,
+              30
+            ],
+            "pdf-independent": [
+              0,
+              11,
+              205,
+              30
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "1m",
+          "role": "time",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "required-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "svg-independent": [
+              1,
+              13,
+              24,
+              25
+            ],
+            "pdf-independent": [
+              1,
+              13,
+              24,
+              25
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Messer",
+          "role": "label",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              14,
+              61,
+              28
+            ],
+            "svg-independent": [
+              2,
+              14,
+              61,
+              29
+            ],
+            "pdf-independent": [
+              2,
+              14,
+              61,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Warnung: Unbekannte Warnung ",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              11,
+              251,
+              29
+            ],
+            "svg-independent": [
+              1,
+              11,
+              251,
+              29
+            ],
+            "pdf-independent": [
+              1,
+              11,
+              251,
+              29
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "(constructor)",
+          "role": "warning",
+          "source": {
+            "stepId": "required-group",
+            "tokenId": "unknown-warning-token"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              11,
+              102,
+              28
+            ],
+            "svg-independent": [
+              2,
+              11,
+              102,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              11,
+              102,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        }
+      ]
+    },
+    {
+      "fixture": "long-heading",
+      "page": 1,
+      "pageSizeMm": {
+        "widthMm": 210,
+        "heightMm": 297
+      },
+      "pdfSizeVerified": true,
+      "dimensions": {
+        "png": [
+          1240,
+          1754
+        ],
+        "svg-independent": [
+          1240,
+          1754
+        ],
+        "pdf-independent": [
+          1241,
+          1754
+        ]
+      },
+      "textChecks": [
+        {
+          "text": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              1,
+              19,
+              1100,
+              38
+            ],
+            "svg-independent": [
+              1,
+              19,
+              1100,
+              38
+            ],
+            "pdf-independent": [
+              1,
+              19,
+              1100,
+              38
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "WW",
+          "role": "heading",
+          "source": {},
+          "inkBounds": {
+            "png": [
+              1,
+              19,
+              45,
+              39
+            ],
+            "svg-independent": [
+              1,
+              19,
+              45,
+              39
+            ],
+            "pdf-independent": [
+              1,
+              19,
+              45,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 1: Wash hands",
+          "role": "heading",
+          "source": {
+            "stepId": "group-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              18,
+              261,
+              39
+            ],
+            "svg-independent": [
+              1,
+              18,
+              261,
+              40
+            ],
+            "pdf-independent": [
+              1,
+              18,
+              261,
+              40
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Wash hands",
+          "role": "label",
+          "source": {
+            "stepId": "group-0",
+            "tokenId": "picture-0-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              13,
+              104,
+              28
+            ],
+            "svg-independent": [
+              1,
+              13,
+              104,
+              28
+            ],
+            "pdf-independent": [
+              0,
+              13,
+              104,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Soap",
+          "role": "label",
+          "source": {
+            "stepId": "group-0",
+            "tokenId": "workplace-soap"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              14,
+              44,
+              32
+            ],
+            "svg-independent": [
+              2,
+              14,
+              44,
+              32
+            ],
+            "pdf-independent": [
+              2,
+              14,
+              44,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 2: Prepare vegetables",
+          "role": "heading",
+          "source": {
+            "stepId": "group-1"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              17,
+              349,
+              45
+            ],
+            "svg-independent": [
+              1,
+              17,
+              349,
+              45
+            ],
+            "pdf-independent": [
+              1,
+              17,
+              349,
+              45
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Chop onion",
+          "role": "label",
+          "source": {
+            "stepId": "group-1",
+            "tokenId": "picture-1-0"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              12,
+              99,
+              32
+            ],
+            "svg-independent": [
+              1,
+              12,
+              99,
+              32
+            ],
+            "pdf-independent": [
+              1,
+              12,
+              99,
+              32
+            ]
+          },
+          "maximumEdgeDeltaPixels": 0
+        },
+        {
+          "text": "Schritt 3: Store food",
+          "role": "heading",
+          "source": {
+            "stepId": "group-2"
+          },
+          "inkBounds": {
+            "png": [
+              1,
+              17,
+              241,
+              39
+            ],
+            "svg-independent": [
+              1,
+              17,
+              241,
+              39
+            ],
+            "pdf-independent": [
+              2,
+              17,
+              241,
+              39
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        },
+        {
+          "text": "Food container",
+          "role": "label",
+          "source": {
+            "stepId": "group-2",
+            "tokenId": "picture-2-0"
+          },
+          "inkBounds": {
+            "png": [
+              2,
+              13,
+              132,
+              28
+            ],
+            "svg-independent": [
+              2,
+              13,
+              132,
+              28
+            ],
+            "pdf-independent": [
+              2,
+              12,
+              133,
+              28
+            ]
+          },
+          "maximumEdgeDeltaPixels": 1
+        }
+      ]
+    }
+  ]
+}

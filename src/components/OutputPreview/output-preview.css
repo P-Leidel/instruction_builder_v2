@@ -1,0 +1,13 @@
+.output-preview { min-width: 0; }
+.output-preview__controls { display: flex; flex-wrap: wrap; align-items: end; gap: .5rem; }
+.output-preview__controls > * { flex: 1 1 8rem; }
+.output-preview__viewport { width: 100%; max-width: 100%; overflow: auto; padding: .5rem; border: 1px solid var(--color-control-border); background: var(--color-canvas-bg); }
+/* The paper, transparent-paper checkerboard and printable bounds show the
+   physical output. They keep the same colors in either interface theme. */
+.output-preview__page { position: relative; min-width: 0; background: repeating-conic-gradient(#f1f5f9 0% 25%, #fff 0% 50%) 50% / 16px 16px; box-shadow: 0 1px 5px rgb(15 23 42 / .25); }
+.output-preview__image svg { display: block; width: 100%; height: auto; }
+.output-preview__bounds { position: absolute; pointer-events: none; border: 1px dashed #1d4ed8; }
+.output-preview__semantic { margin-top: 1rem; }
+.output-preview__semantic summary { min-height: 44px; padding: .5rem; cursor: pointer; }
+.output-preview__semantic .reading-content { padding: .75rem; border: 1px solid var(--color-border-strong); }
+.output-preview__semantic .reader__group, .output-preview__semantic .reader__picture { min-width: 0; overflow-wrap: anywhere; }

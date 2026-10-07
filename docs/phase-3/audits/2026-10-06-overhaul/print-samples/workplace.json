@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "meta": {
+    "title": "Prepare the workplace",
+    "domain": "recipe",
+    "createdAt": "2026-10-06T00:00:00Z",
+    "presentation": "sequence"
+  },
+  "steps": [
+    {
+      "id": "group-0",
+      "title": "Wash hands",
+      "tokens": [
+        {
+          "id": "picture-0-0",
+          "iconId": "routines.action.wash-hands",
+          "category": "action",
+          "label": "Wash hands"
+        },
+        {
+          "id": "workplace-soap",
+          "iconId": "routines.object.soap",
+          "category": "object",
+          "label": "Soap"
+        }
+      ]
+    },
+    {
+      "id": "group-1",
+      "title": "Prepare vegetables",
+      "tokens": [
+        {
+          "id": "picture-1-0",
+          "iconId": "action.chop",
+          "category": "action",
+          "label": "Chop onion",
+          "warning": {
+            "iconId": "warning.sharp",
+            "label": "Sharp blade"
+          }
+        }
+      ]
+    },
+    {
+      "id": "group-2",
+      "title": "Store food",
+      "tokens": [
+        {
+          "id": "picture-2-0",
+          "iconId": "tool.container",
+          "category": "tool",
+          "label": "Food container"
+        }
+      ]
+    }
+  ]
+}

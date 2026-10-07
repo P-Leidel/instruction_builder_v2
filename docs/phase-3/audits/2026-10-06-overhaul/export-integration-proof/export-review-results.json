@@ -1,0 +1,315 @@
+{
+  "runAt": "2026-10-06T16:42:22.178Z",
+  "checks": {
+    "attached_delayed_0": true,
+    "long_heading_once_and_complete": true,
+    "physical_portable_svg": true,
+    "attached_delayed_1": true,
+    "attached_delayed_2": true,
+    "png_150_physical_opaque": true,
+    "attached_delayed_3": true,
+    "png_300_physical_opaque": true,
+    "print_actual_size_explained": true,
+    "global_artwork_survives_kitchen": true,
+    "attached_delayed_4": true,
+    "global_sources_kitchen": true,
+    "global_artwork_survives_routines": true,
+    "attached_delayed_5": true,
+    "global_sources_routines": true,
+    "global_artwork_survives_learning": true,
+    "attached_delayed_6": true,
+    "global_sources_learning": true,
+    "attached_delayed_7": true,
+    "selection_retains_source_order": true,
+    "semantic_selection_matches": true,
+    "attached_delayed_8": true,
+    "required_values_labels": true,
+    "attached_delayed_9": true,
+    "required_values_pictures": true,
+    "detailed_optional_japanese_blocks": true,
+    "glyph_preflight_no_download": true,
+    "attached_delayed_10": true,
+    "blocked_json_full_and_unchanged": true,
+    "visible-japanese_preflight_disabled": true,
+    "visible-japanese_no_partial_download": true,
+    "attached_delayed_11": true,
+    "visible-japanese_json_preserved": true,
+    "overflow-heading_preflight_disabled": true,
+    "overflow-heading_no_partial_download": true,
+    "attached_delayed_12": true,
+    "overflow-heading_json_preserved": true,
+    "continuation_has_all_numbered_actions": true,
+    "attached_delayed_13": true,
+    "attached_delayed_14": true,
+    "attached_delayed_15": true,
+    "85_main_tokens_exactly_once": true,
+    "attached_delayed_16": true,
+    "page_navigation": true,
+    "attached_delayed_17": true,
+    "transparent_svg_background": true,
+    "attached_delayed_18": true,
+    "transparent_png_background": true,
+    "attached_delayed_19": true,
+    "transparent_pdf_paper_explained": true,
+    "raster_limit_no_download": true,
+    "failed_canvas_no_download": true,
+    "attached_delayed_20": true,
+    "vector_recovery_after_png_failure": true,
+    "no_console_or_page_errors": true
+  },
+  "errors": [],
+  "files": [
+    {
+      "file": "01-wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.svg",
+      "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.svg",
+      "bytes": 128259,
+      "downloadEvidence": {
+        "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/ff107afd-3bf6-4131-a350-aa2a84d190d4",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "02-wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww.pdf",
+      "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww.pdf",
+      "bytes": 282463,
+      "downloadEvidence": {
+        "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww.pdf",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/6d85b7a8-2957-4ee1-b49c-73fa0632b506",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "03-wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.png",
+      "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.png",
+      "bytes": 117975,
+      "downloadEvidence": {
+        "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.png",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/60be6f57-9f92-49c7-82d0-9901efae175f",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "04-wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.png",
+      "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.png",
+      "bytes": 332855,
+      "downloadEvidence": {
+        "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww-page-01-of-01.png",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/4e0168ac-cefa-4e3c-98a2-dfe1f24e5244",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "05-three-libraries-page-01-of-01.svg",
+      "filename": "three-libraries-page-01-of-01.svg",
+      "bytes": 78095,
+      "downloadEvidence": {
+        "filename": "three-libraries-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/ce08e9ab-b5b1-4144-be97-2c7340ff9710",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "06-three-libraries-page-01-of-01.svg",
+      "filename": "three-libraries-page-01-of-01.svg",
+      "bytes": 78095,
+      "downloadEvidence": {
+        "filename": "three-libraries-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/ca306a57-8778-4923-b440-8b8c0fba7eb6",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "07-three-libraries-page-01-of-01.svg",
+      "filename": "three-libraries-page-01-of-01.svg",
+      "bytes": 78095,
+      "downloadEvidence": {
+        "filename": "three-libraries-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/e0a2f771-84e4-42fc-b1ea-4b21d274db26",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "08-three-libraries-page-01-of-01.svg",
+      "filename": "three-libraries-page-01-of-01.svg",
+      "bytes": 52802,
+      "downloadEvidence": {
+        "filename": "three-libraries-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/61cb3711-b383-4985-8f30-199285231b56",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "09-required-meanings-page-01-of-01.svg",
+      "filename": "required-meanings-page-01-of-01.svg",
+      "bytes": 69481,
+      "downloadEvidence": {
+        "filename": "required-meanings-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/0f59cf37-d8fd-4961-8be4-f2eebc4c95c6",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "10-required-meanings-page-01-of-01.svg",
+      "filename": "required-meanings-page-01-of-01.svg",
+      "bytes": 65948,
+      "downloadEvidence": {
+        "filename": "required-meanings-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/ece5616a-13f9-47ad-8884-14299a1d474e",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "11-required-meanings.json",
+      "filename": "required-meanings.json",
+      "bytes": 994,
+      "downloadEvidence": {
+        "filename": "required-meanings.json",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/6e95ee92-787e-40df-8fe5-cff1677ebfc3",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "12-untitled-instructions.json",
+      "filename": "untitled-instructions.json",
+      "bytes": 952,
+      "downloadEvidence": {
+        "filename": "untitled-instructions.json",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/dc8df2f4-6267-487b-b0e1-438f5fe8dbc1",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "13-wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww.json",
+      "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww.json",
+      "bytes": 3943,
+      "downloadEvidence": {
+        "filename": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww.json",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/3718b389-f3dc-4c6a-81a5-3ebf03c663e2",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "14-eighty-five-pictures-page-01-of-03.svg",
+      "filename": "eighty-five-pictures-page-01-of-03.svg",
+      "bytes": 257870,
+      "downloadEvidence": {
+        "filename": "eighty-five-pictures-page-01-of-03.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/0af68f5b-a879-499e-a79a-996d8aaa0970",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "15-eighty-five-pictures-page-02-of-03.svg",
+      "filename": "eighty-five-pictures-page-02-of-03.svg",
+      "bytes": 251430,
+      "downloadEvidence": {
+        "filename": "eighty-five-pictures-page-02-of-03.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/454e71c6-4f46-4e2d-ba85-31f15cf74546",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "16-eighty-five-pictures-page-03-of-03.svg",
+      "filename": "eighty-five-pictures-page-03-of-03.svg",
+      "bytes": 56534,
+      "downloadEvidence": {
+        "filename": "eighty-five-pictures-page-03-of-03.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/dee46e9c-1db7-4fb9-8c55-ef8d6696f975",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "17-eighty-five-pictures.pdf",
+      "filename": "eighty-five-pictures.pdf",
+      "bytes": 1177675,
+      "downloadEvidence": {
+        "filename": "eighty-five-pictures.pdf",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/31942b4a-d2f6-4854-858d-bada61c014d8",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "18-transparent-page-page-01-of-01.svg",
+      "filename": "transparent-page-page-01-of-01.svg",
+      "bytes": 82145,
+      "downloadEvidence": {
+        "filename": "transparent-page-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/73b79836-fae8-4242-847e-69f33bb346a3",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "19-transparent-page-page-01-of-01.png",
+      "filename": "transparent-page-page-01-of-01.png",
+      "bytes": 93189,
+      "downloadEvidence": {
+        "filename": "transparent-page-page-01-of-01.png",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/c479618c-582a-4d1e-a39a-e56b05cbbc76",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "20-transparent-page.pdf",
+      "filename": "transparent-page.pdf",
+      "bytes": 187575,
+      "downloadEvidence": {
+        "filename": "transparent-page.pdf",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/5da3cf92-3e77-43de-bb75-e84b8df7ce41",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    },
+    {
+      "file": "21-transparent-page-page-01-of-01.svg",
+      "filename": "transparent-page-page-01-of-01.svg",
+      "bytes": 82145,
+      "downloadEvidence": {
+        "filename": "transparent-page-page-01-of-01.svg",
+        "connected": true,
+        "url": "blob:http://127.0.0.1:33380/ca1322cf-17ca-4947-8d05-5aff4fd6b4df",
+        "revokedAtClick": false,
+        "afterTask": false
+      }
+    }
+  ]
+}

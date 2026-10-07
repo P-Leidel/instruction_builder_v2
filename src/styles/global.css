@@ -1,0 +1,1385 @@
+@import "../components/InstructionEditor/editor.css";
+/* Minimal reset + prototype styling.
+   Mobile-first per the plan's "Fast and Responsive" principle; a real
+   responsive pass is Phase 2 task 21.
+
+   Design tokens: every color, radius, and shadow used below is defined once
+   in :root and referenced via var() everywhere else. To retheme the app
+   (new palette, sharper/rounder corners, etc.) change the tokens here -
+   nothing that follows should need a hardcoded color or radius. */
+
+:root {
+  color-scheme: light;
+  /* Backgrounds - three distinct layers so the canvas reads as its own
+     "work surface", separate from both the page chrome and the white
+     panels around it. */
+  --color-app-bg: #f3f4f7;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #f5f6f9;
+  --color-canvas-bg: #e9ecf2;
+
+  --color-border: #e3e5ea;
+  --color-border-strong: #c7cbd4;
+  --color-control-border: #697281;
+  --color-focus: #2849bb;
+
+  --color-text: #1d1d1f;
+  --color-text-muted: #6b6e76;
+
+  /* #4b66f2, not the more obvious #4f6bff - the more obvious shade's white
+     text/icons on it (buttons, active tabs) only reach a 4.3:1 contrast
+     ratio, short of WCAG AA's 4.5:1 minimum for normal-size text (task 22,
+     caught by an axe-core audit). This shade clears it at ~4.69:1. */
+  --color-accent: #4b66f2;
+  --color-accent-soft: #eef1ff;
+  --color-accent-contrast: #ffffff;
+
+  --color-danger: #c0392b;
+  --color-warning-bg: #fff4e5;
+  --color-warning-border: #e8a33d;
+  --color-warning-text: #7a4a00;
+
+  /* Radius scale - bump any of these to change roundness everywhere at once. */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 10px rgba(16, 24, 40, 0.05);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-app-bg: #151a23;
+  --color-surface: #222936;
+  --color-surface-sunken: #1b212c;
+  --color-canvas-bg: #121720;
+  --color-border: #3b4658;
+  --color-border-strong: #718097;
+  --color-control-border: #8290a4;
+  --color-focus: #b1c3ff;
+  --color-text: #f3f4f6;
+  --color-text-muted: #b6bfcd;
+  --color-accent: #9aafff;
+  --color-accent-soft: #293a60;
+  --color-accent-contrast: #111827;
+  --color-danger: #ffaaa3;
+  --color-warning-bg: #3b2d18;
+  --color-warning-border: #c89642;
+  --color-warning-text: #f9d99b;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / .2), 0 4px 10px rgb(0 0 0 / .25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--color-text);
+  background: var(--color-app-bg);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.app__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.app__titles {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.app__preview-toggle {
+  flex-shrink: 0;
+  border: none;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1.1rem;
+  min-height: 44px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.app__preview-toggle:hover {
+  filter: brightness(0.94);
+}
+
+.app__history-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.app__history-button {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1.1rem;
+  min-height: 44px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.app__history-button:hover:not(:disabled) {
+  background: var(--color-app-bg);
+}
+
+.app__history-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.app__file-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  /* UI polish follow-up: a shared tray background turns 5 separate,
+     same-weight pills (Export JSON/SVG/PNG/PDF, Import) into one visibly
+     grouped unit, distinct from "New" (a document-lifecycle action, kept
+     outside this group) and the history/preview controls either side of
+     it - a pure visual grouping with no change to any button's own
+     behavior. */
+  padding: 0.3rem;
+  background: var(--color-surface-sunken);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  /* No flex-shrink: 0 here (unlike its sibling toolbar groups) and an
+     explicit min-width: 0: this group's own flex-wrap only ever gets a
+     chance to break its 5 buttons onto multiple rows if the outer
+     .app__toolbar is actually allowed to size this item narrower than its
+     un-wrapped content width (~550px) first - flex-shrink: 0 would pin it
+     at that full width forever, wrapping never triggering, which is what
+     pushed "Export PDF"/Import off the right edge of narrow viewports. */
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.app__file-button {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1.1rem;
+  min-height: 44px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.app__file-button:hover {
+  background: var(--color-app-bg);
+}
+
+.app__toast {
+  margin: 0;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.app__toast--info {
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+}
+
+.app__toast--warning {
+  background: var(--color-warning-bg);
+  border-bottom: 1px solid var(--color-warning-border);
+  color: var(--color-warning-text);
+}
+
+.app__toast--error {
+  background: #fdecea;
+  border-bottom: 1px solid #f5c2c0;
+  color: var(--color-danger);
+}
+
+.app__toast-dismiss {
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0 0.25rem;
+}
+
+/* Shared by every two-button "confirm this destructive action" dialog -
+   ImportConfirmDialog (task 19) and NewDocumentConfirmDialog (task 28) -
+   rather than each carrying its own copy of this same overlay/card/button
+   styling under an import-specific class name. */
+.confirm-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 24, 40, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+
+.confirm-dialog {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+  max-width: 380px;
+  width: 100%;
+}
+
+.confirm-dialog h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.confirm-dialog p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.confirm-dialog-cancel,
+.confirm-dialog-confirm {
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1.1rem;
+  min-height: 44px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.confirm-dialog-cancel {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.confirm-dialog-cancel:hover {
+  background: var(--color-app-bg);
+}
+
+.confirm-dialog-confirm {
+  border: none;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.confirm-dialog-confirm:hover {
+  filter: brightness(0.94);
+}
+
+.app__toolbar h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.app__tagline {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Task 27: an inline field for meta.title, the source every export
+   filename derives from (lib/download.ts's slugify). Lives inside
+   .app__titles (already flex: 1 1 200px; min-width: 0) so it shrinks
+   correctly on narrow viewports instead of forcing the toolbar to
+   overflow - the same min-width: 0 discipline task 21's audit established
+   for this row's other flex children. */
+.app__document-title {
+  display: block;
+  margin-top: 0.4rem;
+  min-width: 0;
+}
+
+.app__document-title input {
+  font: inherit;
+  width: 100%;
+  min-width: 0;
+  padding: 0.35rem 0.5rem;
+  /* UI polish follow-up: the previous var(--color-border) (#e3e5ea, nearly
+     white) read as inert/non-interactive at a glance despite this field
+     driving every export's filename (task 27) - color-border-strong plus a
+     faint sunken fill makes it visibly an input rather than static text. */
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-sunken);
+  color: var(--color-text);
+  font-size: 0.85rem;
+}
+
+.app__document-title input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Unconditional (not just inside the desktop grid below) so the same stack
+   spacing applies on mobile, where .app__main's own flex column just stacks
+   .app__col-left/.instruction-canvas/.app__col-right in turn - each side's
+   own panels still need their own gap between them either way. */
+.app__col-left,
+.app__col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+@media (min-width: 800px) {
+  /* .app__main's grid-template-columns below uses vw-based clamp() for its
+     side columns, so the vertical scrollbar toggling on/off as the document
+     grows/shrinks would otherwise change the viewport width vw resolves
+     against and reflow the whole grid. Reserving the gutter unconditionally
+     keeps that width constant whether or not a scrollbar is actually
+     showing. Scoped to this same breakpoint (not a bare `html` rule) since
+     mobile's plain flex-column layout below has no vw-based columns to
+     protect, and reserving a gutter there only distorts
+     scrollWidth/clientWidth measurements without fixing anything real. */
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  .app__main {
+    max-width: none;
+    display: grid;
+    /* Fluid, not fixed: at exactly 800px, fixed 240px/280px side columns left
+       only ~216px for the canvas - well under its own 480px minimum
+       (.instruction-canvas__svg's clamp below), forcing every document into
+       a cramped horizontal scroll immediately above the breakpoint instead
+       of only on genuinely narrow desktop windows. Shrinking the side
+       columns first reclaims real room for the canvas as the viewport
+       narrows; the vw-scaled middle of each clamp reaches its ceiling
+       (identical to the old fixed width) well before 1400px, so nothing
+       changes at typical desktop widths. */
+    grid-template-columns: clamp(200px, 24vw, 240px) minmax(280px, 1fr) clamp(210px, 30vw, 280px);
+    /* One implicit row, three columns, placed in DOM order
+       (.app__col-left, .instruction-canvas, .app__col-right - see app.tsx) -
+       deliberately NOT three explicit grid-template-rows shared across all
+       three columns. A shared-rows version used to size the right column's
+       row 3 ("Add to token") off the *left* column's row 2 height ("Step
+       details"), since CSS Grid's row tracks always span the full grid
+       width - "Add to token" ended up stranded below a gap as tall as
+       whatever "Step details"/"Token details" needed, unrelated to
+       anything in its own column. Each side's own flex column (below) now
+       sizes to its own content only. */
+    align-items: start;
+  }
+
+  /* Re-shown above the breakpoint: with three side-by-side columns there
+     is nothing for an empty Token details to push out of the way, and the
+     placeholder's "select a step, then click one of its tokens" is the
+     only hint that panel exists at all. See `.token-details--empty`.
+
+     Scoped through `.app__main` for specificity, not for reach - it is the
+     only place that panel ever renders. This block sits *above* the
+     component rules in this file rather than below them (it is grouped
+     with the layout it belongs to, which is the more useful arrangement to
+     read), so a bare `.token-details--empty` here would tie on specificity
+     with the `display: none` further down and lose on source order - at
+     every width, silently. Caught by the driver reporting `none` on both
+     sides of the breakpoint. */
+  .app__main .token-details--empty {
+    display: block;
+  }
+}
+
+/* Task 8 (Live Preview): a single, centered, read-only canvas replaces the
+   whole editor grid while previewMode is on. */
+.app__main--preview {
+  display: block;
+  max-width: 960px;
+}
+
+/* Task 12 (Data Persistence): shown only when IndexedDB writes fail. */
+.app__persistence-warning {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background: var(--color-warning-bg);
+  border-bottom: 1px solid var(--color-warning-border);
+  color: var(--color-warning-text);
+  font-size: 0.85rem;
+}
+
+/* Task 9 (Drag-and-Drop): the floating label that follows the pointer. */
+.drag-ghost {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  /* The ghost is centered on the pointer, so it sits between the pointer and
+     whatever is underneath it. That used to make this line load-bearing on
+     where a drop landed: the drop was resolved by asking the DOM what was
+     under the pointer, and without this the answer would have been the ghost
+     itself, every time. Since drops resolve against the layout instead
+     (2026-09-20 candidate 1) this is back to being what it reads as - a
+     decoration should not take hover, cursor or clicks from the thing it is
+     decorating. */
+  pointer-events: none;
+  /* A cursor decoration, not content - it exists only while a drag is in
+     flight, so its label should no more be selectable than the chip or the
+     picker button the drag came from. */
+  -webkit-user-select: none;
+  user-select: none;
+  z-index: 1000;
+  background: var(--color-text);
+  color: #fff;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* Shared panel chrome (step list, step details, token details, token picker).
+   The canvas gets its own background below - see "Instruction canvas" -
+   so it reads as a distinct work surface rather than another white card. */
+
+.instruction-canvas {
+  /* The clamped min-width on .instruction-canvas__svg (below) can exceed a
+     narrow mobile container - scroll horizontally rather than overflow the page. */
+  overflow-x: auto;
+  /* Without a cap, this card stretches to fill its grid column (up to
+     `.app__main`'s full middle-column width) while .instruction-canvas__svg
+     inside it tops out at 960px - on a wide viewport that left the card's
+     background/border trailing off well past the SVG's actual right edge.
+     Capping the card at the SVG's own max (960px) plus this card's own
+     padding/border keeps the two in step; margin-inline centers the card in
+     any leftover column space once it hits that cap, rather than leaving it
+     flush left with the same dead space just moved outside the card. */
+  /* `width: min(...)` rather than `max-width` + default `width: auto`:
+     an auto-margin on a grid item with an auto width disables stretch
+     sizing entirely and falls back to a fit-content/shrink-to-fit size -
+     which can't be computed sensibly here, since .instruction-canvas__svg's
+     own width is itself a percentage of *this* box, a circular dependency
+     that (confirmed by driving the app) collapsed the card to a width far
+     narrower than even the SVG's own 480px floor. An explicit `width` value
+     is never "auto", so the item keeps its normal grid-area-resolved,
+     non-circular sizing, and the auto margins just center whatever that
+     resolves to. */
+  width: min(100%, calc(960px + 2rem + 2px));
+  margin-inline: auto;
+}
+
+.step-details,
+.token-details,
+.instruction-canvas,
+.token-picker {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1rem;
+}
+
+.instruction-canvas {
+  background: var(--color-canvas-bg);
+}
+
+/* Visual clarity: whichever of the two mirrors the canvas's own current
+   selection (StepDetails with only a step selected, TokenDetails once a
+   token is too - see each component's own class-choosing comment) gets the
+   same border color/thickness as `.instruction-canvas__step-bg--selected`'s
+   `stroke: var(--color-accent)` / implicit `stroke-width: 1`. */
+.step-details--selected,
+.token-details--selected {
+  border-color: var(--color-accent);
+}
+
+.step-details__heading,
+.token-details__heading,
+.instruction-canvas__heading,
+.token-picker__heading {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+/* Copy/paste tokens: each panel's heading shares a row with its own button
+   (Copy in token-details, Paste in step-details - see CONTEXT.md's "Token
+   clipboard" and each component's own doc comment for why they're split
+   across panels), so the heading's own margin moves onto the row. */
+.token-details__header,
+.step-details__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.token-details__header .token-details__heading,
+.step-details__header .step-details__heading {
+  margin: 0;
+}
+
+.token-details__copy-button,
+.step-details__paste-button {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.7rem;
+  min-height: 32px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.token-details__copy-button:hover,
+.step-details__paste-button:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.step-details__paste-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* .instruction-canvas__heading-time/-title (the document's own title,
+   optionally prefixed by the sum of every step's displayedTime) carry no
+   styling of their own - same "just a selectable sub-span of the heading
+   text" role as .instruction-canvas__step-time plays inside a step's title,
+   see that class's own comment below. */
+
+/* Step details */
+
+.step-details__empty {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.step-details__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.step-details__label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+
+.step-details__field input,
+.step-details__field textarea,
+.token-details__field input,
+.token-details__field textarea {
+  font: inherit;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.step-details__field input:focus-visible,
+.step-details__field textarea:focus-visible,
+.token-details__field input:focus-visible,
+.token-details__field textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.step-details__tokens {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Collapsed by default (see StepDetails.tsx) so live-adding tokens doesn't
+   grow this list and push the TokenDetails panel further down the column.
+   A plain <details>/<summary> rather than a hand-rolled toggle - its native
+   marker/keyboard handling covers this section's sole purpose (a keyboard-
+   only path to select a token) for free. */
+.step-details__tokens-disclosure {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.step-details__tokens-disclosure > summary {
+  cursor: pointer;
+}
+
+.step-details__tokens-disclosure > summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.step-details__token-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.step-details__token-button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.3rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.step-details__token-button:hover {
+  background: var(--color-surface-sunken);
+}
+
+.step-details__token-button--selected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.step-details__token-label {
+  font-weight: 600;
+}
+
+/* Collapsed field - the add/display/edit/remove/popover-anchor chrome
+   shared by every "few clicks" value field in this app (Step/Token time via
+   DurationField, TokenDetails' Quantity), see
+   components/CollapsedField/CollapsedField.tsx. Collapsed to one line (a
+   "+ <label>" button, or a value with Edit/Remove) until actively editing,
+   so it doesn't dominate either panel. Each field still owns its own edit
+   form's classes (.duration-field__inputs, .token-details__quantity-form,
+   etc.) below - only this shared chrome moved out of duplicating
+   .duration-field__* and .token-details__quantity-* rules. */
+
+.collapsed-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.collapsed-field__label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+
+.collapsed-field__add {
+  align-self: flex-start;
+  border: 1px dashed var(--color-border-strong);
+  background: transparent;
+  border-radius: var(--radius-md);
+  padding: 0.35rem 0.75rem;
+  min-height: 36px;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+.collapsed-field__add:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.collapsed-field__display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.collapsed-field__display-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.collapsed-field__value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.collapsed-field__edit,
+.collapsed-field__remove,
+.collapsed-field__save,
+.collapsed-field__cancel {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.6rem;
+  min-height: 32px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.collapsed-field__remove:hover {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.collapsed-field__save {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.collapsed-field__save:disabled {
+  background: var(--color-surface-sunken);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* Duration form (DurationForm) - the day/hour/minute/second inputs inside
+   DurationField's popover. */
+
+.duration-field__inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.duration-field__unit {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.duration-field__unit input {
+  width: 2.6rem;
+  font: inherit;
+  padding: 0.35rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-align: right;
+}
+
+.duration-field__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* FieldPopover - shared by DurationField (Step/Token time) and
+   TokenDetails' QuantityRow (Quantity), see
+   components/FieldPopover/FieldPopover.tsx. `.field-popover-anchor` must
+   wrap exactly the trigger button ("+ Time"/"+ Quantity" or Edit) that
+   opens it - `position: relative` there makes `.field-popover`'s
+   `top: 100%` land directly below that button, not any other sibling
+   content in the field. Floats above the layout instead of pushing it,
+   so a field next to this one (Token time beside Quantity, in
+   TimeAndQuantityRow below) never reflows just because this one opened. */
+
+.field-popover-anchor {
+  position: relative;
+  display: inline-block;
+}
+
+.field-popover {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: max-content;
+  /* 16px = VIEWPORT_GUTTER (8px, lib/field-placement.ts) per edge, the
+     same number the placement flip is measured against, rather than a
+     second unrelated literal for the same idea. */
+  max-width: calc(100vw - 16px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 0.75rem;
+}
+
+/* The two flipped positions. Which one applies is decided by
+   `resolveFieldPlacement` (lib/field-placement.ts) and toggled onto the
+   element by FieldPopover.tsx - the arithmetic lives there so it can be
+   unit-tested without a browser, while the positioning itself stays here.
+
+   `--right` aligns the panel's right edge to the *trigger's* right edge,
+   not the window's. FieldPopover adds a horizontal correction when that
+   alignment would clip the opposite edge of a wide panel.
+   `--above` mirrors the default `top` offset, keeping the same 0.4rem gap
+   between trigger and panel on whichever side it lands. */
+.field-popover--right {
+  left: auto;
+  right: 0;
+}
+
+.field-popover--above {
+  top: auto;
+  bottom: calc(100% + 0.4rem);
+}
+
+/* Token details */
+
+/* Mobile-first: the panel disappears entirely while it has nothing in it,
+   and the `min-width: 800px` block above turns it back on. Below that
+   breakpoint the three columns stack, so an empty "Token details" sits
+   between Step details and the canvas and a first-time phone user scrolls
+   past an empty placeholder to reach the thing they are building
+   (docs/known-issues.md). No DOM reorder is needed to fix that - once this
+   collapses, the stacking order already reads Step details -> canvas ->
+   Add to step. Done as a modifier on the panel rather than a third media
+   query on purpose: this stylesheet has exactly two (`print` and
+   `min-width: 800px`), and keeping it that way is what makes "which layout
+   am I looking at?" answerable. */
+.token-details--empty {
+  display: none;
+}
+
+.token-details__empty {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.token-details__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Token time + Quantity sit in one row (testers wanted "+ Quantity" inline
+   next to "+ Time" rather than stacked) - see TokenDetails.tsx's
+   TimeAndQuantityRow. The row itself carries the bottom margin that
+   .duration-field/.token-details__field normally carry individually, so the
+   two don't stack a double gap underneath whichever one happens to be
+   shorter. */
+.token-details__time-quantity-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.token-details__time-quantity-row .collapsed-field {
+  margin-bottom: 0;
+}
+
+.token-details__label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+
+.token-details__attachment {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.token-details__attachment-label {
+  flex: 1;
+}
+
+.token-details__attachment-remove {
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.25rem;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: var(--radius-sm);
+}
+
+.token-details__attachment-remove:hover {
+  color: var(--color-danger);
+}
+
+/* Instruction canvas */
+
+.instruction-canvas__svg {
+  display: block;
+  /* A press that the browser reads as the start of a text selection marks up
+     every label the pointer then travels over - which is what a token drag
+     *is*, and what users reported as "marking the text when grabbing a
+     token". There is no text worth selecting in here anyway: the canvas is a
+     diagram, and its copy path is Export (tasks 15-18), not the clipboard.
+     On the whole SVG rather than on .instruction-canvas__token alone, since
+     a grab that lands a pixel off a chip - on the step background, the step
+     title, a drag handle - starts the exact same selection. Safari/iOS still
+     needs the -webkit- prefix. */
+  -webkit-user-select: none;
+  user-select: none;
+  /* Bounds the rendered icon size to a reasonable range (roughly 64-128px
+     per chip, since a chip is 96 of the SVG's 720 base design units) no
+     matter how narrow or wide the panel gets. */
+  width: clamp(480px, 100%, 960px);
+  height: auto;
+  font-family: inherit;
+}
+
+.instruction-canvas__step-bg {
+  fill: var(--color-surface);
+  stroke: var(--color-border);
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.instruction-canvas__step-bg--selected {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+}
+
+.instruction-canvas__step-bg--drop-target {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.instruction-canvas--readonly .instruction-canvas__step-bg {
+  cursor: default;
+}
+
+.instruction-canvas__badge {
+  cursor: pointer;
+}
+
+.instruction-canvas__badge circle {
+  fill: var(--color-accent);
+}
+
+.instruction-canvas__badge text {
+  fill: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.instruction-canvas__badge:focus-visible,
+.instruction-canvas__chip-remove:focus-visible,
+.instruction-canvas__step-remove:focus-visible,
+.instruction-canvas__step-move:focus-visible,
+.instruction-canvas__add-step:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.instruction-canvas__step-title {
+  fill: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.instruction-canvas__flag {
+  fill: var(--color-danger);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Step management controls (previously the standalone StepList panel - see
+   InstructionCanvas.tsx's doc comment) - remove and the reorder stack
+   (drag handle + move up/down) share the chip remove button's visual
+   language (a plain circle + glyph), just at the step level. */
+
+.instruction-canvas__step-remove {
+  cursor: pointer;
+}
+
+.instruction-canvas__step-remove circle {
+  fill: var(--color-surface);
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+}
+
+.instruction-canvas__step-remove text {
+  fill: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.instruction-canvas__step-remove:hover circle {
+  stroke: var(--color-accent);
+}
+
+.instruction-canvas__step-drag-handle {
+  cursor: grab;
+  /* Task 10: without this, a touch-drag to reorder a step scrolls the page instead. */
+  touch-action: none;
+}
+
+.instruction-canvas__step-drag-handle circle {
+  fill: var(--color-surface-sunken);
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.instruction-canvas__step-drag-handle text {
+  fill: var(--color-text-muted);
+  font-size: 10px;
+}
+
+.instruction-canvas__step-move {
+  cursor: pointer;
+}
+
+.instruction-canvas__step-move circle {
+  fill: var(--color-surface-sunken);
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.instruction-canvas__step-move text {
+  fill: var(--color-text-muted);
+  font-size: 10px;
+}
+
+.instruction-canvas__step-move:not(.instruction-canvas__step-move--disabled):hover circle {
+  stroke: var(--color-accent);
+}
+
+.instruction-canvas__step-move--disabled {
+  cursor: not-allowed;
+}
+
+.instruction-canvas__step-move--disabled circle {
+  opacity: 0.4;
+}
+
+.instruction-canvas__add-step {
+  cursor: pointer;
+}
+
+.instruction-canvas__add-step-bg {
+  fill: transparent;
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+}
+
+.instruction-canvas__add-step text {
+  fill: var(--color-text);
+  font-size: 12px;
+}
+
+.instruction-canvas__add-step:hover .instruction-canvas__add-step-bg {
+  stroke: var(--color-accent);
+}
+
+.instruction-canvas__add-step:hover text {
+  fill: var(--color-accent);
+}
+
+.instruction-canvas__connector {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+  /* The corner rounding is built into the path geometry itself (see
+     buildConnectors in InstructionCanvas.tsx) - stroke-linejoin's own
+     rounding radius is tied to stroke-width and too small to read as
+     rounded on its own, so this is just a light backstop. */
+  stroke-linejoin: round;
+}
+
+.instruction-canvas__insertion-marker {
+  fill: var(--color-accent);
+}
+
+.instruction-canvas__token {
+  cursor: pointer;
+  /* Task 10: without this, a touch-drag to move a token scrolls the canvas instead. */
+  touch-action: none;
+}
+
+.instruction-canvas--readonly .instruction-canvas__token {
+  cursor: default;
+}
+
+/* The chip currently being dragged, while its ghost is in flight (see
+   TokenChip's own isDragging state) - dimmed so the chip reads as "picked
+   up", leaving the insertion marker as the only fully-drawn thing tracking
+   the pointer. Same 0.4 the canvas already uses to dim a control that isn't
+   currently acting (.instruction-canvas__step-move--disabled circle), rather
+   than a second dimming value meaning the same thing. */
+.instruction-canvas__token--dragging {
+  opacity: 0.4;
+}
+
+.instruction-canvas__chip {
+  fill: var(--color-surface-sunken);
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.instruction-canvas__chip--warning {
+  fill: var(--color-warning-bg);
+  stroke: var(--color-warning-border);
+}
+
+.instruction-canvas__chip--selected {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+.instruction-canvas__chip-icon {
+  color: var(--color-text);
+}
+
+.instruction-canvas__chip-label {
+  fill: var(--color-text);
+  font-size: 9px;
+}
+
+.instruction-canvas__chip-remove {
+  cursor: pointer;
+}
+
+.instruction-canvas__chip-remove circle {
+  fill: var(--color-surface);
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+}
+
+.instruction-canvas__chip-remove text {
+  fill: var(--color-text-muted);
+  font-size: 12px;
+}
+
+/* Attachment badges (Quantity/Warning) - small, decorative, non-interactive
+   markers on a chip; managing them (attaching/removing) happens via "Add to
+   token" and Token details, not by clicking the badge itself, so these
+   carry no cursor/hover/focus styling. Time has no chip badge - see
+   .instruction-canvas__step-time below. */
+
+.instruction-canvas__chip-badge--warning circle {
+  fill: var(--color-warning-bg);
+  stroke: var(--color-warning-border);
+}
+
+.instruction-canvas__chip-badge--warning .instruction-canvas__chip-badge-icon {
+  color: var(--color-warning-text);
+}
+
+/* Quantity's badge is a text pill, not an icon circle - the value itself
+   ("250 g") is the useful part, so it's shown directly rather than requiring
+   a hover to see it via a <title> tooltip. */
+.instruction-canvas__chip-badge--quantity rect {
+  fill: var(--color-surface-sunken);
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+}
+
+.instruction-canvas__chip-badge--quantity text {
+  fill: var(--color-text);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+/* .instruction-canvas__step-time (the step's own duration, shown either the
+   step's own time or the sum of its tokens' times) carries no styling of its
+   own - it's a <tspan> inside .instruction-canvas__step-title's <text>, so it
+   inherits that text's look, and the class exists only so
+   driver.mjs/tests can select just the time portion. */
+
+/* Token duration label - above one chip instead of a whole step's title,
+   and smaller to match the chip's own label (.instruction-canvas__chip-label). */
+.instruction-canvas__chip-time {
+  fill: var(--color-text-muted);
+  font-size: 8px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Token picker */
+
+/* Same reason as .instruction-canvas__svg above: dragging a token out of the
+   picker onto a step used to mark up the button labels it passed over. The
+   whole panel, not just .token-picker__button, because a grab that lands in
+   the gap between two buttons selects just as readily - and the button
+   itself as well, since TokenDetails' warning presets reuse that class
+   outside this panel. */
+.token-picker,
+.token-picker__button {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.token-picker__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1rem;
+}
+
+.token-picker__tab {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.9rem;
+  min-height: 36px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.token-picker__tab:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.token-picker__tab--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.token-picker__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.token-picker__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  /* A fixed width (not just min-width) plus the label's own reserved
+     two-line height below is what makes every button the same size,
+     regardless of how long its label is. */
+  width: 76px;
+  min-height: 44px;
+  padding: 0.5rem 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-sunken);
+  font-size: 0.75rem;
+  color: var(--color-text);
+  /* Task 10: without this, a touch-drag to drop a token onto a step scrolls the page instead. */
+  touch-action: none;
+}
+
+.token-picker__button:hover {
+  border-color: var(--color-accent);
+}
+
+/* Marks the preset matching a token's currently-attached value - see
+   TokenDetails' WarningRow, the only caller that tracks an "active" preset
+   among a button grid like this. */
+.token-picker__button--active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.token-picker__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* Reserved for two lines even when a label only needs one, so a short
+     label ("Pan") and a long one ("Thermometer") produce the same button
+     height instead of the row's tallest label dictating it. */
+  min-height: calc(1.2em * 2);
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  /* A long single word (e.g. "Thermometer") wraps at a real syllable break
+     with a hyphen instead of an arbitrary mid-word cut - index.html's
+     lang="en" is what lets the browser find those break points. */
+  hyphens: auto;
+}
+
+/* Quantity form (QuantityForm) - the amount+unit inputs inside
+   TokenDetails' Quantity field's popover (the collapsed/edit-toggle chrome
+   around it is CollapsedField's, shared with DurationField - see the
+   "Collapsed field" section above). */
+
+.token-details__quantity-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.token-details__quantity-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.token-details__quantity-field input,
+.token-details__quantity-field select {
+  font: inherit;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.token-details__quantity-field input {
+  width: 5.5rem;
+}
+
+.token-details__quantity-error {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-danger);
+}
+
+.token-details__quantity-actions {
+  display: flex;
+  gap: 0.5rem;
+}

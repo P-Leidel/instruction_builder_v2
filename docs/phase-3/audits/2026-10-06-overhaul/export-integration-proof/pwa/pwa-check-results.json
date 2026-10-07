@@ -1,0 +1,344 @@
+{
+  "runAt": "2026-10-06T16:42:52.781Z",
+  "checks": {
+    "PDF_manifest_reachable": true,
+    "PDF_icons_and_manifest": true,
+    "PDF_font_and_converter_manifest": true,
+    "PDF_complete_cache_before_control": true,
+    "PDF_no_online_output_font_converter_warmup": true,
+    "PDF_guide_survives_offline_reload": true,
+    "PDF_same_selected_preview_sources": true,
+    "PDF_same_selected_semantic_sources": true,
+    "PDF_captured_filename_one_download": true,
+    "PDF_complete_vector_A4": true,
+    "PDF_no_failed_requests": true,
+    "PNG_manifest_reachable": true,
+    "PNG_icons_and_manifest": true,
+    "PNG_font_and_converter_manifest": true,
+    "PNG_complete_cache_before_control": true,
+    "PNG_no_online_output_font_converter_warmup": true,
+    "PNG_guide_survives_offline_reload": true,
+    "PNG_same_selected_preview_sources": true,
+    "PNG_same_selected_semantic_sources": true,
+    "PNG_captured_filename_one_download": true,
+    "PNG_signature_exact_150dpi": true,
+    "PNG_independently_decodes_opaque": true,
+    "PNG_no_failed_requests": true,
+    "SVG_manifest_reachable": true,
+    "SVG_icons_and_manifest": true,
+    "SVG_font_and_converter_manifest": true,
+    "SVG_complete_cache_before_control": true,
+    "SVG_no_online_output_font_converter_warmup": true,
+    "SVG_guide_survives_offline_reload": true,
+    "SVG_same_selected_preview_sources": true,
+    "SVG_same_selected_semantic_sources": true,
+    "SVG_captured_filename_one_download": true,
+    "SVG_portable_exact_content": true,
+    "SVG_no_failed_requests": true,
+    "JSON_manifest_reachable": true,
+    "JSON_icons_and_manifest": true,
+    "JSON_font_and_converter_manifest": true,
+    "JSON_complete_cache_before_control": true,
+    "JSON_no_online_output_font_converter_warmup": true,
+    "JSON_guide_survives_offline_reload": true,
+    "JSON_captured_filename_one_download": true,
+    "JSON_full_editable_independent": true,
+    "JSON_never_prepares_font_converter": true,
+    "JSON_no_failed_requests": true,
+    "no_console_or_page_errors": true
+  },
+  "errors": [],
+  "runs": [
+    {
+      "format": "PDF",
+      "loaded": [
+        "/",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/persistence-DZHhZsba.js",
+        "/",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/persistence-DZHhZsba.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/assets/svg2pdf.es.min-DwfSYR45.js",
+        "/assets/jspdf.es.min-Cm391-XJ.js"
+      ],
+      "requestFailures": [],
+      "manifest": {
+        "cacheName": "instruction-builder-v2-84482efca478c95d",
+        "assets": [
+          "/",
+          "/assets/html2canvas-1lVARquP.js",
+          "/assets/index-BStm4Iiu.css",
+          "/assets/index-n8VWJFWb.js",
+          "/assets/index.es-BWtO_YPt.js",
+          "/assets/jspdf.es.min-Cm391-XJ.js",
+          "/assets/persistence-DZHhZsba.js",
+          "/assets/purify.es-t6o27EpX.js",
+          "/assets/svg2pdf.es.min-DwfSYR45.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      },
+      "cachedUrls": [
+        "/",
+        "/assets/html2canvas-1lVARquP.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index.es-BWtO_YPt.js",
+        "/assets/jspdf.es.min-Cm391-XJ.js",
+        "/assets/persistence-DZHhZsba.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-DwfSYR45.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ],
+      "beforeOffline": {
+        "loaded": [
+          "/",
+          "/assets/index-n8VWJFWb.js",
+          "/assets/index-BStm4Iiu.css",
+          "/assets/persistence-DZHhZsba.js"
+        ],
+        "fontFaces": 0,
+        "downloads": []
+      },
+      "file": "cold-pdf-guide.pdf",
+      "bytes": 154390
+    },
+    {
+      "format": "PNG",
+      "loaded": [
+        "/",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/persistence-DZHhZsba.js",
+        "/",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/persistence-DZHhZsba.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf"
+      ],
+      "requestFailures": [],
+      "manifest": {
+        "cacheName": "instruction-builder-v2-84482efca478c95d",
+        "assets": [
+          "/",
+          "/assets/html2canvas-1lVARquP.js",
+          "/assets/index-BStm4Iiu.css",
+          "/assets/index-n8VWJFWb.js",
+          "/assets/index.es-BWtO_YPt.js",
+          "/assets/jspdf.es.min-Cm391-XJ.js",
+          "/assets/persistence-DZHhZsba.js",
+          "/assets/purify.es-t6o27EpX.js",
+          "/assets/svg2pdf.es.min-DwfSYR45.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      },
+      "cachedUrls": [
+        "/",
+        "/assets/html2canvas-1lVARquP.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index.es-BWtO_YPt.js",
+        "/assets/jspdf.es.min-Cm391-XJ.js",
+        "/assets/persistence-DZHhZsba.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-DwfSYR45.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ],
+      "beforeOffline": {
+        "loaded": [
+          "/",
+          "/assets/index-n8VWJFWb.js",
+          "/assets/index-BStm4Iiu.css",
+          "/assets/persistence-DZHhZsba.js"
+        ],
+        "fontFaces": 0,
+        "downloads": []
+      },
+      "file": "cold-png-guide-page-01-of-01.png",
+      "bytes": 87076,
+      "inspection": {
+        "width": 1240,
+        "height": 1754,
+        "alpha": 255
+      }
+    },
+    {
+      "format": "SVG",
+      "loaded": [
+        "/",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/persistence-DZHhZsba.js",
+        "/",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/persistence-DZHhZsba.js",
+        "/fonts/SourceSans3-Regular-3.052.ttf"
+      ],
+      "requestFailures": [],
+      "manifest": {
+        "cacheName": "instruction-builder-v2-84482efca478c95d",
+        "assets": [
+          "/",
+          "/assets/html2canvas-1lVARquP.js",
+          "/assets/index-BStm4Iiu.css",
+          "/assets/index-n8VWJFWb.js",
+          "/assets/index.es-BWtO_YPt.js",
+          "/assets/jspdf.es.min-Cm391-XJ.js",
+          "/assets/persistence-DZHhZsba.js",
+          "/assets/purify.es-t6o27EpX.js",
+          "/assets/svg2pdf.es.min-DwfSYR45.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      },
+      "cachedUrls": [
+        "/",
+        "/assets/html2canvas-1lVARquP.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index.es-BWtO_YPt.js",
+        "/assets/jspdf.es.min-Cm391-XJ.js",
+        "/assets/persistence-DZHhZsba.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-DwfSYR45.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ],
+      "beforeOffline": {
+        "loaded": [
+          "/",
+          "/assets/index-n8VWJFWb.js",
+          "/assets/index-BStm4Iiu.css",
+          "/assets/persistence-DZHhZsba.js"
+        ],
+        "fontFaces": 0,
+        "downloads": []
+      },
+      "file": "cold-svg-guide-page-01-of-01.svg",
+      "bytes": 71321,
+      "inspection": {
+        "width": "210mm",
+        "height": "297mm",
+        "ids": [
+          "cold-kitchen",
+          "cold-routines",
+          "cold-learning"
+        ],
+        "texts": [
+          "Cold SVG guide",
+          "Total time: 1m",
+          "Step 1: Three libraries",
+          "1m",
+          "Chop",
+          "2 kg",
+          "Warning: Sharp",
+          "Wash hands",
+          "Count"
+        ],
+        "forbidden": 0
+      }
+    },
+    {
+      "format": "JSON",
+      "loaded": [
+        "/",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/persistence-DZHhZsba.js",
+        "/",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/persistence-DZHhZsba.js"
+      ],
+      "requestFailures": [],
+      "manifest": {
+        "cacheName": "instruction-builder-v2-84482efca478c95d",
+        "assets": [
+          "/",
+          "/assets/html2canvas-1lVARquP.js",
+          "/assets/index-BStm4Iiu.css",
+          "/assets/index-n8VWJFWb.js",
+          "/assets/index.es-BWtO_YPt.js",
+          "/assets/jspdf.es.min-Cm391-XJ.js",
+          "/assets/persistence-DZHhZsba.js",
+          "/assets/purify.es-t6o27EpX.js",
+          "/assets/svg2pdf.es.min-DwfSYR45.js",
+          "/fonts/SourceSans3-LICENSE.md",
+          "/fonts/SourceSans3-Regular-3.052.ttf",
+          "/icons/favicon.svg",
+          "/icons/icon-192.png",
+          "/icons/icon-512.png",
+          "/icons/icon-maskable-512.png",
+          "/manifest.webmanifest"
+        ]
+      },
+      "cachedUrls": [
+        "/",
+        "/assets/html2canvas-1lVARquP.js",
+        "/assets/index-BStm4Iiu.css",
+        "/assets/index-n8VWJFWb.js",
+        "/assets/index.es-BWtO_YPt.js",
+        "/assets/jspdf.es.min-Cm391-XJ.js",
+        "/assets/persistence-DZHhZsba.js",
+        "/assets/purify.es-t6o27EpX.js",
+        "/assets/svg2pdf.es.min-DwfSYR45.js",
+        "/fonts/SourceSans3-LICENSE.md",
+        "/fonts/SourceSans3-Regular-3.052.ttf",
+        "/icons/favicon.svg",
+        "/icons/icon-192.png",
+        "/icons/icon-512.png",
+        "/icons/icon-maskable-512.png",
+        "/manifest.webmanifest"
+      ],
+      "beforeOffline": {
+        "loaded": [
+          "/",
+          "/assets/index-n8VWJFWb.js",
+          "/assets/index-BStm4Iiu.css",
+          "/assets/persistence-DZHhZsba.js"
+        ],
+        "fontFaces": 0,
+        "downloads": []
+      },
+      "file": "cold-json-guide.json",
+      "bytes": 1177
+    }
+  ]
+}

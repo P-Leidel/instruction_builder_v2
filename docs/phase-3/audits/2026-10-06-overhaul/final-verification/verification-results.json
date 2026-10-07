@@ -1,0 +1,124 @@
+{
+  "recordedAt": "2026-10-06T17:03:37.207393+00:00",
+  "sourceCheckpoint": "8eb60c680522564ae398b5c3aefafa35c48be846",
+  "productionBuildCheckpoint": "c577134",
+  "productionSourceUnchangedThrough": "8eb60c680522564ae398b5c3aefafa35c48be846",
+  "onlyInterveningDelta": "Four checker Node imports/removal of unused assert, and preserved Task 5 review; no production source/dependency changes. Later handoff commits contain docs/evidence only.",
+  "runtime": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "browser": "153.0.8010.12",
+    "platform": "Windows, root-owned Chromium contexts"
+  },
+  "commands": {
+    "audit-full": {
+      "command": "npm audit",
+      "started": "2026-10-06T18:54:38.7041537+02:00",
+      "ended": "2026-10-06T18:54:41.7528710+02:00",
+      "exitCode": 0
+    },
+    "audit-production": {
+      "command": "npm audit --omit=dev",
+      "started": "2026-10-06T18:54:39.2430810+02:00",
+      "ended": "2026-10-06T18:54:42.3981515+02:00",
+      "exitCode": 0
+    },
+    "browser": {
+      "command": "npm run test:browser -- docs/phase-3/audits/2026-10-06-overhaul/final-verification/browser",
+      "started": "2026-10-06T18:58:35.1211313+02:00",
+      "ended": "2026-10-06T18:59:22.7209569+02:00",
+      "exitCode": 0
+    },
+    "build": {
+      "command": "npm run build",
+      "started": "2026-10-06T18:55:19.6088184+02:00",
+      "ended": "2026-10-06T18:55:29.4343924+02:00",
+      "exitCode": 0
+    },
+    "chromium-install": {
+      "command": "npx playwright install chromium",
+      "started": "2026-10-06T18:54:38.2817595+02:00",
+      "ended": "2026-10-06T18:54:43.5978172+02:00",
+      "exitCode": 0
+    },
+    "explicit-checker-lint": {
+      "command": "npx eslint --no-ignore [nine active browser checkers, runner and sample generator]",
+      "started": "2026-10-06T18:57:43.1250545+02:00",
+      "ended": "2026-10-06T18:57:46.5328534+02:00",
+      "exitCode": 0
+    },
+    "lint": {
+      "command": "npm run lint",
+      "started": "2026-10-06T18:54:32.5352244+02:00",
+      "ended": "2026-10-06T18:54:51.0347081+02:00",
+      "exitCode": 0
+    },
+    "pwa": {
+      "command": "npm run test:pwa -- docs/phase-3/audits/2026-10-06-overhaul/final-verification/pwa",
+      "started": "2026-10-06T18:56:39.3544003+02:00",
+      "ended": "2026-10-06T18:56:52.3837154+02:00",
+      "exitCode": 0
+    },
+    "tooling": {
+      "command": "npm run test:tooling",
+      "started": "2026-10-06T18:54:37.5847960+02:00",
+      "ended": "2026-10-06T18:54:39.3699573+02:00",
+      "exitCode": 0
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "started": "2026-10-06T18:54:32.9984291+02:00",
+      "ended": "2026-10-06T18:54:38.8063605+02:00",
+      "exitCode": 0
+    },
+    "unit": {
+      "command": "npm test",
+      "started": "2026-10-06T18:54:36.4898436+02:00",
+      "ended": "2026-10-06T18:54:45.4412107+02:00",
+      "exitCode": 0
+    },
+    "npm-ci": {
+      "command": "npm ci",
+      "exitCode": 0,
+      "result": "247 packages added; 248 audited; zero vulnerabilities",
+      "log": "npm-ci.log",
+      "observedBy": "Root exec session 21434 completed exit 0; no exact command-start timestamp was captured."
+    }
+  },
+  "productionOfflineManifest": {
+    "cacheName": "instruction-builder-v2-84482efca478c95d",
+    "assets": [
+      "/",
+      "/assets/html2canvas-1lVARquP.js",
+      "/assets/index-BStm4Iiu.css",
+      "/assets/index-n8VWJFWb.js",
+      "/assets/index.es-BWtO_YPt.js",
+      "/assets/jspdf.es.min-Cm391-XJ.js",
+      "/assets/persistence-DZHhZsba.js",
+      "/assets/purify.es-t6o27EpX.js",
+      "/assets/svg2pdf.es.min-DwfSYR45.js",
+      "/fonts/SourceSans3-LICENSE.md",
+      "/fonts/SourceSans3-Regular-3.052.ttf",
+      "/icons/favicon.svg",
+      "/icons/icon-192.png",
+      "/icons/icon-512.png",
+      "/icons/icon-maskable-512.png",
+      "/manifest.webmanifest"
+    ]
+  },
+  "browserCheckCounts": {
+    "driver-checks": 29,
+    "review-checks": 22,
+    "editor-evidence": 51,
+    "editor-transition-all": 53,
+    "app-output-integration": 26,
+    "export-review-results": 55
+  },
+  "browserNamedCheckTotal": 236,
+  "nativeReliability": "Five named PASS safety cases plus final PERSISTENCE_RELIABILITY_CHECKS=PASS in browser.log",
+  "coldPwaChecks": 45,
+  "coldFormats": 4,
+  "actualWaitingObservationMs": 512,
+  "practicalAcceptance": "Pending; no new participant, physical-printer, real-mobile or screen-reader observations",
+  "ci": "Local gates reproduced; GitHub workflow source reviewed but remote CI has not run in this local-only task."
+}

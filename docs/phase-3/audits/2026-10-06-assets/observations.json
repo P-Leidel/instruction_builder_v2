@@ -1,0 +1,296 @@
+[
+  {
+    "width": 320,
+    "popover": {
+      "x": 8,
+      "y": 574.9375,
+      "width": 304,
+      "height": 122.375
+    },
+    "popoverWithinViewport": true,
+    "quantityValidation": {
+      "invalid": "true",
+      "describedBy": "P0-0",
+      "description": "Enter a whole number from 1 to 99999."
+    },
+    "warningSelected": true,
+    "warningCleared": true,
+    "importTabReachesPreview": true,
+    "label": {
+      "width": 153.6964111328125,
+      "chipDesignWidth": 96
+    },
+    "twoTokens": {
+      "svgWidth": 480,
+      "designWidth": 748,
+      "scale": 0.6416807432432432,
+      "chipWidth": 61.60136413574219,
+      "iconWidth": 15.400337837837837,
+      "labelFontPx": 5.775126689189189,
+      "canvasTop": 1209.34375,
+      "pickerTop": 1434.796875,
+      "detailsTop": 775.546875,
+      "pageOverflow": 0
+    },
+    "twelveTokens": {
+      "svgWidth": 480,
+      "designWidth": 1412,
+      "scale": 0.33987894144144143,
+      "chipWidth": 32.62837219238281,
+      "iconWidth": 8.157094594594595,
+      "labelFontPx": 3.058910472972973,
+      "canvasTop": 1209.34375,
+      "pickerTop": 1367.796875,
+      "detailsTop": 775.546875,
+      "pageOverflow": 0
+    },
+    "previewTree": "- main:\n  - heading \"Untitled instructions\" [level=2]\n  - group \"1 instruction step, read-only preview\"",
+    "previewSvg": "- group \"1 instruction step, read-only preview\"",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "popover": {
+      "x": 8,
+      "y": 574.34375,
+      "width": 374,
+      "height": 122.375
+    },
+    "popoverWithinViewport": true,
+    "quantityValidation": {
+      "invalid": "true",
+      "describedBy": "P0-0",
+      "description": "Enter a whole number from 1 to 99999."
+    },
+    "warningSelected": true,
+    "warningCleared": true,
+    "importTabReachesPreview": true,
+    "label": {
+      "width": 153.6964111328125,
+      "chipDesignWidth": 96
+    },
+    "twoTokens": {
+      "svgWidth": 480,
+      "designWidth": 748,
+      "scale": 0.6416807432432432,
+      "chipWidth": 61.60136413574219,
+      "iconWidth": 15.400337837837837,
+      "labelFontPx": 5.775126689189189,
+      "canvasTop": 1159.75,
+      "pickerTop": 1385.203125,
+      "detailsTop": 725.953125,
+      "pageOverflow": 0
+    },
+    "twelveTokens": {
+      "svgWidth": 480,
+      "designWidth": 1412,
+      "scale": 0.33987894144144143,
+      "chipWidth": 32.62837219238281,
+      "iconWidth": 8.157094594594595,
+      "labelFontPx": 3.058910472972973,
+      "canvasTop": 1159.75,
+      "pickerTop": 1318.203125,
+      "detailsTop": 725.953125,
+      "pageOverflow": 0
+    },
+    "previewTree": "- main:\n  - heading \"Untitled instructions\" [level=2]\n  - group \"1 instruction step, read-only preview\"",
+    "previewSvg": "- group \"1 instruction step, read-only preview\"",
+    "errors": []
+  },
+  {
+    "width": 768,
+    "popover": {
+      "x": 149.28125,
+      "y": 325.75,
+      "width": 385.09375,
+      "height": 80.78125
+    },
+    "popoverWithinViewport": true,
+    "quantityValidation": {
+      "invalid": "true",
+      "describedBy": "P0-0",
+      "description": "Enter a whole number from 1 to 99999."
+    },
+    "warningSelected": true,
+    "warningCleared": true,
+    "importTabReachesPreview": true,
+    "label": {
+      "width": 153.05093383789062,
+      "chipDesignWidth": 96
+    },
+    "twoTokens": {
+      "svgWidth": 654,
+      "designWidth": 748,
+      "scale": 0.8742961711711712,
+      "chipWidth": 83.93243408203125,
+      "iconWidth": 20.98310810810811,
+      "labelFontPx": 7.86866554054054,
+      "canvasTop": 1006.15625,
+      "pickerTop": 1283.25,
+      "detailsTop": 572.359375,
+      "pageOverflow": 0
+    },
+    "twelveTokens": {
+      "svgWidth": 654,
+      "designWidth": 1412,
+      "scale": 0.46311936936936937,
+      "chipWidth": 44.45945739746094,
+      "iconWidth": 11.114864864864865,
+      "labelFontPx": 4.168074324324325,
+      "canvasTop": 1006.15625,
+      "pickerTop": 1191.96875,
+      "detailsTop": 572.359375,
+      "pageOverflow": 0
+    },
+    "previewTree": "- main:\n  - heading \"Untitled instructions\" [level=2]\n  - group \"1 instruction step, read-only preview\"",
+    "previewSvg": "- group \"1 instruction step, read-only preview\"",
+    "errors": []
+  },
+  {
+    "width": 800,
+    "popover": {
+      "x": 33,
+      "y": 446.75,
+      "width": 385.09375,
+      "height": 80.78125
+    },
+    "popoverWithinViewport": true,
+    "quantityValidation": {
+      "invalid": "true",
+      "describedBy": "P0-0",
+      "description": "Enter a whole number from 1 to 99999."
+    },
+    "warningSelected": true,
+    "warningCleared": true,
+    "importTabReachesPreview": true,
+    "label": {
+      "width": 153.6964111328125,
+      "chipDesignWidth": 96
+    },
+    "twoTokens": {
+      "svgWidth": 480,
+      "designWidth": 748,
+      "scale": 0.6416807432432432,
+      "chipWidth": 61.60137939453125,
+      "iconWidth": 15.400337837837837,
+      "labelFontPx": 5.775126689189189,
+      "canvasTop": 199.171875,
+      "pickerTop": 199.171875,
+      "detailsTop": 572.359375,
+      "pageOverflow": -15
+    },
+    "twelveTokens": {
+      "svgWidth": 480,
+      "designWidth": 748,
+      "scale": 0.64169921875,
+      "chipWidth": 61.603118896484375,
+      "iconWidth": 15.400781250000001,
+      "labelFontPx": 5.7752929687500005,
+      "canvasTop": 199.171875,
+      "pickerTop": 199.171875,
+      "detailsTop": 589.359375,
+      "pageOverflow": -15
+    },
+    "previewTree": "- main:\n  - heading \"Untitled instructions\" [level=2]\n  - group \"1 instruction step, read-only preview\"",
+    "previewSvg": "- group \"1 instruction step, read-only preview\"",
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "popover": {
+      "x": 125.28125,
+      "y": 721.1875,
+      "width": 385.09375,
+      "height": 80.78125
+    },
+    "popoverWithinViewport": true,
+    "quantityValidation": {
+      "invalid": "true",
+      "describedBy": "P0-0",
+      "description": "Enter a whole number from 1 to 99999."
+    },
+    "warningSelected": true,
+    "warningCleared": true,
+    "importTabReachesPreview": true,
+    "label": {
+      "width": 153.6964111328125,
+      "chipDesignWidth": 96
+    },
+    "twoTokens": {
+      "svgWidth": 480,
+      "designWidth": 748,
+      "scale": 0.6416807432432432,
+      "chipWidth": 61.60137939453125,
+      "iconWidth": 15.400337837837837,
+      "labelFontPx": 5.775126689189189,
+      "canvasTop": 199.171875,
+      "pickerTop": 199.171875,
+      "detailsTop": 572.359375,
+      "pageOverflow": -15
+    },
+    "twelveTokens": {
+      "svgWidth": 480,
+      "designWidth": 748,
+      "scale": 0.64169921875,
+      "chipWidth": 61.603118896484375,
+      "iconWidth": 15.400781250000001,
+      "labelFontPx": 5.7752929687500005,
+      "canvasTop": 199.171875,
+      "pickerTop": 199.171875,
+      "detailsTop": 572.359375,
+      "pageOverflow": -15
+    },
+    "previewTree": "- main:\n  - heading \"Untitled instructions\" [level=2]\n  - group \"1 instruction step, read-only preview\"",
+    "previewSvg": "- group \"1 instruction step, read-only preview\"",
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "popover": {
+      "x": 125.28125,
+      "y": 668.59375,
+      "width": 385.09375,
+      "height": 80.78125
+    },
+    "popoverWithinViewport": true,
+    "quantityValidation": {
+      "invalid": "true",
+      "describedBy": "P0-0",
+      "description": "Enter a whole number from 1 to 99999."
+    },
+    "warningSelected": true,
+    "warningCleared": true,
+    "importTabReachesPreview": true,
+    "label": {
+      "width": 152.9715118408203,
+      "chipDesignWidth": 96
+    },
+    "twoTokens": {
+      "svgWidth": 807,
+      "designWidth": 748,
+      "scale": 1.0788288288288288,
+      "chipWidth": 103.56756591796875,
+      "iconWidth": 25.89189189189189,
+      "labelFontPx": 9.70945945945946,
+      "canvasTop": 135.578125,
+      "pickerTop": 135.578125,
+      "detailsTop": 508.765625,
+      "pageOverflow": -15
+    },
+    "twelveTokens": {
+      "svgWidth": 807,
+      "designWidth": 748,
+      "scale": 1.078857421875,
+      "chipWidth": 103.5703125,
+      "iconWidth": 25.892578125,
+      "labelFontPx": 9.709716796875,
+      "canvasTop": 135.578125,
+      "pickerTop": 135.578125,
+      "detailsTop": 508.765625,
+      "pageOverflow": -15
+    },
+    "previewTree": "- main:\n  - heading \"Untitled instructions\" [level=2]\n  - group \"1 instruction step, read-only preview\"",
+    "previewSvg": "- group \"1 instruction step, read-only preview\"",
+    "errors": []
+  }
+]
