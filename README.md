@@ -26,6 +26,7 @@ npm run test:pwa   # production offline exports + update lifecycle; build first
 Planning and architecture docs live in [docs/](docs/):
 
 - [docs/milestones.md](docs/milestones.md) — the single source of truth for current phase/task status; start here.
+- [7 October codebase health review](docs/phase-3/reviews/2026-10-07-codebase-health-review.md) — current reliability findings, minor fixes, architecture debt and UX decisions, with source line references.
 - [docs/project-plan.md](docs/project-plan.md) — the approved project plan (goals, stack, phased task list, risks, success criteria).
 - [2026-10-06 takeover review](docs/phase-3/audits/2026-10-06-takeover-review.md) — historical baseline UX, graphics, mobile, and reliability findings and verified minor fixes; the overhaul handoff records their resolution.
 - [Agent specification package](docs/superpowers/specs/2026-10-06-overhaul/README.md) — confirmed product choices, shared contracts, and separately owned overhaul deliveries.

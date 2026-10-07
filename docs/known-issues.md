@@ -9,6 +9,16 @@ Tracked, intentionally-deferred issues that `npm run lint`/`typecheck`/`build`
 don't surface. Not a replacement for fixing bugs promptly - only for things
 noted and deliberately left alone.
 
+## Codebase health review, 7 October 2026
+
+The [current review](./phase-3/reviews/2026-10-07-codebase-health-review.md)
+records remaining planner/input robustness, cross-tab preference loss, startup
+storage retry, unknown-picture captions, PNG physical density, and focus-flow
+issues, plus architecture and UX decisions. It also records the fixed save/Undo
+race, field shortcut scoping, UI language, repeated import submission, and
+obsolete startup viewport tracking. Older sections below retain their dated
+context; use this review and `CONTEXT.md` for current implementation behavior.
+
 ## Takeover review and overhaul, 6 October 2026
 
 The [audit](./phase-3/audits/2026-10-06-takeover-review.md) records the
@@ -38,7 +48,7 @@ Current limits and next owners:
 | PNG supports 150/300 dpi, max 24M pixels per page | Vector SVG/PDF available for larger outputs; no silent raster allocation beyond limit |
 | Local browser/device storage and abrupt teardown's final-edit window | Maintainer/user; portable JSON backup and [recovery instructions](./persistence-recovery.md); no cross-device sync |
 | Original artwork distribution license is not established | Project owner must choose a grant before public release; [factual status](./artwork/LICENSE-STATUS.md) retained |
-| Optional drag convenience | Future editor agent after primary-flow trials; tap/keyboard ordering is complete |
+| Optional drag convenience | Mouse/pen and armed touch movement are delivered; real-device usability acceptance remains pending, alongside tap/keyboard ordering |
 
 Nothing in the technical record establishes universal pictogram comprehension or
 physical/device release acceptance. No overhaul deployment occurred.
@@ -578,7 +588,7 @@ task, which shipped keyboard alternatives for step reordering and token
 
 ## Three token drag-and-drop improvements deferred behind a testing round
 
-**Current scope:** drag is an optional deferred shortcut; the new editor has complete tap/keyboard ordering. The following items describe the retained legacy drag path and may inform a later agent, not block the primary authoring flow.
+**Historical scope:** these items describe the retained legacy drag path. The current print-based editor has mouse/pen dragging, armed touch movement and tap/keyboard ordering; use `CONTEXT.md` and the current drag-design record for its behavior.
 
 Scoped with the user on 2026-09-20 while planning the token drop-accuracy
 fix (bounding-rect drop resolution, both-sides insertion, per-pointer-type

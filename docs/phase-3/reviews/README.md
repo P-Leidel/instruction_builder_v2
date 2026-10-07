@@ -1,12 +1,17 @@
 # Phase 3 Code Reviews
 
-> 🗄️ **Doc status: HISTORICAL — superseded.** Dated snapshots, not edited
-> after they're written; see [../../milestones.md](../../milestones.md#documentation-status-conventions)
+> 📌 **Doc status: CURRENT** — index of dated review snapshots; see
+> [../../milestones.md](../../milestones.md#documentation-status-conventions)
 > for what CURRENT/HISTORICAL mean project-wide.
 
 Dated code-review reports produced during Phase 3, mirroring
 [phase-2/reviews/](../../phase-2/reviews/README.md)'s own folder. One file
 per run (`YYYY-MM-DD-code-review.md`).
+
+- [7 October 2026 codebase health review](./2026-10-07-codebase-health-review.md)
+  reviews code, architecture and UX across the current application. It records
+  verified small fixes, remaining functional findings, open design decisions
+  and fresh unit/browser/offline verification.
 
 - [2026-09-17-code-review.md](./2026-09-17-code-review.md) was produced with
   the `mattpocock-skills:code-review` plugin skill, reviewing the
