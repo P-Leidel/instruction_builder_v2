@@ -9,13 +9,18 @@ import type { GuideRecord, GuideRepository } from "../model/guide";
 function storage() {
   const records = new Map<string, unknown>(); let tail = Promise.resolve();
   const state = { fail: false, failPreferences: false };
-  const store: GuideStore = { transaction: (operation) => {
+  const store: GuideStore = { transaction: (plan, operation) => {
     const promise = tail.then(() => {
       const draft = structuredClone(records);
-      const result = operation({ get: (key) => draft.get(key), entries: () => [...draft], put: (key, value) => {
+      const declared = (key: string) => plan.keys?.includes(key) || (plan.prefix !== undefined && key.startsWith(plan.prefix));
+      const put = (key: string, value: unknown) => {
+        if (plan.mode === "readonly") throw new Error("readonly");
         if (state.failPreferences && key === PREFERENCES_KEY) throw new Error("preference quota");
         draft.set(key, structuredClone(value));
-      } });
+      };
+      const result = operation({ get: (key) => { if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
+        entries: () => { if (plan.prefix === undefined && !plan.keys?.length) throw new Error("undeclared entries"); return [...draft].filter(([key]) => declared(key)); },
+        put, add: (key, value) => { if (draft.has(key)) throw new Error("insert collision"); put(key, value); } });
       if (state.fail) throw new Error("quota"); records.clear(); for (const [key, value] of draft) records.set(key, value); return result;
     }); tail = promise.then(() => undefined, () => undefined); return promise;
   } };
@@ -148,9 +153,9 @@ describe("local guide controller", () => {
   it("summary refresh cannot rebase a same-revision external edit", async () => {
     const { controller, session, records, records: [active], ...data } = await fixture();
     const external = structuredClone(active); external.document.meta.title = "External without revision bump";
-    const diskRecords = await data.store.transaction((tx) => tx.entries());
+    const diskRecords = await data.store.transaction({ prefix: "", mode: "readonly" }, (tx) => tx.entries());
     expect(diskRecords).toHaveLength(3);
-    await data.store.transaction((tx) => tx.put(GUIDE_PREFIX + active.id, external));
+    await data.store.transaction({}, (tx) => tx.put(GUIDE_PREFIX + active.id, external));
     await controller.refreshGuides(); sessionActions.updateTitle(session, "Losing local");
     expect(await controller.flushActiveGuide()).toEqual({ ok: false, reason: "conflict" });
     expect(session.document.value.meta.title).toBe("Losing local"); expect(records[0].id).toBe(active.id);
@@ -202,7 +207,7 @@ describe("local guide controller", () => {
       if (block) { entered.resolve(); await gate.promise; }
       return result;
     } }) });
-    await store.transaction((tx) => { const raw = tx.get(GUIDE_PREFIX + records[0].id) as GuideRecord;
+    await store.transaction({ keys: [GUIDE_PREFIX + records[0].id] }, (tx) => { const raw = tx.get(GUIDE_PREFIX + records[0].id) as GuideRecord;
       raw.document.meta.title = "Same-revision disk winner"; tx.put(GUIDE_PREFIX + raw.id, raw); });
     block = true; const reload = controller.reloadActiveGuide(); await entered.promise;
     sessionActions.updateTitle(session, "New local edit during reload"); await vi.advanceTimersByTimeAsync(250);
@@ -222,13 +227,13 @@ describe("local guide controller", () => {
       save: (...args) => { writes++; return repository.save(...args); },
     }) });
     const winner = { ...records[0], document: { ...records[0].document, meta: { ...records[0].document.meta, title: "Same-revision disk winner" } } };
-    await store.transaction((tx) => tx.put(GUIDE_PREFIX + winner.id, winner));
+    await store.transaction({}, (tx) => tx.put(GUIDE_PREFIX + winner.id, winner));
     pauseLoad = true; const reload = controller.reloadActiveGuide(); await entered.promise;
     sessionActions.updateTitle(session, "Exportable edit during reload");
     if (trigger === "visibilitychange") window.document.visibilityState = "hidden";
     if (trigger !== "direct") window.dispatchEvent(new Event(trigger));
     const flushed = await controller.flushActiveGuide(); await vi.advanceTimersByTimeAsync(250);
-    const disk = await store.transaction((tx) => tx.get(GUIDE_PREFIX + winner.id));
+    const disk = await store.transaction({ keys: [GUIDE_PREFIX + winner.id], mode: "readonly" }, (tx) => tx.get(GUIDE_PREFIX + winner.id));
     gate.resolve(); const result = await reload;
     expect(flushed).toEqual({ ok: false, reason: "cancelled" }); expect(disk).toEqual(winner); expect(writes).toBe(0);
     expect(result).toEqual({ ok: false, reason: "cancelled" }); expect(session.document.value.meta.title).toBe("Exportable edit during reload");
@@ -255,7 +260,7 @@ describe("local guide controller", () => {
     releaseLoad.resolve(); expect(await reload).toEqual({ ok: false, reason: "cancelled" });
     expect(await first).toEqual({ ok: false, reason: "cancelled" });
     expect(session.document.value.meta.title).toBe("New edit while reload waits");
-    expect((await store.transaction((tx) => tx.get(GUIDE_PREFIX + records[0].id)) as GuideRecord).document.meta.title).toBe("Write already in flight");
+    expect((await store.transaction({ keys: [GUIDE_PREFIX + records[0].id], mode: "readonly" }, (tx) => tx.get(GUIDE_PREFIX + records[0].id)) as GuideRecord).document.meta.title).toBe("Write already in flight");
     expect(controller.saveState.value).toBe("conflict");
   });
 
@@ -290,10 +295,10 @@ describe("local guide controller", () => {
 
   it("imports recovered content as another guide and never removes the recovery source", async () => {
     const { controller, store, session } = await fixture(); const recovered = createEmptyDocument("board"); recovered.meta.title = "Recovered";
-    const key = "instruction-builder:recovery:fixture"; await store.transaction((tx) => tx.put(key, recovered));
+    const key = "instruction-builder:recovery:fixture"; await store.transaction({}, (tx) => tx.put(key, recovered));
     expect((await controller.importRecoveredGuide(key)).ok).toBe(true); expect(session.document.value.meta.title).toBe("Recovered");
-    expect(await store.transaction((tx) => tx.get(key))).toEqual(recovered); expect(controller.guideSummaries.value).toHaveLength(3);
-    await store.transaction((tx) => tx.put(key, { schemaVersion: 999 })); const draft = session.document.value;
+    expect(await store.transaction({ keys: [key], mode: "readonly" }, (tx) => tx.get(key))).toEqual(recovered); expect(controller.guideSummaries.value).toHaveLength(3);
+    await store.transaction({}, (tx) => tx.put(key, { schemaVersion: 999 })); const draft = session.document.value;
     expect((await controller.importRecoveredGuide(key)).ok).toBe(false); expect(session.document.value).toBe(draft);
     expect((await controller.importRecoveredGuide(LEGACY_KEY)).ok).toBe(false);
   });

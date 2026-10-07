@@ -187,7 +187,7 @@ export function createGuideController(session: DocumentSession, options: GuideCo
     }),
     importRecoveredGuide: (key: string) => serialize(async () => {
       if (!key.startsWith("instruction-builder:recovery:")) return { ok: false, reason: "not-found" };
-      const raw = await store.transaction((transaction) => transaction.get(key));
+      const raw = await store.transaction({ keys: [key], mode: "readonly" }, (transaction) => transaction.get(key));
       if (raw === undefined) return { ok: false, reason: "not-found" };
       try {
         const doc = typeof raw === "object" && raw !== null && "document" in raw ? raw.document : raw;

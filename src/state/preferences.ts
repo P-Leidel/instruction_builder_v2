@@ -26,7 +26,7 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
   let initialized = false; let intent = preferences.peek();
   const startupPatches: Partial<AppPreferences>[] = [];
   function initializePreferences(): Promise<void> {
-    initialization ??= store.transaction((transaction) => {
+    initialization ??= store.transaction({ keys: [PREFERENCES_KEY] }, (transaction) => {
       const raw = transaction.get(PREFERENCES_KEY);
       if (raw === undefined) return intent;
       const value = object(raw) && raw.version === 1 ? raw.preferences : undefined;
@@ -38,8 +38,7 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
         ? { ...value, theme: "light" } : value;
       if (!object(raw) || raw.version !== 1 || rawFingerprint(compatible) !== rawFingerprint(clean)) {
         const key = `instruction-builder:recovery:${options.now?.() ?? new Date().toISOString()}:${options.newId?.() ?? crypto.randomUUID()}`;
-        if (transaction.get(key) !== undefined) throw new Error("Recovery key collision");
-        transaction.put(key, raw);
+        transaction.add(key, raw);
       }
       return clean;
     }).then((value) => {
@@ -66,7 +65,7 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
       if (version === serial) preferences.value = persisted;
       if (version === serial) preferenceSaveState.value = "saving";
       try {
-        await store.transaction((transaction) => transaction.put(PREFERENCES_KEY, { version: 1, preferences: persisted }));
+        await store.transaction({}, (transaction) => transaction.put(PREFERENCES_KEY, { version: 1, preferences: persisted }));
         if (version === serial) preferenceSaveState.value = "saved";
       } catch { preferenceSaveState.value = "unavailable"; }
     });

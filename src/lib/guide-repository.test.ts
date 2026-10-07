@@ -5,14 +5,19 @@ import { createGuideRepository, GUIDE_PREFIX, LEGACY_KEY, MIGRATION_KEY, type Gu
 function memoryStore(seed: Map<string, unknown> = new Map()) {
   let tail = Promise.resolve();
   const state = { records: seed, failRecovery: false, failCommit: false, pause: undefined as Promise<void> | undefined };
-  const store: GuideStore = { transaction: (operation) => {
+  const store: GuideStore = { transaction: (plan, operation) => {
     const next = tail.then(async () => {
       await state.pause;
       const draft = structuredClone(state.records);
-      const value = operation({ get: (key) => draft.get(key), entries: () => [...draft], put: (key, entry) => {
+      const declared = (key: string) => plan.keys?.includes(key) || (plan.prefix !== undefined && key.startsWith(plan.prefix));
+      const put = (key: string, entry: unknown) => {
+        if (plan.mode === "readonly") throw new Error("readonly");
         if (state.failRecovery && key.startsWith("instruction-builder:recovery:")) throw new Error("backup failed");
         draft.set(key, structuredClone(entry));
-      } });
+      };
+      const value = operation({ get: (key) => { if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
+        entries: () => { if (plan.prefix === undefined && !plan.keys?.length) throw new Error("undeclared entries"); return [...draft].filter(([key]) => declared(key)); },
+        put, add: (key, entry) => { if (draft.has(key)) throw new Error("insert collision"); put(key, entry); } });
       if (state.failCommit) throw new Error("quota exceeded");
       state.records.clear();
       for (const [key, entry] of draft) state.records.set(key, entry);

@@ -5,9 +5,13 @@ import type { GuideStore } from "../lib/guide-repository";
 function storage(seed?: unknown) {
   const records = new Map<string, unknown>(); if (seed !== undefined) records.set(PREFERENCES_KEY, seed);
   const state = { fail: false, pause: undefined as Promise<void> | undefined };
-  const store: GuideStore = { transaction: async (operation) => {
+  const store: GuideStore = { transaction: async (plan, operation) => {
     await state.pause; const draft = structuredClone(records);
-    const result = operation({ get: (key) => draft.get(key), entries: () => [...draft], put: (key, value) => draft.set(key, structuredClone(value)) });
+    const declared = (key: string) => plan.keys?.includes(key) || (plan.prefix !== undefined && key.startsWith(plan.prefix));
+    const put = (key: string, value: unknown) => { if (plan.mode === "readonly") throw new Error("readonly"); draft.set(key, structuredClone(value)); };
+    const result = operation({ get: (key) => { if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
+      entries: () => { if (plan.prefix === undefined && !plan.keys?.length) throw new Error("undeclared entries"); return [...draft].filter(([key]) => declared(key)); },
+      put, add: (key, value) => { if (draft.has(key)) throw new Error("insert collision"); put(key, value); } });
     if (state.fail) throw new Error("quota");
     records.clear(); for (const [key, value] of draft) records.set(key, value); return result;
   } };

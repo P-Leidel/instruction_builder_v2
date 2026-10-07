@@ -25,8 +25,8 @@ try {
     assert.deepEqual(exported, expectedLocal); assert.equal(await b.locator(".save-status--conflict").isVisible(), true); await stays(b, key, winner); await stays(b, legacyKey, rawSeed);
     console.log("CROSS_TAB_CONFLICT_AND_LOCAL_JSON_EXPORT=PASS");
     // A failed explicit reload must preserve the entire losing draft; no stale flush.
-    await b.evaluate(() => { window.__realGetAll = IDBObjectStore.prototype.getAll; IDBObjectStore.prototype.getAll = function () { throw new DOMException("Injected load failure", "UnknownError"); }; });
-    await b.getByRole("button", { name: "Reload saved guide", exact: true }).click(); await b.getByRole("dialog").getByRole("button", { name: "Reload saved guide", exact: true }).click(); await b.waitForFunction(() => !document.querySelector("dialog")); await b.evaluate(() => { IDBObjectStore.prototype.getAll = window.__realGetAll; });
+    await b.evaluate(() => { window.__realGet = IDBObjectStore.prototype.get; IDBObjectStore.prototype.get = function () { throw new DOMException("Injected load failure", "UnknownError"); }; });
+    await b.getByRole("button", { name: "Reload saved guide", exact: true }).click(); await b.getByRole("dialog").getByRole("button", { name: "Reload saved guide", exact: true }).click(); await b.waitForFunction(() => !document.querySelector("dialog")); await b.evaluate(() => { IDBObjectStore.prototype.get = window.__realGet; });
     assert.deepEqual(await snapshot(b), expectedLocal); assert.equal(await b.locator(".save-status--unavailable").count(), 1); await stays(b, key, winner);
     await b.getByRole("button", { name: "Reload saved guide", exact: true }).click(); await b.getByRole("dialog").getByRole("button", { name: "Reload saved guide", exact: true }).click(); await b.waitForFunction(() => !document.querySelector("dialog")); assert.deepEqual(await snapshot(b), winner.document); assert.equal(await b.getByRole("button", { name: "Undo", exact: true }).isDisabled(), true);
     console.log("EXPLICIT_RELOAD_FAILURE_PRESERVES_DRAFT_AND_SUCCESS_ADOPTS_WINNER=PASS");
@@ -49,8 +49,8 @@ try {
   // Failed raw backup aborts initialization and prevents creation, keeping exportable draft explicit.
   const { page: fail, context: failContext } = await boot(browser, url, errors);
   try {
-    await fail.evaluate(async (raw) => { const { createIndexedDbGuideStore, LEGACY_KEY } = await import("/src/lib/guide-repository.ts"); await createIndexedDbGuideStore().transaction((tx) => tx.put(LEGACY_KEY, raw)); }, future);
-    await fail.addInitScript(() => { const put = IDBObjectStore.prototype.put; IDBObjectStore.prototype.put = function (value, key) { if (String(key).startsWith("instruction-builder:recovery:")) throw new DOMException("Injected backup quota", "QuotaExceededError"); return put.call(this, value, key); }; });
+    await fail.evaluate(async (raw) => { const { createIndexedDbGuideStore, LEGACY_KEY } = await import("/src/lib/guide-repository.ts"); await createIndexedDbGuideStore().transaction({}, (tx) => tx.put(LEGACY_KEY, raw)); }, future);
+    await fail.addInitScript(() => { const add = IDBObjectStore.prototype.add; IDBObjectStore.prototype.add = function (value, key) { if (String(key).startsWith("instruction-builder:recovery:")) throw new DOMException("Injected backup quota", "QuotaExceededError"); return add.call(this, value, key); }; });
     await fail.reload(); await fail.locator(".save-status--unavailable").waitFor(); await fail.getByRole("button", { name: "New guide", exact: true }).click(); await fail.getByRole("button", { name: "Start blank", exact: true }).click(); await fail.getByRole("button", { name: "Close", exact: true }).last().click(); await fail.getByRole("button", { name: "Download new draft JSON", exact: true }).waitFor();
     const draft = await downloadJson(fail, fail.getByRole("button", { name: "Download new draft JSON", exact: true })); assert.equal(draft.schemaVersion, 2); assert.deepEqual(await value(fail, legacyKey), future); assert.equal((await records(fail)).filter(([key]) => key.startsWith(guidePrefix)).length, 0);
     console.log("FAILED_RECOVERY_COPY_BLOCKS_CREATION_WITH_EXPLICIT_DRAFT_BACKUP=PASS");
