@@ -12,9 +12,10 @@ noted and deliberately left alone.
 ## Codebase health review, 7 October 2026
 
 The [dated review](./phase-3/reviews/2026-10-07-codebase-health-review.md)
-records remaining planner/input robustness, cross-tab preference loss, startup
-storage retry, unknown-picture captions, PNG physical density, and focus-flow
-issues and UX decisions. The [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
+records the original functional findings and UX decisions. The [reliability remediation](./phase-3/progress/2026-10-07-reliability-remediation.md)
+addresses long-text planning, cross-tab preference loss and explicit startup
+storage retry. Unknown-picture captions, nonempty imported identities, PNG physical
+density, focus-flow issues and UX decisions remain open. The [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
 retires disconnected legacy code, narrows atomic storage reads and consolidates
 maintained browser checks under `tests/browser`. It also records the fixed save/Undo
 race, field shortcut scoping, UI language, repeated import submission, and
@@ -375,7 +376,7 @@ task, which shipped keyboard alternatives for step reordering and token
   real-browser driver, not Vitest" objection this entry originally raised no
   longer applies to pagination specifically: it's now pure, DOM-free
   arithmetic. See
-  [`pdf-pagination.test.ts`](../src/lib/pdf-pagination.test.ts)'s
+  [`pdf-pagination.test.ts`](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/lib/pdf-pagination.test.ts)'s
   "paginateSteps against real computeCanvasLayout output (non-uniform
   document)" tests for the resulting regression coverage - built with a
   desktop-layout (6-chips-per-row) document specifically, since desktop
@@ -485,7 +486,7 @@ task, which shipped keyboard alternatives for step reordering and token
   entirely on one mechanism. `app.tsx` marks the background `inert` while a
   dialog is open, and the hand-written Tab cycle that used to keep focus
   between Cancel and Confirm was deleted in the same change (see
-  [`lib/dialog-focus.ts`](../src/lib/dialog-focus.ts) for the argument: two
+  [`lib/dialog-focus.ts`](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/lib/dialog-focus.ts) for the argument: two
   mechanisms enforcing one rule is the shape that was just removed from
   `FieldPopover`, and the cycle only ever knew about two buttons). There is
   no fallback and no feature detection, so on a browser without `inert`
@@ -545,7 +546,7 @@ task, which shipped keyboard alternatives for step reordering and token
 
 **Historical replaced flow:** current import creates a new guide and captures/restores its opener; native modal transition coverage is recorded. Real OS file-picker focus remains a device observation to perform; no result is inferred from automated file selection.
 
-- **What it is:** [`lib/dialog-focus.ts`](../src/lib/dialog-focus.ts)
+- **What it is:** [`lib/dialog-focus.ts`](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/lib/dialog-focus.ts)
   records the opener by listening for `focusin` on the whole document while
   the dialog is closed, because marking the toolbar `inert` blurs the real
   opener before any effect can read `document.activeElement`. Both confirm
@@ -620,7 +621,7 @@ audited decision, or is too large to land without its own design pass.
   an auto-scroll implementation would have to start.
 - **Step-reorder drag shows no insertion marker.** `StepCard`'s drag handle
   sets only `dragGhost`, never `dropTarget`
-  ([StepCard.tsx](../src/components/InstructionCanvas/StepCard.tsx)), so
+  ([StepCard.tsx](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/components/InstructionCanvas/StepCard.tsx)), so
   reordering steps previews nothing while reordering tokens previews its
   exact landing slot. Closing the gap needs a horizontal between-cards
   marker, which has no equivalent in `canvas-layout.ts` yet - the existing

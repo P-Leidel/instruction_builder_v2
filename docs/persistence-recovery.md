@@ -5,7 +5,7 @@ Guides live in IndexedDB database `keyval-store`, object store `keyval`, in this
 | Key | Value |
 | --- | --- |
 | `instruction-builder:guide:<id>` | `GuideRecord`: `id`, positive integer `revision`, `document`, `createdAt`, `updatedAt`, optional `deletedAt` |
-| `instruction-builder:preferences:v1` | `{ version: 1, preferences: { uiLocale, labelLocale, activeLibraryId, lastGuideId? } }` |
+| `instruction-builder:preferences:v1` | `{ version: 1, preferences: { uiLocale, labelLocale, theme, activeLibraryId, lastGuideId? } }` |
 | `instruction-builder:guides-migration:v1` | `{ guideId, fingerprint }`, identifying the exact imported legacy snapshot |
 | `instruction-builder:document` | Original legacy document; the guide controller never replaces it |
 | `instruction-builder:recovery:<ISO timestamp>:<UUID>` | Exact raw value copied from an unreadable or changed source |
@@ -25,6 +25,8 @@ Each mutation compares the expected revision and loaded raw baseline in the same
 Normal JSON records and comparable structured-clone graphs (including cycles and binary data) use stable comparisons. Opaque non-JSON extras such as Blob/File/Error cannot be compared synchronously inside the transaction; records containing them conservatively conflict instead of risking a stale overwrite. Their original values and any recovery copies remain intact. Ordinary imported JSON and authored fields are unaffected.
 
 Startup calls `await initializeGuides(documentSession)` once. This initializes preferences/repository, opens a valid last guide, and owns one document observer. Before attaching it, initialization disables the old `initPersistence` observer/listeners and drains/awaits old writes. The compatibility function cannot reattach after this handoff.
+
+After a failed startup read/migration, **Retry local storage** resumes incomplete initialization in the running app. Failed recovery copies must still commit before creation is enabled; their failure rolls back the entire transaction and retains the original. Retry installs observation once and does not replace document/history edited before or during recovery. It remains on My guides; Open/Create become usable after success. This startup action does not clear active conflicts, deletions or later save failures. **Retry saving preferences** independently retries failed initialization or retained preference writes.
 
 ## Save status and conflicts
 
@@ -72,7 +74,7 @@ The signal starts as null, changes only after committed deletion, is replaced by
 
 `guideNotices` exposes `{ code, sourceKey, recoveryKey, guideId? }` with codes `legacy-changed`, `legacy-recovered`, and `guide-recovered`; UI owns localized explanations. `importRecoveredGuide(recoveryKey)` validates a recovered document (or a guide envelope's inner document), flushes, and adds another guide. It never deletes recovery data. Missing/malformed input leaves the session intact and returns an error.
 
-Preferences use a separate versioned record. New profiles use browser English/German, otherwise English, and Kitchen. Unsupported stored values fall back field by field to English/Kitchen; invalid raw records receive diagnostic recovery copies before replacement. Changes appear immediately and persist in serialized order, including during initialization. Failure retains local choices and reports `unavailable` without changing the guide's saved status.
+Preferences use a separate versioned record. New profiles use browser English/German, otherwise English, Kitchen and light theme. Unsupported stored values fall back field by field; invalid raw records receive exact diagnostic recovery copies before replacement. Changes appear immediately and persist in serialized order, including during initialization. Each write reads the latest stored record and merges only retained local patches atomically, so another tab's unrelated choices survive. Other tabs adopt external changes on their next local write or initialization; no immediate broadcast is implemented. Failure retains local choices and reports `unavailable` without changing the guide's saved status. Explicit preference retry preserves failed patches and changes queued while retry is running; Saved requires committed writes.
 
 ## Inspecting raw recovery data
 

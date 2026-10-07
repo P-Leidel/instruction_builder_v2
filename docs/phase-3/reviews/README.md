@@ -12,7 +12,8 @@ per run (`YYYY-MM-DD-code-review.md`).
   reviews code, architecture and UX across its dated application snapshot. It records
   verified small fixes, remaining functional findings, open design decisions
   and fresh unit/browser/offline verification. The [architecture remediation](../progress/2026-10-07-architecture-remediation.md)
-  records subsequent fixes and current open work.
+  and [reliability remediation](../progress/2026-10-07-reliability-remediation.md)
+  record subsequent fixes and current open work.
 
 - [2026-09-17-code-review.md](./2026-09-17-code-review.md) was produced with
   the `mattpocock-skills:code-review` plugin skill, reviewing the

@@ -19,8 +19,9 @@ three original libraries, local guides, responsive editing/semantic reading,
 physical planning, preview and exports. [Technical acceptance](./phase-3/audits/2026-10-06-overhaul/technical-acceptance.md)
 records clean-install gates (461 unit tests, 7 tooling tests, integrated browser
 and cold/update PWA checks). The later [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
-and prior review fixes are committed and pushed separately on `codex/architecture-remediation`;
-487 current unit tests, tooling, browser and production PWA gates pass. No merge or deployment occurred.
+and [reliability remediation](./phase-3/progress/2026-10-07-reliability-remediation.md)
+are committed and pushed separately on `codex/architecture-remediation`;
+532 current unit tests, tooling, browser and production PWA gates pass. No merge or deployment occurred.
 Participant, actual-print, real-device and screen-reader acceptance remain pending;
 Phase 3 is not complete.
 
