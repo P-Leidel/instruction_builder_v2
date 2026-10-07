@@ -8,11 +8,11 @@ import { TokenPicker } from "../TokenPicker/TokenPicker";
 import { TokenDetails } from "../TokenDetails/TokenDetails";
 import { StepDetails } from "../StepDetails/StepDetails";
 import { AttachmentDraftProvider } from "../TokenDetails/AttachmentFields";
-export function ModalDialog({ children, label, onClose }: { children: ComponentChildren; label: string; onClose: () => void }) {
+export function ModalDialog({ children, label, onClose, busy = false }: { children: ComponentChildren; label: string; onClose: () => void; busy?: boolean }) {
   const ref = useRef<HTMLDialogElement>(null);
   useLayoutEffect(() => { const dialog = ref.current!; const opener = window.document.activeElement; dialog.showModal(); return () => { dialog.close(); if (opener instanceof HTMLElement && opener.isConnected) opener.focus(); }; }, []);
-  return <dialog ref={ref} aria-label={label} class="context-sheet" onKeyDown={(event) => {
-    if (event.key === "Escape") { event.preventDefault(); onClose(); return; }
+  return <dialog ref={ref} aria-label={label} aria-busy={busy || undefined} class="context-sheet" onKeyDown={(event) => {
+    if (event.key === "Escape") { event.preventDefault(); if (!busy) onClose(); return; }
     if (event.key !== "Tab") return;
     const nodes = [...ref.current!.querySelectorAll<HTMLElement>('button:not(:disabled),input:not(:disabled),select:not(:disabled),textarea:not(:disabled),summary,[tabindex="0"]')].filter((node) => {
       if (node.getBoundingClientRect().width <= 0) return false;
@@ -26,7 +26,7 @@ export function ModalDialog({ children, label, onClose }: { children: ComponentC
     const first = nodes[0]; const last = nodes.at(-1);
     if (event.shiftKey && window.document.activeElement === first) { event.preventDefault(); last?.focus(); }
     else if (!event.shiftKey && window.document.activeElement === last) { event.preventDefault(); first?.focus(); }
-  }} onCancel={(event) => { event.preventDefault(); onClose(); }}><header class="context-sheet__header"><button type="button" onClick={onClose}>{t(preferences.value.uiLocale, "dialog.close")}</button></header><div class="context-sheet__body">{children}</div></dialog>;
+  }} onCancel={(event) => { event.preventDefault(); if (!busy) onClose(); }}><header class="context-sheet__header"><button type="button" disabled={busy} onClick={onClose}>{t(preferences.value.uiLocale, "dialog.close")}</button></header><div class="context-sheet__body">{children}</div></dialog>;
 }
 export function AuthoringPanel({ session }: { session: DocumentSession }) {
   const [mobile, setMobile] = useState(() => window.matchMedia("(max-width: 767px)").matches);

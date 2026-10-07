@@ -22,6 +22,8 @@ export function App() {
   const input = useRef<HTMLInputElement>(null); const readOpener = useRef<HTMLElement | null>(null); const outputOpener = useRef<HTMLElement | null>(null);
   const [reloadConfirm, setReloadConfirm] = useState(false);
   const [settings, setSettings] = useState(false);
+  const creatingGuide = useRef(false);
+  const [guideCreationBusy, setGuideCreationBusy] = useState(false);
   const [output, setOutput] = useState<{ guideId: string | null; locale: AppLocale } | null>(null);
   const locale = preferences.value.uiLocale; const session = documentSession;
   const editing = appView.value === "editor"; const reading = appView.value === "reader";
@@ -50,6 +52,13 @@ export function App() {
   function result(value: GuideActionResult) {
     if (!value.ok) toast.value = { text: t(preferences.peek().uiLocale, value.reason === "not-found" ? "guides.notFound" : value.reason === "deleted" ? "guides.deleted" : value.reason === "conflict" || value.reason === "cancelled" ? "save.conflict" : "save.unavailable"), tone: "error" };
   }
+  async function createOnce(doc: InstructionDocument) {
+    if (creatingGuide.current) return;
+    creatingGuide.current = true; setGuideCreationBusy(true);
+    try { const created = await createGuide(doc); result(created); return created; }
+    finally { creatingGuide.current = false; setGuideCreationBusy(false); }
+  }
+  const closeImport = () => { if (!creatingGuide.current) pendingImport.value = null; };
   async function backup(doc: InstructionDocument) { const exported = await runJsonExport(doc); if (exported.error) toast.value = { text: t(preferences.peek().uiLocale, "output.failed"), tone: "error" }; }
   const guides = async () => { const flushed = await flushActiveGuide(); if (!flushed.ok) { result(flushed); return; } authoring.close(); await refreshGuides(); appView.value = "guides"; };
   const read = () => { readOpener.current = window.document.activeElement instanceof HTMLElement ? window.document.activeElement : null; authoring.close(); appView.value = "reader"; };
@@ -77,10 +86,10 @@ export function App() {
       {(saveState.value === "unavailable" || saveState.value === "conflict") && <div class="action-row"><button type="button" onClick={() => void backup(session.document.peek())}>{t(locale, "save.backup")}</button><button type="button" onClick={() => setReloadConfirm(true)}>{t(locale, "save.reload")}</button><button type="button" onClick={() => { toast.value = null; }}>{t(locale, "save.keepEditing")}</button></div>}
     </section>}
     {toast.value && <div class={`toast toast--${toast.value.tone}`} role={toast.value.tone === "error" ? "alert" : "status"}><p>{toast.value.text}</p><button type="button" aria-label={t(locale, "dialog.close")} onClick={() => { toast.value = null; }}>{t(locale, "dialog.close")}</button></div>}
-    {editing && failedNewGuide.value && <div class="persistent-notice" role="alert"><p>{t(locale, "guides.failedNewDraft")}</p><button type="button" onClick={() => void backup(failedNewGuide.peek()!)}>{t(locale, "guides.downloadFailedDraft")}</button><button type="button" onClick={async () => { const created = await createGuide(failedNewGuide.peek()!); result(created); }}>{t(locale, "guides.retryFailedDraft")}</button></div>}
+    {editing && failedNewGuide.value && <div class="persistent-notice" role="alert"><p>{t(locale, "guides.failedNewDraft")}</p><button type="button" onClick={() => void backup(failedNewGuide.peek()!)}>{t(locale, "guides.downloadFailedDraft")}</button><button type="button" disabled={guideCreationBusy} onClick={() => void createOnce(failedNewGuide.peek()!)}>{t(locale, "guides.retryFailedDraft")}</button></div>}
     {editing && guideNotices.value.length > 0 && <p role="status">{t(locale, "guides.legacyRecovered")} <button type="button" onClick={() => void guides()}>{t(locale, "guides.title")}</button></p>}
     <main>{editing ? <div class="editor-layout"><InstructionEditor session={session} locale={locale} /><AuthoringPanel session={session} /></div> : <MyGuides onOpened={() => { authoring.close(); appView.value = "editor"; }} onResult={result} onBackup={(doc) => void backup(doc)} />}</main>
-    {pendingImport.value && <ModalDialog label={t(locale, "toolbar.import")} onClose={() => { pendingImport.value = null; }}><p>{t(locale, "import.confirmNew")}</p><button type="button" onClick={async () => { const imported = pendingImport.peek()!; const created = await createGuide(imported.document); result(created); pendingImport.value = null; if (created.ok) { authoring.close(); appView.value = "editor"; } }}>{t(locale, "dialog.confirm")}</button><button type="button" onClick={() => { pendingImport.value = null; }}>{t(locale, "dialog.cancel")}</button></ModalDialog>}
+    {pendingImport.value && <ModalDialog label={t(locale, "toolbar.import")} busy={guideCreationBusy} onClose={closeImport}><p>{t(locale, "import.confirmNew")}</p><button type="button" disabled={guideCreationBusy} onClick={async () => { const imported = pendingImport.peek(); if (!imported) return; const created = await createOnce(imported.document); if (!created) return; pendingImport.value = null; if (created.ok) { authoring.close(); appView.value = "editor"; } }}>{t(locale, "dialog.confirm")}</button><button type="button" disabled={guideCreationBusy} onClick={closeImport}>{t(locale, "dialog.cancel")}</button></ModalDialog>}
     {reloadConfirm && <ModalDialog label={t(locale, "save.reload")} onClose={() => setReloadConfirm(false)}><p>{t(locale, "save.reloadConfirm")}</p><button type="button" onClick={() => void backup(session.document.peek())}>{t(locale, "save.backup")}</button><button type="button" onClick={async () => { const reloaded = await reloadActiveGuide(); result(reloaded); setReloadConfirm(false); }}>{t(locale, "save.reload")}</button><button type="button" onClick={() => setReloadConfirm(false)}>{t(locale, "save.keepEditing")}</button></ModalDialog>}
     {outputVisible && <OutputDialog sourceDocument={documentSession.document.value} guideId={activeGuideId.value} locale={output.locale} onClose={closeOutput} initialOptions={printSettings.getOptions(session.document.value, activeGuideId.value, output.locale)} onOptionsChange={(options, capturedDocument) => printSettings.setOptions(capturedDocument, activeGuideId.peek(), options)} />}
   </div>;
