@@ -42,6 +42,42 @@ function placedPictures(layout: EditorLayout) {
 }
 
 describe("fixed physical editing layout", () => {
+  it.each(["note", "label", "warning", "quantity", "time", "documentTitle", "groupTitle", "description", "groupTime"] as const)("returns exact repairs for valid oversized %s text without throwing or changing geometry", async field => {
+    const api = await planner(), doc = sequenceFixture();
+    doc.steps[0].description = undefined;
+    doc.steps[0].tokens[0].note = "Prep";
+    const options = api.createDefaultOutputOptions(doc, "en"); options.mode = "detailed";
+    const baseline = editing(successful(api.planOutput(doc, options, api.fonts)));
+    const content = "A" + "\n".repeat(150000);
+    const token = doc.steps[0].tokens[0];
+    if (field === "note" || field === "label") token[field] = content;
+    else if (field === "warning" || field === "quantity" || field === "time") token[field]!.label = content;
+    else if (field === "documentTitle") doc.meta.title = content;
+    else if (field === "groupTitle") doc.steps[0].title = content;
+    else if (field === "description") doc.steps[0].description = content;
+    else doc.steps[0].time = { iconId: "time.duration", seconds: 300, label: content };
+    const validated = migrate(doc), before = structuredClone(validated);
+    const result = api.planOutput(validated, options, api.fonts);
+    expect(result.ok).toBe(false); if (result.ok) throw new Error("Expected text overflow");
+    const source = field === "documentTitle" ? {} : ["groupTitle", "description", "groupTime"].includes(field) ? { stepId: "fixture-group-1" } : { stepId: "fixture-group-1", tokenId: "fixture-token-1" };
+    const role = field === "documentTitle" || field === "groupTitle" ? "heading" : field === "groupTime" ? "time" : field;
+    expect(result.issues).toContainEqual(expect.objectContaining({ code: "overflow", source, messageKey: "output.cellOverflow", params: expect.objectContaining({ field: role }) }));
+    expect(result).not.toHaveProperty("plan"); expect(editing(result)).toEqual(baseline); expect(validated).toEqual(before);
+    expect(result.issues.find(issue => issue.code === "overflow" && issue.params?.field === role)?.params?.content).toBe(field === "groupTitle" ? "Step 1: " + content : content);
+  });
+  it("excludes huge optional notes in Labels and Pictures and checks glyphs beyond the fitting prefix", async () => {
+    const api = await planner(), doc = sequenceFixture();
+    doc.steps[0].tokens[0].note = "\n".repeat(150000);
+    for (const mode of ["labels", "pictures"] as const) {
+      const options = api.createDefaultOutputOptions(doc, "en"); options.mode = mode;
+      assertBounds(successful(api.planOutput(migrate(doc), options, api.fonts)).plan);
+    }
+    doc.steps[0].tokens[0].note += "日";
+    const options = api.createDefaultOutputOptions(doc, "en"); options.mode = "detailed";
+    const result = api.planOutput(migrate(doc), options, api.fonts);
+    expect(result.ok).toBe(false); if (result.ok) throw new Error("Expected unsupported glyph");
+    expect(result.issues).toContainEqual(expect.objectContaining({ code: "unsupported-glyph", source: { stepId: "fixture-group-1", tokenId: "fixture-token-1" }, params: expect.objectContaining({ codePoints: "U+65E5" }) }));
+  });
   it("keeps every cell and row position unchanged when short attachments or viewport width change", async () => {
     const api = await planner(), doc = sequenceFixture();
     doc.steps[0].tokens = Array.from({ length: 9 }, (_, index) => ({ id: `fixed-${index}`, category: "object", iconId: "object.onion", label: "Banana" }));

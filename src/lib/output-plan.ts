@@ -139,15 +139,16 @@ export function planOutput(doc: InstructionDocument, input: OutputOptions, fonts
   for (const group of groups) if (unfit.has(group.stepId)) {
     issues.push({ code: "overflow", source: { stepId: group.stepId, ...(group.pictures[0] ? { tokenId: group.pictures[0].tokenId } : {}) }, messageKey: "output.overflow", params: { group: groupName(group), format } });
   }
-  function text(value: string, width: number, size: number, source: OutputSource, role: ContentRole, group: OutputContentGroup): Block | null {
+  function text(value: string, width: number, availableHeight: number, size: number, source: OutputSource, role: ContentRole, group: OutputContentGroup): Block | null {
     const missing = fonts.unsupportedCodePoints(value);
     if (missing.length) {
       issues.push({ code: "unsupported-glyph", source, messageKey: "output.unsupportedGlyph", params: { content: value, codePoints: missing.map(cp => `U+${cp.toString(16).toUpperCase().padStart(4, "0")}`).join(", ") } });
       return null;
     }
-    const wrapped = wrapPrintText(value, width, size, fonts);
-    if (!wrapped.ok) { overflow(source, group, role, value); return null; }
     const height = fonts.lineHeightMm(size);
+    const maximumLines = Math.floor((availableHeight + EPSILON) / height);
+    const wrapped = wrapPrintText(value, width, size, fonts, maximumLines);
+    if (!wrapped.ok) { overflow(source, group, role, value); return null; }
     return { height: height * wrapped.lines.length, fragments: wrapped.lines.map((line, index) => ({ kind: "text", source: { ...source }, role, text: line, fontId: fonts.fontId, fontSizePt: size,
       box: { xMm: 0, yMm: index * height, widthMm: width, heightMm: height }, baselineMm: (index + .8) * height })) };
   }
@@ -162,8 +163,8 @@ export function planOutput(doc: InstructionDocument, input: OutputOptions, fonts
   }
   function addText(block: Block, value: string | undefined, lane: MmBox, size: number, source: OutputSource, role: ContentRole, group: OutputContentGroup) {
     if (!value) return;
-    stack(block, text(value, lane.widthMm, size, source, role, group));
-    if (block.height > lane.heightMm + EPSILON) overflow(source, group, role, value);
+    const offset = block.height ? block.height + GAP : 0;
+    stack(block, text(value, lane.widthMm, lane.heightMm - offset, size, source, role, group));
   }
   function unit(picture: OutputContentPicture, placement: EditorPicturePlacement, group: OutputContentGroup): OutputFragment[] {
     const source = { stepId: group.stepId, tokenId: picture.tokenId };
@@ -179,8 +180,8 @@ export function planOutput(doc: InstructionDocument, input: OutputOptions, fonts
       if (role !== "warning" && !resolveIcon(iconId).known) notices.push({ code: "unknown-symbol", source, messageKey: "output.unknownSymbolNotice" });
       const symbolSize = Math.min(options.preset === "label" ? 3 : 4, pictureMm), stacked = role === "warning";
       const fontSize = stacked ? warningPt : secondaryPt;
-      const labelBlock = text(label, stacked ? lane.widthMm : lane.widthMm - symbolSize - 1, fontSize, source, role, group);
-      const paintedWidth = Math.max(0, ...(labelBlock?.fragments ?? []).map(fragment => fragment.kind === "text" ? fonts.measureWidthMm(fragment.text, fragment.fontSizePt) : 0));
+      const labelBlock = text(label, stacked ? lane.widthMm : lane.widthMm - symbolSize - 1, lane.heightMm - (stacked ? symbolSize + .5 : 0), fontSize, source, role, group);
+      const paintedWidth = (labelBlock?.fragments ?? []).reduce((width, fragment) => Math.max(width, fragment.kind === "text" ? fonts.measureWidthMm(fragment.text, fragment.fontSizePt) : 0), 0);
       const offset = centered ? (lane.widthMm - symbolSize - 1 - paintedWidth) / 2 : 0;
       const labelFragments = (labelBlock?.fragments ?? []).map(fragment => {
         if (fragment.kind !== "text") return fragment;
