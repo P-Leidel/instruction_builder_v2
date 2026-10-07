@@ -20,6 +20,7 @@ try {
       ["editor-transition-check.mjs", output, url], ["editor-output-integration-check.mjs", output, url],
       ["export-review.mjs", output, url], ["reliability-check.mjs", url],
       ["scripts/check-header-theme.mjs", path.join(output, "header-theme"), url],
+      ["scripts/check-review-regressions.mjs", path.join(output, "review-regressions"), url],
       ["scripts/check-editor-drag.mjs", path.join(output, "editor-drag"), url],
       ["scripts/check-print-faithful-editor.mjs", path.join(output, "print-faithful-editor"), url],
       ["scripts/check-centered-pictograms.mjs", path.join(output, "centered-pictograms"), url]]
