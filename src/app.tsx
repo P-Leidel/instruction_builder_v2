@@ -30,7 +30,7 @@ export function App() {
   useEffect(() => effect(() => { window.document.title = session.document.value.meta.title || t(preferences.value.uiLocale, "app.title"); }), [session]);
   useEffect(() => {
     const keyboard = (event: KeyboardEvent) => {
-      if (!(event.metaKey || event.ctrlKey) || appView.peek() !== "editor" || window.document.querySelector("dialog[open]") || outputVisible) return;
+      if (event.defaultPrevented || !(event.metaKey || event.ctrlKey) || appView.peek() !== "editor" || window.document.querySelector("dialog[open]") || outputVisible || textEntry(event.target)) return;
       const key = event.key.toLowerCase();
       if (key === "z" || key === "y") { event.preventDefault(); if (key === "y" || event.shiftKey) sessionActions.redo(session); else sessionActions.undo(session); }
       else if (!textEntry(event.target) && key === "c" && session.selectedStepId.peek() && session.selectedTokenId.peek()) { event.preventDefault(); authoring.copyPicture(session.selectedStepId.peek()!, session.selectedTokenId.peek()!); }
