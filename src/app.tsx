@@ -26,7 +26,7 @@ export function App() {
   const locale = preferences.value.uiLocale; const session = documentSession;
   const editing = appView.value === "editor"; const reading = appView.value === "reader";
   const outputVisible = output !== null && output.guideId === activeGuideId.value;
-  useLayoutEffect(() => effect(() => { window.document.documentElement.dataset.theme = preferences.value.theme; }), []);
+  useLayoutEffect(() => effect(() => { window.document.documentElement.dataset.theme = preferences.value.theme; window.document.documentElement.lang = preferences.value.uiLocale; }), []);
   useEffect(() => effect(() => { window.document.title = session.document.value.meta.title || t(preferences.value.uiLocale, "app.title"); }), [session]);
   useEffect(() => {
     const keyboard = (event: KeyboardEvent) => {
