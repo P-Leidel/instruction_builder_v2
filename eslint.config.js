@@ -6,7 +6,7 @@ export default tseslint.config(
   // .claude/ holds agent-tooling scripts (e.g. the run-instruction-builder
   // skill's Playwright driver) that run under Node, not the browser - they
   // aren't part of the shipped app and don't need its lint rules.
-  { ignores: ["dist", "node_modules", ".claude"] },
+  { ignores: ["dist", "node_modules", "artifacts", ".claude"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
