@@ -51,7 +51,14 @@ export function createGuideController(session: DocumentSession, options: GuideCo
       if (activeGuideId.peek() === null) saveState.value = "pending";
       disposeObserver = effect(() => {
         const doc = session.document.value;
-        if (doc === cleanDocument || disposed) return;
+        if (disposed) return;
+        if (doc === cleanDocument && !drain) {
+          // Undo can return to the committed snapshot before its queued edit saves.
+          pending = undefined; clearTimer();
+          if (baseline && !blocked && !reloading) saveState.value = "saved";
+          return;
+        }
+        // Even the previously clean snapshot needs saving if an older edit is in flight.
         pending = doc;
         if (blocked) return;
         saveState.value = "pending"; clearTimer();

@@ -114,6 +114,37 @@ describe("local guide controller", () => {
     expect(controller.saveState.value).toBe("unavailable");
   });
 
+  it("Undo before autosave preserves the saved document instead of the reverted edit", async () => {
+    const { controller, session, records, store } = await fixture();
+    sessionActions.updateTitle(session, "Reverted edit");
+    sessionActions.undo(session);
+
+    await vi.advanceTimersByTimeAsync(200);
+    expect((await controller.flushActiveGuide()).ok).toBe(true);
+    expect(session.document.value.meta.title).toBe("A");
+    expect((await createGuideRepository({ store }).load(records[0].id)))
+      .toMatchObject({ revision: 1, document: { meta: { title: "A" } } });
+    expect(controller.saveState.value).toBe("saved");
+  });
+
+  it("Undo during an in-flight save persists the restored document before reporting saved", async () => {
+    const entered = deferred(); const release = deferred(); let first = true;
+    const { controller, session, records, store } = await fixture({ wrap: (repository) => ({ ...repository, save: async (...args) => {
+      if (first) { first = false; entered.resolve(); await release.promise; }
+      return repository.save(...args);
+    } }) });
+    sessionActions.updateTitle(session, "Reverted edit");
+    const flush = controller.flushActiveGuide(); await entered.promise;
+    sessionActions.undo(session);
+    release.resolve();
+
+    expect((await flush).ok).toBe(true);
+    expect(session.document.value.meta.title).toBe("A");
+    expect((await createGuideRepository({ store }).load(records[0].id)))
+      .toMatchObject({ revision: 3, document: { meta: { title: "A" } } });
+    expect(controller.saveState.value).toBe("saved");
+  });
+
   it("summary refresh cannot rebase a same-revision external edit", async () => {
     const { controller, session, records, records: [active], ...data } = await fixture();
     const external = structuredClone(active); external.document.meta.title = "External without revision bump";
