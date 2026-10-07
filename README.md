@@ -21,6 +21,8 @@ npm run test:browser # starts/stops its own dev server; screenshots in artifacts
 npm run test:pwa   # production offline exports + update lifecycle; build first
 ```
 
+Maintained Playwright drivers and browser helpers live in [tests/browser](tests/browser/README.md). The gate runner and build/assertion tooling remain in `scripts/`; both browser gates write new evidence under ignored `artifacts/` by default.
+
 ## Documentation
 
 Planning and architecture docs live in [docs/](docs/):

@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { Buffer } from "node:buffer";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -5,11 +6,12 @@ import path from "node:path";
 import process from "node:process";
 import { chromium } from "playwright";
 import { createServer } from "vite";
-import { boot, fixture, importDocument } from "../.claude/skills/run-instruction-builder/editor-browser-helpers.mjs";
+import { boot, fixture, importDocument } from "./editor-browser-helpers.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
 
 // Actual App only: fresh isolated contexts, owned ephemeral server, native SVG downloads.
-// Usage: node scripts/check-centered-pictograms.mjs <evidence-directory> [url] [--baseline]
-const output = path.resolve(process.argv[2] ?? "artifacts/centered-pictograms");
+// Usage: node tests/browser/check-centered-pictograms.mjs <evidence-directory> [url] [--baseline]
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "centered-pictograms"));
 const baselineRun = process.argv.includes("--baseline");
 const checks = {}, measurements = {}, errors = [];
 let server, browser, failure;
@@ -232,7 +234,7 @@ try {
   await mkdir(output, { recursive: true });
   let url = process.argv.slice(3).find(argument => /^https?:\/\//u.test(argument));
   if (!url) {
-    server = await createServer({ server: { host: '127.0.0.1', port: 0, open: false } });
+    server = await createServer({ root, server: { host: '127.0.0.1', port: 0, open: false } });
     await server.listen();
     url = `http://127.0.0.1:${server.httpServer.address().port}/`;
   }

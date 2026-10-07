@@ -1,12 +1,14 @@
+import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { chromium } from "playwright";
 import { createServer } from "vite";
-import { boot, fixture, importDocument, downloadJson } from "../.claude/skills/run-instruction-builder/editor-browser-helpers.mjs";
+import { boot, fixture, importDocument, downloadJson } from "./editor-browser-helpers.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
 
-const output = path.resolve(process.argv[2] ?? "artifacts/editor-drag");
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "editor-drag"));
 const checks = {}, errors = []; let browser, server, failure;
 function check(name, value) { checks[name] = value === true; assert.equal(value, true, name); }
 async function move(page, source, destination, edge = "before") {
@@ -20,7 +22,7 @@ async function move(page, source, destination, edge = "before") {
 try {
   await mkdir(output, { recursive: true });
   let url = process.argv[3];
-  if (!url) { server = await createServer({ server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
+  if (!url) { server = await createServer({ root, server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
   browser = await chromium.launch({ headless: true });
   const { page, context } = await boot(browser, url, errors);
   try {

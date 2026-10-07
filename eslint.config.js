@@ -3,9 +3,7 @@ import tseslint from "typescript-eslint";
 import globals from "globals";
 
 export default tseslint.config(
-  // .claude/ holds agent-tooling scripts (e.g. the run-instruction-builder
-  // skill's Playwright driver) that run under Node, not the browser - they
-  // aren't part of the shipped app and don't need its lint rules.
+  // Evidence and skill instructions are separate from maintained browser drivers.
   { ignores: ["dist", "node_modules", "artifacts", ".claude"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -22,13 +20,13 @@ export default tseslint.config(
     },
   },
   {
-    files: ["scripts/**/*.mjs"],
+    files: ["scripts/**/*.mjs", "tests/browser/**/*.mjs"],
     languageOptions: { globals: globals.node },
   },
   {
     // Task 23: the hand-written service worker runs in its own global
     // scope (self/caches/clients), not a browser window - it's real
-    // shipped code (unlike .claude/'s tooling scripts, ignored above), so
+    // shipped code, so
     // it still gets linted, just with the right globals for where it runs.
     files: ["public/sw.js"],
     languageOptions: {

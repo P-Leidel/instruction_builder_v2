@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 import { createServer } from "vite";
-import { fixture, importDocument, downloadJson } from "../../../../../.claude/skills/run-instruction-builder/editor-browser-helpers.mjs";
+import { fixture, importDocument, downloadJson } from "../../../../../tests/browser/editor-browser-helpers.mjs";
 
 const output = path.dirname(fileURLToPath(import.meta.url));
 const results = [];

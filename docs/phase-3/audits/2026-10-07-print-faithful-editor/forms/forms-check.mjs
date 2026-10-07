@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { pathToFileURL } from "node:url";
+
 import { chromium } from "playwright";
 import { createServer } from "vite";
 
-const { boot, fixture, snapshot } = await import(pathToFileURL(path.resolve(".claude/skills/run-instruction-builder/editor-browser-helpers.mjs")));
+import { boot, fixture, snapshot } from "../../../../../tests/browser/editor-browser-helpers.mjs";
 const stage = process.argv[2] ?? "after", isolated = process.argv.includes("--isolated");
 const output = path.resolve("docs/phase-3/audits/2026-10-07-print-faithful-editor/forms", stage);
 const checks = {}, errors = []; let browser, server, failure;

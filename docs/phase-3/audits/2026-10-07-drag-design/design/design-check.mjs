@@ -3,11 +3,11 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import process from "node:process";
-import { pathToFileURL } from "node:url";
+
 import { chromium } from "playwright";
 import { createServer } from "vite";
 
-const { boot } = await import(pathToFileURL(path.resolve(".claude/skills/run-instruction-builder/editor-browser-helpers.mjs")));
+import { boot } from "../../../../../tests/browser/editor-browser-helpers.mjs";
 const stage = process.argv[2] ?? "before", output = path.resolve("docs/phase-3/audits/2026-10-07-drag-design/design", stage);
 if (stage === "compare") {
   const root = path.resolve("docs/phase-3/audits/2026-10-07-drag-design/design");

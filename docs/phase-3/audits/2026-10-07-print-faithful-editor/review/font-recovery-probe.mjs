@@ -2,7 +2,7 @@ import { createServer } from "vite";
 import { chromium } from "playwright";
 import { Buffer } from "node:buffer";
 import { mkdir, writeFile } from "node:fs/promises";
-import { boot, fixture, importDocument } from "../../../../../.claude/skills/run-instruction-builder/editor-browser-helpers.mjs";
+import { boot, fixture, importDocument } from "../../../../../tests/browser/editor-browser-helpers.mjs";
 
 let server, browser;
 const evidence = {};

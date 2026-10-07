@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 // Production: node pwa-check.mjs <url> <output-dir>. Each format has its own cold install/context.
 import process from "node:process";
 import { Buffer } from "node:buffer";
@@ -5,9 +6,10 @@ import { chromium } from "playwright";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
-import { assertChecks } from "../../../scripts/check-results.mjs";
+import { assertChecks } from "../../scripts/check-results.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
 
-const url = process.argv[2] ?? "http://127.0.0.1:4173/", output = path.resolve(process.argv[3] ?? "docs/phase-3/audits/2026-10-06-overhaul/export-integration-proof/pwa");
+const url = process.argv[2] ?? "http://127.0.0.1:4173/", output = path.resolve(process.argv[3] ?? path.join(root, "artifacts", "pwa"));
 const checks = {}, errors = [], runs = []; let browser, failure;
 function check(name, value) { checks[name] = value === true; assert.equal(value, true, name); }
 function fixture(format) { return { schemaVersion: 2, meta: { title: `Cold ${format} guide`, domain: "proof", presentation: "sequence", createdAt: "2026-10-06T00:00:00Z" }, steps: [{ id: "cold-group", title: "Three libraries", time: { iconId: "time.duration", label: "1m", seconds: 60 }, tokens: [

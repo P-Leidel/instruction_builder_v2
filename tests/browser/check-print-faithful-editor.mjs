@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { Buffer } from "node:buffer";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -5,12 +6,13 @@ import path from "node:path";
 import process from "node:process";
 import { chromium } from "playwright";
 import { createServer } from "vite";
-import { boot, fixture, importDocument, snapshot } from "../.claude/skills/run-instruction-builder/editor-browser-helpers.mjs";
+import { boot, fixture, importDocument, snapshot } from "./editor-browser-helpers.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
 
-// Usage: node scripts/check-print-faithful-editor.mjs <output-directory> [url]
+// Usage: node tests/browser/check-print-faithful-editor.mjs <output-directory> [url]
 // Without a URL this driver owns and closes its fresh Vite server. Browser
 // contexts have isolated native storage and never use a user's browser profile.
-const output = path.resolve(process.argv[2] ?? "artifacts/print-faithful-editor");
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "print-faithful-editor"));
 const checks = {}, errors = [], measurements = {};
 let browser, server, failure;
 function check(name, value) {
@@ -409,7 +411,7 @@ try {
   await mkdir(output, { recursive: true });
   let url = process.argv[3];
   if (!url) {
-    server = await createServer({ server: { host: "127.0.0.1", port: 0, open: false } });
+    server = await createServer({ root, server: { host: "127.0.0.1", port: 0, open: false } });
     await server.listen();
     url = `http://127.0.0.1:${server.httpServer.address().port}/`;
   }

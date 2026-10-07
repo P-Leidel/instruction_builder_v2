@@ -9,6 +9,25 @@ This is a Windows (PowerShell + Git Bash) machine, not a Linux
 container - commands below are Windows-specific where it matters
 (see Gotchas).
 
+## Maintained verification entrypoints
+
+Browser drivers and shared helpers live in `tests/browser/`; this skill
+keeps the usage instructions. Use the complete managed gates for the
+current editor:
+
+```bash
+npm run test:browser # dev server + all maintained browser checks
+npm run build
+npm run test:pwa     # production offline exports + waiting-update lifecycle
+```
+
+Both gates own and close their servers and child browsers. Their default
+output is ignored `artifacts/browser` or `artifacts/pwa`; pass a fresh
+output directory after `--` to keep evidence elsewhere. See
+`tests/browser/README.md` for standalone scripts and their argument order.
+The detailed checks below describe the historical canvas implementation;
+the maintained drivers exercise the current print-faithful editor.
+
 ## Prerequisites
 
 Node.js must be on PATH. In the Bash tool it isn't by default on this
@@ -84,7 +103,7 @@ the only one that needs the steps under "Run (agent path)".
 2. Drive it and capture screenshots:
 
    ```bash
-   node .claude/skills/run-instruction-builder/driver.mjs /path/to/output/dir
+   node tests/browser/driver.mjs /path/to/output/dir
    ```
 
    This navigates to the app, names the first step, adds three tokens
@@ -371,7 +390,7 @@ for i in $(seq 1 30); do
   curl -sf http://localhost:4173 >/dev/null 2>&1 && echo UP && break
   sleep 1
 done
-node .claude/skills/run-instruction-builder/pwa-check.mjs
+node tests/browser/pwa-check.mjs
 ```
 
 It confirms the manifest and all three app icons

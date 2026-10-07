@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 // Semantic/locale/history/focus review checks for the print-faithful editor.
 import assert from "node:assert/strict";
 import process from "node:process";
@@ -5,8 +6,9 @@ import { chromium } from "playwright";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import path from "node:path";
 import { boot, createBlank, fixture, importDocument, snapshot } from "./editor-browser-helpers.mjs";
-import { assertChecks } from "../../../scripts/check-results.mjs";
-const out = process.argv[2]; const url = process.argv[3] ?? "http://localhost:5173/"; const checks = {}; const errors = []; const browser = await chromium.launch();
+import { assertChecks } from "../../scripts/check-results.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
+const out = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "browser")); const url = process.argv[3] ?? "http://localhost:5173/"; const checks = {}; const errors = []; const browser = await chromium.launch();
 try {
   await mkdir(out, { recursive: true }); const { page, context } = await boot(browser, url, errors, { width: 390, height: 900 });
   try {
@@ -34,7 +36,7 @@ try {
     await page.getByRole("searchbox").fill("Stift"); await page.locator(".token-picker").getByRole("button", { name: "Bleistift", exact: true }).click(); checks.CAPTURED_TARGET_IGNORES_AMBIENT_SELECTION = (await snapshot(page)).steps[0].tokens.at(-1).iconId === "learning.tool.pencil";
     await page.locator("[data-add-picture]").first().click(); await page.evaluate(async () => { const { documentSession, sessionActions } = await import("/src/state/document.ts"); sessionActions.removeStep(documentSession, documentSession.document.peek().steps[0].id); });
     await page.waitForFunction(() => !document.querySelector(".token-picker")); await page.getByRole("status").filter({ hasText: "This group was removed" }).waitFor(); checks.DELETED_TARGET_CLOSES_WITH_NOTICE = await page.getByRole("status").filter({ hasText: "This group was removed" }).count() === 1;
-    const axe = await readFile(path.resolve("node_modules/axe-core/axe.min.js"), "utf8"); await page.addScriptTag({ content: axe }); const results = await page.evaluate(() => window.axe.run(document, { resultTypes: ["violations"] })); checks.EDITOR_AXE_ZERO = results.violations.length === 0;
+    const axe = await readFile(path.join(root, "node_modules/axe-core/axe.min.js"), "utf8"); await page.addScriptTag({ content: axe }); const results = await page.evaluate(() => window.axe.run(document, { resultTypes: ["violations"] })); checks.EDITOR_AXE_ZERO = results.violations.length === 0;
     await page.screenshot({ path: path.join(out, "semantic-editor-review.png"), fullPage: true }); checks.NO_CONSOLE_OR_PAGE_ERRORS = errors.length === 0;
     await writeFile(path.join(out, "review-checks.json"), JSON.stringify({ checks, errors, axe: results.violations }, null, 2)); assertChecks(checks); assert.deepEqual(errors, []);
   } finally { await context.close(); }

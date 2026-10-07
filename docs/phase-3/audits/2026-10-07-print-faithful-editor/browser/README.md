@@ -1,15 +1,15 @@
 # Print-faithful editor browser regression
 
-The standalone driver is [check-print-faithful-editor.mjs](../../../../../scripts/check-print-faithful-editor.mjs).
+The standalone driver is [check-print-faithful-editor.mjs](../../../../../tests/browser/check-print-faithful-editor.mjs).
 
-    node scripts/check-print-faithful-editor.mjs <output-directory> [url]
+    node tests/browser/check-print-faithful-editor.mjs <output-directory> [url]
 
 Omitting the URL starts an owned Vite server on an ephemeral loopback port. The driver closes that server, Chromium, every isolated browser context and the mobile CDP session. Fixtures are imported through the actual guide workflow into fresh native browser storage; no user profile or existing guide collection is used. Both console errors and page errors are recorded.
 
 ## Fresh result
 
-    npx eslint --no-ignore scripts/check-print-faithful-editor.mjs
-    node scripts/check-print-faithful-editor.mjs docs/phase-3/audits/2026-10-07-print-faithful-editor/browser/proof
+    npx eslint --no-ignore tests/browser/check-print-faithful-editor.mjs
+    node tests/browser/check-print-faithful-editor.mjs docs/phase-3/audits/2026-10-07-print-faithful-editor/browser/proof
 
 Both commands exited 0. [proof/results.json](proof/results.json) records **118 strict true checks**, an empty errors array, and measured paper/cell rectangles. Node was v24.19.0 on Windows. No product, Git or dependency changes were made by this checker author, and no existing broad gates were repeated.
 

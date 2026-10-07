@@ -1,4 +1,4 @@
-/* global process */
+import process from "node:process";
 // Exercise the actual worker across a deployment while an old app remains open.
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
@@ -8,12 +8,13 @@ import os from "node:os";
 import { fileURLToPath } from "node:url";
 import { createServer } from "node:http";
 import { build as buildApp } from "vite";
-import { prepareOfflineAssets } from "../../../scripts/offline-assets.mjs";
+import { prepareOfflineAssets } from "../../scripts/offline-assets.mjs";
 import { Buffer } from "node:buffer";
+const root = fileURLToPath(new URL("../../", import.meta.url));
 
-const source = await readFile(new URL("../../../public/sw.js", import.meta.url), "utf8");
-const font = await readFile(new URL("../../../public/fonts/SourceSans3-Regular-3.052.ttf", import.meta.url));
-const output = path.resolve(process.argv[2] ?? "docs/phase-3/audits/2026-10-06-overhaul/export-proof/pwa-update");
+const source = await readFile(new URL("../../public/sw.js", import.meta.url), "utf8");
+const font = await readFile(new URL("../../public/fonts/SourceSans3-Regular-3.052.ttf", import.meta.url));
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "pwa-update"));
 const cacheName = (build) => `instruction-builder-v2-update-fixture-${build}`;
 let build = "old";
 const server = createServer((request, response) => {
@@ -118,7 +119,7 @@ try {
 // changing authored data, persistence, schemas, or output geometry.
 await actualAppUpdate();
 async function actualAppUpdate() {
-  const root = fileURLToPath(new URL("../../../", import.meta.url));
+
   const temporary = await mkdtemp(path.join(os.tmpdir(), "instruction-output-update-"));
   const artifacts = path.join(output, "actual-app"), manifests = {}, requests = [], failures = [], errors = [], runs = [];
   let current = "old", server, browser, context, failure;

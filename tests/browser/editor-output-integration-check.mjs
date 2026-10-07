@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import process from "node:process";
 import { Buffer } from "node:buffer";
@@ -6,8 +7,9 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { createServer } from "vite";
 import { boot, createBlank, fixture, importDocument, snapshot } from "./editor-browser-helpers.mjs";
-import { assertChecks } from "../../../scripts/check-results.mjs";
-const output = path.resolve(process.argv[2] ?? "docs/phase-3/audits/2026-10-06-overhaul/editor-proof");
+import { assertChecks } from "../../scripts/check-results.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "browser"));
 const checks = {}; const errors = []; let browser; let server; let failure;
 const equal = (name, actual, expected) => { checks[name] = actual === expected; assert.equal(actual, expected, name); };
 async function download(page, button, name) {
@@ -16,7 +18,7 @@ async function download(page, button, name) {
   const bytes = Buffer.concat(chunks); await writeFile(path.join(output, name), bytes); return bytes;
 }
 try {
-  let url = process.argv[3]; if (!url || url === "-") { server = await createServer({ server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
+  let url = process.argv[3]; if (!url || url === "-") { server = await createServer({ root, server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
   await mkdir(output, { recursive: true }); browser = await chromium.launch(); const { page, context } = await boot(browser, url, errors, { width: 1440, height: 900 });
   try {
     await createBlank(page); const doc = fixture([1, 1], "board"); doc.meta.title = "Output integration";

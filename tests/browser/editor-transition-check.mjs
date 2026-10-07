@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import process from "node:process";
 import { Buffer } from "node:buffer";
@@ -6,9 +7,10 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { createServer } from "vite";
 import { boot, createBlank, fixture, importDocument, snapshot, openGroup, fillDuration, durationInputTotal } from "./editor-browser-helpers.mjs";
-import { assertChecks } from "../../../scripts/check-results.mjs";
+import { assertChecks } from "../../scripts/check-results.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
 
-const output = path.resolve(process.argv[2] ?? "docs/phase-3/audits/2026-10-06-overhaul/editor-proof");
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "browser"));
 const selectedCase = process.argv[4] ?? "all";
 const evidenceTag = process.argv[5] ?? selectedCase;
 const checks = {}; const errors = []; let failure; let browser; let server;
@@ -24,7 +26,7 @@ function testDocument() {
 }
 try {
   let url = process.argv[3];
-  if (!url || url === "-") { server = await createServer({ server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
+  if (!url || url === "-") { server = await createServer({ root, server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
   await mkdir(output, { recursive: true }); browser = await chromium.launch();
   for (const kind of ["attachments", "modal", "focus"].filter((kind) => selectedCase === "all" || selectedCase === kind)) {
     const { page, context } = await boot(browser, url, errors, { width: 1440, height: 900 });

@@ -19,7 +19,7 @@ The 2026-09-18 codebase health review
 this as one of the two structural weaknesses in the codebase.
 
 The component tree's actual coverage is the Playwright driver in
-[`.claude/skills/run-instruction-builder/`](../../.claude/skills/run-instruction-builder/SKILL.md):
+[`tests/browser/`](../../tests/browser/README.md):
 a real Chromium, a real dev server, real pointer drags, real downloads
 opened and inspected, and axe-core scans at five viewport/state
 combinations. That is not a stand-in for component tests - it is a different

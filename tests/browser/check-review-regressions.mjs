@@ -1,15 +1,17 @@
+import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { Buffer } from "node:buffer";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "playwright";
 import { createServer } from "vite";
-import { boot, createBlank, fixture, importDocument, records, snapshot } from "../.claude/skills/run-instruction-builder/editor-browser-helpers.mjs";
+import { boot, createBlank, fixture, importDocument, records, snapshot } from "./editor-browser-helpers.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
 
-const output = path.resolve(process.argv[2] ?? "artifacts/review-regressions");
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "review-regressions"));
 let url = process.argv[3], server;
 if (!url) {
-  server = await createServer({ server: { host: "127.0.0.1", port: 0, open: false } });
+  server = await createServer({ root, server: { host: "127.0.0.1", port: 0, open: false } });
   await server.listen();
   url = `http://127.0.0.1:${server.httpServer.address().port}/`;
 }

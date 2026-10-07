@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import process from "node:process";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -5,8 +6,9 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { createServer } from "vite";
 import { boot, createBlank, insert, importDocument, fixture, snapshot, groupEditControl } from "./editor-browser-helpers.mjs";
-import { assertChecks } from "../../../scripts/check-results.mjs";
-const output = path.resolve(process.argv[2] ?? "docs/phase-3/audits/2026-10-06-overhaul/editor-proof");
+import { assertChecks } from "../../scripts/check-results.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "browser"));
 let server; let browser; const errors = []; const checks = {}; const observations = [];
 async function physicalGeometry(page) {
   return page.locator("[data-editor-page]").evaluateAll(pages => pages.map(paper => {
@@ -27,7 +29,7 @@ function sameGeometry(before, after) {
   });
 }
 try {
-  let url = process.argv[3]; if (!url) { server = await createServer({ server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
+  let url = process.argv[3]; if (!url) { server = await createServer({ root, server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
   await mkdir(output, { recursive: true }); browser = await chromium.launch();
   for (const width of [320, 390, 768, 1440]) {
     const { page, context } = await boot(browser, url, errors, { width, height: 900 });

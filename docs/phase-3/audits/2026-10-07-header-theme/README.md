@@ -33,4 +33,4 @@ All browser profiles are isolated fixtures; the user's stored guides and theme p
 
 ## Reproduce
 
-Run `npm test`, `npm run test:tooling`, `npm run lint`, `npm run typecheck`, `npm run build`, `npm run test:browser -- <fresh-output-directory>` and `npm run test:pwa -- <fresh-output-directory>`. Use the configured bundled Node runtime when the host PATH has an older Node. The browser commands require permission to start their local Vite/Chromium child processes. The interface check is included in `test:browser`; it can also run alone as `node scripts/check-header-theme.mjs <fresh-output-directory>`.
+Run `npm test`, `npm run test:tooling`, `npm run lint`, `npm run typecheck`, `npm run build`, `npm run test:browser -- <fresh-output-directory>` and `npm run test:pwa -- <fresh-output-directory>`. Use the configured bundled Node runtime when the host PATH has an older Node. The browser commands require permission to start their local Vite/Chromium child processes. The interface check is included in `test:browser`; it can also run alone as `node tests/browser/check-header-theme.mjs <fresh-output-directory>`.

@@ -1,6 +1,6 @@
 # Focused centered-pictogram browser evidence
 
-The standalone `scripts/check-centered-pictograms.mjs` opens the actual App in fresh Playwright contexts. Without a supplied URL it owns an ephemeral Vite server and closes both the server and browser. The full browser adapter supplies its own managed server URL; the checker still owns and closes its isolated contexts/browser. It never accesses the user's browser profile or storage.
+The standalone `tests/browser/check-centered-pictograms.mjs` opens the actual App in fresh Playwright contexts. Without a supplied URL it owns an ephemeral Vite server and closes both the server and browser. The full browser adapter supplies its own managed server URL; the checker still owns and closes its isolated contexts/browser. It never accesses the user's browser profile or storage.
 
 The checks measure the rendered SVG and physical editor-cell DOM, without importing the layout planner, normalizer, or connector helper. Pictogram centering uses the allocated 24-unit icon viewport rather than the asymmetric ink of a particular drawing. Annotation containment and overlap use painted SVG bounds. Connector route and arrowhead checks inspect the actual path commands. Export parity compares the native SVG download to the editor vectors, preserving all physical attributes and ignoring only root accessibility and namespace serialization.
 
@@ -15,9 +15,9 @@ The final run was captured at 2026-10-07 10:53:30 UTC after product edits were f
 Commands from the repository root (PowerShell):
 
 ```powershell
-& 'C:/Users/Patrick/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' scripts/check-centered-pictograms.mjs docs/phase-3/audits/2026-10-07-centered-pictograms/browser/red --baseline
-& 'C:/Users/Patrick/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' scripts/check-centered-pictograms.mjs docs/phase-3/audits/2026-10-07-centered-pictograms/browser/green
-& 'C:/Users/Patrick/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' node_modules/eslint/bin/eslint.js scripts/check-centered-pictograms.mjs
+& 'C:/Users/Patrick/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' tests/browser/check-centered-pictograms.mjs docs/phase-3/audits/2026-10-07-centered-pictograms/browser/red --baseline
+& 'C:/Users/Patrick/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' tests/browser/check-centered-pictograms.mjs docs/phase-3/audits/2026-10-07-centered-pictograms/browser/green
+& 'C:/Users/Patrick/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' node_modules/eslint/bin/eslint.js tests/browser/check-centered-pictograms.mjs
 ```
 
 Vite/Playwright require process launch outside this workspace's restrictive sandbox; the focused check was run through the approved escalation. The driver creates no product dependencies and does not modify broad browser drivers.

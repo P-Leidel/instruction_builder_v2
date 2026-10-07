@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 // Reviewed HTML editor equivalents of the former SVG authoring checks.
 import process from "node:process";
 import { Buffer } from "node:buffer";
@@ -5,8 +6,9 @@ import { chromium } from "playwright";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { boot, createBlank, insert, snapshot, importDocument, fixture, records, downloadJson, openActions, openGroup, fillDuration, durationInputTotal } from "./editor-browser-helpers.mjs";
-import { assertChecks } from "../../../scripts/check-results.mjs";
-const out = process.argv[2]; const url = process.argv[3] ?? "http://localhost:5173/"; if (!out) throw new Error("Output directory required");
+import { assertChecks } from "../../scripts/check-results.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
+const out = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "browser")); const url = process.argv[3] ?? "http://localhost:5173/";
 const errors = []; const checks = {}; const browser = await chromium.launch();
 try {
   await mkdir(out, { recursive: true }); const { page, context } = await boot(browser, url, errors);

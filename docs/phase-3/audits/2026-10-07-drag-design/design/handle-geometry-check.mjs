@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { pathToFileURL } from "node:url";
+
 import { chromium } from "playwright";
 import { createServer } from "vite";
-const { boot } = await import(pathToFileURL(path.resolve(".claude/skills/run-instruction-builder/editor-browser-helpers.mjs")));
+import { boot } from "../../../../../tests/browser/editor-browser-helpers.mjs";
 const stage = process.argv[2] ?? "after", output = path.resolve("docs/phase-3/audits/2026-10-07-drag-design/design", `handle-${stage}`);
 const source = JSON.parse(await readFile("docs/phase-3/audits/2026-10-06-overhaul/editor-proof/workplace-prototype.json", "utf8"));
 const checks = [], errors = []; let browser, server, failure;

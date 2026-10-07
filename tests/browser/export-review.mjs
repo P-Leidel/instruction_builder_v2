@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 // Full-app output audit: node export-review.mjs <output-dir> <url> ("-" owns a dev server).
 import process from "node:process";
 import { Buffer } from "node:buffer";
@@ -6,10 +7,11 @@ import path from "node:path";
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { createServer } from "vite";
-import { assertChecks } from "../../../scripts/check-results.mjs";
+import { assertChecks } from "../../scripts/check-results.mjs";
+const root = fileURLToPath(new URL("../../", import.meta.url));
 
-if (!process.argv[2]) throw new Error("Supply an output directory");
-const output = path.resolve(process.argv[2]), checks = {}, errors = [], files = [];
+
+const output = path.resolve(process.argv[2] ?? path.join(root, "artifacts", "browser", "export-review")), checks = {}, errors = [], files = [];
 let browser, server, failure;
 function check(name, value) { checks[name] = value === true; assert.equal(value, true, name); }
 const mixed = title => ({ schemaVersion: 2, meta: { title, presentation: "sequence", domain: "proof", createdAt: "2026-10-06T00:00:00Z" }, steps: [
@@ -88,7 +90,7 @@ async function caseRun(name, run) {
 let url = process.argv[3];
 try {
   await mkdir(output, { recursive: true });
-  if (!url || url === "-") { server = await createServer({ server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
+  if (!url || url === "-") { server = await createServer({ root, server: { host: "127.0.0.1", port: 0, open: false } }); await server.listen(); url = `http://127.0.0.1:${server.httpServer.address().port}/`; }
   browser = await chromium.launch();
   await caseRun("long-heading", async page => {
     const doc = mixed("W".repeat(50)); doc.steps[0].time = { iconId: "time.duration", seconds: 99 * 86400, label: "99d" };
