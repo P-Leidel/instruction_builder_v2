@@ -79,6 +79,17 @@ try {
     await page.mouse.move(box.x + 20, box.y + 20); await page.mouse.down(); await page.mouse.move(2, 10, { steps: 8 }); await page.mouse.up();
     check("off_editor_drop_preserves_document", JSON.stringify(await downloadJson(page)) === JSON.stringify(beforeCancel));
     await page.locator('[data-add-picture="group-0"]').click();
+    const heading = await page.locator(".token-picker h2").evaluate(node => {
+      const range = document.createRange(); range.selectNodeContents(node);
+      const rect = range.getClientRects()[0];
+      return { x: rect.x, y: rect.y, width: rect.width, height: rect.height };
+    });
+    await page.evaluate(() => window.getSelection().removeAllRanges());
+    await page.mouse.move(heading.x + 1, heading.y + heading.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(heading.x + heading.width - 1, heading.y + heading.height / 2, { steps: 12 });
+    await page.mouse.up();
+    check("picker_heading_drag_does_not_select_text", await page.evaluate(() => window.getSelection().toString()) === "");
     await page.getByRole("searchbox", { name: "Search pictures", exact: true }).fill("Apple");
     const apple = page.locator(".token-picker").getByRole("button", { name: "Apple", exact: true });
     box = await apple.boundingBox(); await page.mouse.move(box.x + 20, box.y + 20); await page.mouse.down(); await page.keyboard.press("Escape"); await page.mouse.up();
