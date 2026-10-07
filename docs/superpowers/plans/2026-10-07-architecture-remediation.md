@@ -32,10 +32,10 @@
 
 **Interfaces:** Preserve `dragThresholdFor(pointerType: string): number`, its two threshold constants, and all active UI/session exports.
 
-- [ ] Reconfirm static/dynamic imports and active CSS boundaries.
-- [ ] Remove unreachable files/exports and exclusive tests; retain threshold tests, base/theme CSS and desktop scrollbar gutter.
-- [ ] Run `npm test`, `npm run lint`, `npm run build`; active tests and compilation pass.
-- [ ] Obtain independent review; commit `refactor: retire disconnected legacy editor implementation` and push after browser verification.
+- [x] Reconfirm static/dynamic imports and active CSS boundaries.
+- [x] Remove unreachable files/exports and exclusive tests; retain threshold tests, base/theme CSS and desktop scrollbar gutter.
+- [x] Run `npm test`, `npm run lint`, `npm run build`; active tests and compilation pass.
+- [x] Obtain independent review; commit `refactor: retire disconnected legacy editor implementation` and push after browser verification.
 
 ## Task 2: Consolidate maintained browser checks
 
@@ -43,9 +43,9 @@
 
 **Interfaces:** Preserve `npm run test:browser`/`test:pwa`, check argument order and helper exports. Storage task owns later edits to relocated reliability/helper files.
 
-- [ ] Move files, update imports/root resolution and evidence defaults; lint Node browser drivers.
-- [ ] Run lint, tooling, build, full browser and PWA gates. Confirm no maintained executable imports hidden drivers.
-- [ ] Obtain independent review; commit `refactor: make browser verification ownership explicit` and push.
+- [x] Move files, update imports/root resolution and evidence defaults; lint Node browser drivers.
+- [x] Run lint, tooling, build, full browser and PWA gates. Confirm no maintained executable imports hidden drivers.
+- [x] Obtain independent review; commit `refactor: make browser verification ownership explicit` and push.
 
 ## Task 3: Declare storage reads and use atomic inserts
 
@@ -53,14 +53,14 @@
 
 **Interfaces:** `GuideReadPlan { keys?: readonly string[]; prefix?: string; mode?: "readonly" | "readwrite" }`; `GuideStore.transaction<T>(plan: GuideReadPlan, operation: (transaction: GuideTransaction) => T): Promise<T>`; existing transaction `get/put/entries` plus `add(key: string, value: unknown): void`.
 
-- [ ] Write meaningful read-plan/range/insert rollback regressions, run before implementation and record expected failures.
-- [ ] Implement selective prefetch and synchronous policy dispatch; require declared reads; native `add` for guide/recovery inserts. Update callers and serialized fakes while preserving existing session behavior.
-- [ ] Update real-browser reload/recovery fault injections; test keyed operations with `getAll/getAllKeys` prohibited and prefix exclusion, collision rollback and notice/baseline protection.
-- [ ] Run full unit suite, lint/build and reliability/native browser checks; obtain independent concurrency/recovery review.
-- [ ] Commit `refactor: narrow atomic guide storage transactions` and push.
+- [x] Write meaningful read-plan/range/insert rollback regressions, run before implementation and record expected failures.
+- [x] Implement selective prefetch and synchronous policy dispatch; require declared reads; native `add` for guide/recovery inserts. Update callers and serialized fakes while preserving existing session behavior.
+- [x] Update real-browser reload/recovery fault injections; test keyed operations with `getAll/getAllKeys` prohibited and prefix exclusion, collision rollback and notice/baseline protection.
+- [x] Run full unit suite, lint/build and reliability/native browser checks; obtain independent concurrency/recovery review.
+- [x] Commit `refactor: narrow atomic guide storage transactions` and push.
 
 ## Final verification
 
-- [ ] Run integrated unit/tooling, lint/build, browser/PWA gates after all changes.
-- [ ] Review the branch independently, resolve material findings, and update current remediation status with source lines and commits in a separate documentation commit.
-- [ ] Verify remote branch equals local HEAD and working tree is clean.
+- [x] Run integrated unit/tooling, lint/build, browser/PWA gates after all changes.
+- [x] Review the branch independently, resolve material findings, and update current remediation status with source lines and commits in a separate documentation commit.
+- [x] Verify remote branch equals local HEAD and working tree is clean.

@@ -46,7 +46,7 @@ those version facts is true. The *conclusion drawn from them was not*, and
 it is corrected here in place rather than quietly deleted, because it is
 exactly the argument a future reader would otherwise re-derive and believe.
 
-None of those facts is a consequence of adding a DOM environment.
+None of those facts is a consequence of adding a DOM environment. The following dependency evidence describes the 18 September decision; the maintained project has since upgraded to Vite 8/Vitest 5 and resolved those advisories.
 `vitest@2.1.9` - and with it `@vitest/mocker@2.1.9` - is **already installed
 and already shipping in this project's dev tree today** (`npm ls
 @vitest/mocker`), and that advisory is already an accepted, guard-railed
@@ -83,14 +83,12 @@ weaker signal than the coverage that already exists.
 ## The alternative that is actually being pursued
 
 Push testable logic *out* of components and into `src/lib/`, where it is
-plain Vitest with no environment at all. This is not hypothetical - it is
-the move that already produced
-[`canvas-layout.ts`](../../src/lib/canvas-layout.ts),
-[`pointer-drag.ts`](../../src/lib/pointer-drag.ts),
-[`quantity.ts`](../../src/lib/quantity.ts) and, most recently,
-[`field-placement.ts`](../../src/lib/field-placement.ts), which turned "where
-does a floating panel go?" from an untested comparison inside an effect into
-six unit tests at any viewport you can type.
+plain Vitest with no environment at all. Current examples include
+[`output-plan.ts`](../../src/lib/output-plan.ts),
+[`editor-layout.ts`](../../src/lib/editor-layout.ts),
+[`instruction-reading.ts`](../../src/lib/instruction-reading.ts) and
+[`quantity.ts`](../../src/lib/quantity.ts). The old canvas layout and floating-field
+helpers were retired during the [architecture remediation](../phase-3/progress/2026-10-07-architecture-remediation.md).
 
 ## Consequences
 

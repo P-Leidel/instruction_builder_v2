@@ -11,13 +11,15 @@ noted and deliberately left alone.
 
 ## Codebase health review, 7 October 2026
 
-The [current review](./phase-3/reviews/2026-10-07-codebase-health-review.md)
+The [dated review](./phase-3/reviews/2026-10-07-codebase-health-review.md)
 records remaining planner/input robustness, cross-tab preference loss, startup
 storage retry, unknown-picture captions, PNG physical density, and focus-flow
-issues, plus architecture and UX decisions. It also records the fixed save/Undo
+issues and UX decisions. The [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
+retires disconnected legacy code, narrows atomic storage reads and consolidates
+maintained browser checks under `tests/browser`. It also records the fixed save/Undo
 race, field shortcut scoping, UI language, repeated import submission, and
 obsolete startup viewport tracking. Older sections below retain their dated
-context; use this review and `CONTEXT.md` for current implementation behavior.
+context; use the remediation record and `CONTEXT.md` for current implementation behavior.
 
 ## Takeover review and overhaul, 6 October 2026
 

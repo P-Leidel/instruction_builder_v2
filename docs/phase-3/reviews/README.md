@@ -9,9 +9,10 @@ Dated code-review reports produced during Phase 3, mirroring
 per run (`YYYY-MM-DD-code-review.md`).
 
 - [7 October 2026 codebase health review](./2026-10-07-codebase-health-review.md)
-  reviews code, architecture and UX across the current application. It records
+  reviews code, architecture and UX across its dated application snapshot. It records
   verified small fixes, remaining functional findings, open design decisions
-  and fresh unit/browser/offline verification.
+  and fresh unit/browser/offline verification. The [architecture remediation](../progress/2026-10-07-architecture-remediation.md)
+  records subsequent fixes and current open work.
 
 - [2026-09-17-code-review.md](./2026-09-17-code-review.md) was produced with
   the `mattpocock-skills:code-review` plugin skill, reviewing the

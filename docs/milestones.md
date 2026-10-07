@@ -5,7 +5,7 @@
 > any task's status; see "Documentation status conventions" below for how
 > this doc relates to every other doc in `docs/`.
 
-**Current status (2026-10-06): Phase 3 remains in progress (5 of 7 tasks).**
+**Current status (2026-10-07): Phase 3 remains in progress (5 of 7 tasks).**
 Task 30 (real-user testing) is in progress; task 31 has a reviewed local overhaul, with practical refinement and release acceptance still open.
 The [takeover review](./phase-3/audits/2026-10-06-takeover-review.md) records
 UX/mobile/output risks; [maintenance](./phase-3/progress/2026-10-06-reliability-maintenance.md)
@@ -18,7 +18,9 @@ supersede recipe-only finishing. The local overhaul is implemented and independe
 three original libraries, local guides, responsive editing/semantic reading,
 physical planning, preview and exports. [Technical acceptance](./phase-3/audits/2026-10-06-overhaul/technical-acceptance.md)
 records clean-install gates (461 unit tests, 7 tooling tests, integrated browser
-and cold/update PWA checks). Nothing from this run is pushed, merged or deployed.
+and cold/update PWA checks). The later [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
+and prior review fixes are committed and pushed separately on `codex/architecture-remediation`;
+487 current unit tests, tooling, browser and production PWA gates pass. No merge or deployment occurred.
 Participant, actual-print, real-device and screen-reader acceptance remain pending;
 Phase 3 is not complete.
 

@@ -4,7 +4,7 @@ Terms used consistently across `docs/` and `src/`, kept here so architecture
 reviews and new contributors have one place to check a name's meaning
 instead of reverse-engineering it from call sites.
 
-**Current overhaul architecture, 7 October 2026:** the editor and physical output share fixed print geometry. The [print layout contract](docs/print-layout-contract.md) defines centered pictogram anchors, disjoint reserved field zones and orthogonal row connectors; future field/UI changes must preserve those invariants. See the [centered-pictogram acceptance record](docs/phase-3/audits/2026-10-07-centered-pictograms/README.md), [print-faithful editor handoff](docs/phase-3/audits/2026-10-07-print-faithful-editor/README.md) and [overhaul implementation handoff](docs/phase-3/audits/2026-10-06-overhaul/implementation-report.md) for verification and practical release status. The later canvas-era sections describe retained legacy code, rather than the running editor/output flow.
+**Current overhaul architecture, 7 October 2026:** the editor and physical output share fixed print geometry. The [print layout contract](docs/print-layout-contract.md) defines centered pictogram anchors, disjoint reserved field zones and orthogonal row connectors; future field/UI changes must preserve those invariants. See the [centered-pictogram acceptance record](docs/phase-3/audits/2026-10-07-centered-pictograms/README.md), [print-faithful editor handoff](docs/phase-3/audits/2026-10-07-print-faithful-editor/README.md) and [overhaul implementation handoff](docs/phase-3/audits/2026-10-06-overhaul/implementation-report.md) for verification and practical release status. The [architecture remediation](docs/phase-3/progress/2026-10-07-architecture-remediation.md) retires disconnected legacy implementations and consolidates maintained browser checks under `tests/browser`. The later canvas-era sections describe retired code, rather than the running editor/output flow.
 
 ## Document session
 
@@ -39,6 +39,8 @@ _Avoid_: "copy buffer", "system clipboard" (this is never that).
 
 A **guide** is a schema-2 document with `meta.presentation` equal to `sequence` or `board`. Sequences express ordered steps; boards express choices without procedural numbering, connectors or summed alternative times. The persisted domain is authored data, independent of library/language preferences. A guide's versioned IndexedDB envelope has an identity and revision. Repository transactions compare both revision and the raw loaded baseline; conflict preserves the local draft for backup and explicit reload. Unreadable records are copied exactly before fallback, and deletion uses a revisioned tombstone. See [recovery](docs/persistence-recovery.md).
 
+Storage policy declares exact keys or a bounded prefix before its synchronous callback runs in one native IndexedDB transaction. Generated guide/recovery identities use insert-only `add`, while updates use `put`; results, baselines and notices advance after commit. Keyed operations avoid unrelated retained data, and listing scans only the guide prefix. Recovery import uses an exact readonly key. Preference patch merging and startup retry remain separately tracked functional work.
+
 ## Library and picture
 
 A **library** selects canonical catalog entries for Kitchen, Daily routines/workplace or Learning/classroom. Entries share stable global IDs and original SVG artwork. Preferences select app language and default-label language independently; neither translates authored content. Product controls say **picture**; source models retain `InstructionToken`. Unknown imported pictures/warnings keep their authored meaning and named fallback. See [catalog and provenance](docs/content-libraries.md).
@@ -61,7 +63,7 @@ The recursive build manifest includes the shell, all libraries, bundled font/lic
 
 ## Historical canvas-era terms
 
-The following entries document retained legacy components and their historical decisions. They are useful when reading earlier reports. Current authoring, modal, movement and output behavior is defined above and in the reviewed [specification package](docs/superpowers/specs/2026-10-06-overhaul/README.md).
+The following entries document retired legacy components and their historical decisions. Their source links point to the pre-remediation snapshot. They are useful when reading earlier reports. Current authoring, modal, movement and output behavior is defined above and in the reviewed [specification package](docs/superpowers/specs/2026-10-06-overhaul/README.md).
 
 ## Field popover
 
@@ -73,9 +75,9 @@ expanding inside it, because a **collapsed field**'s own footprint must
 never change just because its form opened: Token time and Quantity sit in
 one row, and either one growing in place shoves the other sideways
 mid-edit. See
-[src/components/FieldPopover/FieldPopover.tsx](./src/components/FieldPopover/FieldPopover.tsx)
+[src/components/FieldPopover/FieldPopover.tsx](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/components/FieldPopover/FieldPopover.tsx)
 for the panel and
-[src/components/CollapsedField/CollapsedField.tsx](./src/components/CollapsedField/CollapsedField.tsx)
+[src/components/CollapsedField/CollapsedField.tsx](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/components/CollapsedField/CollapsedField.tsx)
 for the collapsed/edit-toggle chrome around it.
 
 It is deliberately **non-modal**: nothing behind it is inert, there is no
@@ -83,7 +85,7 @@ backdrop, Tab moves out of it normally, and Escape or a click outside
 closes it. Which of the four positions it takes around its trigger
 (below or above, left- or right-aligned) is **field placement**, decided
 by `resolveFieldPlacement` in
-[src/lib/field-placement.ts](./src/lib/field-placement.ts) and applied as a
+[src/lib/field-placement.ts](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/lib/field-placement.ts) and applied as a
 CSS modifier - the arithmetic is kept out of the panel itself so it can be
 tested without a browser. _Avoid_: "modal", "dialog", "tooltip" (it is
 none of these).
@@ -95,7 +97,7 @@ the centered panel, over a backdrop, that asks the user to approve
 replacing the whole document before it happens. There are exactly two -
 Import's "Replace current document?" and New document's "Start a new
 document?" - and they share one shell,
-[src/components/ConfirmDialog/ConfirmDialog.tsx](./src/components/ConfirmDialog/ConfirmDialog.tsx),
+[src/components/ConfirmDialog/ConfirmDialog.tsx](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/components/ConfirmDialog/ConfirmDialog.tsx),
 with each caller supplying only its own wording and its own go-ahead.
 
 The term exists because this app now decides modality in opposite
@@ -122,13 +124,13 @@ pattern and one non-modal one - name which), "alert" (that is the toast).
 A **canvas point** is a position in the canvas's own design units - the
 coordinate space `computeCanvasLayout` returns every `cardY`, `cx` and `cy`
 in, and the space all drop resolution happens in (`CanvasPoint` in
-[src/lib/canvas-layout.ts](./src/lib/canvas-layout.ts)).
+[src/lib/canvas-layout.ts](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/lib/canvas-layout.ts)).
 
 It is deliberately not a client coordinate. The `<svg>` canvas is scaled by
 its `viewBox`, scrolled inside its container, and zoomable independently of
 the page, so the two spaces agree only by accident. Exactly one function
 converts between them: `clientToCanvasPoint` in
-[src/lib/pointer-drag.ts](./src/lib/pointer-drag.ts), composing the
+[src/lib/pointer-drag.ts](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/lib/pointer-drag.ts), composing the
 element's `getScreenCTM()`. That call and the clipping check beside it
 (`isInsideViewport`, which decides whether the point is somewhere the canvas
 can actually be seen) are the only two DOM reads left in the drag path.
@@ -140,7 +142,7 @@ space a coordinate is in whenever both are in scope.
 
 A **drop target** is where a dragged token would land: a step id plus a
 drop-before index within that step's tokens (`TokenDropTarget` in
-[src/lib/canvas-layout.ts](./src/lib/canvas-layout.ts)). It is the whole
+[src/lib/canvas-layout.ts](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/lib/canvas-layout.ts)). It is the whole
 instruction a move needs - `moveToken` and `addTokenToStep` take exactly
 this and nothing more.
 
@@ -151,7 +153,7 @@ layout, one drop index means two different places on screen at a row
 boundary - index 6 on a 6-per-row step is both "after the last chip of row
 0" and "before the first chip of row 1" - and the live insertion marker has
 to pick one. The `dropTarget` signal
-([src/state/drag.ts](./src/state/drag.ts)) holds a drop slot for that
+([src/state/drag.ts](https://github.com/P-Leidel/instruction_builder_v2/blob/3a4b67acf7f246419053c7d7f02ff1b45f196c43/src/state/drag.ts)) holds a drop slot for that
 reason; the narrower drop target stays what the document mutators consume.
 
 `ChipSlot`, in the same module, is the step-less half of that pair: an

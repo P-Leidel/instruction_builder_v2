@@ -28,6 +28,7 @@ Standalone checks that own a Vite server resolve its root from their file.
 | `editor-transition-check.mjs` | `[output-directory] [url-or-dash] [case] [evidence-tag]` | Own dev server when URL is omitted or `-`; cases remain `all`, `attachments`, `modal`, `focus` |
 | `editor-output-integration-check.mjs`, `export-review.mjs` | `[output-directory] [url-or-dash]` | Own dev server when URL is omitted or `-` |
 | `reliability-check.mjs` | `[url]` | Existing dev server; URL defaults to `http://localhost:5173/` |
+| `storage-check.mjs` | `[url]` | Own dev server when URL is omitted; native IndexedDB contracts in an isolated context |
 | `check-header-theme.mjs`, `check-editor-drag.mjs`, `check-review-regressions.mjs`, `check-print-faithful-editor.mjs` | `[output-directory] [url]` | Own dev server when URL is omitted |
 | `check-centered-pictograms.mjs` | `[output-directory] [url] [--baseline]` | Own dev server when URL is omitted; `--baseline` keeps the existing baseline comparison mode |
 | `pwa-check.mjs` | `[url] [output-directory]` | Existing production preview; URL defaults to `http://127.0.0.1:4173/` |
@@ -42,7 +43,7 @@ node tests/browser/editor-transition-check.mjs artifacts/transitions - focus
 
 The browser gate covers authoring/history/downloads, semantic reading,
 responsive layout and accessibility, attachment/modal/focus transitions,
-output integration, export artifacts, native persistence and conflicts,
+output integration, export artifacts, native persistence and conflicts, declared-key/prefix reads and atomic insert recovery,
 theme/header layout, review regressions, mouse/touch drag behavior,
 print-faithful editor geometry and centered pictograms. The PWA gate covers
 four separately cold offline exports and old/new waiting-worker activation,
