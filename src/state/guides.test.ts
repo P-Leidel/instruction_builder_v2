@@ -66,6 +66,152 @@ describe("local guide controller", () => {
     expect((await repository.load(records[0].id))?.deletedAt).toBeDefined();
   });
 
+  it("explicit startup retry recovers a failed list and enables open, create, and autosave", async () => {
+    let failList = true;
+    const { controller, records, session, repository } = await fixture({ wrap: (repository) => ({ ...repository,
+      list: async () => { if (failList) throw new Error("temporarily offline"); return repository.list(); },
+    }) });
+    expect(controller.saveState.value).toBe("unavailable");
+    failList = false; await controller.refreshGuides();
+    expect(controller.guideSummaries.value).toHaveLength(2);
+    expect(await controller.openGuide(records[1].id)).toEqual({ ok: false, reason: "unavailable" });
+    expect(await controller.retryGuideStorage()).toEqual({ ok: true, guideId: records[0].id });
+    expect(controller.startupStorageUnavailable.value).toBe(false);
+    expect(controller.saveState.value).toBe("saved");
+    expect(await controller.openGuide(records[1].id)).toEqual({ ok: true, guideId: records[1].id });
+    const created = await controller.createGuide(createEmptyDocument()); expect(created.ok).toBe(true);
+    sessionActions.updateTitle(session, "Autosaved after retry"); await vi.advanceTimersByTimeAsync(200);
+    expect((await repository.load(controller.activeGuideId.value!))?.document.meta.title).toBe("Autosaved after retry");
+    expect(controller.saveState.value).toBe("saved");
+  });
+
+  it("startup retry rechecks a failed last-guide read and tolerates missing or deleted targets", async () => {
+    for (const target of ["live", "missing", "deleted"] as const) {
+      let failLoad = true;
+      const { controller, records, repository } = await fixture({ lastGuideId: target === "missing" ? "missing" : undefined,
+        prepare: target === "deleted" ? async (repository, records) => { await repository.remove(records[0].id, 1); } : undefined,
+        wrap: (repository) => ({ ...repository, load: async (id) => { if (failLoad) throw new Error("read failed"); return repository.load(id); } }),
+      });
+      expect(controller.saveState.value).toBe("unavailable"); failLoad = false;
+      expect((await controller.retryGuideStorage()).ok).toBe(true);
+      expect(controller.activeGuideId.value).toBe(target === "live" ? records[0].id : null);
+      expect(controller.saveState.value).toBe(target === "live" ? "saved" : "pending");
+      expect(controller.startupStorageUnavailable.value).toBe(false);
+      expect((await controller.createGuide(createEmptyDocument())).ok).toBe(true);
+      expect(await repository.list()).toHaveLength(target === "deleted" ? 2 : 3);
+    }
+  });
+
+  it("repeated startup retries retain unavailability until storage really recovers", async () => {
+    let failList = true;
+    const { controller } = await fixture({ empty: true, wrap: (repository) => ({ ...repository,
+      list: async () => { if (failList) throw new Error("still offline"); return repository.list(); },
+    }) });
+    expect(await controller.retryGuideStorage()).toEqual({ ok: false, reason: "unavailable" });
+    expect(controller.startupStorageUnavailable.value).toBe(true);
+    expect(controller.saveState.value).toBe("unavailable");
+    failList = false;
+    expect(await controller.retryGuideStorage()).toEqual({ ok: true });
+    expect(controller.saveState.value).toBe("pending");
+    expect(controller.activeGuideId.value).toBeNull(); expect(controller.guideSummaries.value).toEqual([]);
+  });
+
+  it("concurrent startup retries do not race navigation or install duplicate autosave observers", async () => {
+    const gate = deferred(); const entered = deferred(); let failList = true; let pauseList = false;
+    const { controller, session, records, repository } = await fixture({ wrap: (repository) => ({ ...repository,
+      list: async () => { if (failList) throw new Error("offline"); if (pauseList) { entered.resolve(); await gate.promise; } return repository.list(); },
+    }) });
+    failList = false; pauseList = true;
+    const retry = controller.retryGuideStorage(); await entered.promise;
+    const secondRetry = controller.retryGuideStorage(); const opening = controller.openGuide(records[1].id);
+    gate.resolve(); await Promise.all([retry, secondRetry, opening]);
+    expect(controller.activeGuideId.value).toBe(records[1].id);
+    sessionActions.updateTitle(session, "One committed edit"); await vi.advanceTimersByTimeAsync(250);
+    expect((await repository.load(records[1].id))?.revision).toBe(2);
+  });
+
+  it.each(["before", "during"] as const)("startup retry preserves an unsaved session edited %s recovery", async (when) => {
+    const gate = deferred(); const entered = deferred(); let failList = true;
+    const { controller, session, records, repository } = await fixture({ wrap: (repository) => ({ ...repository,
+      list: async () => { if (failList) throw new Error("offline"); entered.resolve(); await gate.promise; return repository.list(); },
+    }) });
+    if (when === "before") sessionActions.updateTitle(session, "Local draft before retry");
+    failList = false; const retry = controller.retryGuideStorage();
+    if (when === "during") { await entered.promise; sessionActions.updateTitle(session, "Local draft during retry"); }
+    const draft = session.document.value; const history = session.past.value;
+    gate.resolve(); expect(await retry).toEqual({ ok: false, reason: "cancelled" });
+    expect(session.document.value).toBe(draft); expect(session.past.value).toBe(history);
+    expect(controller.activeGuideId.value).toBeNull(); expect(controller.saveState.value).toBe("unavailable");
+    expect((await repository.load(records[0].id))?.revision).toBe(1);
+  });
+
+  it("startup retry does not clear an active conflict or runtime storage failure", async () => {
+    const { controller, session, records, store, state } = await fixture();
+    const other = createGuideRepository({ store }); const disk = (await other.load(records[0].id))!;
+    disk.document.meta.title = "External winner"; await other.save(disk.id, disk.revision, disk.document);
+    sessionActions.updateTitle(session, "Losing draft"); await controller.flushActiveGuide();
+    const draft = session.document.value; const history = session.past.value;
+    expect(await controller.retryGuideStorage()).toEqual({ ok: false, reason: "conflict" });
+    expect(controller.saveState.value).toBe("conflict"); expect(session.document.value).toBe(draft); expect(session.past.value).toBe(history);
+    expect(controller.startupStorageUnavailable.value).toBe(false);
+    await controller.reloadActiveGuide(); state.fail = true; sessionActions.updateTitle(session, "Quota draft"); await controller.flushActiveGuide();
+    state.fail = false;
+    expect(await controller.retryGuideStorage()).toEqual({ ok: false, reason: "unavailable" });
+    expect(controller.saveState.value).toBe("unavailable"); expect(controller.startupStorageUnavailable.value).toBe(false);
+  });
+
+  it("startup retry remains usable when preference storage is independently unavailable", async () => {
+    const data = storage(); const repository = createGuideRepository({ store: data.store });
+    const created = await repository.create(createEmptyDocument()); if (!created.ok) throw new Error("fixture create");
+    const preferenceController = createPreferencesController({ store: data.store, languages: ["en"] });
+    await preferenceController.initializePreferences(); await preferenceController.updatePreferences({ lastGuideId: created.record.id });
+    data.state.failPreferences = true; await preferenceController.updatePreferences({ theme: "dark" });
+    const retryPreferences = async () => { await preferenceController.updatePreferences({ theme: "dark" }); };
+    let failList = true;
+    const controller = createGuideController(createDocumentSession(), { store: data.store,
+      preferenceController: { ...preferenceController, retryPreferences }, repository: { ...repository,
+        list: async () => { if (failList) throw new Error("offline guide list"); return repository.list(); },
+      },
+    }); cleanup.push(controller.dispose); await controller.initializeGuides();
+    failList = false;
+    expect(await controller.retryGuideStorage()).toEqual({ ok: true, guideId: created.record.id });
+    expect(controller.saveState.value).toBe("saved");
+    expect(preferenceController.preferenceSaveState.value).toBe("unavailable");
+    expect(preferenceController.preferences.value.theme).toBe("dark");
+    expect((await controller.createGuide(createEmptyDocument())).ok).toBe(true);
+  });
+
+  it("startup retry cannot clear an active deletion blocker or discard its retained draft", async () => {
+    const { controller, session, records, store } = await fixture();
+    const other = createGuideRepository({ store }); const disk = (await other.load(records[0].id))!;
+    await other.remove(disk.id, disk.revision);
+    sessionActions.updateTitle(session, "Draft after external deletion");
+    expect(await controller.flushActiveGuide()).toEqual({ ok: false, reason: "deleted" });
+    const draft = session.document.value; const history = session.past.value;
+    expect(await controller.retryGuideStorage()).toEqual({ ok: false, reason: "deleted" });
+    expect(controller.startupStorageUnavailable.value).toBe(false); expect(controller.saveState.value).toBe("conflict");
+    expect(session.document.value).toBe(draft); expect(session.past.value).toBe(history);
+    expect((await other.load(disk.id))?.deletedAt).toBeDefined();
+  });
+
+  it("startup retry recovers a transaction failure during legacy migration without duplicate creation", async () => {
+    const data = storage(); const raw = createEmptyDocument(); raw.meta.title = "Legacy to recover";
+    data.records.set(LEGACY_KEY, raw);
+    const preferenceController = createPreferencesController({ store: data.store, languages: ["en"] });
+    await preferenceController.initializePreferences(); data.state.fail = true;
+    const controller = createGuideController(createDocumentSession(), { store: data.store, preferenceController });
+    cleanup.push(controller.dispose); await controller.initializeGuides();
+    expect(controller.startupStorageUnavailable.value).toBe(true);
+    expect([...data.records]).toEqual([[LEGACY_KEY, raw]]);
+    data.state.fail = false;
+    expect(await controller.retryGuideStorage()).toEqual({ ok: true });
+    expect(controller.guideSummaries.value).toMatchObject([{ title: "Legacy to recover", revision: 1 }]);
+    expect(await controller.retryGuideStorage()).toEqual({ ok: true });
+    expect([...data.records.keys()].filter((key) => key.startsWith(GUIDE_PREFIX))).toHaveLength(1);
+    expect(data.records.get(LEGACY_KEY)).toEqual(raw);
+    expect((await controller.openGuide(controller.guideSummaries.value[0].id)).ok).toBe(true);
+  });
+
   it("drainsLatestEditBeforeNavigation", async () => {
     const gate = deferred(); let writes = 0;
     const { controller, session, records, store } = await fixture({ wrap: (repository) => ({ ...repository, save: async (...args) => {

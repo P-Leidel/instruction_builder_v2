@@ -78,6 +78,38 @@ describe("local guide transactions", () => {
     expect([...state.records]).toEqual([[LEGACY_KEY, raw]]);
   });
 
+  it("retries an aborted legacy migration once storage recovers", async () => {
+    const raw = legacy();
+    const { state, store } = memoryStore(new Map([[LEGACY_KEY, raw]]));
+    const repository = createGuideRepository({ store }); state.failCommit = true;
+    await expect(repository.list()).rejects.toThrow("quota exceeded");
+    expect([...state.records]).toEqual([[LEGACY_KEY, raw]]);
+    state.failCommit = false;
+    const [first, second] = await Promise.all([repository.list(), repository.list()]);
+    expect(first).toHaveLength(1); expect(second).toEqual(first);
+    expect([...state.records.keys()].filter((key) => key.startsWith(GUIDE_PREFIX))).toHaveLength(1);
+    expect(state.records.get(LEGACY_KEY)).toEqual(raw);
+    expect(await repository.create(createEmptyDocument())).toMatchObject({ ok: true });
+  });
+
+  it("requires the exact unreadable backup to commit on every retry before creation", async () => {
+    const raw = { schemaVersion: 99, future: ["exact"] };
+    const { state, store } = memoryStore(new Map([[LEGACY_KEY, raw]]));
+    const notices: unknown[] = [];
+    const repository = createGuideRepository({ store, onNotice: (notice) => notices.push(notice) });
+    state.failRecovery = true;
+    await expect(repository.list()).rejects.toThrow("backup failed");
+    expect(await repository.create(createEmptyDocument())).toEqual({ ok: false, reason: "unavailable" });
+    expect([...state.records]).toEqual([[LEGACY_KEY, raw]]); expect(notices).toEqual([]);
+    state.failRecovery = false;
+    expect(await repository.list()).toEqual([]);
+    expect([...state.records].filter(([key]) => key.startsWith("instruction-builder:recovery:")).map(([, value]) => value)).toEqual([raw]);
+    expect(notices).toHaveLength(1);
+    expect(await repository.create(createEmptyDocument())).toMatchObject({ ok: true });
+    await repository.list(); expect(notices).toHaveLength(1);
+    expect(state.records.get(LEGACY_KEY)).toEqual(raw);
+  });
+
   it("preservesLaterLegacyEdits", async () => {
     const { state, store } = memoryStore(new Map([[LEGACY_KEY, legacy()]]));
     const first = await createGuideRepository({ store }).list();

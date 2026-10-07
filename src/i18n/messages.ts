@@ -83,6 +83,8 @@ export interface MessageParams {
   "save.reloadConfirm": undefined;
   "save.keepEditing": undefined;
   "preferences.saveUnavailable": undefined;
+  "preferences.retry": undefined;
+  "save.retryStorage": undefined;
   "reader.backToEditing": undefined;
   "reader.contentMode": undefined;
   "editor.warningReview": undefined;

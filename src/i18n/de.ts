@@ -81,6 +81,8 @@ export const de = {
   "save.reloadConfirm": "Gespeicherten Leitfaden laden und lokale Änderungen verwerfen? Lade zuerst eine JSON-Sicherung herunter, wenn du sie behalten möchtest.",
   "save.keepEditing": "Lokale Arbeit weiter bearbeiten",
   "preferences.saveUnavailable": "Deine Einstellungen konnten auf diesem Gerät nicht gespeichert werden.",
+  "preferences.retry": "Einstellungen erneut speichern",
+  "save.retryStorage": "Lokalen Speicher erneut versuchen",
   "reader.backToEditing": "Zurück zur Bearbeitung",
   "reader.contentMode": "Leseinhalt",
   "editor.warningReview": "Prüfe dieses unbekannte Bild vor dem Teilen.",

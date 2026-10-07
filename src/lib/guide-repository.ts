@@ -171,7 +171,11 @@ export function createGuideRepository(options: GuideRepositoryOptions = {}): Gui
         transaction.put(MIGRATION_KEY, { guideId: record.id, fingerprint });
       }
       return notices;
-    }).then((notices) => { for (const notice of notices) options.onNotice?.(notice); });
+    }).catch((error: unknown) => {
+        // A failed transaction committed neither migration nor recovery data.
+        // Allow a later explicit startup retry to attempt the same policy again.
+        initialization = undefined; throw error;
+      }).then((notices) => { for (const notice of notices) options.onNotice?.(notice); });
     await initialization;
   }
   async function loadRecords(id?: string, refresh = false): Promise<GuideRecord[]> {

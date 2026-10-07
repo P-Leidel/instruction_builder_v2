@@ -22,10 +22,12 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
   const preferences = signal<AppPreferences>({ uiLocale: locale, labelLocale: locale, activeLibraryId: "kitchen", theme: "light" });
   const preferenceSaveState = signal<PreferenceSaveState>("loading");
   let initialization: Promise<void> | undefined;
+  let retrying: Promise<void> | undefined;
   let tail = Promise.resolve(); let serial = 0; let writable = false;
   let initialized = false; let intent = preferences.peek();
   const startupPatches: Partial<AppPreferences>[] = [];
   let pendingPatch: Partial<AppPreferences> = {};
+  let pendingSave = false;
   const recovered = new Set<string>();
   function readPreferences(transaction: GuideTransaction): { value: AppPreferences; recoveryFingerprint?: string } {
     const raw = transaction.get(PREFERENCES_KEY);
@@ -64,29 +66,47 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
     preferences.value = snapshot;
     const version = ++serial; preferenceSaveState.value = "pending";
     tail = tail.then(async () => {
+      // Keep startup intent even when initialization cannot yet read storage.
+      pendingPatch = { ...pendingPatch, ...capturedPatch }; pendingSave = true;
       await initializePreferences();
       if (!writable) { preferenceSaveState.value = "unavailable"; return; }
-      // Retain failed local intent, but never replay fields this controller did not change.
-      pendingPatch = { ...pendingPatch, ...capturedPatch };
-      if (version === serial) preferenceSaveState.value = "saving";
-      try {
-        const { value, recoveryFingerprint } = await store.transaction({ keys: [PREFERENCES_KEY], mode: "readwrite" }, (transaction) => {
-          const current = readPreferences(transaction);
-          const value = validated({ ...current.value, ...pendingPatch });
-          transaction.put(PREFERENCES_KEY, { version: 1, preferences: value });
-          return { ...current, value };
-        });
-        if (recoveryFingerprint !== undefined) recovered.add(recoveryFingerprint);
-        intent = value; pendingPatch = {};
-        if (version === serial) preferences.value = value;
-        if (version === serial) preferenceSaveState.value = "saved";
-      } catch { if (version === serial) preferenceSaveState.value = "unavailable"; }
+      await savePending(version);
     });
     return tail;
   }
-  return { preferences, preferenceSaveState, initializePreferences, updatePreferences };
+  async function savePending(version: number): Promise<void> {
+    if (version === serial) preferenceSaveState.value = "saving";
+    try {
+      const { value, recoveryFingerprint } = await store.transaction({ keys: [PREFERENCES_KEY], mode: "readwrite" }, (transaction) => {
+        const current = readPreferences(transaction);
+        const value = validated({ ...current.value, ...pendingPatch });
+        transaction.put(PREFERENCES_KEY, { version: 1, preferences: value });
+        return { ...current, value };
+      });
+      if (recoveryFingerprint !== undefined) recovered.add(recoveryFingerprint);
+      intent = value; pendingPatch = {}; pendingSave = false;
+      if (version === serial) preferences.value = value;
+      if (version === serial) preferenceSaveState.value = "saved";
+    } catch { if (version === serial) preferenceSaveState.value = "unavailable"; }
+  }
+  function retryPreferences(): Promise<void> {
+    if (retrying) return retrying;
+    const version = ++serial;
+    // Reserve a place after existing writes. Later updates queue behind this retry.
+    retrying = tail = tail.then(async () => {
+      await initialization;
+      if (!writable) initialization = undefined;
+      await initializePreferences();
+      if (!writable) { if (version === serial) preferenceSaveState.value = "unavailable"; return; }
+      if (pendingSave) await savePending(version);
+      else if (version === serial) { preferences.value = intent; preferenceSaveState.value = "saved"; }
+    }).finally(() => { retrying = undefined; });
+    preferenceSaveState.value = "pending";
+    return retrying;
+  }
+  return { preferences, preferenceSaveState, initializePreferences, updatePreferences, retryPreferences };
 }
 
 export type PreferencesController = ReturnType<typeof createPreferencesController>;
 const controller = createPreferencesController();
-export const { preferences, preferenceSaveState, initializePreferences, updatePreferences } = controller;
+export const { preferences, preferenceSaveState, initializePreferences, updatePreferences, retryPreferences } = controller;

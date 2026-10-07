@@ -18,7 +18,7 @@ try {
   const scripts = mode === "browser"
     ? [["driver.mjs", output, url], ["review-check.mjs", output, url], ["responsive-editor-check.mjs", output, url],
       ["editor-transition-check.mjs", output, url], ["editor-output-integration-check.mjs", output, url],
-      ["export-review.mjs", output, url], ["reliability-check.mjs", url], ["storage-check.mjs", url], ["preferences-merge-check.mjs", url],
+      ["export-review.mjs", output, url], ["reliability-check.mjs", url], ["storage-check.mjs", url], ["preferences-merge-check.mjs", url], ["startup-retry-check.mjs", url],
       ["check-header-theme.mjs", path.join(output, "header-theme"), url],
       ["check-review-regressions.mjs", path.join(output, "review-regressions"), url],
       ["check-editor-drag.mjs", path.join(output, "editor-drag"), url],

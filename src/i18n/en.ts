@@ -81,6 +81,8 @@ export const en = {
   "save.reloadConfirm": "Reload the saved guide and discard your local edits? Download a JSON backup first if you want to keep them.",
   "save.keepEditing": "Keep editing local work",
   "preferences.saveUnavailable": "Your settings could not be saved on this device.",
+  "preferences.retry": "Retry saving preferences",
+  "save.retryStorage": "Retry local storage",
   "reader.backToEditing": "Back to editing",
   "reader.contentMode": "Reading content",
   "editor.warningReview": "Review this unknown picture before sharing.",

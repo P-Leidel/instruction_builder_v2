@@ -5,15 +5,16 @@ import type { GuideStore } from "../lib/guide-repository";
 
 function storage(seed?: unknown) {
   const records = new Map<string, unknown>(); if (seed !== undefined) records.set(PREFERENCES_KEY, seed);
-  const state = { fail: false, failures: 0, failBackup: false, pause: undefined as Promise<void> | undefined };
+  const state = { fail: false, failures: 0, failBackup: false, failRead: false, pause: undefined as Promise<void> | undefined, onStart: undefined as (() => void) | undefined };
   let tail = Promise.resolve();
   const store: GuideStore = { transaction: (plan, operation) => {
     const pause = state.pause;
     const pending = tail.then(async () => {
+    state.onStart?.();
     await pause; const draft = structuredClone(records);
     const declared = (key: string) => plan.keys?.includes(key) || (plan.prefix !== undefined && key.startsWith(plan.prefix));
     const put = (key: string, value: unknown) => { if (plan.mode === "readonly") throw new Error("readonly"); draft.set(key, structuredClone(value)); };
-    const result = operation({ get: (key) => { if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
+    const result = operation({ get: (key) => { if (state.failRead) throw new Error("read unavailable"); if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
       entries: () => { if (plan.prefix === undefined && !plan.keys?.length) throw new Error("undeclared entries"); return [...draft].filter(([key]) => declared(key)); },
       put, add: (key, value) => { if (state.failBackup) throw new Error("backup unavailable"); if (draft.has(key)) throw new Error("insert collision"); put(key, value); } });
     if (state.fail) throw new Error("quota");
@@ -27,6 +28,121 @@ function storage(seed?: unknown) {
 }
 
 describe("local preferences", () => {
+  it("explicit retry rechecks a failed startup read and adopts saved preferences without rewriting them", async () => {
+    const raw = { version: 1, preferences: { uiLocale: "de", labelLocale: "en", activeLibraryId: "learning", lastGuideId: "saved" } };
+    const { store, records, state } = storage(raw); const controller = createPreferencesController({ store, languages: ["en"] });
+    state.failRead = true; await controller.initializePreferences();
+    expect(controller.preferenceSaveState.value).toBe("unavailable");
+    await controller.retryPreferences(); expect(controller.preferenceSaveState.value).toBe("unavailable");
+    state.failRead = false; await controller.retryPreferences();
+    expect(controller.preferences.value).toEqual({ uiLocale: "de", labelLocale: "en", activeLibraryId: "learning", lastGuideId: "saved", theme: "light" });
+    expect(controller.preferenceSaveState.value).toBe("saved");
+    expect([...records]).toEqual([[PREFERENCES_KEY, raw]]);
+  });
+
+  it("startup retry saves retained local patches while adopting another tab's untouched fields", async () => {
+    const { store, records, state } = storage();
+    const external = createPreferencesController({ store, languages: ["en"] }); await external.initializePreferences();
+    const controller = createPreferencesController({ store, languages: ["en"] });
+    state.failRead = true; await controller.initializePreferences();
+    await controller.updatePreferences({ theme: "dark", lastGuideId: "first" });
+    await controller.updatePreferences({ lastGuideId: undefined });
+    state.failRead = false; await external.updatePreferences({ uiLocale: "de", activeLibraryId: "routines", lastGuideId: "external" });
+    await controller.retryPreferences();
+    const expected = { uiLocale: "de", labelLocale: "en", activeLibraryId: "routines", theme: "dark" };
+    expect(controller.preferences.value).toEqual(expected);
+    expect(controller.preferenceSaveState.value).toBe("saved");
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: expected });
+  });
+
+  it("retrying a failed save keeps failed intent and merges another tab's intervening commit", async () => {
+    const { store, records, state } = storage();
+    const controller = createPreferencesController({ store, languages: ["en"] }), external = createPreferencesController({ store, languages: ["en"] });
+    await Promise.all([controller.initializePreferences(), external.initializePreferences()]);
+    state.fail = true; await controller.updatePreferences({ theme: "dark" }); state.fail = false;
+    await external.updatePreferences({ uiLocale: "de", lastGuideId: "external" });
+    await controller.retryPreferences();
+    const expected = { uiLocale: "de", labelLocale: "en", activeLibraryId: "kitchen", theme: "dark", lastGuideId: "external" };
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: expected });
+    expect(controller.preferences.value).toEqual(expected);
+    expect(controller.preferenceSaveState.value).toBe("saved");
+  });
+
+  it("retrying an empty failed patch cannot claim saved while storage remains unavailable", async () => {
+    const { store, records, state } = storage(); const controller = createPreferencesController({ store, languages: ["en"] });
+    await controller.initializePreferences(); state.fail = true;
+    await controller.updatePreferences({}); await controller.retryPreferences();
+    expect(controller.preferenceSaveState.value).toBe("unavailable");
+    expect([...records]).toEqual([]);
+    state.fail = false; await controller.retryPreferences();
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "en", labelLocale: "en", activeLibraryId: "kitchen", theme: "light" } });
+    expect(controller.preferenceSaveState.value).toBe("saved");
+  });
+
+  it.each(["startup", "save"])("%s backup retry remains unavailable until exact diagnostic preservation commits", async (when) => {
+    const { store, records, state } = storage(); const controller = createPreferencesController({ store, languages: ["en"] });
+    if (when === "save") await controller.initializePreferences();
+    const raw = { version: 99, retained: new Map([["exact", new Uint8Array([3, 255])]]) }; records.set(PREFERENCES_KEY, raw);
+    state.failBackup = true;
+    if (when === "startup") await controller.initializePreferences();
+    await controller.updatePreferences({ theme: "dark" });
+    for (let attempt = 0; attempt < 2; attempt++) {
+      await controller.retryPreferences();
+      expect(controller.preferenceSaveState.value).toBe("unavailable");
+      expect([...records]).toEqual([[PREFERENCES_KEY, raw]]);
+      expect(controller.preferences.value.theme).toBe("dark");
+    }
+    state.failBackup = false; await controller.retryPreferences();
+    expect([...records].filter(([key]) => key.startsWith("instruction-builder:recovery:")).map(([, value]) => value)).toEqual([raw]);
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "en", labelLocale: "en", activeLibraryId: "kitchen", theme: "dark" } });
+    expect(controller.preferenceSaveState.value).toBe("saved");
+  });
+
+  it("simultaneous explicit retries share one operation while initialization is paused", async () => {
+    const { store, records, state } = storage({ version: 99, exact: "retained" });
+    const controller = createPreferencesController({ store, languages: ["en"] });
+    state.failBackup = true; await controller.initializePreferences(); state.failBackup = false;
+    let release!: () => void; state.pause = new Promise<void>((resolve) => { release = resolve; });
+    const first = controller.retryPreferences(), second = controller.retryPreferences();
+    expect(second).toBe(first); expect(controller.preferenceSaveState.value).not.toBe("saved");
+    release(); await Promise.all([first, second]);
+    expect([...records].filter(([key]) => key.startsWith("instruction-builder:recovery:")).map(([, value]) => value)).toEqual([{ version: 99, exact: "retained" }]);
+    expect(controller.preferenceSaveState.value).toBe("saved");
+  });
+
+  it("a user update during startup retry remains visible and saves after the retained older patch", async () => {
+    const raw = { version: 1, preferences: { uiLocale: "de", labelLocale: "de", activeLibraryId: "learning", theme: "light", lastGuideId: "saved" } };
+    const { store, records, state } = storage(raw); const controller = createPreferencesController({ store, languages: ["en"] });
+    state.failRead = true; await controller.updatePreferences({ theme: "dark", lastGuideId: "older" }); state.failRead = false;
+    let release!: () => void; state.pause = new Promise<void>((resolve) => { release = resolve; });
+    let entered!: () => void; const started = new Promise<void>((resolve) => { entered = resolve; }); state.onStart = entered;
+    const retry = controller.retryPreferences(); await started;
+    const update = controller.updatePreferences({ theme: "light", lastGuideId: "latest" });
+    const observed: string[] = []; const dispose = effect(() => { observed.push(controller.preferences.value.lastGuideId ?? "none"); });
+    expect(controller.preferences.value).toMatchObject({ theme: "light", lastGuideId: "latest" });
+    release(); await Promise.all([retry, update]); dispose();
+    expect(observed.every((id) => id === "latest")).toBe(true);
+    const expected = { uiLocale: "de", labelLocale: "de", activeLibraryId: "learning", theme: "light", lastGuideId: "latest" };
+    expect(controller.preferences.value).toEqual(expected);
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: expected });
+    expect(controller.preferenceSaveState.value).toBe("saved");
+  });
+
+  it("retry drains earlier queued writes and cannot overwrite a newer update queued during its wait", async () => {
+    const { store, records, state } = storage(); const controller = createPreferencesController({ store, languages: ["en"] });
+    await controller.initializePreferences();
+    let release!: () => void; state.pause = new Promise<void>((resolve) => { release = resolve; });
+    let entered!: () => void; const started = new Promise<void>((resolve) => { entered = resolve; }); state.onStart = entered;
+    state.failures = 1; const first = controller.updatePreferences({ theme: "dark", lastGuideId: "older" }); await started;
+    const retry = controller.retryPreferences();
+    const latest = controller.updatePreferences({ lastGuideId: "latest" });
+    const observed: string[] = []; const dispose = effect(() => { observed.push(controller.preferences.value.lastGuideId ?? "none"); });
+    release(); await Promise.all([first, retry, latest]); dispose();
+    expect(observed.every((id) => id === "latest")).toBe(true);
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "en", labelLocale: "en", activeLibraryId: "kitchen", theme: "dark", lastGuideId: "latest" } });
+    expect(controller.preferenceSaveState.value).toBe("saved");
+  });
+
   it("a stale controller changes only its patch and adopts another controller's saved fields", async () => {
     const raw = { version: 1, preferences: { uiLocale: "en", labelLocale: "en", activeLibraryId: "kitchen", theme: "light" } };
     const { store, records } = storage(raw);

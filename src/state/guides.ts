@@ -3,23 +3,25 @@ import type { GuideRecord, GuideRepository, GuideSummary, GuideWriteResult } fro
 import type { InstructionDocument } from "../model/instruction";
 import { openDocumentInSession, type DocumentSession } from "./document";
 import { createGuideRepository, createIndexedDbGuideStore, type GuideStore, type GuideNotice } from "../lib/guide-repository";
-import { createPreferencesController, preferences, initializePreferences, updatePreferences, preferenceSaveState, type PreferencesController } from "./preferences";
+import { createPreferencesController, preferences, initializePreferences, retryPreferences, updatePreferences, preferenceSaveState, type PreferencesController } from "./preferences";
 import { migrate } from "../model/migrate";
 import { t } from "../i18n/messages";
 export type { GuideNotice } from "../lib/guide-repository";
 export type SaveState = "loading" | "saved" | "pending" | "saving" | "unavailable" | "conflict";
 export type GuideActionResult = { ok: true; guideId?: string } | { ok: false; reason: "conflict" | "unavailable" | "deleted" | "not-found" | "cancelled" };
-export interface GuideControllerOptions { repository?: GuideRepository; store?: GuideStore; preferenceController?: PreferencesController; signals?: ReturnType<typeof createGuideControllerSignals> }
+type GuidePreferencesController = Pick<PreferencesController, "preferences" | "preferenceSaveState" | "initializePreferences" | "updatePreferences"> & { retryPreferences?: () => Promise<void> };
+export interface GuideControllerOptions { repository?: GuideRepository; store?: GuideStore; preferenceController?: GuidePreferencesController; signals?: ReturnType<typeof createGuideControllerSignals> }
 export function createGuideController(session: DocumentSession, options: GuideControllerOptions = {}) {
-  const { activeGuideId, guideSummaries, saveState, failedNewGuide, guideNotices, lastDeletedGuide } = options.signals ?? createGuideControllerSignals();
+  const { activeGuideId, guideSummaries, saveState, failedNewGuide, guideNotices, lastDeletedGuide, startupStorageUnavailable } = options.signals ?? createGuideControllerSignals();
   const store = options.store ?? createIndexedDbGuideStore();
   const repository = options.repository ?? createGuideRepository({ store, onNotice: (notice) => { guideNotices.value = [...guideNotices.peek(), notice]; } });
-  const pref = options.preferenceController ?? createPreferencesController({ store });
+  const pref: GuidePreferencesController = options.preferenceController ?? createPreferencesController({ store });
   let baseline: GuideRecord | undefined; let cleanDocument = session.document.peek();
   let pending: InstructionDocument | undefined; let timer: ReturnType<typeof setTimeout> | undefined;
   let drain: Promise<GuideActionResult> | undefined; let initialization: Promise<void> | undefined;
   let blocked: "conflict" | "unavailable" | "deleted" | undefined;
   let disposeObserver: (() => void) | undefined; let operationTail = Promise.resolve(); let disposed = false; let reloading = false;
+  let startupComplete = false;
   function clearTimer() { if (timer !== undefined) clearTimeout(timer); timer = undefined; }
   function failure(reason: "conflict" | "unavailable" | "deleted"): GuideActionResult {
     blocked = reason; saveState.value = reason === "deleted" ? "conflict" : reason; clearTimer();
@@ -39,34 +41,59 @@ export function createGuideController(session: DocumentSession, options: GuideCo
   async function refreshGuides(): Promise<void> {
     try { guideSummaries.value = await repository.list(); } catch { failure("unavailable"); }
   }
-  function initializeGuides(): Promise<void> {
-    initialization ??= (async () => {
-      await pref.initializePreferences(); await refreshGuides();
-      if (blocked) return;
-      const id = pref.preferences.peek().lastGuideId;
-      if (id !== undefined) {
-        try { const record = await repository.load(id); if (record && record.deletedAt === undefined) adopt(record); }
-        catch { failure("unavailable"); return; }
+  function observeDocument() {
+    if (disposeObserver || disposed) return;
+    disposeObserver = effect(() => {
+      const doc = session.document.value;
+      if (disposed) return;
+      if (doc === cleanDocument && !drain) {
+        // Undo can return to the committed snapshot before its queued edit saves.
+        pending = undefined; clearTimer();
+        if (baseline && !blocked && !reloading) saveState.value = "saved";
+        return;
       }
-      if (activeGuideId.peek() === null) saveState.value = "pending";
-      disposeObserver = effect(() => {
-        const doc = session.document.value;
-        if (disposed) return;
-        if (doc === cleanDocument && !drain) {
-          // Undo can return to the committed snapshot before its queued edit saves.
-          pending = undefined; clearTimer();
-          if (baseline && !blocked && !reloading) saveState.value = "saved";
-          return;
-        }
-        // Even the previously clean snapshot needs saving if an older edit is in flight.
-        pending = doc;
-        if (blocked) return;
-        saveState.value = "pending"; clearTimer();
-        if (reloading) return;
-        timer = setTimeout(() => { void flushActiveGuide(); }, 200);
-      });
-      if (typeof window !== "undefined") { window.addEventListener("pagehide", pagehide); window.addEventListener("visibilitychange", visibilitychange); }
-    })();
+      // Even the previously clean snapshot needs saving if an older edit is in flight.
+      pending = doc;
+      if (blocked) return;
+      saveState.value = "pending"; clearTimer();
+      if (reloading) return;
+      timer = setTimeout(() => { void flushActiveGuide(); }, 200);
+    });
+    if (typeof window !== "undefined") { window.addEventListener("pagehide", pagehide); window.addEventListener("visibilitychange", visibilitychange); }
+  }
+  async function startGuides(retry = false): Promise<GuideActionResult> {
+    if (startupComplete) return blocked ? { ok: false, reason: blocked } : { ok: true, ...(baseline ? { guideId: baseline.id } : {}) };
+    // Startup has no saved baseline. Never replace edits made before or during recovery.
+    const local = cleanDocument;
+    const cancelled = () => disposed || session.document.peek() !== local;
+    function preserveDraft(): GuideActionResult {
+      startupStorageUnavailable.value = true; failure("unavailable");
+      return { ok: false, reason: "cancelled" };
+    }
+    if (cancelled()) return preserveDraft();
+    // Preference persistence is independent of guide storage availability.
+    try { await (retry && pref.retryPreferences ? pref.retryPreferences() : pref.initializePreferences()); } catch { /* Its own status remains visible. */ }
+    if (cancelled()) return preserveDraft();
+    try {
+      const summaries = await repository.list();
+      if (cancelled()) return preserveDraft();
+      const id = pref.preferences.peek().lastGuideId;
+      const record = id === undefined ? undefined : await repository.load(id);
+      if (cancelled()) return preserveDraft();
+      guideSummaries.value = summaries;
+      blocked = undefined;
+      if (record && record.deletedAt === undefined) adopt(record);
+      else saveState.value = "pending";
+      startupComplete = true; startupStorageUnavailable.value = false;
+      observeDocument();
+      return { ok: true, ...(baseline ? { guideId: baseline.id } : {}) };
+    } catch {
+      startupStorageUnavailable.value = true;
+      return failure("unavailable");
+    }
+  }
+  function initializeGuides(): Promise<void> {
+    initialization ??= startGuides().then(() => undefined);
     return initialization;
   }
   async function flushActiveGuide(): Promise<GuideActionResult> {
@@ -130,7 +157,8 @@ export function createGuideController(session: DocumentSession, options: GuideCo
     if (!finished.ok) failedNewGuide.value = candidate;
     return finished;
   }
-  return { activeGuideId, guideSummaries, saveState, guideNotices, failedNewGuide, lastDeletedGuide, initializeGuides, refreshGuides,
+  return { activeGuideId, guideSummaries, saveState, guideNotices, failedNewGuide, lastDeletedGuide, startupStorageUnavailable, initializeGuides, refreshGuides,
+    retryGuideStorage: () => serialize(() => startGuides(true)),
     openGuide: (id: string) => serialize(() => open(id)), flushActiveGuide,
     reloadActiveGuide: () => serialize(async () => {
       clearTimer(); reloading = true;
@@ -201,16 +229,17 @@ export function createGuideController(session: DocumentSession, options: GuideCo
   };
 }
 
-const pref: PreferencesController = { preferences, initializePreferences, updatePreferences, preferenceSaveState };
+const pref: GuidePreferencesController = { preferences, initializePreferences, retryPreferences, updatePreferences, preferenceSaveState };
 let defaultController: ReturnType<typeof createGuideController> | undefined;
 let defaultInitialization: Promise<void> | undefined;
 // Export stable signal identities before asynchronous startup.
 const uninitialized = createGuideControllerSignals();
 function createGuideControllerSignals() {
   return { activeGuideId: signal<string | null>(null), guideSummaries: signal<readonly GuideSummary[]>([]), saveState: signal<SaveState>("loading"),
-    guideNotices: signal<readonly GuideNotice[]>([]), failedNewGuide: signal<InstructionDocument | null>(null), lastDeletedGuide: signal<GuideRecord | null>(null) };
+    guideNotices: signal<readonly GuideNotice[]>([]), failedNewGuide: signal<InstructionDocument | null>(null), lastDeletedGuide: signal<GuideRecord | null>(null),
+    startupStorageUnavailable: signal(false) };
 }
-export const { activeGuideId, guideSummaries, saveState, guideNotices, failedNewGuide, lastDeletedGuide } = uninitialized;
+export const { activeGuideId, guideSummaries, saveState, guideNotices, failedNewGuide, lastDeletedGuide, startupStorageUnavailable } = uninitialized;
 export function initializeGuides(session: DocumentSession): Promise<void> {
   defaultInitialization ??= (async () => {
     const { stopLegacyPersistence } = await import("./persistence"); await stopLegacyPersistence();
@@ -221,6 +250,7 @@ export function initializeGuides(session: DocumentSession): Promise<void> {
 }
 function controller() { if (!defaultController) throw new Error("initializeGuides must complete before guide actions"); return defaultController; }
 export const refreshGuides = () => controller().refreshGuides();
+export const retryGuideStorage = () => controller().retryGuideStorage();
 export const openGuide = (id: string) => controller().openGuide(id);
 export const reloadActiveGuide = () => controller().reloadActiveGuide();
 export const createGuide = (doc: InstructionDocument) => controller().createGuide(doc);
