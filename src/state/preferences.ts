@@ -1,6 +1,6 @@
 import { signal } from "@preact/signals";
 import type { AppPreferences } from "../model/preferences";
-import { createIndexedDbGuideStore, rawFingerprint, type GuideStore } from "../lib/guide-repository";
+import { createIndexedDbGuideStore, rawFingerprint, type GuideStore, type GuideTransaction } from "../lib/guide-repository";
 
 export const PREFERENCES_KEY = "instruction-builder:preferences:v1";
 export type PreferenceSaveState = "loading" | "saved" | "pending" | "saving" | "unavailable";
@@ -25,23 +25,30 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
   let tail = Promise.resolve(); let serial = 0; let writable = false;
   let initialized = false; let intent = preferences.peek();
   const startupPatches: Partial<AppPreferences>[] = [];
-  function initializePreferences(): Promise<void> {
-    initialization ??= store.transaction({ keys: [PREFERENCES_KEY] }, (transaction) => {
-      const raw = transaction.get(PREFERENCES_KEY);
-      if (raw === undefined) return intent;
-      const value = object(raw) && raw.version === 1 ? raw.preferences : undefined;
-      const clean = validated(value);
-      // Theme is an additive v1 field. Its absence in an older valid record
-      // needs a light default, while all other invalid/unknown data still
-      // receives the exact diagnostic copy before any later update.
-      const compatible = object(value) && !Object.prototype.hasOwnProperty.call(value, "theme")
-        ? { ...value, theme: "light" } : value;
-      if (!object(raw) || raw.version !== 1 || rawFingerprint(compatible) !== rawFingerprint(clean)) {
+  let pendingPatch: Partial<AppPreferences> = {};
+  const recovered = new Set<string>();
+  function readPreferences(transaction: GuideTransaction): { value: AppPreferences; recoveryFingerprint?: string } {
+    const raw = transaction.get(PREFERENCES_KEY);
+    if (raw === undefined && !transaction.entries().some(([key]) => key === PREFERENCES_KEY)) return { value: intent };
+    const value = object(raw) && raw.version === 1 ? raw.preferences : undefined;
+    const clean = validated(value);
+    // Theme is an additive v1 field. Older valid records default to light.
+    const compatible = object(value) && !Object.prototype.hasOwnProperty.call(value, "theme")
+      ? { ...value, theme: "light" } : value;
+    const envelope = object(raw) ? { ...raw, preferences: compatible } : raw;
+    if (rawFingerprint(envelope) !== rawFingerprint({ version: 1, preferences: clean })) {
+      const recoveryFingerprint = rawFingerprint(raw);
+      if (!recovered.has(recoveryFingerprint)) {
         const key = `instruction-builder:recovery:${options.now?.() ?? new Date().toISOString()}:${options.newId?.() ?? crypto.randomUUID()}`;
         transaction.add(key, raw);
       }
-      return clean;
-    }).then((value) => {
+      return { value: clean, recoveryFingerprint };
+    }
+    return { value: clean };
+  }
+  function initializePreferences(): Promise<void> {
+    initialization ??= store.transaction({ keys: [PREFERENCES_KEY], mode: "readwrite" }, readPreferences).then(({ value, recoveryFingerprint }) => {
+      if (recoveryFingerprint !== undefined) recovered.add(recoveryFingerprint);
       intent = value; initialized = true; writable = true;
       preferences.value = startupPatches.reduce<AppPreferences>((current, patch) => validated({ ...current, ...patch }), value);
       startupPatches.length = 0;
@@ -59,15 +66,21 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
     tail = tail.then(async () => {
       await initializePreferences();
       if (!writable) { preferenceSaveState.value = "unavailable"; return; }
-      // Apply queued intent in order, retaining untouched fields discovered by initial load.
-      intent = validated({ ...intent, ...capturedPatch });
-      const persisted = intent;
-      if (version === serial) preferences.value = persisted;
+      // Retain failed local intent, but never replay fields this controller did not change.
+      pendingPatch = { ...pendingPatch, ...capturedPatch };
       if (version === serial) preferenceSaveState.value = "saving";
       try {
-        await store.transaction({}, (transaction) => transaction.put(PREFERENCES_KEY, { version: 1, preferences: persisted }));
+        const { value, recoveryFingerprint } = await store.transaction({ keys: [PREFERENCES_KEY], mode: "readwrite" }, (transaction) => {
+          const current = readPreferences(transaction);
+          const value = validated({ ...current.value, ...pendingPatch });
+          transaction.put(PREFERENCES_KEY, { version: 1, preferences: value });
+          return { ...current, value };
+        });
+        if (recoveryFingerprint !== undefined) recovered.add(recoveryFingerprint);
+        intent = value; pendingPatch = {};
+        if (version === serial) preferences.value = value;
         if (version === serial) preferenceSaveState.value = "saved";
-      } catch { preferenceSaveState.value = "unavailable"; }
+      } catch { if (version === serial) preferenceSaveState.value = "unavailable"; }
     });
     return tail;
   }

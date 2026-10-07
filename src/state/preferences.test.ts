@@ -1,24 +1,140 @@
+import { effect } from "@preact/signals";
 import { describe, expect, it } from "vitest";
 import { createPreferencesController, PREFERENCES_KEY } from "./preferences";
 import type { GuideStore } from "../lib/guide-repository";
 
 function storage(seed?: unknown) {
   const records = new Map<string, unknown>(); if (seed !== undefined) records.set(PREFERENCES_KEY, seed);
-  const state = { fail: false, pause: undefined as Promise<void> | undefined };
-  const store: GuideStore = { transaction: async (plan, operation) => {
-    await state.pause; const draft = structuredClone(records);
+  const state = { fail: false, failures: 0, failBackup: false, pause: undefined as Promise<void> | undefined };
+  let tail = Promise.resolve();
+  const store: GuideStore = { transaction: (plan, operation) => {
+    const pause = state.pause;
+    const pending = tail.then(async () => {
+    await pause; const draft = structuredClone(records);
     const declared = (key: string) => plan.keys?.includes(key) || (plan.prefix !== undefined && key.startsWith(plan.prefix));
     const put = (key: string, value: unknown) => { if (plan.mode === "readonly") throw new Error("readonly"); draft.set(key, structuredClone(value)); };
     const result = operation({ get: (key) => { if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
       entries: () => { if (plan.prefix === undefined && !plan.keys?.length) throw new Error("undeclared entries"); return [...draft].filter(([key]) => declared(key)); },
-      put, add: (key, value) => { if (draft.has(key)) throw new Error("insert collision"); put(key, value); } });
+      put, add: (key, value) => { if (state.failBackup) throw new Error("backup unavailable"); if (draft.has(key)) throw new Error("insert collision"); put(key, value); } });
     if (state.fail) throw new Error("quota");
+    if (state.failures > 0) { state.failures--; throw new Error("quota"); }
     records.clear(); for (const [key, value] of draft) records.set(key, value); return result;
+    });
+    tail = pending.then(() => undefined, () => undefined);
+    return pending;
   } };
   return { records, store, state };
 }
 
 describe("local preferences", () => {
+  it("a stale controller changes only its patch and adopts another controller's saved fields", async () => {
+    const raw = { version: 1, preferences: { uiLocale: "en", labelLocale: "en", activeLibraryId: "kitchen", theme: "light" } };
+    const { store, records } = storage(raw);
+    const first = createPreferencesController({ store }), stale = createPreferencesController({ store });
+    await Promise.all([first.initializePreferences(), stale.initializePreferences()]);
+    await first.updatePreferences({ uiLocale: "de", theme: "dark" });
+    await stale.updatePreferences({ lastGuideId: "chosen-guide" });
+    const expected = { uiLocale: "de", labelLocale: "en", activeLibraryId: "kitchen", theme: "dark", lastGuideId: "chosen-guide" };
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: expected });
+    expect(stale.preferences.value).toEqual(expected);
+    expect(stale.preferenceSaveState.value).toBe("saved");
+  });
+
+  it("concurrent controllers preserve disjoint patches in storage transaction order", async () => {
+    const { store, records, state } = storage();
+    const first = createPreferencesController({ store, languages: ["en"] }), second = createPreferencesController({ store, languages: ["en"] });
+    await Promise.all([first.initializePreferences(), second.initializePreferences()]);
+    let release!: () => void; state.pause = new Promise<void>((resolve) => { release = resolve; });
+    const changes = [first.updatePreferences({ uiLocale: "de", theme: "dark" }), second.updatePreferences({ activeLibraryId: "routines", lastGuideId: "routine" })];
+    release(); await Promise.all(changes);
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "de", labelLocale: "en", activeLibraryId: "routines", theme: "dark", lastGuideId: "routine" } });
+  });
+
+  it("the later overlapping patch wins without reverting unrelated committed fields", async () => {
+    const { store, records } = storage();
+    const first = createPreferencesController({ store, languages: ["en"] }), second = createPreferencesController({ store, languages: ["en"] });
+    await Promise.all([first.initializePreferences(), second.initializePreferences()]);
+    await Promise.all([first.updatePreferences({ uiLocale: "de", theme: "dark" }), second.updatePreferences({ theme: "light", labelLocale: "de" })]);
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "de", labelLocale: "de", activeLibraryId: "kitchen", theme: "light" } });
+  });
+
+  it("explicit undefined removes lastGuideId while adopting other tabs' changes", async () => {
+    const raw = { version: 1, preferences: { uiLocale: "en", labelLocale: "en", activeLibraryId: "kitchen", theme: "light", lastGuideId: "old" } };
+    const { store, records } = storage(raw);
+    const first = createPreferencesController({ store }), second = createPreferencesController({ store });
+    await Promise.all([first.initializePreferences(), second.initializePreferences()]);
+    await first.updatePreferences({ theme: "dark", lastGuideId: "new" });
+    await second.updatePreferences({ lastGuideId: undefined });
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "en", labelLocale: "en", activeLibraryId: "kitchen", theme: "dark" } });
+    expect(second.preferences.value).not.toHaveProperty("lastGuideId");
+  });
+
+  it("rapid local patches keep optimistic intent while adopting fresh persisted fields", async () => {
+    const { store, records, state } = storage();
+    const first = createPreferencesController({ store, languages: ["en"] }), second = createPreferencesController({ store, languages: ["en"] });
+    await Promise.all([first.initializePreferences(), second.initializePreferences()]);
+    await first.updatePreferences({ uiLocale: "de", theme: "dark" });
+    let release!: () => void; state.pause = new Promise<void>((resolve) => { release = resolve; });
+    const pending = [second.updatePreferences({ labelLocale: "de", lastGuideId: "first" }), second.updatePreferences({ lastGuideId: "second" }), second.updatePreferences({ activeLibraryId: "learning" })];
+    expect(second.preferences.value).toMatchObject({ labelLocale: "de", lastGuideId: "second", activeLibraryId: "learning" });
+    expect(second.preferenceSaveState.value).toBe("pending");
+    release(); await Promise.all(pending);
+    const expected = { uiLocale: "de", labelLocale: "de", activeLibraryId: "learning", theme: "dark", lastGuideId: "second" };
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: expected });
+    expect(second.preferences.value).toEqual(expected);
+  });
+
+  it("a subsequent save retains failed local intent while merging another controller's patch", async () => {
+    const { store, records, state } = storage();
+    const first = createPreferencesController({ store, languages: ["en"] }), second = createPreferencesController({ store, languages: ["en"] });
+    await Promise.all([first.initializePreferences(), second.initializePreferences()]);
+    state.fail = true; await second.updatePreferences({ theme: "dark" }); state.fail = false;
+    expect(second.preferenceSaveState.value).toBe("unavailable");
+    await first.updatePreferences({ uiLocale: "de" });
+    await second.updatePreferences({ lastGuideId: "guide" });
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "de", labelLocale: "en", activeLibraryId: "kitchen", theme: "dark", lastGuideId: "guide" } });
+    expect(second.preferenceSaveState.value).toBe("saved");
+  });
+
+  it("an older failed save cannot report unavailable for a newer pending patch", async () => {
+    const { store, records, state } = storage();
+    const controller = createPreferencesController({ store, languages: ["en"] }); await controller.initializePreferences();
+    const states: string[] = []; const dispose = effect(() => { states.push(controller.preferenceSaveState.value); });
+    state.failures = 1;
+    await Promise.all([controller.updatePreferences({ theme: "dark" }), controller.updatePreferences({ uiLocale: "de" })]);
+    dispose();
+    expect(states).not.toContain("unavailable");
+    expect(controller.preferenceSaveState.value).toBe("saved");
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "de", labelLocale: "en", activeLibraryId: "kitchen", theme: "dark" } });
+  });
+
+  it.each([
+    { raw: { version: 1, preferences: { uiLocale: "fr", labelLocale: "de", activeLibraryId: "unknown", theme: "system", bytes: new Uint8Array([0, 255]) } }, labelLocale: "de" },
+    { raw: { version: 99, future: new Map([["binary", new Uint8Array([2, 7])]]) }, labelLocale: "en" },
+    { raw: { version: 1, preferences: { uiLocale: "en", labelLocale: "en", activeLibraryId: "kitchen", theme: "light" }, unknownEnvelopeData: new Set(["retained"]) }, labelLocale: "en" },
+    { raw: undefined, labelLocale: "en" },
+  ])("backs up exact malformed data introduced after startup before replacing it: %j", async ({ raw, labelLocale }) => {
+    const { store, records } = storage(); const controller = createPreferencesController({ store, languages: ["en"] });
+    await controller.initializePreferences(); records.set(PREFERENCES_KEY, raw);
+    await controller.updatePreferences({ theme: "dark" });
+    expect([...records].filter(([key]) => key.startsWith("instruction-builder:recovery:")).map(([, value]) => value)).toEqual([raw]);
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "en", labelLocale, activeLibraryId: "kitchen", theme: "dark" } });
+    expect(controller.preferenceSaveState.value).toBe("saved");
+  });
+
+  it("a failed backup after startup blocks overwrite and permits a later safe save", async () => {
+    const { store, records, state } = storage(); const controller = createPreferencesController({ store, languages: ["en"] });
+    await controller.initializePreferences(); const raw = { version: 99, future: { exact: ["payload"] } }; records.set(PREFERENCES_KEY, raw);
+    state.failBackup = true; await controller.updatePreferences({ theme: "dark" });
+    expect([...records]).toEqual([[PREFERENCES_KEY, raw]]);
+    expect(controller.preferences.value.theme).toBe("dark");
+    expect(controller.preferenceSaveState.value).toBe("unavailable");
+    state.failBackup = false; await controller.updatePreferences({ uiLocale: "de" });
+    expect([...records].filter(([key]) => key.startsWith("instruction-builder:recovery:")).map(([, value]) => value)).toEqual([raw]);
+    expect(records.get(PREFERENCES_KEY)).toEqual({ version: 1, preferences: { uiLocale: "de", labelLocale: "en", activeLibraryId: "kitchen", theme: "dark" } });
+    expect(controller.preferenceSaveState.value).toBe("saved");
+  });
+
   it("uses supported browser language only for a new profile", async () => {
     for (const [language, expected] of [["de-DE", "de"], ["fr-FR", "en"], ["en-GB", "en"]]) {
       const { store } = storage(); const controller = createPreferencesController({ store, languages: [language] });
