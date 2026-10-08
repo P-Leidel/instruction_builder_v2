@@ -4,11 +4,12 @@ import { authoring, closeAuthoringPanel, focusPicture } from "../../state/ui";
 import { preferences } from "../../state/preferences";
 import { t } from "../../i18n/messages";
 import { TimeEditor } from "../TokenDetails/AttachmentFields";
+import { getGroupLabel } from "../../lib/instruction-presentation";
 export function StepDetails({ session }: { session: DocumentSession }) {
   const [confirmRemove, setConfirmRemove] = useState(false); const panel = authoring.panel.value; const locale = preferences.value.uiLocale;
   if (panel.kind !== "group") return null;
   const step = session.document.value.steps.find((group) => group.id === panel.stepId); if (!step) return null;
-  const index = session.document.value.steps.indexOf(step); const name = step.title || t(locale, session.document.value.meta.presentation === "board" ? "editor.groupNumber" : "editor.stepNumber", { number: index + 1 });
+  const index = session.document.value.steps.indexOf(step); const name = getGroupLabel(step.title, locale, { kind: "authoring", presentation: session.document.value.meta.presentation, number: index + 1 });
   const remove = () => { sessionActions.removeStep(session, step.id); closeAuthoringPanel(); };
   if (confirmRemove) return <section><h2>{t(locale, "editor.removeGroupConfirm", { group: name, count: step.tokens.length })}</h2><div class="action-row"><button type="button" onClick={() => setConfirmRemove(false)}>{t(locale, "dialog.cancel")}</button><button type="button" onClick={remove}>{t(locale, "dialog.delete")}</button></div></section>;
   return <section><h2>{name}</h2><label>{t(locale, "editor.groupTitle")}<input autoFocus value={step.title ?? ""} onInput={(event) => sessionActions.updateStepTitle(session, step.id, event.currentTarget.value)} /></label>

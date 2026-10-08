@@ -7,6 +7,7 @@ import { getQuantityDisplayLabel, getDurationDisplayLabel } from "../../lib/atta
 import { formatDuration } from "../../lib/duration";
 import { t } from "../../i18n/messages";
 import { Icon } from "../Icon/Icon";
+import { getGroupLabel } from "../../lib/instruction-presentation";
 export function InstructionReader({ document, locale, onBack }: { document: InstructionDocument; locale: AppLocale; onBack: () => void }) {
   const [mode, setMode] = useState<OutputMode>("labels"); const groups = toReadingGroups(document, mode, locale); const board = document.meta.presentation === "board";
   return <section class="reader" aria-label={t(locale, "reader.title")}>
@@ -25,7 +26,7 @@ export function ReadingContent({ groups, presentation, locale }: { groups: reado
   return <div class="reading-content">{!!total && <p>{t(locale, "output.totalTime", { duration: formatDuration(total) })}</p>}
     <GroupList class="reader__groups" data-reading-presentation={presentation}>
       {groups.map((group, index) => <li class="reader__group" key={group.stepId}>
-        <h2>{group.title || (board ? t(locale, "output.groupContext") : t(locale, "editor.stepNumber", { number: index + 1 }))}</h2>
+        <h2>{getGroupLabel(group.title, locale, { kind: "reader", presentation, number: index + 1 })}</h2>
         {group.description !== undefined && <p>{group.description}</p>}
         {group.groupSeconds !== undefined && <p>{t(locale, "time.group")}: {group.time ? getDurationDisplayLabel(group.time) : formatDuration(group.groupSeconds)}</p>}
         {group.timeReferenceNotice && <p class="review-notice">{group.timeReferenceNotice}</p>}

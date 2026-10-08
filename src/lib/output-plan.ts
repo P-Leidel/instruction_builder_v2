@@ -3,7 +3,8 @@ import type { ContentRole, EditorGroupPlacement, EditorLayout, EditorPageLayout,
 import { t } from "../i18n/messages";
 import { formatDuration } from "./duration";
 import { getDurationDisplayLabel, getQuantityDisplayLabel } from "./attachment-labels";
-import { getCatalogEntry, getWarningMeaning, resolveIcon } from "./library-catalog";
+import { resolveIcon } from "./library-catalog";
+import { getGroupLabel, getWarningPresentation } from "./instruction-presentation";
 import { projectOutputContent } from "./output-content";
 import { normalizeOutputOptions, type NormalizedOutputOptions } from "./output-options";
 import { wrapPrintText } from "./text-layout";
@@ -21,7 +22,7 @@ function translated(box: MmBox, x: number, y: number): MmBox {
 
 /** Pure geometry is finished before text is measured, so failures stay repairable. */
 function editingGeometry(groups: readonly OutputContentGroup[], geometry: NormalizedOutputOptions) {
-  const { cell, pageSize, regions, compact } = geometry;
+  const { cell, pageSize, contentRegions: regions, compact } = geometry;
   const pages: MutablePage[] = [];
   const documentHeaders: { pageIndex: number; box: MmBox }[] = [];
   const unfit = new Set<string>();
@@ -30,8 +31,7 @@ function editingGeometry(groups: readonly OutputContentGroup[], geometry: Normal
     pages.push(page); return page;
   };
   function area(region: MmBox, documentHeader: boolean) {
-    const margin = Math.min(geometry.marginMm, region.widthMm / 4, region.heightMm / 4);
-    const width = region.widthMm - 2 * margin, height = region.heightMm - 2 * margin;
+    const width = region.widthMm, height = region.heightMm;
     const documentHeight = documentHeader ? geometry.documentHeaderMm : 0;
     const required = documentHeight + (documentHeight ? geometry.headingGapMm : 0) + geometry.groupHeaderMm + (geometry.groupHeaderMm ? geometry.headingGapMm : 0) + cell.heightMm;
     const fits = width + EPSILON >= cell.widthMm && height + EPSILON >= required;
@@ -43,8 +43,8 @@ function editingGeometry(groups: readonly OutputContentGroup[], geometry: Normal
     const documentBand = documentMm + (documentMm ? gap : 0);
     const headerBand = headerMm + (headerMm ? gap : 0);
     return {
-      fits, left: region.xMm + margin, top: region.yMm + margin, width,
-      bottom: region.yMm + region.heightMm - margin,
+      fits, left: region.xMm, top: region.yMm, width,
+      bottom: region.yMm + region.heightMm,
       documentMm, documentBand, headerMm, headerBand,
       cellWidth: fits ? cell.widthMm : Math.min(cell.widthMm, width),
       cellHeight: fits ? cell.heightMm : Math.min(cell.heightMm, height - documentBand - headerBand),
@@ -131,7 +131,7 @@ export function planOutput(doc: InstructionDocument, input: OutputOptions, fonts
   if (!normalized.ok) return { ok: false, issues: normalized.issues, editorLayout: layout };
   const issues: OutputIssue[] = [], notices: OutputNotice[] = [];
   const pages: (OutputPage & { fragments: OutputFragment[] })[] = layout.pages.map(page => ({ index: page.pageIndex, size: { ...page.size }, background: options.background, fragments: [] }));
-  const groupName = (group: OutputContentGroup) => group.title || t(options.locale, "output.groupContext");
+  const groupName = (group: OutputContentGroup) => getGroupLabel(group.title, options.locale, { kind: "issue" });
   const format = t(options.locale, FORMAT_KEYS[options.preset]);
   function overflow(source: OutputSource, group: OutputContentGroup, field: string, content: string) {
     issues.push({ code: "overflow", source, messageKey: "output.cellOverflow", params: { group: groupName(group), format, field, content } });
@@ -200,10 +200,9 @@ export function planOutput(doc: InstructionDocument, input: OutputOptions, fonts
     };
     if (picture.quantity) attach(picture.quantity.iconId, getQuantityDisplayLabel(picture.quantity), "quantity", cell.quantityBox);
     if (picture.warning) {
-      const known = resolveIcon(picture.warning.iconId).known && getCatalogEntry(picture.warning.iconId)?.category === "warning";
-      if (!known) notices.push({ code: "unknown-symbol", source, messageKey: "output.unknownSymbolNotice" });
-      const meaning = getWarningMeaning(picture.warning, options.locale);
-      attach(picture.warning.iconId, known ? meaning : t(options.locale, "output.warningContext", { meaning }), "warning", cell.detailBox);
+      const warning = getWarningPresentation(picture.warning, options.locale, "print");
+      if (warning.review) notices.push({ code: "unknown-symbol", source, messageKey: "output.unknownSymbolNotice" });
+      attach(picture.warning.iconId, warning.text, "warning", cell.detailBox);
     }
     if (picture.time) attach(picture.time.iconId, getDurationDisplayLabel(picture.time), "time", cell.timeBox, true);
     const centeredCaption = caption.fragments.map(fragment => {
@@ -217,9 +216,7 @@ export function planOutput(doc: InstructionDocument, input: OutputOptions, fonts
   function heading(group: OutputContentGroup, placement: EditorGroupPlacement): OutputFragment[] {
     const source = { stepId: group.stepId }, block: Block = { height: 0, fragments: [] };
     const lane = placement.headingBox ?? { xMm: placement.groupBox.xMm, yMm: placement.groupBox.yMm, widthMm: placement.groupBox.widthMm, heightMm: 0 };
-    let title = options.metadata.groupTitles ? group.title || "" : "";
-    if (options.metadata.stepNumbers) title = t(options.locale, "output.sequenceGroup", { number: doc.steps.findIndex(step => step.id === group.stepId) + 1, title });
-    if (placement.continued) title = t(options.locale, "output.continuedGroup", { group: title || groupName(group) });
+    const title = getGroupLabel(group.title, options.locale, { kind: "print", number: doc.steps.findIndex(step => step.id === group.stepId) + 1, groupTitles: options.metadata.groupTitles, stepNumbers: options.metadata.stepNumbers, continued: placement.continued });
     addText(block, title, lane, headingPt, source, placement.continued ? "context" : "heading", group);
     if (!placement.continued) {
       addText(block, group.description, lane, secondaryPt, source, "description", group);
@@ -258,5 +255,5 @@ export function planOutput(doc: InstructionDocument, input: OutputOptions, fonts
     }
   }
   if (issues.length) return { ok: false, issues, editorLayout: layout };
-  return { ok: true, plan: { documentTitle: doc.meta.title, presentation: doc.meta.presentation, options, pages, notices, editorLayout: layout } };
+  return { ok: true, plan: { documentTitle: doc.meta.title, presentation: doc.meta.presentation, options, pages, notices, contentRegions: geometry.contentRegions, editorLayout: layout } };
 }

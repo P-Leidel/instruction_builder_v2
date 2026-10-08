@@ -1,5 +1,6 @@
 import type { DurationAttachment, QuantityAttachment, TokenAttachment } from "./instruction";
 import type { AppLocale } from "./library";
+import type { MessageKey } from "../i18n/messages";
 
 export type OutputMode = "labels" | "pictures" | "detailed";
 export type OutputPreset = "label" | "card" | "sheet" | "large" | "custom";
@@ -75,13 +76,13 @@ export interface OutputPage {
 export interface OutputIssue {
   code: "invalid-options" | "empty-selection" | "overflow" | "unsupported-glyph" | "font-unavailable" | "raster-limit";
   source?: OutputSource;
-  messageKey: string;
+  messageKey: MessageKey;
   params?: Record<string, string | number>;
 }
 export interface OutputNotice {
   code: "unknown-symbol" | "empty-group";
   source: OutputSource;
-  messageKey: string;
+  messageKey: MessageKey;
 }
 export interface OutputPlan {
   documentTitle: string;
@@ -89,6 +90,8 @@ export interface OutputPlan {
   options: OutputOptions;
   pages: readonly OutputPage[];
   notices: readonly OutputNotice[];
+  /** Every composed plan supplies all content regions, including unused sheet cells. */
+  contentRegions?: readonly MmBox[];
   /** Every composed plan supplies this; optional for older external plan fixtures. */
   editorLayout?: EditorLayout;
 }

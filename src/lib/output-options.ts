@@ -21,8 +21,12 @@ export function createDefaultOutputOptions(doc: InstructionDocument, locale: App
     metadata: { documentTitle: !compact, groupTitles: preset !== "label", stepNumbers: sequence && preset !== "label", totalTime: !compact && sequence } };
 }
 
+export function switchOutputPreset(doc: InstructionDocument, current: OutputOptions, preset: OutputPreset): OutputOptions {
+  return { ...createDefaultOutputOptions(doc, current.locale, preset), orientation: current.orientation, mode: current.mode, background: current.background, selectedStepIds: current.selectedStepIds };
+}
+
 export interface NormalizedOutputOptions {
-  ok: true; options: OutputOptions; pageSize: PageSize; regions: readonly MmBox[];
+  ok: true; options: OutputOptions; pageSize: PageSize; regions: readonly MmBox[]; contentRegions: readonly MmBox[];
   marginMm: number; compact: boolean; pictureMm: number; labelPt: number; secondaryPt: number; warningPt: number; headingPt: number;
   cell: FixedCellMetrics; documentHeaderMm: number; groupHeaderMm: number; headingGapMm: number; groupGapMm: number;
 }
@@ -34,7 +38,7 @@ function finiteSize(size: PageSize | undefined): size is PageSize {
   return !!size && Number.isFinite(size.widthMm) && Number.isFinite(size.heightMm) && size.widthMm >= 20 && size.widthMm <= 1000 && size.heightMm >= 20 && size.heightMm <= 1000;
 }
 
-/** Package-private geometry normalization; UI consumes only canonical option defaults. */
+/** Canonical physical regions and content bounds for planning and preview. */
 export function normalizeOutputOptions(doc: InstructionDocument, input: OutputOptions): Normalization {
   if (!input || !Object.hasOwn(PRESETS, input.preset) || !["en", "de"].includes(input.locale) ||
       !["portrait", "landscape"].includes(input.orientation) || !["labels", "pictures", "detailed"].includes(input.mode) ||
@@ -88,7 +92,11 @@ export function normalizeOutputOptions(doc: InstructionDocument, input: OutputOp
     timeBox: { xMm: pictureX - 1, yMm: pictureY + pictureMm + 1, widthMm: pictureMm + 2, heightMm: heightMm - pictureY - pictureMm - 1 },
     noteBox: { xMm: 0, yMm: pictureY + pictureMm + (label ? 1 : 2), widthMm: sideWidth, heightMm: heightMm - pictureY - pictureMm - (label ? 1 : 2) },
   };
-  const geometry: NormalizedOutputOptions = { ok: true, options, pageSize, regions, marginMm: preset.marginMm,
+  const contentRegions = regions.map(region => {
+    const margin = Math.min(preset.marginMm, region.widthMm / 4, region.heightMm / 4);
+    return { xMm: region.xMm + margin, yMm: region.yMm + margin, widthMm: region.widthMm - 2 * margin, heightMm: region.heightMm - 2 * margin };
+  });
+  const geometry: NormalizedOutputOptions = { ok: true, options, pageSize, regions, contentRegions, marginMm: preset.marginMm,
     compact: label || input.preset === "card", pictureMm,
     labelPt: large ? 14 : 9, secondaryPt: large ? 12 : 9, warningPt: large ? 10 : 9,
     headingPt: large ? 20 : label ? 10 : 14,

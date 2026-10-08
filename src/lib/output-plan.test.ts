@@ -42,6 +42,18 @@ function placedPictures(layout: EditorLayout) {
 }
 
 describe("fixed physical editing layout", () => {
+  it("carries canonical A4 content regions on composed plans", async () => {
+    const api = await planner(), doc = sequenceFixture();
+    const result = successful(api.planOutput(doc, api.createDefaultOutputOptions(doc, "en"), api.fonts));
+    expect(result.plan.contentRegions).toEqual([{ xMm: 10, yMm: 10, widthMm: 190, heightMm: 277 }]);
+  });
+  it("carries all label-sheet content regions when only one cell is assigned", async () => {
+    const api = await planner(), doc = sequenceFixture(); doc.steps[0].tokens = [doc.steps[0].tokens[1]];
+    const options = api.createDefaultOutputOptions(doc, "en", "label"); options.labelSheet = api.createDefaultLabelSheet();
+    const result = successful(api.planOutput(doc, options, api.fonts));
+    expect(result.plan.contentRegions).toHaveLength(24);
+    expect(result.plan.contentRegions?.[23]).toEqual({ xMm: 116, yMm: 236, widthMm: 46, heightMm: 26 });
+  });
   it.each(["note", "label", "warning", "quantity", "time", "documentTitle", "groupTitle", "description", "groupTime"] as const)("returns exact repairs for valid oversized %s text without throwing or changing geometry", async field => {
     const api = await planner(), doc = sequenceFixture();
     doc.steps[0].description = undefined;

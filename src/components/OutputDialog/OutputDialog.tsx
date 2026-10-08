@@ -1,9 +1,11 @@
 import type { InstructionDocument } from "../../model/instruction";
 import type { AppLocale } from "../../model/library";
-import type { OutputIssue, OutputOptions, OutputPreset } from "../../model/output";
+import type { OutputOptions, OutputPreset } from "../../model/output";
 import { useLayoutEffect, useRef, useState } from "preact/hooks";
 import { t } from "../../i18n/messages";
-import { createDefaultLabelSheet, createDefaultOutputOptions, normalizeOutputOptions } from "../../lib/output-options";
+import { createDefaultLabelSheet, normalizeOutputOptions, switchOutputPreset } from "../../lib/output-options";
+import { getGroupLabel } from "../../lib/instruction-presentation";
+import { issueText, noticeText } from "../../lib/output-presentation";
 import { runJsonExport } from "../../lib/document-actions";
 import { createOutputRequestController } from "./output-request";
 import { OutputPreview } from "../OutputPreview/OutputPreview";
@@ -11,22 +13,6 @@ import { preparedPrintFonts } from "../../state/print-fonts";
 import "./output-dialog.css";
 
 export interface OutputDialogProps { sourceDocument: InstructionDocument; guideId: string | null; locale: AppLocale; onClose: () => void; initialOptions?: OutputOptions; onOptionsChange?: (options: OutputOptions, capturedDocument: InstructionDocument) => void }
-
-export function issueText(issue: OutputIssue, locale: AppLocale): string {
-  if (issue.messageKey === "output.cellOverflow") {
-    const fields = { label: "editor.pictureLabel", note: "editor.note", quantity: "quantity.title", warning: "warning.title", time: "time.title", heading: issue.source?.stepId ? "editor.groupTitle" : "editor.documentTitle", description: "editor.description", context: "output.notices" } as const;
-    const field = String(issue.params?.field ?? "");
-    return t(locale, "output.cellOverflow", { group: String(issue.params?.group ?? ""), format: String(issue.params?.format ?? ""), field: Object.hasOwn(fields, field) ? t(locale, fields[field as keyof typeof fields]) : field, content: String(issue.params?.content ?? "") });
-  }
-  switch (issue.code) {
-    case "overflow": return t(locale, "output.overflow", { group: String(issue.params?.group ?? t(locale, "output.groupContext")), format: String(issue.params?.format ?? t(locale, "output.custom")) });
-    case "unsupported-glyph": return t(locale, "output.unsupportedGlyph", { content: String(issue.params?.content ?? ""), codePoints: String(issue.params?.codePoints ?? "") });
-    case "font-unavailable": return t(locale, "output.fontUnavailable");
-    case "raster-limit": return t(locale, "output.rasterLimit");
-    case "empty-selection": return t(locale, "output.emptySelection");
-    case "invalid-options": return t(locale, "output.invalidOptions");
-  }
-}
 
 export function OutputDialog({ sourceDocument, guideId, locale, onClose, initialOptions, onOptionsChange }: OutputDialogProps) {
   const [controller] = useState(() => createOutputRequestController(sourceDocument, guideId, locale, {}, initialOptions));
@@ -49,16 +35,12 @@ export function OutputDialog({ sourceDocument, guideId, locale, onClose, initial
   const metadata = (key: keyof OutputOptions["metadata"], label: "output.documentTitle" | "output.groupTitles" | "output.stepNumbers" | "output.includeTotalTime") => <label class="output-dialog__check"><input type="checkbox" checked={options.metadata[key]} onChange={event => update({ metadata: { ...options.metadata, [key]: event.currentTarget.checked } })} />{t(locale, label)}</label>;
   const board = request.document.meta.presentation === "board", ready = request.status === "ready" && !previewError;
   const geometry = normalizeOutputOptions(request.document, options);
-  const contentRegions = geometry.ok ? geometry.regions.map(region => ({ xMm: region.xMm + geometry.marginMm, yMm: region.yMm + geometry.marginMm, widthMm: region.widthMm - 2 * geometry.marginMm, heightMm: region.heightMm - 2 * geometry.marginMm })) : [];
   const backup = async () => { const result = await runJsonExport(controller.backupDocument()); setBackupFailed(!!result.error); };
   return <dialog ref={dialog} class="output-dialog" aria-labelledby="output-dialog-heading" data-output-status={request.status} onCancel={event => { event.preventDefault(); close(); }}>
     <header class="output-dialog__header"><h2 id="output-dialog-heading">{t(locale, "output.title")}</h2><button type="button" onClick={close}>{t(locale, "dialog.close")}</button></header>
     <div class="output-dialog__body">
       <div class="output-dialog__settings">
-        <label>{t(locale, "output.format")}<select aria-label={t(locale, "output.format")} value={options.preset} onChange={event => {
-          const next = createDefaultOutputOptions(request.document, locale, event.currentTarget.value as OutputPreset);
-          change({ ...next, orientation: options.orientation, mode: options.mode, background: options.background, selectedStepIds: options.selectedStepIds });
-        }}>{(["label", "card", "sheet", "large", "custom"] as const).map(preset => <option value={preset}>{t(locale, `output.${preset}`)}</option>)}</select></label>
+        <label>{t(locale, "output.format")}<select aria-label={t(locale, "output.format")} value={options.preset} onChange={event => change(switchOutputPreset(request.document, options, event.currentTarget.value as OutputPreset))}>{(["label", "card", "sheet", "large", "custom"] as const).map(preset => <option value={preset}>{t(locale, `output.${preset}`)}</option>)}</select></label>
         <label>{t(locale, "output.orientation")}<select aria-label={t(locale, "output.orientation")} value={options.orientation} onChange={event => update({ orientation: event.currentTarget.value as OutputOptions["orientation"] })}>{(["portrait", "landscape"] as const).map(value => <option value={value}>{t(locale, `output.${value}`)}</option>)}</select></label>
         {options.preset === "custom" && options.customSize && <fieldset><legend>{t(locale, "output.custom")}</legend><div class="output-dialog__fields">
           {numberField("output.width", options.customSize.widthMm, widthMm => update({ customSize: { ...options.customSize!, widthMm } }), 20, 1000)}
@@ -69,7 +51,7 @@ export function OutputDialog({ sourceDocument, guideId, locale, onClose, initial
         <label>{t(locale, "output.background")}<select aria-label={t(locale, "output.background")} value={options.background} onChange={event => update({ background: event.currentTarget.value as OutputOptions["background"] })}>{(["white", "transparent"] as const).map(value => <option value={value}>{t(locale, `output.${value}`)}</option>)}</select></label>
         {options.background === "transparent" && <p>{t(locale, "output.pdfPaper")}</p>}
         <fieldset><legend>{t(locale, "output.metadata")}</legend>{metadata("documentTitle", "output.documentTitle")}{metadata("groupTitles", "output.groupTitles")}{!board && <>{metadata("stepNumbers", "output.stepNumbers")}{metadata("totalTime", "output.includeTotalTime")}</>}</fieldset>
-        <fieldset><legend>{t(locale, "output.selectGroups")}</legend>{request.document.steps.map((group, index) => <label class="output-dialog__check" key={group.id}><input type="checkbox" checked={options.selectedStepIds.includes(group.id)} onChange={event => update({ selectedStepIds: event.currentTarget.checked ? [...options.selectedStepIds, group.id] : options.selectedStepIds.filter(id => id !== group.id) })} />{group.title || (board ? t(locale, "output.groupContext") : t(locale, "editor.stepNumber", { number: index + 1 }))}</label>)}</fieldset>
+        <fieldset><legend>{t(locale, "output.selectGroups")}</legend>{request.document.steps.map((group, index) => <label class="output-dialog__check" key={group.id}><input type="checkbox" checked={options.selectedStepIds.includes(group.id)} onChange={event => update({ selectedStepIds: event.currentTarget.checked ? [...options.selectedStepIds, group.id] : options.selectedStepIds.filter(id => id !== group.id) })} />{getGroupLabel(group.title, locale, { kind: "reader", presentation: request.document.meta.presentation, number: index + 1 })}</label>)}</fieldset>
         {options.preset === "label" && <>
           <label class="output-dialog__check"><input type="checkbox" checked={!!options.labelSheet} onChange={event => update({ labelSheet: event.currentTarget.checked ? createDefaultLabelSheet() : undefined })} />{t(locale, "output.labelSheet")}</label>
           {options.labelSheet && <fieldset><legend>{t(locale, "output.sheetSettings")}</legend><div class="output-dialog__fields">
@@ -91,8 +73,8 @@ export function OutputDialog({ sourceDocument, guideId, locale, onClose, initial
         {request.exportIssue && <p role="alert">{issueText(request.exportIssue, locale)}</p>}
         {(request.errorKey || previewError) && <p role="alert">{t(locale, request.errorKey ?? "output.failed")}</p>}
         {(request.status === "blocked" || request.errorKey || previewError) && <button type="button" onClick={() => { setPreviewError(undefined); void controller.retryPreparation(); }}>{t(locale, "output.retry")}</button>}
-        {!!request.plan?.notices.length && <section aria-label={t(locale, "output.notices")}><h3>{t(locale, "output.notices")}</h3>{request.plan.notices.map((notice, index) => <p key={index}>{t(locale, notice.code === "empty-group" ? "output.emptyGroup" : "output.unknownSymbolNotice")}</p>)}</section>}
-        {request.plan && request.fonts && request.readingGroups && <OutputPreview plan={request.plan} fonts={request.fonts} readingGroups={request.readingGroups} contentRegions={contentRegions} onError={setPreviewError} />}
+        {!!request.plan?.notices.length && <section aria-label={t(locale, "output.notices")}><h3>{t(locale, "output.notices")}</h3>{request.plan.notices.map((notice, index) => <p key={index}>{noticeText(notice, locale)}</p>)}</section>}
+        {request.plan && request.fonts && request.readingGroups && <OutputPreview plan={request.plan} fonts={request.fonts} readingGroups={request.readingGroups} onError={setPreviewError} />}
         <div class="output-dialog__downloads"><button type="button" disabled={!ready} onClick={() => void controller.download("pdf")}>{t(locale, "output.downloadPdf")}</button>
           <label>{t(locale, "output.dpi")}<select aria-label={t(locale, "output.dpi")} value={dpi} onChange={event => { setDpi(Number(event.currentTarget.value) as 150 | 300); change(options); }}><option value="150">150</option><option value="300">300</option></select></label>
           {request.plan?.pages.map((_page, index) => <div class="output-dialog__page-actions" key={index}><button type="button" disabled={!ready} onClick={() => void controller.download("svg", index)}>{t(locale, "output.downloadSvgPage", { number: index + 1, total: request.plan!.pages.length })}</button><button type="button" disabled={!ready} onClick={() => void controller.download("png", index, dpi)}>{t(locale, "output.downloadPngPage", { number: index + 1, total: request.plan!.pages.length, dpi })}</button></div>)}

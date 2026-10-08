@@ -1,15 +1,16 @@
 import { useLayoutEffect, useRef, useState } from "preact/hooks";
-import type { MmBox, OutputPlan, PreparedFonts } from "../../model/output";
+import type { OutputPlan, PreparedFonts } from "../../model/output";
 import type { ReadingGroup } from "../../lib/instruction-reading";
 import { ReadingContent } from "../InstructionReader/InstructionReader";
 import { renderOutputPage } from "../../lib/output-svg";
 import { t } from "../../i18n/messages";
 import "./output-preview.css";
 
-interface OutputPreviewProps { plan: OutputPlan; fonts: PreparedFonts; readingGroups: readonly ReadingGroup[]; contentRegions: readonly MmBox[]; onError: (error: unknown) => void }
-export function OutputPreview({ plan, fonts, readingGroups, contentRegions, onError }: OutputPreviewProps) {
+interface OutputPreviewProps { plan: OutputPlan; fonts: PreparedFonts; readingGroups: readonly ReadingGroup[]; onError: (error: unknown) => void }
+export function OutputPreview({ plan, fonts, readingGroups, onError }: OutputPreviewProps) {
   const [selectedPage, setSelectedPage] = useState(0), [zoom, setZoom] = useState(100), [bounds, setBounds] = useState(false);
   const visual = useRef<HTMLDivElement>(null), index = Math.min(selectedPage, plan.pages.length - 1), page = plan.pages[index], locale = plan.options.locale;
+  const contentRegions = plan.contentRegions ?? [];
   const paddingMm = Math.min(...contentRegions.flatMap(region => [region.xMm, region.yMm, page.size.widthMm - region.xMm - region.widthMm, page.size.heightMm - region.yMm - region.heightMm]));
   useLayoutEffect(() => {
     try { const svg = renderOutputPage(page, fonts); svg.setAttribute("aria-hidden", "true"); visual.current?.replaceChildren(svg); }

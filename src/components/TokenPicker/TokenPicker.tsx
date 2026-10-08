@@ -7,13 +7,14 @@ import { t } from "../../i18n/messages";
 import { authoring, focusPicture, toast } from "../../state/ui";
 import { Icon } from "../Icon/Icon";
 import { beginEditorDrag } from "../../state/editor-drag";
+import { getGroupLabel } from "../../lib/instruction-presentation";
 const query = signal(""); const category = signal<TokenCategory | "">("");
 export function TokenPicker({ session }: { session: DocumentSession }) {
   const pref = preferences.value; const panel = authoring.panel.value;
   if (panel.kind !== "picker") return null;
   const step = session.document.value.steps.find((group) => group.id === panel.stepId);
   const index = session.document.value.steps.findIndex((group) => group.id === panel.stepId);
-  const target = step?.title || t(pref.uiLocale, session.document.value.meta.presentation === "board" ? "editor.groupNumber" : "editor.stepNumber", { number: index + 1 });
+  const target = getGroupLabel(step?.title, pref.uiLocale, { kind: "authoring", presentation: session.document.value.meta.presentation, number: index + 1 });
   const entries = findLibraryEntries(getLibrary(pref.activeLibraryId), query.value, pref.labelLocale, category.value || undefined);
   return <section class="token-picker"><h2>{t(pref.uiLocale, "editor.addPictureTo", { group: target })}</h2>
     <label>{t(pref.uiLocale, "preferences.library")}<select value={pref.activeLibraryId} onChange={(event) => void updatePreferences({ activeLibraryId: event.currentTarget.value as typeof pref.activeLibraryId })}>{(["kitchen", "routines", "learning"] as const).map((id) => <option value={id}>{getLibrary(id).names[pref.uiLocale]}</option>)}</select></label>

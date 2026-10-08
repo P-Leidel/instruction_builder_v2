@@ -12,9 +12,10 @@ import { printSettings } from "../../state/print-settings";
 import { preparedPrintFonts } from "../../state/print-fonts";
 import { prepareFonts } from "../../lib/print-fonts";
 import { planOutput } from "../../lib/output-plan";
-import { createDefaultOutputOptions } from "../../lib/output-options";
+import { switchOutputPreset } from "../../lib/output-options";
+import { projectEditorControls } from "../../lib/editor-projection";
 import { renderOutputPage } from "../../lib/output-svg";
-import { issueText } from "../OutputDialog/OutputDialog";
+import { issueText } from "../../lib/output-presentation";
 
 function PrintedPage({ page, fonts, onError }: { page: OutputPage; fonts: PreparedFonts; onError: (error: unknown) => void }) {
   const visual = useRef<HTMLDivElement>(null);
@@ -45,12 +46,12 @@ export function InstructionEditor({ session, locale }: { session: DocumentSessio
   const GroupList = board ? "ul" : "ol";
   const selected = doc.steps.filter(step => options.selectedStepIds.includes(step.id));
   const change = (next: typeof options) => printSettings.setOptions(doc, guideId, next);
-  const auxiliary = selected.filter(step => !layout?.pages.some(page => page.groups.some(group => group.stepId === step.id && !group.continued && group.headingBox && group.headingBox.heightMm * scale >= 44 && group.headingBox.widthMm * scale >= 280)));
-  const tinyTargets = layout?.pages.some(page => page.groups.some(group => group.pictures.some(picture => picture.cellBox.widthMm * scale < 44 || picture.cellBox.heightMm * scale < 44)));
+  const projection = projectEditorControls(layout, selected.map(step => step.id), scale);
+  const auxiliary = selected.filter(step => projection.auxiliaryStepIds.includes(step.id));
   return <section class="instruction-editor" ref={ref} aria-label={t(locale, "toolbar.edit")} data-editor-layout={plan ? "ready" : "blocked"}>
     <div class="editor-document-fields"><label class="guide-title">{t(locale, "editor.documentTitle")}<input value={doc.meta.title} placeholder={t(locale, "guide.untitled")} onInput={event => sessionActions.updateTitle(session, event.currentTarget.value)} /></label>
       <label>{t(locale, "editor.presentation")}<select aria-label={t(locale, "editor.presentation")} value={doc.meta.presentation} onChange={event => sessionActions.setPresentation(session, event.currentTarget.value as "sequence" | "board")}><option value="sequence">{t(locale, "guide.sequence")}</option><option value="board">{t(locale, "guide.board")}</option></select></label></div>
-    <div class="editor-canvas-controls"><label>{t(locale, "editor.paperFormat")}<select aria-label={t(locale, "editor.paperFormat")} value={options.preset} onChange={event => { const defaults = createDefaultOutputOptions(doc, locale, event.currentTarget.value as OutputPreset); change({ ...defaults, orientation: options.orientation, mode: options.mode, background: options.background, selectedStepIds: options.selectedStepIds }); }}>{(["label", "card", "sheet", "large", "custom"] as const).map(preset => <option value={preset}>{t(locale, `output.${preset}`)}</option>)}</select></label>
+    <div class="editor-canvas-controls"><label>{t(locale, "editor.paperFormat")}<select aria-label={t(locale, "editor.paperFormat")} value={options.preset} onChange={event => change(switchOutputPreset(doc, options, event.currentTarget.value as OutputPreset))}>{(["label", "card", "sheet", "large", "custom"] as const).map(preset => <option value={preset}>{t(locale, `output.${preset}`)}</option>)}</select></label>
       <label>{t(locale, "editor.pageOrientation")}<select aria-label={t(locale, "editor.pageOrientation")} value={options.orientation} onChange={event => change({ ...options, orientation: event.currentTarget.value as "portrait" | "landscape" })}>{(["portrait", "landscape"] as const).map(value => <option value={value}>{t(locale, `output.${value}`)}</option>)}</select></label>
       <label>{t(locale, "editor.canvasZoom")}<select aria-label={t(locale, "editor.canvasZoom")} value={zoom} onChange={event => setZoom(Number(event.currentTarget.value))}>{[50, 75, 100, 125, 150, 200].map(value => <option value={value}>{value}%</option>)}</select></label>
       {options.preset === "custom" && options.customSize && <>{(["widthMm", "heightMm"] as const).map(key => <label>{t(locale, key === "widthMm" ? "output.width" : "output.height")}<input type="number" min="20" max="1000" value={Number.isFinite(options.customSize![key]) ? options.customSize![key] : ""} onInput={event => change({ ...options, customSize: { ...options.customSize!, [key]: event.currentTarget.valueAsNumber } })} /></label>)}</>}
@@ -67,7 +68,7 @@ export function InstructionEditor({ session, locale }: { session: DocumentSessio
       {plan && fonts && <PrintedPage page={plan.pages[page.pageIndex]} fonts={fonts} onError={setRenderError} />}
       <GroupList class="editor-groups" data-editor-presentation={doc.meta.presentation}>{page.groups.map(group => { const step = doc.steps.find(step => step.id === group.stepId); return step && <EditorGroup key={`${step.id}-${group.segment}`} step={step} index={doc.steps.indexOf(step)} session={session} locale={locale} placement={group} scale={scale} draft={!plan} marked={marked} headingPrinted={(!board && options.metadata.stepNumbers) || (options.metadata.groupTitles && !!step.title?.trim())} />; })}</GroupList>
     </div>)}</div></div>}
-    {(!layout || tinyTargets) && <div class="editor-repair-list">{selected.map(step => <div key={step.id}>{!auxiliary.includes(step) && <GroupControls step={step} index={doc.steps.indexOf(step)} board={board} locale={locale} />}<ul class="editor-repair-pictures">{step.tokens.map(token => <EditorPicture key={token.id} token={token} locale={locale} session={session} groupId={step.id} selected={session.selectedTokenId.value === token.id} scale={scale} draft onActivate={() => { capturePanelOpener(); authoring.openPicture(step.id, token.id); }} />)}</ul></div>)}</div>}
+    {projection.needsPictureList && <div class="editor-repair-list">{selected.map(step => <div key={step.id}>{!auxiliary.includes(step) && <GroupControls step={step} index={doc.steps.indexOf(step)} board={board} locale={locale} />}<ul class="editor-repair-pictures">{step.tokens.map(token => <EditorPicture key={token.id} token={token} locale={locale} session={session} groupId={step.id} selected={session.selectedTokenId.value === token.id} scale={scale} draft onActivate={() => { capturePanelOpener(); authoring.openPicture(step.id, token.id); }} />)}</ul></div>)}</div>}
     <button type="button" data-add-group onClick={() => { capturePanelOpener(); sessionActions.addStep(session); const id = session.selectedStepId.peek(); if (id) authoring.openGroup(id); }}>{t(locale, board ? "editor.addGroup" : "editor.addStep")}</button>
     {drag && <div class="editor-drag-ghost" aria-hidden="true" style={{ left: `${Math.min(drag.x + 12, window.innerWidth - 160)}px`, top: `${Math.min(drag.y + 12, window.innerHeight - 50)}px` }}>{drag.label}</div>}
     <span class="visually-hidden" role="status">{editorDragAnnouncement.value}</span>

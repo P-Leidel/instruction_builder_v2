@@ -9,6 +9,42 @@ function normalized(doc: Parameters<typeof api.normalizeOutputOptions>[0], optio
   return result;
 }
 describe("physical output options", () => {
+  it("switches presets with the current locale and selection, resetting format-specific settings without mutating inputs", () => {
+    const doc = sequenceFixture();
+    const current: OutputOptions = { ...api.createDefaultOutputOptions(doc, "de", "label"), orientation: "landscape", mode: "pictures", background: "transparent", selectedStepIds: [doc.steps[0].id], labelSheet: api.createDefaultLabelSheet(), customSize: { widthMm: 80, heightMm: 90 } };
+    const before = structuredClone(current), raw = structuredClone(doc);
+    const custom = api.switchOutputPreset(doc, current, "custom");
+    expect(custom).toMatchObject({ preset: "custom", locale: "de", orientation: "landscape", mode: "pictures", background: "transparent", selectedStepIds: ["fixture-group-1"], customSize: { widthMm: 210, heightMm: 297 }, metadata: { documentTitle: true, groupTitles: true, stepNumbers: true, totalTime: true } });
+    expect(custom).not.toHaveProperty("labelSheet");
+    const label = api.switchOutputPreset(doc, custom, "label");
+    expect(label.metadata).toEqual({ documentTitle: false, groupTitles: false, stepNumbers: false, totalTime: false });
+    expect(label).not.toHaveProperty("customSize"); expect(label).not.toHaveProperty("labelSheet");
+    expect(current).toEqual(before); expect(doc).toEqual(raw); expect(custom).not.toBe(current);
+    expect(custom.selectedStepIds).toBe(current.selectedStepIds);
+    expect(custom.metadata).not.toBe(current.metadata);
+  });
+
+  it("exposes canonical clamped content rectangles for A4, landscape and tiny custom paper", () => {
+    const doc = sequenceFixture(), options = api.createDefaultOutputOptions(doc, "en");
+    expect(normalized(doc, options).contentRegions).toEqual([{ xMm: 10, yMm: 10, widthMm: 190, heightMm: 277 }]);
+    options.orientation = "landscape";
+    expect(normalized(doc, options).contentRegions).toEqual([{ xMm: 10, yMm: 10, widthMm: 277, heightMm: 190 }]);
+    options.preset = "custom"; options.customSize = { widthMm: 20, heightMm: 24 };
+    expect(normalized(doc, options).contentRegions).toEqual([{ xMm: 5, yMm: 5, widthMm: 14, heightMm: 10 }]);
+    options.selectedStepIds = [];
+    const empty = api.normalizeOutputOptions(doc, options);
+    expect(empty.ok).toBe(false);
+    if (!empty.ok) expect(empty.geometry?.contentRegions).toEqual([{ xMm: 5, yMm: 5, widthMm: 14, heightMm: 10 }]);
+  });
+
+  it("exposes content bounds for every label-sheet cell, including unassigned cells", () => {
+    const doc = sequenceFixture(), options = api.createDefaultOutputOptions(doc, "en", "label");
+    options.labelSheet = api.createDefaultLabelSheet();
+    const geometry = normalized(doc, options);
+    expect(geometry.contentRegions).toHaveLength(24);
+    expect(geometry.contentRegions[0]).toEqual({ xMm: 12, yMm: 12, widthMm: 46, heightMm: 26 });
+    expect(geometry.contentRegions[23]).toEqual({ xMm: 116, yMm: 236, widthMm: 46, heightMm: 26 });
+  });
   it("supplies content-independent fixed cell metrics and leaves label headings off by default", () => {
     const doc = sequenceFixture();
     const options = api.createDefaultOutputOptions(doc, "en");
