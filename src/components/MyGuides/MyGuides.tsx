@@ -12,7 +12,7 @@ export function MyGuides({ onOpened, onResult, onBackup }: { onOpened: () => voi
   const pref = preferences.value; const locale = pref.uiLocale;
   async function action(operation: () => Promise<GuideActionResult>, open = false) { setBusy(true); try { const result = await operation(); onResult(result); if (result.ok && open) { setCreating(false); onOpened(); } } finally { setBusy(false); } }
   const create = (doc: InstructionDocument) => action(() => createGuide(doc), true);
-  return <section class="my-guides"><h1>{t(locale, "guides.title")}</h1><p>{t(locale, "save.localOnly")}</p>
+  return <section class="my-guides"><h1 tabIndex={-1} data-view-entry="guides">{t(locale, "guides.title")}</h1><p>{t(locale, "save.localOnly")}</p>
     <button type="button" onClick={() => setCreating(true)}>{t(locale, "guides.new")}</button>
     {!guideSummaries.value.length && <p>{t(locale, "guides.empty")}</p>}
     <ul class="guide-list">{guideSummaries.value.map((guide) => { const title = guide.title || t(locale, "guide.untitled"); return <li key={guide.id} data-guide-id={guide.id}><h2>{title}</h2><p>{t(locale, guide.presentation === "board" ? "guide.board" : "guide.sequence")}</p><p>{t(locale, "guides.updated", { date: new Date(guide.updatedAt).toLocaleString(locale) })}</p>

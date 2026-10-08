@@ -10,7 +10,7 @@ import { Icon } from "../Icon/Icon";
 export function InstructionReader({ document, locale, onBack }: { document: InstructionDocument; locale: AppLocale; onBack: () => void }) {
   const [mode, setMode] = useState<OutputMode>("labels"); const groups = toReadingGroups(document, mode, locale); const board = document.meta.presentation === "board";
   return <section class="reader" aria-label={t(locale, "reader.title")}>
-    <div class="reader__controls"><button type="button" onClick={onBack}>{t(locale, "reader.backToEditing")}</button>
+    <div class="reader__controls"><button type="button" data-view-entry="reader" onClick={onBack}>{t(locale, "reader.backToEditing")}</button>
       <label>{t(locale, "reader.contentMode")}<select value={mode} onChange={(event) => setMode(event.currentTarget.value as OutputMode)}>
         {(["labels", "pictures", "detailed"] as const).map((value) => <option value={value}>{t(locale, `output.${value}`)}</option>)}
       </select></label></div>

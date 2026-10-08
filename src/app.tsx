@@ -16,6 +16,7 @@ import type { InstructionDocument } from "./model/instruction";
 import type { AppLocale } from "./model/library";
 import { t } from "./i18n/messages";
 import { printSettings } from "./state/print-settings";
+import { focusViewEntry, type EntryView } from "./lib/view-entry-focus";
 
 function textEntry(target: EventTarget | null) { return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || (target instanceof HTMLElement && target.isContentEditable); }
 export function App() {
@@ -69,13 +70,19 @@ export function App() {
   async function createOnce(doc: InstructionDocument) {
     if (creatingGuide.current) return;
     creatingGuide.current = true; setGuideCreationBusy(true);
-    try { const created = await createGuide(doc); result(created); return created; }
+    try { const created = await createGuide(doc); result(created); if (created.ok) openEditor(); return created; }
     finally { creatingGuide.current = false; setGuideCreationBusy(false); }
   }
   const closeImport = () => { if (!creatingGuide.current) pendingImport.value = null; };
   async function backup(doc: InstructionDocument) { const exported = await runJsonExport(doc); if (exported.error) toast.value = { text: t(preferences.peek().uiLocale, "output.failed"), tone: "error" }; }
-  const guides = async () => { const flushed = await flushActiveGuide(); if (!flushed.ok) { result(flushed); return; } authoring.close(); await refreshGuides(); appView.value = "guides"; };
-  const read = () => { readOpener.current = window.document.activeElement instanceof HTMLElement ? window.document.activeElement : null; authoring.close(); appView.value = "reader"; };
+  function enterView(view: EntryView) {
+    const guideId = activeGuideId.peek();
+    appView.value = view;
+    focusViewEntry(view, () => appView.peek() === view && activeGuideId.peek() === guideId);
+  }
+  function openEditor() { authoring.close(); enterView("editor"); }
+  const guides = async () => { const flushed = await flushActiveGuide(); if (!flushed.ok) { result(flushed); return; } authoring.close(); await refreshGuides(); enterView("guides"); };
+  const read = () => { readOpener.current = window.document.activeElement instanceof HTMLElement ? window.document.activeElement : null; authoring.close(); enterView("reader"); };
   const returnToEditor = () => {
     appView.value = "editor";
     const id = session.selectedTokenId.peek();
@@ -102,8 +109,8 @@ export function App() {
     {toast.value && <div class={`toast toast--${toast.value.tone}`} role={toast.value.tone === "error" ? "alert" : "status"}><p>{toast.value.text}</p><button type="button" aria-label={t(locale, "dialog.close")} onClick={() => { toast.value = null; }}>{t(locale, "dialog.close")}</button></div>}
     {editing && failedNewGuide.value && <div class="persistent-notice" role="alert"><p>{t(locale, "guides.failedNewDraft")}</p><button type="button" onClick={() => void backup(failedNewGuide.peek()!)}>{t(locale, "guides.downloadFailedDraft")}</button><button type="button" disabled={guideCreationBusy} onClick={() => void createOnce(failedNewGuide.peek()!)}>{t(locale, "guides.retryFailedDraft")}</button></div>}
     {editing && guideNotices.value.length > 0 && <p role="status">{t(locale, "guides.legacyRecovered")} <button type="button" onClick={() => void guides()}>{t(locale, "guides.title")}</button></p>}
-    <main>{editing ? <div class="editor-layout"><InstructionEditor session={session} locale={locale} /><AuthoringPanel session={session} /></div> : <MyGuides onOpened={() => { authoring.close(); appView.value = "editor"; }} onResult={result} onBackup={(doc) => void backup(doc)} />}</main>
-    {pendingImport.value && <ModalDialog label={t(locale, "toolbar.import")} busy={guideCreationBusy} onClose={closeImport}><p>{t(locale, "import.confirmNew")}</p><button type="button" disabled={guideCreationBusy} onClick={async () => { const imported = pendingImport.peek(); if (!imported) return; const created = await createOnce(imported.document); if (!created) return; pendingImport.value = null; if (created.ok) { authoring.close(); appView.value = "editor"; } }}>{t(locale, "dialog.confirm")}</button><button type="button" disabled={guideCreationBusy} onClick={closeImport}>{t(locale, "dialog.cancel")}</button></ModalDialog>}
+    <main>{editing ? <div class="editor-layout"><InstructionEditor session={session} locale={locale} /><AuthoringPanel session={session} /></div> : <MyGuides onOpened={openEditor} onResult={result} onBackup={(doc) => void backup(doc)} />}</main>
+    {pendingImport.value && <ModalDialog label={t(locale, "toolbar.import")} busy={guideCreationBusy} onClose={closeImport}><p>{t(locale, "import.confirmNew")}</p><button type="button" disabled={guideCreationBusy} onClick={async () => { const imported = pendingImport.peek(); if (!imported) return; const created = await createOnce(imported.document); if (!created) return; pendingImport.value = null; }}>{t(locale, "dialog.confirm")}</button><button type="button" disabled={guideCreationBusy} onClick={closeImport}>{t(locale, "dialog.cancel")}</button></ModalDialog>}
     {reloadConfirm && <ModalDialog label={t(locale, "save.reload")} onClose={() => setReloadConfirm(false)}><p>{t(locale, "save.reloadConfirm")}</p><button type="button" onClick={() => void backup(session.document.peek())}>{t(locale, "save.backup")}</button><button type="button" onClick={async () => { const reloaded = await reloadActiveGuide(); result(reloaded); setReloadConfirm(false); }}>{t(locale, "save.reload")}</button><button type="button" onClick={() => setReloadConfirm(false)}>{t(locale, "save.keepEditing")}</button></ModalDialog>}
     {outputVisible && <OutputDialog sourceDocument={documentSession.document.value} guideId={activeGuideId.value} locale={output.locale} onClose={closeOutput} initialOptions={printSettings.getOptions(session.document.value, activeGuideId.value, output.locale)} onOptionsChange={(options, capturedDocument) => printSettings.setOptions(capturedDocument, activeGuideId.peek(), options)} />}
   </div>;
