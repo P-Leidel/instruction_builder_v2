@@ -32,7 +32,8 @@ Planning and architecture docs live in [docs/](docs/):
 - [docs/milestones.md](docs/milestones.md) — the single source of truth for current phase/task status; start here.
 - [7 October architecture remediation](docs/phase-3/progress/2026-10-07-architecture-remediation.md) — delivered architecture changes, separate commits, verification and next remediation batches.
 - [7 October reliability remediation](docs/phase-3/progress/2026-10-07-reliability-remediation.md) — long-text planning, cross-tab preference merging and explicit startup recovery.
-- [8 October functional remediation](docs/phase-3/progress/2026-10-08-functional-remediation.md) — imported identities, unknown captions, PNG density and navigation focus; current combined verification status.
+- [8 October P3 remediation](docs/phase-3/progress/2026-10-08-p3-remediation.md) — board semantics, reader attachment notices, Copy feedback, current verification status and UX decisions.
+- [8 October functional remediation](docs/phase-3/progress/2026-10-08-functional-remediation.md) — imported identities, unknown captions, PNG density and navigation focus; prior verified checkpoint.
 - [7 October codebase health review](docs/phase-3/reviews/2026-10-07-codebase-health-review.md) — dated findings and UX decisions, with source references pinned to the reviewed snapshot.
 - [docs/project-plan.md](docs/project-plan.md) — the approved project plan (goals, stack, phased task list, risks, success criteria).
 - [2026-10-06 takeover review](docs/phase-3/audits/2026-10-06-takeover-review.md) — historical baseline UX, graphics, mobile, and reliability findings and verified minor fixes; the overhaul handoff records their resolution.

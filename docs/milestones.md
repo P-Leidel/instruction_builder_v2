@@ -28,6 +28,13 @@ unknown-picture captions, PNG density metadata and successful navigation focus.
 Fresh 561 unit tests / 39 files, 7 tooling tests, lint/build, focused native checks,
 full browser and production PWA gates pass; independent whole-batch review approves
 the source changes.
+The subsequent [P3 remediation](./phase-3/progress/2026-10-08-p3-remediation.md)
+implements unordered board editor groups, reader attachment-reference notices and
+localized Copy success feedback in independently approved, separately pushed commits;
+fresh 569 unit tests / 39 files, 7 tooling tests, lint/build, full browser and production
+PWA gates pass. Whole-batch review approves the changes; all three commits pass CI. The user
+chose automatic saving of valid attachment edits and simpler output controls with named
+advanced sections; implementation is pending. Mobile fitting/readability is the next UX decision.
 No merge or deployment occurred.
 Participant, actual-print, real-device and screen-reader acceptance remain pending;
 Phase 3 is not complete.

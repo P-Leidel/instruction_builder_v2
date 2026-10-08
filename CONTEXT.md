@@ -35,6 +35,7 @@ copy onto the currently selected step, and can be repeated indefinitely
 without clearing the clipboard. It is session-only UI state, not part of
 the document: it isn't saved, isn't part of undo/redo history, and doesn't
 touch the operating system's real clipboard. Opening another guide clears it and all document history. JSON imports/examples create another local guide after a successful repository commit; they do not replace the user's existing guides.
+Successful Copy announces its meaningful localized picture label inside the active details panel, including the native mobile modal. Invalid targets preserve the previous clipboard and produce no success announcement. See [P3 remediation](docs/phase-3/progress/2026-10-08-p3-remediation.md) for verification status.
 _Avoid_: "copy buffer", "system clipboard" (this is never that).
 
 ## Guide and local repository
@@ -53,13 +54,19 @@ A **library** selects canonical catalog entries for Kitchen, Daily routines/work
 
 The **editor** renders `OutputPlan` SVG pages with identity-bearing HTML hit regions from `EditorLayout`. Physical cells, caption/detail lanes and row pitch stay fixed; panel/viewport changes never resize them. A4 portrait is the default; paper format/orientation and explicit zoom control the view. Required content that exceeds its reserved lane blocks export and retains current-source repair targets. Add picture lives at each group header, with an unscaled group rail for compact formats. Whole-picture mouse/pen and desktop-library dragging resolve live rectangles to original indices by stable anchors, including continuations. Touch Move picture arms the whole tile before the next gesture; ordinary tiles scroll normally. Cancellation preserves document/history; a valid release commits one action. Quiet Actions retain keyboard movement, copy/paste and deletion. **Read** uses a semantic projection from `projectOutputContent`, with one named accessible item per picture and required quantity/warning/time in every mode. Its pure `ReadingContent` is also used by output preview; Read contains no authoring canvas.
 
+Choice-board editor groups use unordered lists, including blocked and continued pages; sequences retain ordered groups. Read and semantic preview display localized review notices for unresolved quantity, picture-time and explicit group-time icon references, retaining full IDs and authored values. See [P3 remediation](docs/phase-3/progress/2026-10-08-p3-remediation.md).
+
 ## Contextual panel and native modal
 
 Successful user-driven navigation focuses Guide title in the editor, Back to editing in Read, or the My guides heading. Deferred entry focus checks the current view and guide and yields to an open native dialog; unrelated renders do not request it. Leaving Read retains the existing selected-picture/group focus policy.
 
 Below 768 CSS px, picker/details use one native modal sheet; desktop uses a fixed nonmodal overlay that consumes no canvas layout column. Settings, import and output use native modal containment. A desktop draft stays mounted behind the inert modal; only the top modal handles Escape. Opening output or resizing open output to mobile closes the prior contextual sheet. Closing returns focus to a surviving opener. Committed Undo/Redo/removal/reload changes reconcile attachment fields; unrelated renders and desktop/mobile remounts retain target-scoped attachment drafts. Prepared fonts survive editor/reader switches and recover after a successful retry, preserving focus and current printable geometry.
 
+The user chose automatic saving for valid picture/group details edits, with incomplete input visibly marked. Implementation is pending: labels, warnings and notes currently save immediately, while quantity/time still use separate Save buttons.
+
 ## Physical plan and captured output
+
+The user chose prominent size, orientation, content mode, preview and PDF controls for Print / Download, with background, headings, group selection, DPI and alternate formats in named collapsed sections. This simplification is awaiting implementation.
 
 An **OutputPlan** is the finite millimeter display list produced by the shared physical planner, using measured Source Sans 3 glyph runs. Editor, preview and SVG/PNG/PDF consume the same pages; none rewrap or add a separate heading. Printed text uses vector outlines, with its search/copy limitation disclosed in [print fonts](docs/print-fonts.md). Session-scoped per-guide print choices feed editor and captured output; selecting all groups includes future groups, while explicit subsets remain revealable. A captured request owns a cloned document/options and generation; source edits require explicit Refresh, and close/guide switches discard pending results. JSON backup remains independent of physical selection/preflight and requires no print font/converter preparation.
 

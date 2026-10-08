@@ -17,8 +17,14 @@ addresses long-text planning, cross-tab preference loss and explicit startup
 storage retry. The [8 October functional remediation](./phase-3/progress/2026-10-08-functional-remediation.md)
 addresses unknown-picture captions, empty imported identities, PNG physical
 density and successful navigation focus. Scoped/final reviews approve the batch;
-unit/tooling/lint/build, full browser and production PWA gates pass. The smaller board/Read/Copy
-gaps and five UX decisions remain open. The [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
+unit/tooling/lint/build, full browser and production PWA gates pass at that checkpoint.
+The [P3 remediation](./phase-3/progress/2026-10-08-p3-remediation.md) implements board
+list semantics, reader attachment notices and Copy feedback in independently approved,
+separately pushed commits. Integrated unit/tooling/lint/build, full browser and production
+PWA gates pass; whole-batch review approves the changes without actionable findings. The user
+chose automatic saving of valid attachment edits and simpler output controls with named
+advanced sections; both await implementation. Three UX decisions remain open, beginning
+with mobile fitting/readability. The [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
 retires disconnected legacy code, narrows atomic storage reads and consolidates
 maintained browser checks under `tests/browser`. It also records the fixed save/Undo
 race, field shortcut scoping, UI language, repeated import submission, and

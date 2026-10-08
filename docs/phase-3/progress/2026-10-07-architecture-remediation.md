@@ -1,6 +1,6 @@
 # Architecture remediation — 7 October 2026
 
-> 📌 **Doc status: CURRENT** — delivery record for the first remediation batch. The original health review is a dated snapshot; functional bugs and UX decisions remain open below.
+> 📌 **Doc status: CURRENT** — delivery record for the first remediation batch. The original health review is a dated snapshot; later remediation and open UX decisions are linked below.
 
 The three architecture findings are addressed. Work was delegated by file ownership, independently reviewed, verified together, and committed/pushed separately on `codex/architecture-remediation`. No merge or deployment occurred.
 
@@ -36,6 +36,6 @@ Evidence is local and ignored: `artifacts/architecture-remediation/`, especially
 
 ## Next remediation batches
 
-The next [reliability remediation](./2026-10-07-reliability-remediation.md) addresses valid long-text planning, transactional cross-tab preference merging and explicit startup retry. The following [functional remediation](./2026-10-08-functional-remediation.md) addresses unknown-picture caption composition, nonempty imported identities, PNG density metadata and transition focus, with current combined gates recorded there. The [health review](../reviews/2026-10-07-codebase-health-review.md) retains the original evidence. The three smaller usability gaps and five UX/design decisions remain open. Preference semantics changed in the reliability batch, after this architecture change.
+The subsequent [reliability remediation](./2026-10-07-reliability-remediation.md) addresses valid long-text planning, transactional cross-tab preference merging and explicit startup retry. [Functional remediation](./2026-10-08-functional-remediation.md) addresses unknown-picture captions, imported identities, PNG density and transition focus. [P3 remediation](./2026-10-08-p3-remediation.md) records the later board/Read/Copy changes, current verification status and UX decisions. The [health review](../reviews/2026-10-07-codebase-health-review.md) retains the original evidence. Preference semantics changed after this architecture checkpoint.
 
-Continue with independent reviewed commits for functional fixes, then decide attachment save semantics, output-menu grouping, mobile fit, contextual-panel placement and guide creation flow before altering those UX contracts. The [design](../../superpowers/specs/2026-10-07-architecture-remediation-design.md) and [implementation plan](../../superpowers/plans/2026-10-07-architecture-remediation.md) define this batch's boundaries.
+Resolve the remaining UX decisions before altering those contracts. The [design](../../superpowers/specs/2026-10-07-architecture-remediation-design.md) and [implementation plan](../../superpowers/plans/2026-10-07-architecture-remediation.md) define this architecture batch's boundaries.

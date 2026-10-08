@@ -1,6 +1,13 @@
 # Phase 3 Progress Log — Tasks 25 through 31
 
-Latest work: [8 October functional remediation](./2026-10-08-functional-remediation.md)
+Latest work: [8 October P3 remediation](./2026-10-08-p3-remediation.md) implements
+board semantics, reader attachment notices and Copy feedback in independently approved,
+separately pushed commits. Combined unit/tooling/lint/build, full browser and production PWA
+gates pass; whole-batch review approves the changes and all three commits pass CI. The user chose
+automatic saving of valid attachment edits and simpler output controls with named advanced
+sections; implementation is pending. Mobile fitting/readability is the next UX decision.
+
+The prior [8 October functional remediation](./2026-10-08-functional-remediation.md)
 delivers imported-ID validation, unknown-caption composition, PNG density metadata and
 navigation focus in separate reviewed/pushed commits. 561 unit tests, 7 tooling tests,
 lint/build, focused native checks, full browser and production PWA gates pass;
