@@ -13,9 +13,15 @@ noted and deliberately left alone.
 
 The later [8 October architecture verification](./phase-3/reviews/2026-10-08-architecture-verification.md)
 assesses nine maintenance candidates, qualifies testing/defect claims and
-retires the unused legacy writer and singleton aliases. Its remaining
-command, drop, presentation and storage/shell batches are architectural work;
-the delivered functional fixes below remain in place.
+retires the unused legacy writer and singleton aliases. The subsequent
+[three architecture batches](./phase-3/progress/2026-10-08-architecture-batches.md)
+deliver command/drop, presentation/projection, storage, guide-file and shell
+consolidation in five independently approved local commits. Final unit/tooling,
+typecheck/lint/build, complete browser and production PWA gates pass; broad
+whole-range review and two nonblocking test-precision observations await final
+triage. No product defect was identified by those observations. The delivered
+functional fixes below remain in place; remote integration and pending UX/practical
+acceptance are unchanged.
 
 The [dated review](./phase-3/reviews/2026-10-07-codebase-health-review.md)
 records the original functional findings and UX decisions. The [reliability remediation](./phase-3/progress/2026-10-07-reliability-remediation.md)

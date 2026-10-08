@@ -16,7 +16,11 @@ per run (`YYYY-MM-DD-code-review.md`).
   surface). Its top recommendation is to retire legacy persistence and then
   build the picture-commands module. The [verification and initial remediation](./2026-10-08-architecture-verification.md)
   qualifies its coverage and defect claims, retires the unused legacy writer
-  and singleton aliases, and records the remaining batches.
+  and singleton aliases, and records the batches proposed at that checkpoint.
+  The subsequent [three-batch delivery](../progress/2026-10-08-architecture-batches.md)
+  records five independently approved local commits and passing final integration
+  gates; broad whole-range review is pending. The initial verification is now
+  a superseded snapshot, with its findings and gate evidence preserved.
 
 - [7 October 2026 codebase health review](./2026-10-07-codebase-health-review.md)
   reviews code, architecture and UX across its dated application snapshot. It records

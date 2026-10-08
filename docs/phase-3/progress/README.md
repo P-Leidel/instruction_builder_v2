@@ -1,6 +1,13 @@
 # Phase 3 Progress Log — Tasks 25 through 31
 
-Latest work: [8 October P3 remediation](./2026-10-08-p3-remediation.md) implements
+Latest work: [8 October architecture batches](./2026-10-08-architecture-batches.md)
+deliver command/drop, presentation/projection, storage, guide files and shell in
+five independently approved local commits through `be04807`. Final 682 unit tests /
+41 files, 7 tooling tests, typecheck/lint/build, complete 22-driver browser and
+production cold/update PWA gates pass. Broad whole-range review remains pending.
+No push, merge or deployment occurred; Phase 3 and practical/UX acceptance remain open.
+
+The prior [8 October P3 remediation](./2026-10-08-p3-remediation.md) implements
 board semantics, reader attachment notices and Copy feedback in independently approved,
 separately pushed commits. Combined unit/tooling/lint/build, full browser and production PWA
 gates pass; whole-batch review approves the changes and all three commits pass CI. The user chose

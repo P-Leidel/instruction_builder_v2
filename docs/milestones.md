@@ -38,8 +38,13 @@ advanced sections; implementation is pending. Mobile fitting/readability is the 
 No merge or deployment occurred.
 The [8 October architecture verification](./phase-3/reviews/2026-10-08-architecture-verification.md)
 assesses the nine new independent review candidates and starts cleanup by
-retiring the unused legacy writer and singleton aliases. Command, drop and
-presentation consolidation remain later batches; Phase 3 task status is unchanged.
+retiring the unused legacy writer and singleton aliases. The subsequent
+[three architecture batches](./phase-3/progress/2026-10-08-architecture-batches.md)
+deliver commands/drop, presentation/projection, storage, guide files and shell in
+five independently approved local commits through `be04807`. Final 682 unit tests /
+41 files, 7 tooling tests, typecheck/lint/build, complete 22-driver browser and
+production cold/update PWA gates pass. Broad whole-range review is pending;
+no push, merge or deployment occurred. Phase 3 task status is unchanged.
 Participant, actual-print, real-device and screen-reader acceptance remain pending;
 Phase 3 is not complete.
 
