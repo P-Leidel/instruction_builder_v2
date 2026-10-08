@@ -20,4 +20,4 @@ Local ignored evidence: `artifacts/reliability-remediation/`, including RED/GREE
 
 ## Next agenda
 
-Continue with unknown-picture caption composition, nonempty imported identities, PNG physical-density metadata and transition focus. Then address the smaller board/Read/Copy gaps and trial the five UX decisions: attachment save semantics, output menu grouping, mobile fitting/readability, contextual panel placement and guide creation/list flow. Practical device, screen-reader, participant and physical-print acceptance and artwork distribution licensing remain open.
+The next [functional remediation](./2026-10-08-functional-remediation.md) delivers unknown-picture caption composition, nonempty imported identities, PNG physical-density metadata and transition focus; its combined gates are recorded there. Then address the smaller board/Read/Copy gaps and trial the five UX decisions: attachment save semantics, output menu grouping, mobile fitting/readability, contextual panel placement and guide creation/list flow. Practical device, screen-reader, participant and physical-print acceptance and artwork distribution licensing remain open.

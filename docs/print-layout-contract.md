@@ -1,5 +1,7 @@
 # Print layout contract
 
+> 📌 **Doc status: CURRENT** — shared geometry and output rules for the running editor and physical exports.
+
 These rules govern the editor, print preview and SVG/PNG/PDF output. They implement the creator's requirement that future field changes must not shift the whole layout. Geometry is owned by `src/lib/output-options.ts` and `src/lib/output-plan.ts`; app CSS supplies editing controls around that geometry.
 
 ## Fixed anchor and reserved zones
@@ -10,6 +12,7 @@ These rules govern the editor, print preview and SVG/PNG/PDF output. They implem
 4. The caption is centered and bottom-aligned in its zone above the pictogram. The time badge is centered in its own zone starting 1 mm beneath the pictogram. Quantity sits to the left, warning to the right, and a detailed note below the quantity. Narrow landscape labels have explicit top/bottom annotation zones; their pictogram/time anchor follows the same rule.
 5. Typography is selected by format and role before content is measured. Ordinary formats use 9 pt labels/annotations. A3 uses 14 pt labels, 12 pt quantity/time/notes and 10 pt warning text. Font size never changes in response to content length.
 6. Wrap text only inside its reserved zone. A required field that cannot fit produces a named overflow issue and blocks physical export. Preserve the full authored value, source identity, editable repair target and JSON backup. Never clip, truncate, shrink or move another zone to force a fit.
+7. Unknown main-picture identity and authored label form one measured `context` caption flow in the same reserved zone, without an extra gap. Preserve the full localized identity and authored label in overflow diagnostics; keep the pictogram fallback and repair source identity.
 
 | Format | Cell | Pictogram | Column / row gap |
 | --- | --- | --- | --- |
@@ -30,6 +33,8 @@ Compact labels have no heading band by default. Their individual picture times r
 - Routes depend only on cell geometry. They do not depend on fields, text ink bounds, panel/viewport size or the count of visible annotations. Never draw a diagonal row turn, link across pages/label regions, or add connectors to choice boards.
 
 ## Change and verification rule
+
+PNG raster dimensions use rounded millimetres-to-pixels conversion at selected 150/300 DPI, with a 24M-pixel limit checked before allocation. Files declare both axes in one valid `pHYs` chunk before `IDAT`: 5906/11811 pixels per metre with unit 1, following [W3C PNG](https://www.w3.org/TR/png-3/#11pHYs). Updating density metadata preserves every other native chunk and decoded pixel. This describes file geometry; actual-size printer scaling/readability remains pending. See [functional remediation](phase-3/progress/2026-10-08-functional-remediation.md).
 
 Keep one physical planner and one renderer for the editor and all downloads. A UI change must not introduce its own card sizing, text wrapping or connector computation. Any intentional change to cell metrics, fonts or zones must update this contract and pass the affected layout/export checks.
 

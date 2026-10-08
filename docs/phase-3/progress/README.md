@@ -1,6 +1,14 @@
 # Phase 3 Progress Log — Tasks 25 through 31
 
-Latest work: [6 October 2026 overhaul implementation](../audits/2026-10-06-overhaul/implementation-report.md)
+Latest work: [8 October functional remediation](./2026-10-08-functional-remediation.md)
+delivers imported-ID validation, unknown-caption composition, PNG density metadata and
+navigation focus in separate reviewed/pushed commits. 561 unit tests, 7 tooling tests,
+lint/build, focused native checks, full browser and production PWA gates pass;
+independent whole-batch review approves the source changes.
+It follows the [7 October architecture](./2026-10-07-architecture-remediation.md) and
+[reliability](./2026-10-07-reliability-remediation.md) batches.
+
+The earlier [6 October 2026 overhaul implementation](../audits/2026-10-06-overhaul/implementation-report.md)
 is technically complete in the local worktree under the reviewed [agent delivery plan](../../superpowers/plans/2026-10-06-agent-implementation.md). [Clean-install acceptance](../audits/2026-10-06-overhaul/technical-acceptance.md) records 461 unit tests, 7 tooling tests and the integrated browser/offline gates.
 It follows [reliability maintenance](./2026-10-06-reliability-maintenance.md)
 and the [takeover audit and minor fixes](./2026-10-06-takeover-review.md).

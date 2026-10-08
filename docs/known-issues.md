@@ -14,8 +14,11 @@ noted and deliberately left alone.
 The [dated review](./phase-3/reviews/2026-10-07-codebase-health-review.md)
 records the original functional findings and UX decisions. The [reliability remediation](./phase-3/progress/2026-10-07-reliability-remediation.md)
 addresses long-text planning, cross-tab preference loss and explicit startup
-storage retry. Unknown-picture captions, nonempty imported identities, PNG physical
-density, focus-flow issues and UX decisions remain open. The [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
+storage retry. The [8 October functional remediation](./phase-3/progress/2026-10-08-functional-remediation.md)
+addresses unknown-picture captions, empty imported identities, PNG physical
+density and successful navigation focus. Scoped/final reviews approve the batch;
+unit/tooling/lint/build, full browser and production PWA gates pass. The smaller board/Read/Copy
+gaps and five UX decisions remain open. The [architecture remediation](./phase-3/progress/2026-10-07-architecture-remediation.md)
 retires disconnected legacy code, narrows atomic storage reads and consolidates
 maintained browser checks under `tests/browser`. It also records the fixed save/Undo
 race, field shortcut scoping, UI language, repeated import submission, and
@@ -48,7 +51,7 @@ Current limits and next owners:
 | Actual-size printing, grayscale and viewing distance | Printer-equipped design/QA owner; [10 PDF samples / 14 pages](./phase-3/audits/2026-10-06-overhaul/print-samples/README.md) prepared, physical observations pending |
 | Real iOS/Android keyboards, downloads, rotation, saving and offline; VoiceOver/NVDA | Device/QA owner; Chromium automation is recorded, real devices/screen readers pending |
 | Exported vector text is outlined, so PDF/SVG text is not searchable/selectable | Current deliberate font strategy; [coverage and provenance](./print-fonts.md) documented; new font/shaping support needs independent rendered acceptance |
-| PNG supports 150/300 dpi, max 24M pixels per page | Vector SVG/PDF available for larger outputs; no silent raster allocation beyond limit |
+| PNG supports 150/300 dpi with physical-density metadata, max 24M pixels per page | Vector SVG/PDF available for larger outputs; actual printer scaling/readability remains pending |
 | Local browser/device storage and abrupt teardown's final-edit window | Maintainer/user; portable JSON backup and [recovery instructions](./persistence-recovery.md); no cross-device sync |
 | Original artwork distribution license is not established | Project owner must choose a grant before public release; [factual status](./artwork/LICENSE-STATUS.md) retained |
 | Optional drag convenience | Mouse/pen and armed touch movement are delivered; real-device usability acceptance remains pending, alongside tap/keyboard ordering |

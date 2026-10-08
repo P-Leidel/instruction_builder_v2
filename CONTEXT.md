@@ -1,10 +1,12 @@
 # Domain context
 
+> 📌 **Doc status: CURRENT** — glossary for the running implementation; historical canvas terms are explicitly separated below.
+
 Terms used consistently across `docs/` and `src/`, kept here so architecture
 reviews and new contributors have one place to check a name's meaning
 instead of reverse-engineering it from call sites.
 
-**Current overhaul architecture, 7 October 2026:** the editor and physical output share fixed print geometry. The [print layout contract](docs/print-layout-contract.md) defines centered pictogram anchors, disjoint reserved field zones and orthogonal row connectors; future field/UI changes must preserve those invariants. See the [centered-pictogram acceptance record](docs/phase-3/audits/2026-10-07-centered-pictograms/README.md), [print-faithful editor handoff](docs/phase-3/audits/2026-10-07-print-faithful-editor/README.md) and [overhaul implementation handoff](docs/phase-3/audits/2026-10-06-overhaul/implementation-report.md) for verification and practical release status. The [architecture remediation](docs/phase-3/progress/2026-10-07-architecture-remediation.md) retires disconnected legacy implementations and consolidates maintained browser checks under `tests/browser`. The later canvas-era sections describe retired code, rather than the running editor/output flow.
+**Current overhaul architecture, 8 October 2026:** the editor and physical output share fixed print geometry. The [print layout contract](docs/print-layout-contract.md) defines centered pictogram anchors, disjoint reserved field zones and orthogonal row connectors; future field/UI changes must preserve those invariants. See the [centered-pictogram acceptance record](docs/phase-3/audits/2026-10-07-centered-pictograms/README.md), [print-faithful editor handoff](docs/phase-3/audits/2026-10-07-print-faithful-editor/README.md) and [overhaul implementation handoff](docs/phase-3/audits/2026-10-06-overhaul/implementation-report.md) for verification and practical release status. The [architecture remediation](docs/phase-3/progress/2026-10-07-architecture-remediation.md) retires disconnected legacy implementations and consolidates maintained browser checks under `tests/browser`. The later canvas-era sections describe retired code, rather than the running editor/output flow.
 
 ## Document session
 
@@ -41,6 +43,8 @@ A **guide** is a schema-2 document with `meta.presentation` equal to `sequence` 
 
 Storage policy declares exact keys or a bounded prefix before its synchronous callback runs in one native IndexedDB transaction. Generated guide/recovery identities use insert-only `add`, while updates use `put`; results, baselines and notices advance after commit. Keyed operations avoid unrelated retained data, and listing scans only the guide prefix. Recovery import uses an exact readonly key. Preference writes merge retained local patches into the latest stored record atomically. Explicit startup retry resumes incomplete initialization without replacing a changed local draft or clearing active conflict/deletion blockers; preference retry is independent. See the [reliability remediation](docs/phase-3/progress/2026-10-07-reliability-remediation.md).
 
+Imported schema 1/2 group and picture IDs must be nonempty strings; every nonempty value, including whitespace, is retained exactly. Rejection precedes activation, and invalid stored records retain exact originals/recovery copies. See [functional remediation](docs/phase-3/progress/2026-10-08-functional-remediation.md).
+
 ## Library and picture
 
 A **library** selects canonical catalog entries for Kitchen, Daily routines/workplace or Learning/classroom. Entries share stable global IDs and original SVG artwork. Preferences select app language and default-label language independently; neither translates authored content. Product controls say **picture**; source models retain `InstructionToken`. Unknown imported pictures/warnings keep their authored meaning and named fallback. See [catalog and provenance](docs/content-libraries.md).
@@ -51,11 +55,15 @@ The **editor** renders `OutputPlan` SVG pages with identity-bearing HTML hit reg
 
 ## Contextual panel and native modal
 
+Successful user-driven navigation focuses Guide title in the editor, Back to editing in Read, or the My guides heading. Deferred entry focus checks the current view and guide and yields to an open native dialog; unrelated renders do not request it. Leaving Read retains the existing selected-picture/group focus policy.
+
 Below 768 CSS px, picker/details use one native modal sheet; desktop uses a fixed nonmodal overlay that consumes no canvas layout column. Settings, import and output use native modal containment. A desktop draft stays mounted behind the inert modal; only the top modal handles Escape. Opening output or resizing open output to mobile closes the prior contextual sheet. Closing returns focus to a surviving opener. Committed Undo/Redo/removal/reload changes reconcile attachment fields; unrelated renders and desktop/mobile remounts retain target-scoped attachment drafts. Prepared fonts survive editor/reader switches and recover after a successful retry, preserving focus and current printable geometry.
 
 ## Physical plan and captured output
 
 An **OutputPlan** is the finite millimeter display list produced by the shared physical planner, using measured Source Sans 3 glyph runs. Editor, preview and SVG/PNG/PDF consume the same pages; none rewrap or add a separate heading. Printed text uses vector outlines, with its search/copy limitation disclosed in [print fonts](docs/print-fonts.md). Session-scoped per-guide print choices feed editor and captured output; selecting all groups includes future groups, while explicit subsets remain revealable. A captured request owns a cloned document/options and generation; source edits require explicit Refresh, and close/guide switches discard pending results. JSON backup remains independent of physical selection/preflight and requires no print font/converter preparation.
+
+Unknown main-picture identity and authored label share one measured `context` caption flow in the fixed lane. PNG files replace existing density metadata with one `pHYs` chunk declaring selected 150/300 DPI (5906/11811 pixels per metre), preserving decoded pixels and every other native chunk. Pixel rounding and the 24M limit remain unchanged. See [functional remediation](docs/phase-3/progress/2026-10-08-functional-remediation.md) for implementation and verification status.
 
 ## Offline build
 

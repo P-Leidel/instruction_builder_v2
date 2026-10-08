@@ -1,5 +1,7 @@
 # Visual Instruction Builder
 
+> 📌 **Doc status: CURRENT** — project entry point; [milestones](docs/milestones.md) tracks current delivery and acceptance status.
+
 A browser-based, offline-first app for creating visual instructions, picture routines and choice boards. It serves workplace reminders across language barriers and supported learning at home or in the classroom.
 
 The overhaul adds three original pictogram libraries, English/German controls and default labels, a responsive editor, local saved guides and physical output from labels to large prints. The local technical delivery passed independent reviews and clean-install checks; [milestones](docs/milestones.md) tracks status. Practical participant, device and physical-print acceptance remains pending.
@@ -30,6 +32,7 @@ Planning and architecture docs live in [docs/](docs/):
 - [docs/milestones.md](docs/milestones.md) — the single source of truth for current phase/task status; start here.
 - [7 October architecture remediation](docs/phase-3/progress/2026-10-07-architecture-remediation.md) — delivered architecture changes, separate commits, verification and next remediation batches.
 - [7 October reliability remediation](docs/phase-3/progress/2026-10-07-reliability-remediation.md) — long-text planning, cross-tab preference merging and explicit startup recovery.
+- [8 October functional remediation](docs/phase-3/progress/2026-10-08-functional-remediation.md) — imported identities, unknown captions, PNG density and navigation focus; current combined verification status.
 - [7 October codebase health review](docs/phase-3/reviews/2026-10-07-codebase-health-review.md) — dated findings and UX decisions, with source references pinned to the reviewed snapshot.
 - [docs/project-plan.md](docs/project-plan.md) — the approved project plan (goals, stack, phased task list, risks, success criteria).
 - [2026-10-06 takeover review](docs/phase-3/audits/2026-10-06-takeover-review.md) — historical baseline UX, graphics, mobile, and reliability findings and verified minor fixes; the overhaul handoff records their resolution.

@@ -1,5 +1,7 @@
 # Local guides and recovery
 
+> 📌 **Doc status: CURRENT** — current storage, validation and recovery contract for local guides and preferences.
+
 Guides live in IndexedDB database `keyval-store`, object store `keyval`, in this browser profile and origin. They do not sync between devices. Clearing site data removes guides, preferences, and recovery copies. Portable JSON backups contain the instruction document, without local guide envelopes or preferences.
 
 | Key | Value |
@@ -11,6 +13,8 @@ Guides live in IndexedDB database `keyval-store`, object store `keyval`, in this
 | `instruction-builder:recovery:<ISO timestamp>:<UUID>` | Exact raw value copied from an unreadable or changed source |
 
 Document schema 2 and preference/migration record versions are independent. Schema 1 documents retain authored content and IDs, default to sequence, and receive the existing label-only quantity repair. Preferences never edit authored labels, guide revisions, or history.
+
+Both document schemas require nonempty group and picture ID strings. Every nonempty ID, including whitespace, is preserved exactly; validation does not rename or trim IDs. Invalid JSON file imports fail before activation and retain the current document, history, selection and clipboard. Invalid stored identities follow the exact-copy recovery rules below. A recovery copy preserves the original raw invalid record; repair a separate copy before importing. See [functional remediation](phase-3/progress/2026-10-08-functional-remediation.md).
 
 ## Transactions and startup
 

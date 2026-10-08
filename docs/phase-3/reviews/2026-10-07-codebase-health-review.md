@@ -1,6 +1,6 @@
 # Codebase health review — 7 October 2026
 
-> 📌 **Doc status: HISTORICAL** — dated assessment after the fixes below. Source references are pinned to the reviewed commit. The [architecture remediation](../progress/2026-10-07-architecture-remediation.md) and [reliability remediation](../progress/2026-10-07-reliability-remediation.md) record subsequent delivery and current open work.
+> 📌 **Doc status: HISTORICAL** — dated assessment after the fixes below. Source references are pinned to the reviewed commit. The [architecture remediation](../progress/2026-10-07-architecture-remediation.md), [reliability remediation](../progress/2026-10-07-reliability-remediation.md) and [functional remediation](../progress/2026-10-08-functional-remediation.md) record subsequent delivery and current open work.
 
 The core architecture is sound: document sessions, revision/raw-baseline conflict protection, one measured print plan, a shared renderer, and semantic reading are useful boundaries. Automated coverage is substantial. The principal debt is reliability at storage/input boundaries, retained obsolete implementations, and an authoring UI that exposes too many controls. Broad release still needs the existing device, participant and physical-print acceptance work.
 
