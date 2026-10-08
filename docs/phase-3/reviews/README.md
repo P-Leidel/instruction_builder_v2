@@ -8,6 +8,13 @@ Dated code-review reports produced during Phase 3, mirroring
 [phase-2/reviews/](../../phase-2/reviews/README.md)'s own folder. One file
 per run (`YYYY-MM-DD-code-review.md`).
 
+- [8 October 2026 architecture batches final reviews](./2026-10-08-architecture-batches-review.md)
+  archive the whole-range review of `78e42be..5aa90b8` and scoped test-only
+  re-review of `5aa90b8..7c62dcc`. Both approve the delivery; the two nonblocking
+  test-quality suggestions are addressed, with no new breakage or actionable
+  finding. Product code ends at `be04807`; full integration and affected post-fix
+  checks pass. Practical/UX acceptance and remote integration remain open.
+
 - [8 October 2026 architecture review](../audits/2026-10-08-architecture-review.html)
   was produced with the `mattpocock-skills:improve-codebase-architecture`
   skill against commit `5fc8104`. It proposes nine deepening candidates
@@ -19,7 +26,7 @@ per run (`YYYY-MM-DD-code-review.md`).
   and singleton aliases, and records the batches proposed at that checkpoint.
   The subsequent [three-batch delivery](../progress/2026-10-08-architecture-batches.md)
   records five independently approved local commits and passing final integration
-  gates; broad whole-range review is pending. The initial verification is now
+  gates and approved final reviews with no actionable findings. The initial verification is now
   a superseded snapshot, with its findings and gate evidence preserved.
 
 - [7 October 2026 codebase health review](./2026-10-07-codebase-health-review.md)

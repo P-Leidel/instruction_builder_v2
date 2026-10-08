@@ -43,8 +43,12 @@ retiring the unused legacy writer and singleton aliases. The subsequent
 deliver commands/drop, presentation/projection, storage, guide files and shell in
 five independently approved local commits through `be04807`. Final 682 unit tests /
 41 files, 7 tooling tests, typecheck/lint/build, complete 22-driver browser and
-production cold/update PWA gates pass. Broad whole-range review is pending;
-no push, merge or deployment occurred. Phase 3 task status is unchanged.
+production cold/update PWA gates pass. Whole-range and scoped test-only fix
+[reviews](./phase-3/reviews/2026-10-08-architecture-batches-review.md) approve the
+delivery with no actionable findings. Both minor suggestions are addressed in
+`7c62dcc`; affected 27 units/typecheck/lint and native/memory contracts pass.
+Product code remains at `be04807`. No push, merge or deployment occurred;
+Phase 3 task status is unchanged.
 Participant, actual-print, real-device and screen-reader acceptance remain pending;
 Phase 3 is not complete.
 

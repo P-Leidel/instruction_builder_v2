@@ -90,5 +90,5 @@
 ## Final integration
 
 - [x] Hold product source stable; run full units, tooling, lint, production build, complete browser gate and production cold/update PWA gate.
-- [ ] Request one broad whole-range review from `78e42be` to completed HEAD; fix actionable issues and rerun affected gates.
-- [ ] Update verification/delivery/current docs with exact final behavior, commits, counts, rulings and remaining release limits. Save all local work and leave the managed worktree intact.
+- [x] Request one broad whole-range review from `78e42be` to completed HEAD; fix actionable issues and rerun affected gates.
+- [x] Update verification/delivery/current docs with exact final behavior, commits, counts, rulings and remaining release limits. Save all local work and leave the managed worktree intact.

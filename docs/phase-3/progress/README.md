@@ -4,7 +4,10 @@ Latest work: [8 October architecture batches](./2026-10-08-architecture-batches.
 deliver command/drop, presentation/projection, storage, guide files and shell in
 five independently approved local commits through `be04807`. Final 682 unit tests /
 41 files, 7 tooling tests, typecheck/lint/build, complete 22-driver browser and
-production cold/update PWA gates pass. Broad whole-range review remains pending.
+production cold/update PWA gates pass. [Final reviews](../reviews/2026-10-08-architecture-batches-review.md)
+approve the whole range and test-only follow-up with no actionable findings;
+both minor suggestions are addressed in `7c62dcc`. Affected 27 units/type/lint and
+native/memory contracts pass; product code remains at `be04807`.
 No push, merge or deployment occurred; Phase 3 and practical/UX acceptance remain open.
 
 The prior [8 October P3 remediation](./2026-10-08-p3-remediation.md) implements

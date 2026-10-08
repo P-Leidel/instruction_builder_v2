@@ -17,9 +17,12 @@ retires the unused legacy writer and singleton aliases. The subsequent
 [three architecture batches](./phase-3/progress/2026-10-08-architecture-batches.md)
 deliver command/drop, presentation/projection, storage, guide-file and shell
 consolidation in five independently approved local commits. Final unit/tooling,
-typecheck/lint/build, complete browser and production PWA gates pass; broad
-whole-range review and two nonblocking test-precision observations await final
-triage. No product defect was identified by those observations. The delivered
+typecheck/lint/build, complete browser and production PWA gates pass. The
+[whole-range and scoped reviews](./phase-3/reviews/2026-10-08-architecture-batches-review.md)
+approve the delivery with no actionable findings; both test-quality suggestions
+were addressed in test-only `7c62dcc`, with affected unit/type/lint/native checks
+passing and unchanged product code at `be04807`. Informational tooling notes were
+dismissed as code findings. The delivered
 functional fixes below remain in place; remote integration and pending UX/practical
 acceptance are unchanged.
 

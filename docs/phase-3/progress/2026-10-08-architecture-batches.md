@@ -1,6 +1,6 @@
 # Architecture remediation batches — 8 October 2026
 
-> 📌 **Doc status: CURRENT** — delivery record for the three authorized architecture batches. All five implementation tasks have independent specification/quality approval and final integration gates pass at `be04807`; broad whole-range review is pending.
+> 📌 **Doc status: CURRENT** — completed local delivery record for the three authorized architecture batches. All five task reviews, whole-range review and scoped test-only fix review approve the work; no actionable findings remain. Final full integration gates pass at product commit `be04807`, with post-review test-only checks passing at `7c62dcc`.
 
 The [initial architecture verification](../reviews/2026-10-08-architecture-verification.md) qualified nine review candidates and retired the unused legacy writer and singleton aliases in `78e42be`. The user then authorized all three follow-up batches. The [design](../../superpowers/specs/2026-10-08-architecture-batches-design.md) and [implementation plan](../../superpowers/plans/2026-10-08-architecture-batches.md) define their scope; planning commit `1eabd92` precedes the five product commits below.
 
@@ -39,11 +39,15 @@ Root ran the final gates with product source stable at `be04807`; the documentat
 | Storage and retained native checks | Shared contract **12 each** for native/memory; retained native 11, preferences 5, startup retry 5, import 9, export/backup 57, reader 24 and Copy 100 passed |
 | `npm run test:pwa` | **49 cold-offline checks / four formats passed**; old/new waiting-worker activation and actual first-use PDF from both offline clients passed |
 | Independent task specification/quality reviews | **All five approved**, no critical/important issue |
-| Broad independent review, `78e42be` through completed delivery | **Pending**; no whole-range verdict is claimed yet |
+| Broad independent review, `78e42be..5aa90b8` | **Approved**, no Critical/Important issue; two nonblocking test-quality suggestions subsequently addressed |
+| Test-only fix `7c62dcc` and scoped review, `5aa90b8..7c62dcc` | **Both findings ADDRESSED**, approved; no new breakage or actionable finding |
+| Post-review covering checks | **27 tests / 2 files**, typecheck, lint and whitespace checks passed; native/memory shared contracts **12 each** plus retained native **11** passed |
 
 Each task recorded failing-before/passing-after evidence, full retained units and targeted native checks before its independent review. Unit checkpoints progressed from 590/37 to 632/40, 658/41, 668/39 and final 682/41. These counts reflect moved/retired exclusive interfaces as well as new tests; earlier gate counts remain dated checkpoints. Composition coverage includes continued/self anchors, deep clipboard independence, role/whitespace/unknown naming, exact print regions, request-time clone isolation and rollback, real JSON bytes/migration failures, duplicate submission, failed drafts, startup identity and stale focus.
 
-Detailed implementer/reviewer records and coordination history are local under `.superpowers/sdd/2026-10-08-architecture-batches/`. This durable record carries their outcomes and rulings so current status does not depend on that working ledger. Native IndexedDB, modal/focus and production offline gates remain authoritative for browser behavior; no simulated component DOM environment was introduced. Chromium verification does not establish practical release acceptance.
+The [durable final review archive](../reviews/2026-10-08-architecture-batches-review.md) preserves the complete whole-range verdict and scoped fix re-review. Both test-quality suggestions were fixed in `7c62dcc`, changing only `storage-contract.ts` and `app-shell.test.ts`; production code remains at `be04807`. Post-review verification ran the affected 27 units, typecheck/lint/whitespace checks and native/memory contracts. The source-stable full integration results above remain valid for unchanged product code; no later full-suite rerun is implied.
+
+Temporary implementer/reviewer reports and coordination history used `.superpowers/sdd/2026-10-08-architecture-batches/`, which is removed at closeout. This delivery record and the linked review archive preserve their outcomes and rulings without depending on that scratch workspace. Native IndexedDB, modal/focus and production offline gates remain authoritative for browser behavior; no simulated component DOM environment was introduced. Chromium verification does not establish practical release acceptance.
 
 ## Review rulings and preservation costs
 
@@ -63,7 +67,20 @@ The preflight review approved these boundaries. The ledger's coordination ruling
 | Task 3 moves recovered lookup; Task 5 extracts bootstrap only afterward. | Reordering recovery and flush can overwrite failed drafts; shell extraction must not duplicate repository policy. |
 | Task 5 consumes Task 4's document-only pending import and typed file results. | Retained compatibility fields would perpetuate dead interfaces and muddle duplicate/dismissal behavior. |
 
-Two nonblocking test-precision observations await broad-review triage: shared storage-contract JSON array equality conflates `undefined` and `null`; one shell test's local modal assignments do not exercise actual component dismissal. Neither identified a product defect. Native storage assertions and the complete modal/browser gate remain retained. Vitest's informational transform-cache suggestion and Git's line-ending advisory are tooling notes, with passing required gates. These observations are not counted as resolved until final review decides them.
+The whole-range review confirmed two nonblocking test-quality suggestions: make present/missing/rollback `undefined` assertions exact, and remove local modal assignments that could not exercise component dismissal. Commit `7c62dcc` adds direct `=== undefined` checks while retaining presence/rollback assertions, and replaces the self-fulfilling shell assertions with actual action-result/lock/view checks. Scoped re-review marks both ADDRESSED, with no new breakage. Neither was a product defect; no actionable findings remain. Vitest's transform-cache suggestion and Git's line-ending advisories were dismissed as informational code-review notes.
+
+The final review also declined to judge eight existing scope/release matters. These ledger rulings preserve the authorized boundary and do not settle the pending work:
+
+| Final-review ledger ruling | Reason | Cost if wrong |
+| --- | --- | --- |
+| Preserve deferred automatic detail saving/output-control changes. | Outside authorized architecture scope; current behavior is binding. | Those desired UX improvements remain pending. |
+| Preserve deferred mobile/panel/list redesign choices. | Existing UX decisions outside these batches. | Practical usability work remains to implement. |
+| Leave participant acceptance open. | Technical refactoring cannot establish comprehension. | Release needs participant evidence. |
+| Leave real-device/AT/physical-print acceptance open. | Chromium checks cannot prove those outcomes. | Release needs platform/print evidence. |
+| Leave artwork licensing open. | No artwork/right changes in scope. | Distribution acceptance remains pending. |
+| Preserve existing teardown durability/sync/broadcast limits. | Native algorithm deliberately unchanged. | Storage product expectations require separate work. |
+| Accept recorded RED/GREEN chronology with explicit static-review limit. | Uncommitted historical sequence cannot be independently replayed from final diff. | Chronology evidence is reports, while current runtime verification remains direct. |
+| Keep local-only delivery. | No remote integration/deployment requested. | Integration requires later authorized work. |
 
 ## Remaining product and release work
 
