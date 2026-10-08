@@ -12,7 +12,7 @@ export async function boot(browser, url, errors, viewport = { width: 1440, heigh
   }
   await page.goto(url); await page.locator(".app-brand").waitFor(); return { page, context };
 }
-export async function createBlank(page, presentation = "sequence") { await page.getByRole("button", { name: "New guide", exact: true }).click(); await page.getByLabel("Guide type").selectOption(presentation); await page.getByRole("button", { name: "Start blank", exact: true }).click(); await page.getByLabel("Guide title", { exact: true }).waitFor(); }
+export async function createBlank(page, presentation = "sequence") { await page.getByRole("button", { name: "New guide", exact: true }).click(); await page.getByLabel("Guide type").selectOption(presentation); await page.getByRole("button", { name: "Start blank", exact: true }).click(); await page.getByLabel("Guide title", { exact: true }).waitFor(); await page.waitForFunction(() => document.activeElement === document.querySelector(".guide-title input")); }
 export async function insert(page, name, group = 0) { await page.locator("[data-add-picture]").nth(group).click(); await page.getByRole("searchbox", { name: "Search pictures", exact: true }).fill(name); await page.locator(".token-picker").getByRole("button", { name, exact: true }).click(); await page.waitForFunction(() => !document.querySelector(".token-picker")); }
 export async function openActions(page) {
   const summary = page.locator(".editor-actions > summary"); await summary.waitFor();
