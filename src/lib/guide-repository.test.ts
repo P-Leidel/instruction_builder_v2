@@ -1,31 +1,16 @@
+import { createMemoryStorage } from "../test/memory-storage";
+import type { StorageStore } from "./storage";
 import { describe, it, expect } from "vitest";
 import { createEmptyDocument } from "../model/instruction";
-import { createGuideRepository, GUIDE_PREFIX, LEGACY_KEY, MIGRATION_KEY, type GuideStore } from "./guide-repository";
+import { createGuideRepository, GUIDE_PREFIX, LEGACY_KEY, MIGRATION_KEY } from "./guide-repository";
 
 function memoryStore(seed: Map<string, unknown> = new Map()) {
-  let tail = Promise.resolve();
   const state = { records: seed, failRecovery: false, failCommit: false, pause: undefined as Promise<void> | undefined };
-  const store: GuideStore = { transaction: (plan, operation) => {
-    const next = tail.then(async () => {
-      await state.pause;
-      const draft = structuredClone(state.records);
-      const declared = (key: string) => plan.keys?.includes(key) || (plan.prefix !== undefined && key.startsWith(plan.prefix));
-      const put = (key: string, entry: unknown) => {
-        if (plan.mode === "readonly") throw new Error("readonly");
-        if (state.failRecovery && key.startsWith("instruction-builder:recovery:")) throw new Error("backup failed");
-        draft.set(key, structuredClone(entry));
-      };
-      const value = operation({ get: (key) => { if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
-        entries: () => { if (plan.prefix === undefined && !plan.keys?.length) throw new Error("undeclared entries"); return [...draft].filter(([key]) => declared(key)); },
-        put, add: (key, entry) => { if (draft.has(key)) throw new Error("insert collision"); put(key, entry); } });
-      if (state.failCommit) throw new Error("quota exceeded");
-      state.records.clear();
-      for (const [key, entry] of draft) state.records.set(key, entry);
-      return value;
-    });
-    tail = next.then(() => undefined, () => undefined);
-    return next;
-  } };
+  const { store } = createMemoryStorage({ records: seed,
+    beforeTransaction: () => state.pause,
+    beforeWrite: (_kind, key) => { if (state.failRecovery && key.startsWith("instruction-builder:recovery:")) throw new Error("backup failed"); },
+    beforeCommit: () => { if (state.failCommit) throw new Error("quota exceeded"); },
+  });
   return { state, store };
 }
 
@@ -33,6 +18,47 @@ function legacy() {
   return { schemaVersion: 1, meta: { title: "Old guide", domain: "recipe", createdAt: "2026-10-06T00:00:00Z" },
     steps: [{ id: "step", tokens: [{ id: "token", iconId: "onion", category: "object", quantity: { iconId: "quantity", label: "3 kg" } }] }] };
 }
+
+describe("recovered document lookup", () => {
+  it.each(["document", "envelope"] as const)("validates a recovered %s in a readonly lookup without startup migration", async (kind) => {
+    const doc = createEmptyDocument("board"); doc.meta.title = "Recovered";
+    const key = "instruction-builder:recovery:fixture";
+    const raw = kind === "document" ? doc : { document: doc, future: { retained: true } };
+    const seed = new Map<string, unknown>([[key, raw], [LEGACY_KEY, legacy()]]);
+    const data = memoryStore(seed); const plans: unknown[] = [];
+    const store: StorageStore = { transaction: (plan, operation) => {
+      plans.push(plan); if (plan.mode !== "readonly") throw new Error("Recovery lookup must be readonly");
+      return data.store.transaction(plan, operation);
+    } };
+    const repository = createGuideRepository({ store });
+    expect(typeof repository.loadRecoveredDocument).toBe("function");
+    expect(await repository.loadRecoveredDocument(key)).toEqual(doc);
+    expect(plans).toEqual([{ keys: [key], mode: "readonly" }]);
+    expect([...seed]).toEqual([[key, raw], [LEGACY_KEY, legacy()]]);
+  });
+  it("returns undefined for foreign and missing keys without changing sources", async () => {
+    const data = memoryStore(new Map([[LEGACY_KEY, legacy()]])); const repository = createGuideRepository({ store: data.store });
+    expect(typeof repository.loadRecoveredDocument).toBe("function");
+    expect(await repository.loadRecoveredDocument(LEGACY_KEY)).toBeUndefined();
+    expect(await repository.loadRecoveredDocument("instruction-builder:recovery:missing")).toBeUndefined();
+    expect([...data.state.records]).toEqual([[LEGACY_KEY, legacy()]]);
+  });
+  it.each(["schema", "step", "token"] as const)("rejects an invalid recovered %s without writing or initializing", async (kind) => {
+    const raw = legacy();
+    if (kind === "schema") raw.schemaVersion = 99;
+    else if (kind === "step") raw.steps[0].id = ""; else raw.steps[0].tokens[0].id = "";
+    const key = "instruction-builder:recovery:invalid"; const original = structuredClone(raw);
+    const data = memoryStore(new Map([[key, raw]])); const repository = createGuideRepository({ store: data.store });
+    expect(typeof repository.loadRecoveredDocument).toBe("function");
+    await expect(repository.loadRecoveredDocument(key)).rejects.toThrow();
+    expect([...data.state.records]).toEqual([[key, original]]);
+  });
+  it("propagates unavailable readonly storage", async () => {
+    const repository = createGuideRepository({ store: { transaction: () => Promise.reject(new Error("read unavailable")) } });
+    expect(typeof repository.loadRecoveredDocument).toBe("function");
+    await expect(repository.loadRecoveredDocument("instruction-builder:recovery:fixture")).rejects.toThrow("read unavailable");
+  });
+});
 
 describe("local guide transactions", () => {
   it.each(["step", "token"] as const)("backs up an empty %s identity in legacy data exactly before allowing creation", async (kind) => {

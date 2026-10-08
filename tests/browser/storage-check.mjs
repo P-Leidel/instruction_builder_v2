@@ -16,11 +16,17 @@ try {
   await page.route(url, route => route.fulfill({ contentType: "text/html", body: "<!doctype html><title>Native storage checks</title>" }));
   await page.goto(url);
   const checks = await page.evaluate(async () => {
-    const { createIndexedDbGuideStore, createGuideRepository, GUIDE_PREFIX, LEGACY_KEY, MIGRATION_KEY } = await import("/src/lib/guide-repository.ts");
+    const { createGuideRepository, GUIDE_PREFIX, LEGACY_KEY, MIGRATION_KEY } = await import("/src/lib/guide-repository.ts");
+    const { createIndexedDbStorage } = await import("/src/lib/storage.ts");
+    const { createMemoryStorage } = await import("/src/test/memory-storage.ts");
+    const { runStorageContract } = await import("/src/test/storage-contract.ts");
     const { createEmptyDocument } = await import("/src/model/instruction.ts");
     const { createPreferencesController, PREFERENCES_KEY } = await import("/src/state/preferences.ts");
-    const store = createIndexedDbGuideStore();
+    const store = createIndexedDbStorage();
     const results = {};
+    for (const [adapter, factory] of [["NATIVE", createIndexedDbStorage], ["MEMORY", () => createMemoryStorage().store]]) {
+      for (const [name, result] of Object.entries(await runStorageContract(factory))) results[`${adapter}_CONTRACT: ${name}`] = result;
+    }
     const check = async (name, operation) => { try { await operation(); results[name] = true; } catch (error) { results[name] = String(error); } };
     const equal = (actual, expected) => { if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error(`Expected ${JSON.stringify(expected)}, received ${JSON.stringify(actual)}`); };
     await check("DECLARED_KEY_READS_AND_NO_FULL_STORE_SCANS", async () => {

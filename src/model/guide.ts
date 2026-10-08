@@ -22,6 +22,7 @@ export type GuideWriteResult =
   | { ok: false; reason: "conflict" | "unavailable" | "deleted" };
 
 export interface GuideRepository {
+  loadRecoveredDocument(key: string): Promise<InstructionDocument | undefined>;
   list(): Promise<readonly GuideSummary[]>;
   load(id: string): Promise<GuideRecord | undefined>;
   create(doc: InstructionDocument): Promise<GuideWriteResult>;

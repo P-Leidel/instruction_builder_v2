@@ -80,8 +80,8 @@ try {
       const title = page.getByLabel("Guide title", { exact: true }); await title.waitFor();
       await title.fill(`Saved after ${fault} retry`);
       await page.waitForFunction(async ({ key, title }) => {
-        const { createIndexedDbGuideStore } = await import("/src/lib/guide-repository.ts");
-        return (await createIndexedDbGuideStore().transaction({ keys: [key], mode: "readonly" }, tx => tx.get(key)))?.document.meta.title === title;
+        const { createIndexedDbStorage } = await import("/src/lib/storage.ts");
+        return (await createIndexedDbStorage().transaction({ keys: [key], mode: "readonly" }, tx => tx.get(key)))?.document.meta.title === title;
       }, { key: guideKey, title: `Saved after ${fault} retry` });
       assert.equal((await records(page)).filter(([key]) => key.startsWith("instruction-builder:guide:")).length, 1);
       noReload(); console.log(`STARTUP_${fault.toUpperCase().replaceAll("-", "_")}_RETRY_AND_AUTOSAVE=PASS`);

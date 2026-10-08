@@ -49,7 +49,7 @@ try {
   // Failed raw backup aborts initialization and prevents creation, keeping exportable draft explicit.
   const { page: fail, context: failContext } = await boot(browser, url, errors);
   try {
-    await fail.evaluate(async (raw) => { const { createIndexedDbGuideStore, LEGACY_KEY } = await import("/src/lib/guide-repository.ts"); await createIndexedDbGuideStore().transaction({}, (tx) => tx.put(LEGACY_KEY, raw)); }, future);
+    await fail.evaluate(async (raw) => { const { LEGACY_KEY } = await import("/src/lib/guide-repository.ts"); const { createIndexedDbStorage } = await import("/src/lib/storage.ts"); await createIndexedDbStorage().transaction({}, (tx) => tx.put(LEGACY_KEY, raw)); }, future);
     await fail.addInitScript(() => { const add = IDBObjectStore.prototype.add; IDBObjectStore.prototype.add = function (value, key) { if (String(key).startsWith("instruction-builder:recovery:")) throw new DOMException("Injected backup quota", "QuotaExceededError"); return add.call(this, value, key); }; });
     await fail.reload(); await fail.locator(".save-status--unavailable").waitFor(); await fail.getByRole("button", { name: "New guide", exact: true }).click(); await fail.getByRole("button", { name: "Start blank", exact: true }).click(); await fail.getByRole("button", { name: "Close", exact: true }).last().click(); await fail.getByRole("button", { name: "Download new draft JSON", exact: true }).waitFor();
     const draft = await downloadJson(fail, fail.getByRole("button", { name: "Download new draft JSON", exact: true })); assert.equal(draft.schemaVersion, 2); assert.deepEqual(await value(fail, legacyKey), future); assert.equal((await records(fail)).filter(([key]) => key.startsWith(guidePrefix)).length, 0);

@@ -1,10 +1,10 @@
 import { signal } from "@preact/signals";
 import type { AppPreferences } from "../model/preferences";
-import { createIndexedDbGuideStore, rawFingerprint, type GuideStore, type GuideTransaction } from "../lib/guide-repository";
+import { createIndexedDbStorage, rawFingerprint, copyRecovery, type StorageStore, type StorageTransaction } from "../lib/storage";
 
 export const PREFERENCES_KEY = "instruction-builder:preferences:v1";
 export type PreferenceSaveState = "loading" | "saved" | "pending" | "saving" | "unavailable";
-export interface PreferencesOptions { store?: GuideStore; languages?: readonly string[]; now?: () => string; newId?: () => string }
+export interface PreferencesOptions { store?: StorageStore; languages?: readonly string[]; now?: () => string; newId?: () => string }
 function object(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -16,7 +16,7 @@ function validated(value: unknown): AppPreferences {
     ...(typeof fields.lastGuideId === "string" && fields.lastGuideId.length > 0 ? { lastGuideId: fields.lastGuideId } : {}) };
 }
 export function createPreferencesController(options: PreferencesOptions = {}) {
-  const store = options.store ?? createIndexedDbGuideStore();
+  const store = options.store ?? createIndexedDbStorage();
   const languages = options.languages ?? (typeof navigator === "undefined" ? [] : navigator.languages);
   const locale = languages[0]?.toLowerCase().split("-")[0] === "de" ? "de" : "en";
   const preferences = signal<AppPreferences>({ uiLocale: locale, labelLocale: locale, activeLibraryId: "kitchen", theme: "light" });
@@ -29,7 +29,7 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
   let pendingPatch: Partial<AppPreferences> = {};
   let pendingSave = false;
   const recovered = new Set<string>();
-  function readPreferences(transaction: GuideTransaction): { value: AppPreferences; recoveryFingerprint?: string } {
+  function readPreferences(transaction: StorageTransaction): { value: AppPreferences; recoveryFingerprint?: string } {
     const raw = transaction.get(PREFERENCES_KEY);
     if (raw === undefined && !transaction.entries().some(([key]) => key === PREFERENCES_KEY)) return { value: intent };
     const value = object(raw) && raw.version === 1 ? raw.preferences : undefined;
@@ -41,8 +41,7 @@ export function createPreferencesController(options: PreferencesOptions = {}) {
     if (rawFingerprint(envelope) !== rawFingerprint({ version: 1, preferences: clean })) {
       const recoveryFingerprint = rawFingerprint(raw);
       if (!recovered.has(recoveryFingerprint)) {
-        const key = `instruction-builder:recovery:${options.now?.() ?? new Date().toISOString()}:${options.newId?.() ?? crypto.randomUUID()}`;
-        transaction.add(key, raw);
+        copyRecovery(transaction, raw, { now: options.now ?? (() => new Date().toISOString()), newId: options.newId ?? (() => crypto.randomUUID()) });
       }
       return { value: clean, recoveryFingerprint };
     }

@@ -1,30 +1,19 @@
+import { createMemoryStorage } from "../test/memory-storage";
 import { createAuthoringController } from "./authoring";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createGuideController } from "./guides";
 import { createPreferencesController, PREFERENCES_KEY } from "./preferences";
-import { createGuideRepository, GUIDE_PREFIX, LEGACY_KEY, type GuideStore } from "../lib/guide-repository";
+import { createGuideRepository, GUIDE_PREFIX, LEGACY_KEY } from "../lib/guide-repository";
 import { createDocumentSession, sessionActions } from "./document";
 import { createEmptyDocument } from "../model/instruction";
 import type { GuideRecord, GuideRepository } from "../model/guide";
 
 function storage() {
-  const records = new Map<string, unknown>(); let tail = Promise.resolve();
   const state = { fail: false, failPreferences: false };
-  const store: GuideStore = { transaction: (plan, operation) => {
-    const promise = tail.then(() => {
-      const draft = structuredClone(records);
-      const declared = (key: string) => plan.keys?.includes(key) || (plan.prefix !== undefined && key.startsWith(plan.prefix));
-      const put = (key: string, value: unknown) => {
-        if (plan.mode === "readonly") throw new Error("readonly");
-        if (state.failPreferences && key === PREFERENCES_KEY) throw new Error("preference quota");
-        draft.set(key, structuredClone(value));
-      };
-      const result = operation({ get: (key) => { if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
-        entries: () => { if (plan.prefix === undefined && !plan.keys?.length) throw new Error("undeclared entries"); return [...draft].filter(([key]) => declared(key)); },
-        put, add: (key, value) => { if (draft.has(key)) throw new Error("insert collision"); put(key, value); } });
-      if (state.fail) throw new Error("quota"); records.clear(); for (const [key, value] of draft) records.set(key, value); return result;
-    }); tail = promise.then(() => undefined, () => undefined); return promise;
-  } };
+  const { records, store } = createMemoryStorage({
+    beforeWrite: (_kind, key) => { if (state.failPreferences && key === PREFERENCES_KEY) throw new Error("preference quota"); },
+    beforeCommit: () => { if (state.fail) throw new Error("quota"); },
+  });
   return { records, store, state };
 }
 const cleanup: (() => void)[] = [];
@@ -448,5 +437,36 @@ describe("local guide controller", () => {
     await store.transaction({}, (tx) => tx.put(key, { schemaVersion: 999 })); const draft = session.document.value;
     expect((await controller.importRecoveredGuide(key)).ok).toBe(false); expect(session.document.value).toBe(draft);
     expect((await controller.importRecoveredGuide(LEGACY_KEY)).ok).toBe(false);
+  });
+
+  it.each(["foreign", "missing", "invalid", "unavailable"] as const)("recovered %s lookup leaves the prior failed draft untouched and never flushes", async (kind) => {
+    let saves = 0;
+    const { controller, session, store, state } = await fixture({ wrap: (repository) => ({ ...repository,
+      save: (...args) => { saves++; return repository.save(...args); },
+    }) });
+    const key = "instruction-builder:recovery:invalid";
+    await store.transaction({}, tx => tx.put(key, { schemaVersion: 99 }));
+    const failed = createEmptyDocument(); failed.meta.title = "Earlier failed draft";
+    controller.failedNewGuide.value = failed;
+    sessionActions.updateTitle(session, "Pending local edit");
+    const local = session.document.peek(); const before = saves;
+    if (kind === "unavailable") state.fail = true;
+    const result = await controller.importRecoveredGuide(kind === "foreign" ? LEGACY_KEY : kind === "missing" ? key + "missing" : key);
+    expect(result.ok).toBe(false); expect(saves).toBe(before);
+    expect(controller.failedNewGuide.peek()).toBe(failed); expect(session.document.peek()).toBe(local);
+  });
+
+  it("retains validated recovered content when the subsequent active-guide flush fails", async () => {
+    const { controller, session, store, records } = await fixture({ wrap: repository => ({ ...repository,
+      save: () => Promise.resolve({ ok: false, reason: "unavailable" }),
+    }) });
+    const recovered = createEmptyDocument("board"); recovered.meta.title = "Recovered candidate";
+    const key = "instruction-builder:recovery:valid"; await store.transaction({}, tx => tx.put(key, { document: recovered, future: "retained" }));
+    sessionActions.updateTitle(session, "Keep pending local edit"); const local = session.document.peek();
+    expect(await controller.importRecoveredGuide(key)).toEqual({ ok: false, reason: "unavailable" });
+    expect(controller.failedNewGuide.peek()).toEqual(recovered);
+    expect(session.document.peek()).toBe(local); expect(controller.activeGuideId.peek()).toBe(records[0].id);
+    expect(controller.guideSummaries.peek()).toHaveLength(2);
+    expect(await store.transaction({ keys: [key], mode: "readonly" }, tx => tx.get(key))).toEqual({ document: recovered, future: "retained" });
   });
 });

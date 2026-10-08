@@ -27,9 +27,9 @@ try {
     await page.route(url, route => route.fulfill({ contentType: "text/html", body: "<!doctype html><title>Preference merge checks</title>" }));
     await page.goto(url);
     await page.evaluate(async () => {
-      const { createIndexedDbGuideStore } = await import("/src/lib/guide-repository.ts");
+      const { createIndexedDbStorage } = await import("/src/lib/storage.ts");
       const { createPreferencesController, PREFERENCES_KEY } = await import("/src/state/preferences.ts");
-      const store = createIndexedDbGuideStore();
+      const store = createIndexedDbStorage();
       const controller = createPreferencesController({ store, languages: ["en"] });
       await controller.initializePreferences();
       window.preferenceHarness = { store, controller, key: PREFERENCES_KEY };

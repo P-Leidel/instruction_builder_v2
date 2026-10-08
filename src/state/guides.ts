@@ -2,7 +2,8 @@ import { signal, effect, batch } from "@preact/signals";
 import type { GuideRecord, GuideRepository, GuideSummary, GuideWriteResult } from "../model/guide";
 import type { InstructionDocument } from "../model/instruction";
 import { openDocumentInSession, type DocumentSession } from "./document";
-import { createGuideRepository, createIndexedDbGuideStore, type GuideStore, type GuideNotice } from "../lib/guide-repository";
+import { createGuideRepository, type GuideNotice } from "../lib/guide-repository";
+import { createIndexedDbStorage, type StorageStore } from "../lib/storage";
 import { createPreferencesController, preferences, initializePreferences, retryPreferences, updatePreferences, preferenceSaveState, type PreferencesController } from "./preferences";
 import { migrate } from "../model/migrate";
 import { t } from "../i18n/messages";
@@ -10,10 +11,10 @@ export type { GuideNotice } from "../lib/guide-repository";
 export type SaveState = "loading" | "saved" | "pending" | "saving" | "unavailable" | "conflict";
 export type GuideActionResult = { ok: true; guideId?: string } | { ok: false; reason: "conflict" | "unavailable" | "deleted" | "not-found" | "cancelled" };
 type GuidePreferencesController = Pick<PreferencesController, "preferences" | "preferenceSaveState" | "initializePreferences" | "updatePreferences"> & { retryPreferences?: () => Promise<void> };
-export interface GuideControllerOptions { repository?: GuideRepository; store?: GuideStore; preferenceController?: GuidePreferencesController; signals?: ReturnType<typeof createGuideControllerSignals> }
+export interface GuideControllerOptions { repository?: GuideRepository; store?: StorageStore; preferenceController?: GuidePreferencesController; signals?: ReturnType<typeof createGuideControllerSignals> }
 export function createGuideController(session: DocumentSession, options: GuideControllerOptions = {}) {
   const { activeGuideId, guideSummaries, saveState, failedNewGuide, guideNotices, lastDeletedGuide, startupStorageUnavailable } = options.signals ?? createGuideControllerSignals();
-  const store = options.store ?? createIndexedDbGuideStore();
+  const store = options.store ?? createIndexedDbStorage();
   const repository = options.repository ?? createGuideRepository({ store, onNotice: (notice) => { guideNotices.value = [...guideNotices.peek(), notice]; } });
   const pref: GuidePreferencesController = options.preferenceController ?? createPreferencesController({ store });
   let baseline: GuideRecord | undefined; let cleanDocument = session.document.peek();
@@ -214,13 +215,9 @@ export function createGuideController(session: DocumentSession, options: GuideCo
       updateSummary(result.record); return { ok: true, guideId: id };
     }),
     importRecoveredGuide: (key: string) => serialize(async () => {
-      if (!key.startsWith("instruction-builder:recovery:")) return { ok: false, reason: "not-found" };
-      const raw = await store.transaction({ keys: [key], mode: "readonly" }, (transaction) => transaction.get(key));
-      if (raw === undefined) return { ok: false, reason: "not-found" };
-      try {
-        const doc = typeof raw === "object" && raw !== null && "document" in raw ? raw.document : raw;
-        return await create(migrate(doc));
-      } catch { return { ok: false, reason: "unavailable" }; }
+      const candidate = await repository.loadRecoveredDocument(key);
+      if (candidate === undefined) return { ok: false, reason: "not-found" };
+      return create(candidate);
     }),
     dispose: () => {
       disposed = true; clearTimer(); disposeObserver?.();

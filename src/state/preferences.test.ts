@@ -1,28 +1,26 @@
+import { createMemoryStorage } from "../test/memory-storage";
 import { effect } from "@preact/signals";
 import { describe, expect, it } from "vitest";
 import { createPreferencesController, PREFERENCES_KEY } from "./preferences";
-import type { GuideStore } from "../lib/guide-repository";
+import type { StorageStore } from "../lib/storage";
 
 function storage(seed?: unknown) {
   const records = new Map<string, unknown>(); if (seed !== undefined) records.set(PREFERENCES_KEY, seed);
   const state = { fail: false, failures: 0, failBackup: false, failRead: false, pause: undefined as Promise<void> | undefined, onStart: undefined as (() => void) | undefined };
-  let tail = Promise.resolve();
-  const store: GuideStore = { transaction: (plan, operation) => {
-    const pause = state.pause;
-    const pending = tail.then(async () => {
-    state.onStart?.();
-    await pause; const draft = structuredClone(records);
-    const declared = (key: string) => plan.keys?.includes(key) || (plan.prefix !== undefined && key.startsWith(plan.prefix));
-    const put = (key: string, value: unknown) => { if (plan.mode === "readonly") throw new Error("readonly"); draft.set(key, structuredClone(value)); };
-    const result = operation({ get: (key) => { if (state.failRead) throw new Error("read unavailable"); if (!declared(key)) throw new Error("undeclared read"); return draft.get(key); },
-      entries: () => { if (plan.prefix === undefined && !plan.keys?.length) throw new Error("undeclared entries"); return [...draft].filter(([key]) => declared(key)); },
-      put, add: (key, value) => { if (state.failBackup) throw new Error("backup unavailable"); if (draft.has(key)) throw new Error("insert collision"); put(key, value); } });
-    if (state.fail) throw new Error("quota");
-    if (state.failures > 0) { state.failures--; throw new Error("quota"); }
-    records.clear(); for (const [key, value] of draft) records.set(key, value); return result;
-    });
-    tail = pending.then(() => undefined, () => undefined);
-    return pending;
+  const pauses: (Promise<void> | undefined)[] = [];
+  const data = createMemoryStorage({ records,
+    beforeTransaction: () => { state.onStart?.(); return pauses.shift(); },
+    beforeGet: () => { if (state.failRead) throw new Error("read unavailable"); },
+    beforeWrite: (kind) => { if (kind === "add" && state.failBackup) throw new Error("backup unavailable"); },
+    beforeCommit: () => {
+      if (state.fail) throw new Error("quota");
+      if (state.failures > 0) { state.failures--; throw new Error("quota"); }
+    },
+  });
+  const store: StorageStore = { transaction: (plan, operation) => {
+    // Preference tests capture the pause when queued, not when execution begins.
+    pauses.push(state.pause);
+    return data.store.transaction(plan, operation);
   } };
   return { records, store, state };
 }
