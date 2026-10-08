@@ -8,6 +8,14 @@ Dated code-review reports produced during Phase 3, mirroring
 [phase-2/reviews/](../../phase-2/reviews/README.md)'s own folder. One file
 per run (`YYYY-MM-DD-code-review.md`).
 
+- [8 October 2026 architecture review](../audits/2026-10-08-architecture-review.html)
+  was produced with the `mattpocock-skills:improve-codebase-architecture`
+  skill against commit `5fc8104`. It proposes nine deepening candidates
+  (picture commands, retiring legacy persistence, a drop module, presentation
+  labels, screen projection, a storage seam, guide file, app shell, i18n
+  surface). Its top recommendation is to retire legacy persistence and then
+  build the picture-commands module. Nothing has been implemented yet.
+
 - [7 October 2026 codebase health review](./2026-10-07-codebase-health-review.md)
   reviews code, architecture and UX across its dated application snapshot. It records
   verified small fixes, remaining functional findings, open design decisions
