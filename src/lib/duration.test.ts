@@ -108,10 +108,7 @@ describe("stepDisplayedTime", () => {
 });
 
 describe("documentTotalTime (2026-09-17 audit remediation, finding 5/item 9)", () => {
-  // Regression test for the duplicated `sumDurations(steps.map(stepDisplayedTime))`
-  // expression this replaces - it used to be written out independently in
-  // both InstructionCanvas.tsx's on-screen heading and document-actions.ts's
-  // PDF export heading.
+  // Reader and physical output share the explicit-group-else-picture-sum policy.
 
   it("sums every step's displayed time", () => {
     const time = buildDuration(0, 0, 1, 0)!;

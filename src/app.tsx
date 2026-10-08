@@ -11,7 +11,7 @@ import { InstructionReader } from "./components/InstructionReader/InstructionRea
 import { Toolbar } from "./components/Toolbar/Toolbar";
 import { OutputDialog } from "./components/OutputDialog/OutputDialog";
 import { SettingsDialog } from "./components/SettingsDialog/SettingsDialog";
-import { runJsonExport, readImportFile } from "./lib/document-actions";
+import { runJsonExport, readImportFile } from "./lib/document-file";
 import type { InstructionDocument } from "./model/instruction";
 import type { AppLocale } from "./model/library";
 import { t } from "./i18n/messages";
@@ -74,7 +74,7 @@ export function App() {
     finally { creatingGuide.current = false; setGuideCreationBusy(false); }
   }
   const closeImport = () => { if (!creatingGuide.current) pendingImport.value = null; };
-  async function backup(doc: InstructionDocument) { const exported = await runJsonExport(doc); if (exported.error) toast.value = { text: t(preferences.peek().uiLocale, "output.failed"), tone: "error" }; }
+  async function backup(doc: InstructionDocument) { const exported = await runJsonExport(doc); if (!exported.ok) toast.value = { text: t(preferences.peek().uiLocale, "output.failed"), tone: "error" }; }
   function enterView(view: EntryView) {
     const guideId = activeGuideId.peek();
     appView.value = view;
@@ -99,7 +99,7 @@ export function App() {
   if (reading) return <main class="app reader-app"><InstructionReader document={session.document.value} locale={locale} onBack={returnToEditor} /></main>;
   return <div class="app">
     <header class="app-header"><div class="app-header__brand"><h1 class="app-brand">{t(locale, "app.title")}</h1>{activeGuideId.value !== null && saveState.value !== "unavailable" && saveState.value !== "conflict" && <span class={`save-status save-status--${saveState.value}`} role="status" title={t(locale, `save.${saveState.value}`)}>{saveState.value === "saved" ? t(locale, "save.compactSaved") : t(locale, "save.saving")}</span>}</div><Toolbar session={session} locale={locale} editing={editing} onGuides={() => void guides()} onRead={read} onOutput={() => { outputOpener.current = window.document.activeElement instanceof HTMLElement ? window.document.activeElement : null; if (window.matchMedia("(max-width: 767px)").matches) authoring.close(); setOutput({ guideId: activeGuideId.peek(), locale: preferences.peek().uiLocale }); }} onSettings={() => setSettings(true)} />
-      <input ref={input} type="file" accept="application/json,.json" class="visually-hidden" tabIndex={-1} aria-label={t(locale, "import.chooseFile")} onChange={async (event) => { const file = event.currentTarget.files?.[0]; event.currentTarget.value = ""; if (!file) return; const imported = await readImportFile(file); if (imported.ok) pendingImport.value = { document: imported.document, incompleteCount: imported.incompleteCount }; else toast.value = { text: t(locale, "import.invalid"), tone: "error" }; }} />
+      <input ref={input} type="file" accept="application/json,.json" class="visually-hidden" tabIndex={-1} aria-label={t(locale, "import.chooseFile")} onChange={async (event) => { const file = event.currentTarget.files?.[0]; event.currentTarget.value = ""; if (!file) return; const imported = await readImportFile(file); if (imported.ok) pendingImport.value = { document: imported.document }; else toast.value = { text: t(locale, "import.invalid"), tone: "error" }; }} />
     </header>
     {settings && <SettingsDialog locale={locale} onClose={() => setSettings(false)} onImport={() => { setSettings(false); input.current?.click(); }} onBackup={() => void backup(session.document.peek())} />}
     {preferenceSaveState.value === "unavailable" && <section role="status" aria-busy={preferenceRetryBusy || storageRetryBusy}><p>{t(locale, "preferences.saveUnavailable")}</p><button type="button" disabled={preferenceRetryBusy || storageRetryBusy} onClick={() => void retryPreferenceStorage()}>{t(locale, "preferences.retry")}</button></section>}

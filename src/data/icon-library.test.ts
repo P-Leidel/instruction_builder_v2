@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { iconMarkup, ICON_VIEW_BOX, ICON_PRESENTATION_PROPS } from "./icon-library";
-import { SAMPLE_TOKENS } from "./sample-tokens";
+import { SAMPLE_TOKENS } from "../test/fixtures/sample-tokens";
 import { CATALOG_ENTRIES } from "./catalog-entries";
-import { ARTWORK_PROVENANCE } from "./artwork-provenance";
+import { ARTWORK_PROVENANCE } from "../test/fixtures/artwork-provenance";
 import { CONTENT_LIBRARIES } from "./libraries";
 
 describe("original trusted pictograms", () => {

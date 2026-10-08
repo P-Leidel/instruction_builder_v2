@@ -25,6 +25,5 @@ export const toast = signal<Toast | null>(null);
 /** A validated import awaiting confirmation before creating a new guide. */
 export interface PendingImport {
   document: InstructionDocument;
-  incompleteCount: number;
 }
 export const pendingImport = signal<PendingImport | null>(null);

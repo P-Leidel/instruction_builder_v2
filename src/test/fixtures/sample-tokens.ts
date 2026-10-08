@@ -1,11 +1,8 @@
-import type { TokenCategory } from "../model/instruction";
+import type { TokenCategory } from "../../model/instruction";
 
 /**
- * Curated recipe token vocabulary (Phase 2 task 7's small prototype set,
- * expanded to Phase 3 task 26's "v1" list). Real icons are resolved
- * separately (data/icon-library.ts, task 25) by `iconId`, so this data can
- * be swapped/extended later without changing the model or any component
- * prop shapes.
+ * Historical recipe vocabulary retained for catalog/artwork coverage tests.
+ * The running picker uses the canonical catalog and content libraries.
  */
 export interface SampleToken {
   iconId: string;
@@ -13,7 +10,7 @@ export interface SampleToken {
   label: string;
 }
 
-/** Display name per category, shared by every token-picking UI. */
+/** Historical prototype category names retained with the vocabulary fixture. */
 export const CATEGORY_LABELS: Record<TokenCategory, string> = {
   action: "Actions",
   object: "Objects",

@@ -49,16 +49,23 @@ Visibility/pagehide flushing is best effort. Browsers can abandon asynchronous w
 Stable signals: `activeGuideId`, `guideSummaries`, `saveState`, `guideNotices`, `failedNewGuide`, and `lastDeletedGuide`. Actions return `GuideActionResult`: success with optional `guideId`, or failure reason `conflict`, `unavailable`, `deleted`, `not-found`, or `cancelled`.
 
 ```ts
+import { readImportFile, runJsonExport } from "../src/lib/document-file";
+
 await initializeGuides(documentSession);
 // Empty UI uses activeGuideId === null and guideSummaries.length === 0.
 await createGuide(createEmptyDocument("board"));
 await openGuide(id);
-await createGuide(parseImportedDocument(await file.text())); // Adds another guide.
+const imported = await readImportFile(file);
+if (imported.ok) await createGuide(imported.document); // Adds another guide.
+// Otherwise imported.reason is read-failed, invalid-json or invalid-document.
 
 // After the explicit backup/discard choice:
-exportDocumentAsJson(documentSession.document.value);
-await reloadActiveGuide();
+const backup = await runJsonExport(documentSession.document.value);
+if (backup.ok) await reloadActiveGuide();
+// Otherwise backup.reason is export-failed; retain the draft and retry backup.
 ```
+
+The file API returns typed failure reasons for UI localization. JSON backup downloads the full editable document as pretty `application/json`, including authored text, attachments and empty groups, independently of physical output readiness.
 
 `createGuide` validates before changing anything and flushes the old guide. Failure preserves the current session and sets `failedNewGuide: Signal<InstructionDocument | null>` to the attempted new document for explicit backup/retry. It starts as null; successful creation/duplication clears it. Unrelated opens/reloads and failed retries retain it. A new record can commit while a later old-guide edit conflicts: the new record remains listed, the current draft stays open, and the action reports that flush failure. Inspect the list before retrying to avoid an extra copy.
 

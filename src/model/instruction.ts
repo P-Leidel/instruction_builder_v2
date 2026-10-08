@@ -74,7 +74,7 @@ export interface InstructionToken {
   iconId: string;
   /** Optional human-readable text shown alongside/under the icon. */
   label?: string;
-  /** Optional user-authored note, separate from the app-given description in sample-tokens.ts. */
+  /** Optional user-authored note, separate from the canonical catalog description. */
   note?: string;
   /**
    * At most one of each kind, attached to this token (not standalone in the

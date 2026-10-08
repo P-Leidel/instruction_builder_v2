@@ -6,7 +6,7 @@ import { t } from "../../i18n/messages";
 import { createDefaultLabelSheet, normalizeOutputOptions, switchOutputPreset } from "../../lib/output-options";
 import { getGroupLabel } from "../../lib/instruction-presentation";
 import { issueText, noticeText } from "../../lib/output-presentation";
-import { runJsonExport } from "../../lib/document-actions";
+import { runJsonExport } from "../../lib/document-file";
 import { createOutputRequestController } from "./output-request";
 import { OutputPreview } from "../OutputPreview/OutputPreview";
 import { preparedPrintFonts } from "../../state/print-fonts";
@@ -35,7 +35,7 @@ export function OutputDialog({ sourceDocument, guideId, locale, onClose, initial
   const metadata = (key: keyof OutputOptions["metadata"], label: "output.documentTitle" | "output.groupTitles" | "output.stepNumbers" | "output.includeTotalTime") => <label class="output-dialog__check"><input type="checkbox" checked={options.metadata[key]} onChange={event => update({ metadata: { ...options.metadata, [key]: event.currentTarget.checked } })} />{t(locale, label)}</label>;
   const board = request.document.meta.presentation === "board", ready = request.status === "ready" && !previewError;
   const geometry = normalizeOutputOptions(request.document, options);
-  const backup = async () => { const result = await runJsonExport(controller.backupDocument()); setBackupFailed(!!result.error); };
+  const backup = async () => { const result = await runJsonExport(controller.backupDocument()); setBackupFailed(!result.ok); };
   return <dialog ref={dialog} class="output-dialog" aria-labelledby="output-dialog-heading" data-output-status={request.status} onCancel={event => { event.preventDefault(); close(); }}>
     <header class="output-dialog__header"><h2 id="output-dialog-heading">{t(locale, "output.title")}</h2><button type="button" onClick={close}>{t(locale, "dialog.close")}</button></header>
     <div class="output-dialog__body">

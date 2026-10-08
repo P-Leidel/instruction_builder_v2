@@ -88,11 +88,8 @@ export function stepDisplayedTime(step: InstructionStep): DurationAttachment | u
 
 /**
  * A whole document's total displayed time - every step's own
- * `stepDisplayedTime`, summed. Used by both the on-screen canvas heading
- * (InstructionCanvas.tsx) and the PDF export heading (document-actions.ts's
- * `runPdfExport`), which used to each independently write out
- * `sumDurations(steps.map(stepDisplayedTime))` (2026-09-17 audit
- * remediation, finding 5).
+ * `stepDisplayedTime`, summed. The reader and physical output planner share
+ * this policy so explicit group durations and picture estimates agree.
  */
 export function documentTotalTime(steps: InstructionStep[]): DurationAttachment | undefined {
   return sumDurations(steps.map(stepDisplayedTime));

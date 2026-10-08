@@ -1,5 +1,7 @@
-import type { CatalogEntry } from "../model/library";
-import { CATALOG_ENTRIES } from "./catalog-entries";
+import type { CatalogEntry } from "../../model/library";
+import { CATALOG_ENTRIES } from "../../data/catalog-entries";
+
+/** Provenance evidence used by the catalog/artwork coverage tests. */
 
 export interface ArtworkProvenance {
   id: string;

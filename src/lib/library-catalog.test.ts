@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { SAMPLE_TOKENS } from "../data/sample-tokens";
+import { SAMPLE_TOKENS } from "../test/fixtures/sample-tokens";
 import * as fixtures from "../test/fixtures/overhaul";
 
 import * as api from "./library-catalog";
