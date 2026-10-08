@@ -20,6 +20,7 @@ try {
       ["editor-transition-check.mjs", output, url], ["editor-output-integration-check.mjs", output, url],
       ["export-review.mjs", output, url], ["reliability-check.mjs", url], ["storage-check.mjs", url], ["preferences-merge-check.mjs", url], ["startup-retry-check.mjs", url], ["import-identity-check.mjs", url],
       ["unknown-caption-check.mjs", path.join(output, "unknown-caption"), url],
+      ["png-density-check.mjs", path.join(output, "png-density"), url],
       ["check-header-theme.mjs", path.join(output, "header-theme"), url],
       ["check-review-regressions.mjs", path.join(output, "review-regressions"), url],
       ["check-editor-drag.mjs", path.join(output, "editor-drag"), url],

@@ -2,6 +2,7 @@ import type { OutputIssue, OutputPage, OutputPlan, PreparedFonts } from "../mode
 import { prepareFonts } from "./print-fonts";
 import { registerPdfFonts } from "./print-font-adapters";
 import { renderOutputPage } from "./output-svg";
+import { setPngDensity } from "./png-density";
 
 /** Localized expected failure plus preserved technical context for diagnostics. */
 export class OutputExportError extends Error {
@@ -48,7 +49,10 @@ export async function createPngFile(plan: OutputPlan, pageIndex: number, dpi: 15
           if (!context) { fail(); return; }
           if (page.background === "white") { context.fillStyle = "#ffffff"; context.fillRect(0, 0, width, height); }
           context.drawImage(image, 0, 0, width, height);
-          canvas.toBlob(blob => blob ? resolve(blob) : fail(), "image/png");
+          canvas.toBlob(blob => {
+            if (!blob) { fail(); return; }
+            void setPngDensity(blob, dpi).then(resolve, fail);
+          }, "image/png");
         } catch (error) { fail(error); }
       };
       image.src = url;
