@@ -172,9 +172,11 @@ export function planOutput(doc: InstructionDocument, input: OutputOptions, fonts
     const caption: Block = { fragments: [], height: 0 }, note: Block = { fragments: [], height: 0 };
     if (!resolveIcon(picture.iconId).known) {
       notices.push({ code: "unknown-symbol", source, messageKey: "output.unknownSymbolNotice" });
-      addText(caption, t(options.locale, "catalog.unknownSymbol", { iconId: picture.iconId }), cell.captionBox, labelPt, source, "context", group);
-    }
-    addText(caption, picture.label, cell.captionBox, labelPt, source, "label", group);
+      const context = t(options.locale, "catalog.unknownSymbol", { iconId: picture.iconId });
+      // One measured flow preserves the full identity and authored caption
+      // without spending the fixed lane on an extra paragraph gap.
+      addText(caption, picture.label ? `${context} — ${picture.label}` : context, cell.captionBox, labelPt, source, "context", group);
+    } else addText(caption, picture.label, cell.captionBox, labelPt, source, "label", group);
     addText(note, picture.note, cell.noteBox, secondaryPt, source, "note", group);
     const attach = (iconId: string, label: string, role: "quantity" | "warning" | "time", lane: MmBox, centered = false) => {
       if (role !== "warning" && !resolveIcon(iconId).known) notices.push({ code: "unknown-symbol", source, messageKey: "output.unknownSymbolNotice" });

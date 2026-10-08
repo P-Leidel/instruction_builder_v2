@@ -29,6 +29,7 @@ Standalone checks that own a Vite server resolve its root from their file.
 | `editor-output-integration-check.mjs`, `export-review.mjs` | `[output-directory] [url-or-dash]` | Own dev server when URL is omitted or `-` |
 | `reliability-check.mjs` | `[url]` | Existing dev server; URL defaults to `http://localhost:5173/` |
 | `storage-check.mjs`, `preferences-merge-check.mjs`, `startup-retry-check.mjs`, `import-identity-check.mjs` | `[url]` | Own dev server when URL is omitted; native IndexedDB contracts, startup recovery and import preservation in isolated contexts |
+| `unknown-caption-check.mjs` | `[output-directory] [url]` | Own dev server when URL is omitted; full unknown caption, SVG/JSON preservation and repair targets |
 | `check-header-theme.mjs`, `check-editor-drag.mjs`, `check-review-regressions.mjs`, `check-print-faithful-editor.mjs` | `[output-directory] [url]` | Own dev server when URL is omitted |
 | `check-centered-pictograms.mjs` | `[output-directory] [url] [--baseline]` | Own dev server when URL is omitted; `--baseline` keeps the existing baseline comparison mode |
 | `pwa-check.mjs` | `[url] [output-directory]` | Existing production preview; URL defaults to `http://127.0.0.1:4173/` |
