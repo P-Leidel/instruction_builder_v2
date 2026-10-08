@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Architecture review — instruction_builder_v2 — 8 October 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose", flowchart: { useMaxWidth: true } });
+    </script>
+    <style>
+      .seam { border-style: dashed !important; }
+      .leak { color: #dc2626; }
+      .deep { background: linear-gradient(135deg, #0f172a, #1e293b); color: #f8fafc; }
+      .label { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; }
+      .diagram { min-height: 300px; }
+      pre.mermaid { background: transparent; }
+    </style>
+  </head>
+  <body class="bg-stone-50 text-slate-900 font-sans">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+
+      <header class="space-y-4">
+        <p class="label text-slate-500">📌 Doc status: HISTORICAL — dated snapshot of commit 5fc8104</p>
+        <h1 class="font-serif text-4xl">Architecture review: deepening opportunities</h1>
+        <p class="text-slate-600">instruction_builder_v2 · 8 October 2026 · produced with <code>mattpocock-skills:improve-codebase-architecture</code> · scope: all of <code>src/</code>, weighted to the post-overhaul hot spots (<code>state/</code>, <code>lib/guide-repository</code>, <code>lib/output-plan</code>, editor drag, <code>app.tsx</code>)</p>
+        <div class="flex flex-wrap gap-4 text-xs text-slate-600">
+          <span class="flex items-center gap-2"><span class="inline-block w-5 h-4 border border-slate-500 bg-white"></span>module</span>
+          <span class="flex items-center gap-2"><span class="inline-block w-5 h-4 border-2 border-slate-500 seam"></span>seam</span>
+          <span class="flex items-center gap-2"><span class="inline-block w-5 border-t-2 border-red-600"></span>leakage / duplication</span>
+          <span class="flex items-center gap-2"><span class="inline-block w-5 h-4 deep"></span>deep module</span>
+          <span class="flex items-center gap-2"><span class="inline-block w-5 h-4 bg-slate-200 opacity-60"></span>deleted / absorbed</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+          <div class="rounded border border-slate-200 bg-white p-3"><div class="text-2xl font-serif">74</div><div class="text-slate-500">source modules (57 .ts, 17 .tsx)</div></div>
+          <div class="rounded border border-slate-200 bg-white p-3"><div class="text-2xl font-serif">39</div><div class="text-slate-500">Vitest files (~373 cases)</div></div>
+          <div class="rounded border border-slate-200 bg-white p-3"><div class="text-2xl font-serif">26</div><div class="text-slate-500">Playwright drivers in <code>tests/browser</code></div></div>
+          <div class="rounded border border-slate-200 bg-white p-3"><div class="text-2xl font-serif">8</div><div class="text-slate-500">non-component modules without tests</div></div>
+        </div>
+        <p class="text-sm text-slate-600">Untested outside the ADR-0003 component carve-out: <code class="font-mono">state/editor-drag.ts</code>, <code class="font-mono">state/ui.ts</code>, <code class="font-mono">state/print-fonts.ts</code>, <code class="font-mono">lib/png-density.ts</code>, <code class="font-mono">lib/quantity.ts</code>, <code class="font-mono">lib/view-entry-focus.ts</code>, <code class="font-mono">app.tsx</code>, <code class="font-mono">main.tsx</code>. Logic still held inside components: <code>issueText</code> (OutputDialog), <code>groupName</code>/<code>pictureName</code> (EditorGroup/EditorPicture), the 44&nbsp;px/280&nbsp;px hit-target predicate (InstructionEditor), result → toast mapping (app.tsx), notice → message mapping (MyGuides).</p>
+        <p class="text-sm text-slate-600">ADRs respected: 0001 and 0002 untouched; 0003 is the reason most candidates move logic <em>into</em> <code>src/lib</code>; 0004/0005 concern the retired canvas (see candidate 3's note).</p>
+      </header>
+
+      <nav class="text-sm flex flex-wrap gap-x-4 gap-y-1 text-indigo-700">
+        <a href="#c1">1 · Picture commands</a><a href="#c2">2 · Retire legacy persistence</a><a href="#c3">3 · Drop module</a><a href="#c4">4 · Presentation labels</a><a href="#c5">5 · Screen projection</a><a href="#c6">6 · Storage seam</a><a href="#c7">7 · Guide file</a><a href="#c8">8 · App shell</a><a href="#c9">9 · i18n surface</a><a href="#top">Top recommendation</a>
+      </nav>
+
+      <section id="candidates" class="space-y-14">
+
+        <!-- 1 -->
+        <article id="c1" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">1 · One picture-commands module for the document session</h2>
+            <span class="rounded-full bg-emerald-100 text-emerald-800 text-xs px-3 py-1 font-semibold">Strong</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">in-process</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>src/state/document.ts</li><li>src/state/authoring.ts</li><li>src/state/editor-drag.ts (<code>up()</code>, lines 105-126)</li><li>src/components/TokenDetails/TokenDetails.tsx · src/app.tsx</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">Before</div>
+              <pre class="mermaid">
+flowchart TB
+  KB["keyboard / details panel"] --> AU["authoring.ts"]
+  DR["editor-drag up()"] --> SA["sessionActions"]
+  AU --> SA
+  AU -.re-implements paste, clone.-> CL["token clipboard"]
+  DR -.re-implements insert + panel retarget.-> AU
+  SA --> M1["moveTokenCore: pre-removal index"]
+  SA --> M2["moveTokenToCore: final index"]
+  SA --> CL
+  classDef leak stroke:#dc2626,stroke-width:2px,color:#991b1b;
+  class M1,M2 leak
+</pre>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">After</div>
+              <pre class="mermaid">
+flowchart TB
+  KB["keyboard / details panel"] --> PC
+  DR["editor-drag adapter"] --> PC
+  APP["app.tsx shortcuts"] --> PC
+  PC["picture commands: insert, move, copy, paste, move group"]
+  PC --> DOC["document session internals"]
+  classDef deep fill:#0f172a,color:#f8fafc,stroke:#0f172a,stroke-width:3px;
+  class PC deep
+</pre>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> moving a picture has two live index conventions (<code>moveTokenCore</code> for drag, <code>moveTokenToCore</code> for <code>authoring.movePicture</code>), and the follow-up — select, re-target the open panel, build a picture from a catalog entry, paste — is written in both <code>authoring.ts</code> and <code>editor-drag.ts</code>; the well-tested mutators sit below the place the bugs live.</p>
+          <p><strong>Solution:</strong> one module takes intent (insert entry at anchor, move picture to group/anchor, copy/paste, move group) and performs mutation, selection and panel re-targeting as one step; <code>sessionActions</code> becomes its implementation.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Locality: one place owns edit follow-ups</li>
+            <li>Leverage: drag, keyboard, panel share one interface</li>
+            <li>One move convention; one deleted</li>
+            <li>Test the real sequence via <code>createDocumentSession()</code></li>
+            <li><code>pasteToken</code>/<code>addTokenToSelectedStep</code> dead paths disappear</li>
+          </ul>
+          <div class="rounded border border-amber-200 bg-amber-50 text-amber-900 text-sm px-3 py-2">ADR-0002: no conflict — the no-op guards stay inside <code>setSteps</code>/<code>updateTokenIn</code>, behind the new interface.</div>
+        </article>
+
+        <!-- 2 -->
+        <article id="c2" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">2 · Retire legacy persistence and the zero-argument aliases</h2>
+            <span class="rounded-full bg-emerald-100 text-emerald-800 text-xs px-3 py-1 font-semibold">Strong</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">in-process · deletion</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>src/state/persistence.ts (+ persistence.test.ts, ~19 KB together)</li><li>src/state/document.ts:905-947 (alias block, <code>bindActionsToSession</code>)</li><li>src/state/guides.ts:245 · CONTEXT.md “Document session”</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">Before</div>
+              <pre class="mermaid">
+flowchart LR
+  G["guides.initializeGuides"] -- "dynamic import, only to stop it" --> P["persistence.ts"]
+  P --> AL["document aliases: document, selectStep, ..."]
+  P --> IDB["idb-keyval"]
+  P -.duplicate recovery key + conflict debounce.-> R["guide-repository"]
+  G --> R
+  classDef leak stroke:#dc2626,stroke-width:2px,color:#991b1b;
+  class P,AL leak
+</pre>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">After</div>
+              <pre class="mermaid">
+flowchart LR
+  G["guides controller"] --> R["guide-repository"]
+  R --> IDB["IndexedDB store"]
+  classDef deep fill:#0f172a,color:#f8fafc,stroke:#0f172a,stroke-width:3px;
+  class R deep
+</pre>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> <code>initPersistence</code> has no production caller; <code>initializeGuides</code> imports <code>persistence.ts</code> only to call a <code>stopLegacyPersistence()</code> that does nothing, and that module is the sole consumer of ~40 alias exports widening <code>document.ts</code>'s interface.</p>
+          <p><strong>Solution:</strong> delete <code>persistence.ts</code>, its test, the alias block and the session actions with no production caller; the repository already migrates the legacy key.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Deletion test: nothing reappears elsewhere</li>
+            <li><code>document.ts</code> interface shrinks ~40 exports</li>
+            <li>One persistence story, not two</li>
+            <li>Unblocks candidate 1</li>
+          </ul>
+        </article>
+
+        <!-- 3 -->
+        <article id="c3" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">3 · A drop module that returns a command; the drag gesture as a thin adapter</h2>
+            <span class="rounded-full bg-emerald-100 text-emerald-800 text-xs px-3 py-1 font-semibold">Strong</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">in-process (DOM rect read stays an adapter)</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>src/lib/editor-drop.ts · src/lib/editor-drop-index.ts · src/lib/pointer-drag.ts</li><li>src/state/editor-drag.ts</li><li>src/lib/editor-drop.test.ts</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-3">Before — call path a release crosses</div>
+              <div class="space-y-1 text-xs">
+                <div class="border-l-4 border-slate-400 bg-slate-50 px-3 py-2">pointer-drag.ts — one threshold function</div>
+                <div class="border-l-4 border-red-500 bg-red-50 px-3 py-2">editor-drop.ts — returns <code>index</code> (DOM order) <span class="leak">· nothing in production reads it; 13 tests assert it</span></div>
+                <div class="border-l-4 border-slate-400 bg-slate-50 px-3 py-2">editor-drop-index.ts — anchor → real index (continued segments)</div>
+                <div class="border-l-4 border-red-500 bg-red-50 px-3 py-2">editor-drag.ts — “inside” policy, validity check, commit dispatch <span class="leak">· untested</span></div>
+                <div class="border-l-4 border-slate-400 bg-slate-50 px-3 py-2">sessionActions + authoring</div>
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-3">After</div>
+              <div class="space-y-2 text-xs">
+                <div class="border-2 border-dashed border-slate-400 bg-white px-3 py-2">editor-drag — adapter: pointer capture, rAF, auto-scroll, read rects</div>
+                <div class="deep rounded px-3 py-6">
+                  <div class="label">editor drop module</div>
+                  <div class="mt-1">rects + source + document → drop command | null</div>
+                  <div class="mt-2 opacity-50">threshold · anchor resolution · inside policy · validity</div>
+                </div>
+                <div class="border border-slate-400 bg-white px-3 py-2">picture commands (candidate 1)</div>
+              </div>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> one concept (“where does this drop land”) spans three lib modules plus <code>editor-drag.ts</code>; the tested result (<code>index</code>) is dead because DOM order is wrong for continued page segments, while the real conversion and the commit policy sit in the untested state file.</p>
+          <p><strong>Solution:</strong> one drop module takes measured rects, source and document and returns a ready command; <code>editor-drag.ts</code> keeps only gesture handling and hands the command to candidate 1.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Tests cross the real interface</li>
+            <li>Continued-segment bugs testable without Playwright</li>
+            <li>Delete the dead <code>index</code> field</li>
+            <li>Three shallow modules collapse into one</li>
+          </ul>
+          <div class="rounded border border-amber-200 bg-amber-50 text-amber-900 text-sm px-3 py-2">ADR-0005 concerned the retired canvas; the current “inside” guard applies to group drops too (editor-drag.ts:59-62). Confirm that is intended when this lands — not a reason to reopen the ADR.</div>
+        </article>
+
+        <!-- 4 -->
+        <article id="c4" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">4 · One presentation-labels module for group, picture, warning and issue names</h2>
+            <span class="rounded-full bg-emerald-100 text-emerald-800 text-xs px-3 py-1 font-semibold">Strong</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">in-process</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>src/lib/instruction-reading.ts · src/lib/output-plan.ts · src/lib/library-catalog.ts</li><li>EditorGroup · EditorPicture · StepDetails · TokenDetails · TokenPicker · InstructionReader · OutputDialog (<code>issueText</code>)</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-3">Before — who decides a group's name</div>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="border border-red-400 px-2 py-2">EditorGroup<br><span class="text-slate-500">groupNumber / sequenceGroup</span></div>
+                <div class="border border-red-400 px-2 py-2">StepDetails<br><span class="text-slate-500">groupNumber / stepNumber</span></div>
+                <div class="border border-red-400 px-2 py-2">TokenDetails<br><span class="text-slate-500">groupNumber / stepNumber</span></div>
+                <div class="border border-red-400 px-2 py-2">TokenPicker<br><span class="text-slate-500">groupNumber / stepNumber</span></div>
+                <div class="border border-red-400 px-2 py-2">InstructionReader<br><span class="text-slate-500">groupContext</span></div>
+                <div class="border border-red-400 px-2 py-2">OutputDialog<br><span class="text-slate-500">groupContext</span></div>
+                <div class="border border-red-400 px-2 py-2 col-span-2">output-plan heading<br><span class="text-slate-500">sequenceGroup</span></div>
+              </div>
+              <p class="text-xs text-slate-500 mt-3">+ picture fallback name ×3, “known warning” check ×3; InstructionEditor imports <code>issueText</code> from a dialog component.</p>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram flex flex-col justify-center gap-3">
+              <div class="label text-slate-500">After</div>
+              <div class="flex flex-wrap gap-1 text-xs">
+                <span class="border px-2 py-1">editor</span><span class="border px-2 py-1">details</span><span class="border px-2 py-1">picker</span><span class="border px-2 py-1">Read</span><span class="border px-2 py-1">output dialog</span><span class="border px-2 py-1">output-plan</span>
+              </div>
+              <div class="text-center text-slate-400">↓ ↓ ↓</div>
+              <div class="deep rounded px-4 py-8 text-sm">
+                <div class="label">presentation labels</div>
+                <div>groupName · pictureName · warningMeaning · issueText · noticeText</div>
+              </div>
+              <div class="text-xs text-slate-500">→ library-catalog, i18n</div>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> the same group is named by seven call sites with three different message keys, so the editor, Read, output dialog and print can disagree; picture fallback names and warning checks are copied three times each.</p>
+          <p><strong>Solution:</strong> the reading/presentation module owns every localized label and issue/notice text; components and the planner ask it.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Locality: naming lives in one module</li>
+            <li>Leverage: ~12 call sites</li>
+            <li>Pure, testable under ADR-0003</li>
+            <li>Editor stops importing from OutputDialog</li>
+          </ul>
+        </article>
+
+        <!-- 5 -->
+        <article id="c5" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">5 · A screen-projection module for the editor layout and output preset rules</h2>
+            <span class="rounded-full bg-amber-100 text-amber-800 text-xs px-3 py-1 font-semibold">Worth exploring</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">in-process</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>InstructionEditor.tsx:34, 48-49, 60 · EditorGroup.tsx:25, 35 · EditorPicture.tsx:21</li><li>OutputDialog.tsx:52 (content regions), preset onChange</li><li>src/lib/output-plan.ts:33 · src/lib/output-options.ts</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">Before</div>
+              <pre class="mermaid">
+flowchart TB
+  L["EditorLayout, mm"] --> IE["InstructionEditor: auxiliary groups predicate"]
+  L --> EG["EditorGroup: inline predicate"]
+  L --> EP["EditorPicture: scale 96/25.4*zoom"]
+  IE -.must agree.-> EG
+  OD["OutputDialog: raw marginMm"] -.disagrees.-> OP["output-plan: min margin, w/4, h/4"]
+  IE -.preset rule copy.-> OD
+  classDef leak stroke:#dc2626,stroke-width:2px,color:#991b1b;
+  class IE,EG,OD leak
+</pre>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">After</div>
+              <pre class="mermaid">
+flowchart TB
+  L["EditorLayout + zoom"] --> SP["screen projection: placements, inline flag, auxiliary groups"]
+  SP --> IE["InstructionEditor"]
+  SP --> EG["EditorGroup"]
+  SP --> EP["EditorPicture"]
+  OP["output-plan: exposes content regions"] --> OD["OutputDialog"]
+  OO["output-options: switchPreset"] --> OD
+  OO --> IE
+  classDef deep fill:#0f172a,color:#f8fafc,stroke:#0f172a,stroke-width:3px;
+  class SP deep
+</pre>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> the 44&nbsp;px/280&nbsp;px hit-target predicate is written separately in InstructionEditor and EditorGroup (drift means “Add picture” disappears or doubles), the preset-change rule is copied in two components, and the preview's content-region overlay uses raw <code>marginMm</code> where the planner clamps it.</p>
+          <p><strong>Solution:</strong> a pure projection from layout and zoom to screen placements; the planner exposes content regions; <code>output-options</code> gains one preset-switch operation.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Cross-component invariant becomes one function</li>
+            <li>Preview margin matches print</li>
+            <li>Testable under ADR-0003</li>
+          </ul>
+        </article>
+
+        <!-- 6 -->
+        <article id="c6" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">6 · A storage seam with two real adapters, and recovery as one capability</h2>
+            <span class="rounded-full bg-amber-100 text-amber-800 text-xs px-3 py-1 font-semibold">Worth exploring</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">local-substitutable</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>src/lib/guide-repository.ts (<code>GuideStore</code>, <code>createIndexedDbGuideStore</code>, <code>rawFingerprint</code>)</li><li>src/state/preferences.ts · src/state/guides.ts:217 (<code>importRecoveredGuide</code>)</li><li>guide-repository.test.ts · preferences.test.ts · guides.test.ts (three in-memory fakes)</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">Before</div>
+              <pre class="mermaid">
+flowchart LR
+  PR["preferences"] -.imports GuideStore, fingerprint.-> GR["guide-repository"]
+  GU["guides controller"] --> GR
+  GU -.reads raw store directly.-> ST["IndexedDB store"]
+  GR --> ST
+  T1["repo test fake"] ~~~ T2["prefs test fake"] ~~~ T3["guides test fake"]
+  classDef leak stroke:#dc2626,stroke-width:2px,color:#991b1b;
+  class PR,GU,T1,T2,T3 leak
+</pre>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">After</div>
+              <pre class="mermaid">
+flowchart LR
+  GU["guides controller"] --> GR["guide-repository: summaries, recovered import"]
+  GR --> S
+  PR["preferences"] --> S
+  S["storage: transactional keys + recovery"]
+  S --> A1["IndexedDB adapter"]
+  S --> A2["in-memory adapter"]
+  classDef deep fill:#0f172a,color:#f8fafc,stroke:#0f172a,stroke-width:3px;
+  class S deep
+</pre>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> <code>GuideStore</code> is really the app's transactional key-value interface, so preferences reaches into the guide repository; three hand-written fakes each re-implement the declared-key/readonly/<code>add</code>-collision contract while the real IndexedDB adapter is checked only by Playwright; the recovery-key format is built in three places.</p>
+          <p><strong>Solution:</strong> a storage module owns the interface, the IndexedDB adapter, one in-memory adapter and recovery; the repository owns summaries and recovered-guide import.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Two adapters justify the seam</li>
+            <li>One fake instead of three</li>
+            <li>Contract test runs both adapters</li>
+            <li>Recovery policy: one place</li>
+          </ul>
+        </article>
+
+        <!-- 7 -->
+        <article id="c7" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">7 · Fold the guide-file chain into one module; drop outputs nobody reads</h2>
+            <span class="rounded-full bg-amber-100 text-amber-800 text-xs px-3 py-1 font-semibold">Worth exploring</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">in-process</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>src/model/validate.ts · src/lib/document-file.ts · src/lib/document-actions.ts</li><li>src/data/sample-tokens.ts · src/data/artwork-provenance.ts (test-only)</li><li>src/state/ui.ts (<code>PendingImport.incompleteCount</code>)</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-3">Before — nested call tree</div>
+              <div class="border border-slate-400 p-2 text-xs space-y-2">
+                <div class="label">document-actions</div>
+                <div class="border border-slate-400 p-2 ml-3 space-y-2">
+                  <div class="label">document-file</div>
+                  <div class="border border-slate-400 p-2 ml-3">migrate (validates too)</div>
+                  <div class="border border-slate-400 p-2 ml-3">download</div>
+                </div>
+                <div class="border border-slate-400 p-2 ml-3">validate — “group is empty” <span class="leak">· <code>shouldFlagIncompleteStep</code> has no callers</span></div>
+                <div class="text-red-700">unread: <code>ExportResult.warning</code>, <code>incompleteCount</code>, English error strings</div>
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram flex flex-col justify-center">
+              <div class="label text-slate-500 mb-3">After</div>
+              <div class="deep rounded p-4 text-sm space-y-2">
+                <div class="label">guide file</div>
+                <div>parse(text) → guide | typed failure · save(guide)</div>
+                <div class="flex gap-2 text-xs opacity-50"><span class="border border-slate-500 px-2 py-1">migrate</span><span class="border border-slate-500 px-2 py-1">download</span></div>
+              </div>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> three shallow modules hold ~6 KB amounting to <code>JSON.parse → migrate</code> and <code>stringify → download</code>; most of their results (warnings, counts, English messages) are discarded by callers, and validation is split between <code>migrate</code> and <code>validate</code>.</p>
+          <p><strong>Solution:</strong> one guide-file module with typed, localizable failure reasons; dead outputs deleted; test-only data moved into fixtures.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Interface shrinks to parse/save</li>
+            <li>Failure reasons become localizable</li>
+            <li>Delete unread results and data</li>
+          </ul>
+        </article>
+
+        <!-- 8 -->
+        <article id="c8" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">8 · An app-shell controller between the guides controller and app.tsx</h2>
+            <span class="rounded-full bg-amber-100 text-amber-800 text-xs px-3 py-1 font-semibold">Worth exploring</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">in-process (guides controller injectable)</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>src/app.tsx (busy flags, line 56 result mapping, line 84 transition, 86-97 focus fallbacks)</li><li>src/state/guides.ts:252-261 (ten module-level pass-throughs)</li><li>src/components/MyGuides/MyGuides.tsx · src/state/ui.ts · src/lib/view-entry-focus.ts</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">Before</div>
+              <pre class="mermaid">
+sequenceDiagram
+  participant A as app.tsx
+  participant W as guides pass-through
+  participant C as guide controller
+  A->>A: set busy flag, once-guard
+  A->>W: flush
+  W->>C: flush
+  A->>W: refresh
+  W->>C: refresh
+  A->>A: close panel, enter view, map reason to toast, focus fallback
+  Note over A: none of this is unit-tested
+</pre>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-2">After</div>
+              <pre class="mermaid">
+sequenceDiagram
+  participant A as app.tsx / MyGuides
+  participant S as app shell
+  participant C as guide controller
+  A->>S: openGuide(id)
+  S->>C: flush, refresh, open
+  S-->>A: view + notice + busy signals
+  Note over S: unit-tested with injected controller
+</pre>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> view transitions, single-flight busy state, result → notice mapping and flush-before-navigate ordering live in <code>app.tsx</code> with a parallel copy in MyGuides, reachable only through Playwright; <code>guides.ts</code> adds ten pass-through wrappers on top.</p>
+          <p><strong>Solution:</strong> a testable app-shell module in <code>state/</code> owns transitions, busy state and notices; components render its signals.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Ordering bugs caught by unit tests</li>
+            <li>Delete ten pass-through wrappers</li>
+            <li>One busy/notice policy, not two</li>
+          </ul>
+        </article>
+
+        <!-- 9 -->
+        <article id="c9" class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="font-serif text-2xl mr-2">9 · Derive the i18n message interface from the English catalog</h2>
+            <span class="rounded-full bg-slate-200 text-slate-700 text-xs px-3 py-1 font-semibold">Speculative</span>
+            <span class="rounded-full bg-slate-100 text-slate-700 text-xs px-3 py-1">in-process</span>
+          </div>
+          <ul class="font-mono text-sm text-slate-700"><li>src/i18n/messages.ts · src/i18n/en.ts · src/i18n/de.ts</li></ul>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-3">Before — interface vs implementation mass</div>
+              <div class="flex items-end gap-6 h-56">
+                <div class="flex flex-col items-center gap-1"><div class="w-16 bg-red-300 border border-red-500" style="height:190px"></div><span class="text-xs">MessageParams<br>265 keys</span></div>
+                <div class="flex flex-col items-center gap-1"><div class="w-16 bg-slate-300 border border-slate-500" style="height:190px"></div><span class="text-xs">en<br>265 keys</span></div>
+                <div class="flex flex-col items-center gap-1"><div class="w-16 bg-slate-300 border border-slate-500" style="height:190px"></div><span class="text-xs">de<br>265 keys</span></div>
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 diagram">
+              <div class="label text-slate-500 mb-3">After</div>
+              <div class="flex items-end gap-6 h-56">
+                <div class="flex flex-col items-center gap-1"><div class="w-16 deep" style="height:30px"></div><span class="text-xs">derived<br>type</span></div>
+                <div class="flex flex-col items-center gap-1"><div class="w-16 bg-slate-300 border border-slate-500" style="height:190px"></div><span class="text-xs">en<br>source</span></div>
+                <div class="flex flex-col items-center gap-1"><div class="w-16 bg-slate-300 border border-slate-500" style="height:190px"></div><span class="text-xs">de</span></div>
+              </div>
+            </div>
+          </div>
+          <p><strong>Problem:</strong> the key set and parameter types are written by hand alongside both catalogs; <code>OutputIssue.messageKey</code> is a bare <code>string</code>, and 12 call sites build keys from template literals.</p>
+          <p><strong>Solution:</strong> derive keys and parameter types from <code>en</code>; type issue and notice keys as <code>MessageKey</code>.</p>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>One copy of the key set removed</li>
+            <li>Placeholder/param mismatch caught by types</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="top" class="rounded-xl border-2 border-slate-900 bg-white p-6 space-y-3">
+        <div class="label text-slate-500">Top recommendation</div>
+        <h2 class="font-serif text-3xl"><a href="#c1" class="underline decoration-emerald-500">1 · Picture commands</a>, cleared by <a href="#c2" class="underline decoration-emerald-500">2 · retiring legacy persistence</a> first</h2>
+        <p>Candidate 2 is pure deletion and removes the aliases and dead session actions that would otherwise be carried into the new interface; candidate 1 then puts every picture/group edit follow-up behind one interface where real call sequences can be unit-tested — the place drag, keyboard and panel bugs actually live today. Candidate 3 lands naturally on top, since its drop module returns exactly the commands candidate 1 defines.</p>
+        <p class="text-sm text-slate-500">Suggested order: 2 → 1 → 3 → 4 → 5, then 6-9 as capacity allows.</p>
+      </section>
+
+    </main>
+  </body>
+</html>
