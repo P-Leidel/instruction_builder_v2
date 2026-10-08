@@ -2,27 +2,27 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { createDocumentSession, sessionActions, type DocumentSession } from "./document";
 import { createEmptyDocument, createToken } from "../model/instruction";
 import * as documentState from "./document";
+import { createAuthoringController } from "./authoring";
 
 describe("overhaul session contracts", () => {
   it("moveUsesFinalIndexAndRetainsSelection", () => {
-    expect(sessionActions).toHaveProperty("moveTokenTo", expect.any(Function));
     const doc = createEmptyDocument();
     doc.steps = [{ id: "a", tokens: ["x", "y", "z"].map((id) => ({ id, category: "object", iconId: id })) },
       { id: "b", tokens: [] }];
     const session = createDocumentSession(doc);
-    sessionActions.moveTokenTo(session, "a", "x", "a", 1);
+    createAuthoringController(session).movePicture("a", "x", "a", 1);
     expect(session.document.value.steps[0].tokens.map((token) => token.id)).toEqual(["y", "x", "z"]);
     expect(session.past.value).toEqual([doc]);
     expect(session.selectedTokenId.value).toBe("x");
-    sessionActions.moveTokenTo(session, "a", "x", "b", 99);
+    createAuthoringController(session).movePicture("a", "x", "b", 99);
     expect(session.selectedStepId.value).toBe("b");
     expect(session.selectedToken.value?.id).toBe("x");
     expect(session.past.value).toHaveLength(2);
     const moved = session.document.value;
-    sessionActions.moveTokenTo(session, "b", "x", "b", 0);
-    sessionActions.moveTokenTo(session, "b", "x", "missing", 0);
-    sessionActions.moveTokenTo(session, "missing", "x", "a", 0);
-    sessionActions.moveTokenTo(session, "a", "missing", "b", 0);
+    createAuthoringController(session).movePicture("b", "x", "b", 0);
+    createAuthoringController(session).movePicture("b", "x", "missing", 0);
+    createAuthoringController(session).movePicture("missing", "x", "a", 0);
+    createAuthoringController(session).movePicture("a", "missing", "b", 0);
     expect(session.document.value).toBe(moved);
     expect(session.past.value).toHaveLength(2);
     sessionActions.undo(session);
@@ -48,7 +48,7 @@ describe("overhaul session contracts", () => {
     expect(session.copiedToken.value).toBeNull();
     sessionActions.undo(session);
     sessionActions.redo(session);
-    sessionActions.pasteToken(session);
+    createAuthoringController(session).pastePicture(session.selectedStepId.peek() ?? "");
     expect(session.document.value).toBe(next);
     sessionActions.updateTitle(session, "New title");
     sessionActions.undo(session);
@@ -60,14 +60,14 @@ describe("overhaul session contracts", () => {
     doc.steps = [{ id: "a", tokens: ["x", "y", "z"].map((id) => ({ id, category: "object", iconId: id })) },
       { id: "b", tokens: [{ id: "b1", category: "object", iconId: "onion" }] }];
     const session = createDocumentSession(doc);
-    sessionActions.moveTokenTo(session, "a", "z", "a", -10);
+    createAuthoringController(session).movePicture("a", "z", "a", -10);
     expect(session.document.value.steps[0].tokens.map((token) => token.id)).toEqual(["z", "x", "y"]);
-    sessionActions.moveTokenTo(session, "a", "z", "b", 99);
+    createAuthoringController(session).movePicture("a", "z", "b", 99);
     expect(session.document.value.steps[1].tokens.map((token) => token.id)).toEqual(["b1", "z"]);
     sessionActions.undo(session);
     const redo = session.future.value;
-    sessionActions.moveTokenTo(session, "a", "z", "a", 0);
-    sessionActions.moveTokenTo(session, "a", "z", "removed", 0);
+    createAuthoringController(session).movePicture("a", "z", "a", 0);
+    createAuthoringController(session).movePicture("a", "z", "removed", 0);
     expect(session.future.value).toBe(redo);
     expect(session.past.value).toHaveLength(1);
   });
@@ -303,7 +303,7 @@ describe("selection repair through setSteps", () => {
 });
 
 describe("moveToken", () => {
-  it("reorders within the same step, adjusting for the pre-removal index (forward move)", () => {
+  it("reorders within the same step using its final index (forward move)", () => {
     const session = createDocumentSession();
     const stepId = session.document.value.steps[0].id;
     const a = createToken("action", "a");
@@ -312,16 +312,14 @@ describe("moveToken", () => {
     sessionActions.addTokenToStep(session, stepId, a);
     sessionActions.addTokenToStep(session, stepId, b);
     sessionActions.addTokenToStep(session, stepId, c);
-    // [a, b, c] - move a (index 0) to drop-before index 2 (before c, in the
-    // pre-removal array) - removing a first shifts b/c back one, so a should
-    // land at index 1 (between b and c), not index 2.
-    sessionActions.moveToken(session, stepId, a.id, stepId, 2);
+    // [a, b, c] - a finishes between b and c at final index 1.
+    sessionActions.moveToken(session, stepId, a.id, stepId, 1);
 
     const tokens = session.document.value.steps[0].tokens.map((t) => t.id);
     expect(tokens).toEqual([b.id, a.id, c.id]);
   });
 
-  it("reorders within the same step without adjustment (backward move)", () => {
+  it("reorders within the same step using its final index (backward move)", () => {
     const session = createDocumentSession();
     const stepId = session.document.value.steps[0].id;
     const a = createToken("action", "a");
@@ -330,8 +328,7 @@ describe("moveToken", () => {
     sessionActions.addTokenToStep(session, stepId, a);
     sessionActions.addTokenToStep(session, stepId, b);
     sessionActions.addTokenToStep(session, stepId, c);
-    // [a, b, c] - move c (index 2) to drop-before index 0 (before a) - c is
-    // already after index 0, so no pre-removal-shift adjustment is needed.
+    // [a, b, c] - c finishes before a at final index 0.
     sessionActions.moveToken(session, stepId, c.id, stepId, 0);
 
     const tokens = session.document.value.steps[0].tokens.map((t) => t.id);
@@ -361,10 +358,8 @@ describe("moveToken", () => {
     sessionActions.addTokenToStep(session, stepId, a);
     sessionActions.addTokenToStep(session, stepId, b);
     sessionActions.addTokenToStep(session, stepId, c);
-    // [a, b, c] - move a (index 0) to drop-before index 3 (one past the last
-    // pre-removal index) - the append case adjustIndexForRemoval must also
-    // get right, not just mid-array inserts.
-    sessionActions.moveToken(session, stepId, a.id, stepId, 3);
+    // [a, b, c] - a finishes at the last remaining slot, final index 2.
+    sessionActions.moveToken(session, stepId, a.id, stepId, 2);
 
     const tokens = session.document.value.steps[0].tokens.map((t) => t.id);
     expect(tokens).toEqual([b.id, c.id, a.id]);
@@ -823,7 +818,7 @@ describe("token writes through updateTokenIn", () => {
   });
 });
 
-describe("copyToken / pasteToken", () => {
+describe("clipboard / authoring paste", () => {
   it("copies a token's full content into the clipboard with a fresh id", () => {
     const session = createDocumentSession();
     const stepId = session.document.value.steps[0].id;
@@ -859,7 +854,7 @@ describe("copyToken / pasteToken", () => {
     sessionActions.copyToken(session, stepId, token.id);
     const copiedId = session.copiedToken.value?.id;
 
-    sessionActions.pasteToken(session);
+    createAuthoringController(session).pastePicture(session.selectedStepId.peek() ?? "");
 
     const tokens = session.document.value.steps[0].tokens;
     expect(tokens).toHaveLength(2);
@@ -878,8 +873,8 @@ describe("copyToken / pasteToken", () => {
     sessionActions.addTokenToStep(session, stepId, token);
     sessionActions.copyToken(session, stepId, token.id);
 
-    sessionActions.pasteToken(session);
-    sessionActions.pasteToken(session);
+    createAuthoringController(session).pastePicture(session.selectedStepId.peek() ?? "");
+    createAuthoringController(session).pastePicture(session.selectedStepId.peek() ?? "");
 
     const tokens = session.document.value.steps[0].tokens;
     expect(tokens).toHaveLength(3);
@@ -890,7 +885,7 @@ describe("copyToken / pasteToken", () => {
     const session = createDocumentSession();
     const stepId = session.document.value.steps[0].id;
 
-    sessionActions.pasteToken(session);
+    createAuthoringController(session).pastePicture(session.selectedStepId.peek() ?? "");
     expect(session.document.value.steps[0].tokens).toHaveLength(0);
 
     const token = createToken("action", "knife");
@@ -898,7 +893,7 @@ describe("copyToken / pasteToken", () => {
     sessionActions.copyToken(session, stepId, token.id);
     sessionActions.selectStep(session, null);
 
-    sessionActions.pasteToken(session);
+    createAuthoringController(session).pastePicture(session.selectedStepId.peek() ?? "");
     expect(session.document.value.steps[0].tokens).toHaveLength(1);
   });
 

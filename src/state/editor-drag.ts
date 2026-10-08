@@ -1,16 +1,14 @@
 import { signal } from "@preact/signals";
-import type { CatalogEntry } from "../model/library";
+import type { EditorDragSource } from "../model/editor-command";
 import type { DocumentSession } from "./document";
-import { sessionActions } from "./document";
 import { activeGuideId } from "./guides";
 import { authoring, focusPicture } from "./ui";
 import { preferences } from "./preferences";
 import { t } from "../i18n/messages";
 import { dragThresholdFor } from "../lib/pointer-drag";
-import { resolveEditorPictureDrop, resolveEditorGroupDrop, type EditorGroupRect, type EditorPictureDrop } from "../lib/editor-drop";
-import { groupDropIndex, pictureDropIndex } from "../lib/editor-drop-index";
+import { resolveEditorPictureDrop, resolveEditorGroupDrop, resolveEditorDropCommand, type EditorGroupRect, type EditorPictureDrop, type EditorDropPermission } from "../lib/editor-drop";
 
-type Source = { kind: "picture"; groupId: string; tokenId: string } | { kind: "group"; groupId: string } | { kind: "library"; entry: CatalogEntry };
+type Source = EditorDragSource;
 type GroupDrop = NonNullable<ReturnType<typeof resolveEditorGroupDrop>>;
 export const editorDrag = signal<{ source: Source; x: number; y: number; label: string; pictureDrop: EditorPictureDrop | null; groupDrop: GroupDrop | null } | null>(null);
 export const editorDragAnnouncement = signal("");
@@ -66,10 +64,21 @@ export function beginEditorDrag(event: PointerEvent, session: DocumentSession, s
   element.setPointerCapture(pointerId);
 
   const valid = () => element.isConnected && session.document.peek() === initial && activeGuideId.peek() === guideId && !document.querySelector("dialog[open]");
+  function permission(): EditorDropPermission {
+    const hit = document.elementFromPoint(x, y);
+    return {
+      inViewport: x >= 0 && x < innerWidth && y >= 0 && y < innerHeight,
+      blockedTarget: !!hit?.closest(".authoring-panel, dialog, .editor-group-tools"),
+      modalOpen: !!document.querySelector("dialog[open]"),
+      sourceConnected: element.isConnected,
+      guideUnchanged: activeGuideId.peek() === guideId,
+      documentUnchanged: session.document.peek() === initial,
+    };
+  }
   function update() {
     const groups = rectangles();
-    const hit = document.elementFromPoint(x, y);
-    const inside = x >= 0 && x < innerWidth && y >= 0 && y < innerHeight && !hit?.closest(".authoring-panel, dialog, .editor-group-tools");
+    const allowed = permission();
+    const inside = allowed.inViewport && !allowed.blockedTarget;
     editorDrag.value = { source, x, y, label,
       pictureDrop: inside && source.kind !== "group" ? resolveEditorPictureDrop(groups, x, y) : null,
       groupDrop: inside && source.kind === "group" ? resolveEditorGroupDrop(groups, x, y) : null,
@@ -105,26 +114,14 @@ export function beginEditorDrag(event: PointerEvent, session: DocumentSession, s
     update(); const drop = editorDrag.peek(); cleanup();
     if (!drop) return;
     const before = session.document.peek();
-    if (source.kind === "group" && drop.groupDrop) {
-      const index = groupDropIndex(before, drop.groupDrop); if (index === null) return;
-      sessionActions.reorderSteps(session, before.steps.findIndex(group => group.id === source.groupId), index);
-      requestAnimationFrame(() => document.querySelector<HTMLElement>(`[data-group-drag="${CSS.escape(source.groupId)}"]`)?.focus({ preventScroll: true }));
-    } else if (source.kind !== "group" && drop.pictureDrop) {
-      const target = drop.pictureDrop;
-      const index = pictureDropIndex(before, target); if (index === null) return;
-      if (source.kind === "library") {
-        const tokenId = crypto.randomUUID();
-        sessionActions.addTokenToStep(session, target.groupId, { id: tokenId, iconId: source.entry.iconId, category: source.entry.category, label: source.entry.labels[labelLocale] }, index);
-        sessionActions.selectToken(session, target.groupId, tokenId); authoring.close(); focusPicture(tokenId);
-      } else {
-        sessionActions.moveToken(session, source.groupId, source.tokenId, target.groupId, index);
-        if (session.document.peek() !== before) {
-          sessionActions.selectToken(session, target.groupId, source.tokenId);
-          const panel = authoring.panel.peek();
-          if (panel.kind === "picture" && panel.tokenId === source.tokenId) authoring.panel.value = { ...panel, stepId: target.groupId };
-          focusPicture(source.tokenId);
-        }
-      }
+    const command = resolveEditorDropCommand(source, drop, permission(), labelLocale);
+    if (!command) return;
+    if (command.kind === "move-group") {
+      if (authoring.moveGroup(command.sourceStepId, command.destination) === undefined) return;
+      requestAnimationFrame(() => document.querySelector<HTMLElement>(`[data-group-drag="${CSS.escape(command.sourceStepId)}"]`)?.focus({ preventScroll: true }));
+    } else {
+      const result = authoring.executePicture(command, { panel: source.kind === "library" ? "close" : "preserve" });
+      if (result.status === "changed") focusPicture(result.tokenId);
     }
     if (session.document.peek() !== before) editorDragAnnouncement.value = t(locale, source.kind === "group" ? "editor.groupMoved" : "editor.pictureMoved");
   }

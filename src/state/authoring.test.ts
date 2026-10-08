@@ -3,6 +3,8 @@ import { createAuthoringController } from "./authoring";
 import { createDocumentSession, sessionActions, openDocumentInSession } from "./document";
 import { sequenceFixture } from "../test/fixtures/overhaul";
 import { getCatalogEntry } from "../lib/library-catalog";
+import { createEmptyDocument } from "../model/instruction";
+import { resolveEditorDropCommand, resolveEditorPictureDrop } from "../lib/editor-drop";
 function fixture() { const session = createDocumentSession(); const doc = sequenceFixture(); doc.steps.push({ id: "second-group", tokens: [] }); openDocumentInSession(session, doc); return { session, authoring: createAuthoringController(session) }; }
 describe("contextual authoring", () => {
   it("reports successful copy and rejects missing targets without replacing the clipboard", () => {
@@ -52,5 +54,155 @@ describe("contextual authoring", () => {
     expect(session.document.value.steps[0].tokens.at(-1)?.id).toBe(pastedId);
     expect(session.document.value.steps[0].tokens.at(-1)?.warning).not.toBe(session.copiedToken.value?.warning);
     const past = session.past.peek(); authoring.movePicture("stale", token.id, step.id, 0); expect(session.past.peek()).toBe(past);
+  });
+});
+
+// These checks catch anchor conversion done against a rendered segment or twice,
+// and follow-ups bypassed by the drag path. They exercise the running controller.
+describe("picture command composition", () => {
+  function commands() {
+    const doc = createEmptyDocument();
+    doc.steps = [{ id: "a", tokens: ["x", "y", "z"].map(id => ({ id, category: "object", iconId: id })) }, { id: "b", tokens: [] }];
+    const session = createDocumentSession(doc);
+    return { session, authoring: createAuthoringController(session) };
+  }
+  const permission = { inViewport: true, blockedTarget: false, modalOpen: false, sourceConnected: true, guideUnchanged: true, documentUnchanged: true };
+
+  it("commits a same-group anchor once and selects the moved picture", () => {
+    const { session, authoring } = commands(); authoring.openPicture("a", "x");
+    const command = resolveEditorDropCommand({ kind: "picture", groupId: "a", tokenId: "x" }, { pictureDrop: { groupId: "a", anchorId: "z", edge: "after" }, groupDrop: null }, permission, "en");
+    expect(command).not.toBeNull();
+    expect(authoring.executePicture(command!)).toEqual({ status: "changed", stepId: "a", tokenId: "x" });
+    expect(session.document.peek().steps[0].tokens.map(token => token.id)).toEqual(["y", "z", "x"]);
+    expect(session.past.peek()).toHaveLength(1); expect(session.selectedToken.peek()?.id).toBe("x");
+    expect(authoring.panel.peek()).toEqual({ kind: "picture", stepId: "a", tokenId: "x" });
+  });
+
+  it("selects and retargets matching details after a cross-group move", () => {
+    const { session, authoring } = commands(); authoring.openPicture("a", "x");
+    expect(authoring.executePicture({ kind: "move", source: { stepId: "a", tokenId: "x" }, destination: { stepId: "b", kind: "empty" } }).status).toBe("changed");
+    expect(session.selectedStepId.peek()).toBe("b"); expect(session.selectedTokenId.peek()).toBe("x");
+    expect(authoring.panel.peek()).toEqual({ kind: "picture", stepId: "b", tokenId: "x" });
+    expect(session.past.peek()).toHaveLength(1);
+  });
+
+  it("resolves continued-page geometry against the whole group", () => {
+    const { session, authoring } = commands();
+    session.document.value.steps[0].tokens = Array.from({ length: 30 }, (_, i) => ({ id: `p${i}`, category: "object", iconId: "object.onion" }));
+    const target = resolveEditorPictureDrop([{ id: "a", rect: { left: 0, right: 100, top: 0, bottom: 100 }, pictures: [{ id: "p24", rect: { left: 10, right: 50, top: 10, bottom: 50 } }] }], 20, 20);
+    const command = resolveEditorDropCommand({ kind: "picture", groupId: "a", tokenId: "p0" }, { pictureDrop: target, groupDrop: null }, permission, "en");
+    expect(authoring.executePicture(command!).status).toBe("changed");
+    expect(session.document.peek().steps[0].tokens.slice(22, 25).map(token => token.id)).toEqual(["p23", "p0", "p24"]);
+    expect(session.past.peek()).toHaveLength(1);
+  });
+
+  it.each(["before", "after"] as const)("self-%s preserves document, redo, selection and panel identities", edge => {
+    const { session, authoring } = commands();
+    sessionActions.updateTitle(session, "edited"); sessionActions.undo(session); authoring.openPicture("a", "y");
+    const document = session.document.peek(), past = session.past.peek(), future = session.future.peek(), panel = authoring.panel.peek();
+    expect(authoring.executePicture({ kind: "move", source: { stepId: "a", tokenId: "x" }, destination: { stepId: "a", kind: "anchor", anchorId: "x", edge } }, { panel: "close" })).toEqual({ status: "unchanged" });
+    expect(session.document.peek()).toBe(document); expect(session.past.peek()).toBe(past); expect(session.future.peek()).toBe(future);
+    expect(session.selectedTokenId.peek()).toBe("y"); expect(authoring.panel.peek()).toBe(panel);
+  });
+
+  it.each([
+    { tokenId: "x", anchorId: "y", edge: "before" },
+    { tokenId: "y", anchorId: "x", edge: "after" },
+  ] as const)("equivalent neighboring anchor preserves redo and unrelated selection: %j", ({ tokenId, anchorId, edge }) => {
+    const { session, authoring } = commands(); sessionActions.updateTitle(session, "edited"); sessionActions.undo(session); authoring.openPicture("a", "z");
+    const document = session.document.peek(), past = session.past.peek(), future = session.future.peek(), panel = authoring.panel.peek();
+    expect(authoring.executePicture({ kind: "move", source: { stepId: "a", tokenId }, destination: { stepId: "a", kind: "anchor", anchorId, edge } })).toEqual({ status: "unchanged" });
+    expect(session.document.peek()).toBe(document); expect(session.past.peek()).toBe(past); expect(session.future.peek()).toBe(future);
+    expect(session.selectedTokenId.peek()).toBe("z"); expect(authoring.panel.peek()).toBe(panel);
+  });
+
+  it("moves backward to a stable anchor while preserving its authored content", () => {
+    const { session, authoring } = commands(); const token = session.document.peek().steps[0].tokens[2]; token.label = " Z authored "; token.note = "keep";
+    authoring.executePicture({ kind: "move", source: { stepId: "a", tokenId: "z" }, destination: { stepId: "a", kind: "anchor", anchorId: "x", edge: "before" } });
+    expect(session.document.peek().steps[0].tokens.map(item => item.id)).toEqual(["z", "x", "y"]);
+    expect(session.selectedToken.peek()).toBe(token); expect(token.label).toBe(" Z authored "); expect(token.note).toBe("keep");
+  });
+
+  it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])("rejects nonfinite final index %s without selecting the source", index => {
+    const { session, authoring } = commands(); authoring.openPicture("a", "y"); const document = session.document.peek(), panel = authoring.panel.peek();
+    expect(authoring.movePicture("a", "x", "b", index, { panel: "close" })).toEqual({ status: "rejected", reason: "target-missing" });
+    expect(session.document.peek()).toBe(document); expect(session.past.peek()).toHaveLength(0); expect(session.selectedTokenId.peek()).toBe("y"); expect(authoring.panel.peek()).toBe(panel);
+  });
+
+  it("truncates a finite final index before moving and keeps one undo entry", () => {
+    const { session, authoring } = commands(); authoring.movePicture("a", "x", "a", 1.9);
+    expect(session.document.peek().steps[0].tokens.map(token => token.id)).toEqual(["y", "x", "z"]); expect(session.past.peek()).toHaveLength(1);
+  });
+
+  it.each([
+    { source: { stepId: "gone", tokenId: "x" }, destination: { stepId: "b", kind: "empty" } },
+    { source: { stepId: "a", tokenId: "gone" }, destination: { stepId: "b", kind: "empty" } },
+    { source: { stepId: "a", tokenId: "x" }, destination: { stepId: "gone", kind: "append" } },
+    { source: { stepId: "a", tokenId: "x" }, destination: { stepId: "a", kind: "anchor", anchorId: "gone", edge: "before" } },
+    { source: { stepId: "a", tokenId: "x" }, destination: { stepId: "a", kind: "empty" } },
+  ] as const)("rejects stale or false-empty intent without side effects: %j", ({ source, destination }) => {
+    const { session, authoring } = commands(); authoring.openPicture("a", "x");
+    const document = session.document.peek(), past = session.past.peek(), panel = authoring.panel.peek();
+    expect(authoring.executePicture({ kind: "move", source, destination }).status).toBe("rejected");
+    expect(session.document.peek()).toBe(document); expect(session.past.peek()).toBe(past); expect(authoring.panel.peek()).toBe(panel);
+    expect(session.selectedTokenId.peek()).toBe("x");
+  });
+
+  it("inserts a library drop into the actual target and closes the picker", () => {
+    const { session, authoring } = commands(); authoring.openPicker("a");
+    const command = resolveEditorDropCommand({ kind: "library", entry: getCatalogEntry("learning.object.book")! }, { pictureDrop: { groupId: "b", edge: "empty" }, groupDrop: null }, permission, "de");
+    expect(authoring.executePicture(command!, { panel: "close" }).status).toBe("changed");
+    expect(session.document.peek().steps[1].tokens[0].label).toBe("Buch");
+    expect(session.selectedTokenId.peek()).toBe(session.document.peek().steps[1].tokens[0].id);
+    expect(authoring.panel.peek()).toEqual({ kind: "closed" }); expect(session.past.peek()).toHaveLength(1);
+  });
+
+  it("keeps unrelated panels and distinguishes keyboard paste from details paste", () => {
+    const { session, authoring } = commands(); authoring.openPicture("a", "y"); const panel = authoring.panel.peek();
+    authoring.executePicture({ kind: "move", source: { stepId: "a", tokenId: "x" }, destination: { stepId: "b", kind: "append" } });
+    expect(authoring.panel.peek()).toBe(panel);
+    authoring.copyPicture("a", "y"); authoring.pastePicture("b"); expect(authoring.panel.peek()).toBe(panel);
+    authoring.executePicture({ kind: "paste", destination: { stepId: "b", kind: "append" } }, { panel: "close" });
+    expect(authoring.panel.peek()).toEqual({ kind: "closed" }); expect(session.document.peek().steps[1].tokens).toHaveLength(3);
+  });
+
+  it("moves a group by stable anchor without changing picture selection", () => {
+    const { session, authoring } = commands(); authoring.openPicture("a", "x");
+    expect(authoring.moveGroup("a", { anchorId: "b", edge: "after" })).toBe(true);
+    expect(session.document.peek().steps.map(step => step.id)).toEqual(["b", "a"]);
+    expect(session.selectedTokenId.peek()).toBe("x"); expect(session.past.peek()).toHaveLength(1);
+    // A rejected target must not trigger the adapter's valid-drop focus request.
+    expect(authoring.moveGroup("a", { anchorId: "gone", edge: "before" })).toBeUndefined();
+    expect(authoring.moveGroup("gone", { anchorId: "a", edge: "after" })).toBeUndefined();
+    expect(session.past.peek()).toHaveLength(1);
+  });
+
+  it.each(["before", "after"] as const)("group self-%s remains a valid no-op with redo and selection intact", edge => {
+    const { session, authoring } = commands(); sessionActions.updateTitle(session, "edited"); sessionActions.undo(session); authoring.openPicture("a", "x");
+    const document = session.document.peek(), past = session.past.peek(), future = session.future.peek(), panel = authoring.panel.peek();
+    expect(authoring.moveGroup("a", { anchorId: "a", edge })).toBe(false);
+    expect(session.document.peek()).toBe(document); expect(session.past.peek()).toBe(past); expect(session.future.peek()).toBe(future);
+    expect(session.selectedTokenId.peek()).toBe("x"); expect(authoring.panel.peek()).toBe(panel);
+  });
+
+  it("deep clipboard snapshots survive source mutation/removal and repeated paste", () => {
+    const { session, authoring } = commands(); const token = session.document.peek().steps[0].tokens[0];
+    token.quantity = { iconId: "quantity.amount", amount: 2, unit: "cup", label: "Two cups" };
+    token.time = { iconId: "time.duration", seconds: 60, label: "Minute" }; token.warning = { iconId: "warning.sharp", label: "Sharp" }; token.metadata = { custom: "retained" }; token.note = "authored";
+    authoring.openPicture("a", "x"); const document = session.document.peek(), past = session.past.peek(), panel = authoring.panel.peek();
+    expect(authoring.executePicture({ kind: "copy", source: { stepId: "a", tokenId: "x" } }, { panel: "close" })).toEqual({ status: "copied" });
+    expect(session.document.peek()).toBe(document); expect(session.past.peek()).toBe(past); expect(authoring.panel.peek()).toBe(panel); expect(session.selectedTokenId.peek()).toBe("x");
+    const copied = session.copiedToken.peek()!;
+    authoring.duplicatePicture("a", "x"); const duplicate = session.document.peek().steps[0].tokens.at(-1)!;
+    token.quantity.amount = 9; token.time.seconds = 90; token.warning.label = "changed"; token.metadata.custom = "changed";
+    sessionActions.removeTokenFromStep(session, "a", "x");
+    const first = authoring.pastePicture("b")!, second = authoring.pastePicture("b")!;
+    const [one, two] = session.document.peek().steps[1].tokens;
+    expect(new Set([token.id, copied.id, duplicate.id, first, second]).size).toBe(5);
+    for (const item of [copied, duplicate, one, two]) {
+      expect(item.quantity?.amount).toBe(2); expect(item.time?.seconds).toBe(60); expect(item.warning?.label).toBe("Sharp"); expect(item.metadata).toEqual({ custom: "retained" }); expect(item.note).toBe("authored");
+    }
+    one.quantity!.amount = 7; one.time!.seconds = 7; one.warning!.label = "paste changed"; one.metadata!.custom = "paste changed";
+    expect(two.quantity?.amount).toBe(2); expect(copied.time?.seconds).toBe(60); expect(two.warning?.label).toBe("Sharp"); expect(copied.metadata?.custom).toBe("retained");
   });
 });

@@ -88,7 +88,7 @@ export interface DocumentSession {
   /**
    * See CONTEXT.md's "Token clipboard" entry - a single-slot, in-memory copy
    * of one token, written by `copyToken`, read (and paste-again-able) by
-   * `pasteToken`. Not part of the document, not part of undo/redo history.
+   * authoring commands. Not part of the document, not part of undo/redo history.
    */
   readonly copiedToken: Signal<InstructionToken | null>;
   /**
@@ -254,15 +254,9 @@ function setSteps(
   });
 }
 
-/**
- * `index`/`toIndex` in `moveTokenCore`/`reorderStepsCore` is a drop-before
- * position computed against the array *before* the dragged item is removed
- * from it (see `resolveDropTarget`/`resolveStepDropIndex`); removing that
- * item first shifts everything after it back by one, so a forward move
- * (`fromIndex < toIndexBeforeRemoval`) must adjust the target down by one to
- * land where the user actually dropped it. Shared by both call sites below
- * rather than hand-written twice - the same correction, not a coincidence.
- */
+/** The internal group reorder uses a pre-removal insertion position. Removing
+ * a source before that position shifts it back once. Public group commands
+ * resolve stable anchors to this convention; picture moves use final indices. */
 function adjustIndexForRemoval(fromIndex: number, toIndexBeforeRemoval: number): number {
   return fromIndex !== -1 && fromIndex < toIndexBeforeRemoval
     ? toIndexBeforeRemoval - 1
@@ -492,25 +486,8 @@ function removeStepCore(session: DocumentSession, stepId: string): void {
   );
 }
 
-/**
- * Adds a token to a specific step - the drag-and-drop drop target (task 9),
- * and, through `addTokenToSelectedStepCore` below, the tap-to-insert and
- * paste paths as well.
- *
- * The guard is here for the drop-target caller. Its `stepId` is resolved
- * during a drag rather than read off the document at commit time, exactly as
- * `moveTokenCore`'s destination is, so it carries the same risk of naming a
- * step the document no longer holds. The consequence is milder than
- * `moveTokenCore`'s - the map below simply matches nothing, so no token is
- * destroyed - but `setSteps` would still record an identical steps array as
- * an undo entry and wipe redo, which is the behaviour `updateTokenIn` was
- * given a guard against. Same guard, same reason.
- *
- * The other caller passes the selected step id, which `repairSelection`
- * already keeps pointing at a live step, so there the guard is redundant
- * rather than load-bearing - one `some` on a path that rebuilds the whole
- * steps array anyway.
- */
+/** Inserts into an explicit live step. A missing target does not record history
+ * or clear redo, even if a caller captured its ID before the step was removed. */
 function addTokenToStepCore(
   session: DocumentSession,
   stepId: string,
@@ -526,78 +503,10 @@ function addTokenToStepCore(
   );
 }
 
-/** Adds a token to whichever step is selected - the tap-to-insert path (task 11). */
-function addTokenToSelectedStepCore(session: DocumentSession, token: InstructionToken): void {
-  const stepId = session.selectedStepId.value;
-  if (!stepId) return;
-  addTokenToStepCore(session, stepId, token);
-}
-
-/**
- * Moves an existing token to `index` within `toStepId`, removing it from
- * `fromStepId` first - covers both reordering within a step (fromStepId ===
- * toStepId) and moving between steps, via a drag on the canvas (task 9).
- *
- * No-ops (skipping `setSteps`, so no history entry and no redo wipe) when
- * `fromStepId === toStepId` and the drop resolves back to the token's
- * current position - finding 2/B5's guard against dropping a token back
- * exactly where it started. Moving between two different steps is always a
- * real change (the token relocates either way), so that case skips the
- * `tokensEqual` check.
- *
- * Selection repair after the move - finding 2/B5's fix for the token that
- * was selected before the move no longer being found under its old step -
- * comes from `setSteps` now, not from a `repairSelection` call here; see
- * `repairSelection`'s own comment for the bug it prevents.
- *
- * Both step ids are checked against the document before anything is written,
- * the same property `updateTokenIn` states for its own traversal. The
- * destination check is the load-bearing one: the map below removes the token
- * from `fromStepId` in its own branch and re-inserts it in the `toStepId`
- * branch, so a destination the document doesn't hold ran the removal with no
- * matching insertion - the token was destroyed, and because a cross-step move
- * skips the `tokensEqual` guard the destruction was written as a legitimate
- * undo entry. Both ids reach here from a resolved drop target rather than
- * from a caller that just read them off the document, so neither is
- * guaranteed to still name a live step by the time the drop commits.
- */
+/** Moves a picture to its final slot after removing it from its source.
+ * Selection repair is generic here; live authoring commands select the moved
+ * picture only after a real change. Stale and equivalent moves are no-ops. */
 function moveTokenCore(
-  session: DocumentSession,
-  fromStepId: string,
-  tokenId: string,
-  toStepId: string,
-  index: number,
-): void {
-  const fromStep = session.document.value.steps.find((s) => s.id === fromStepId);
-  const token = fromStep?.tokens.find((t) => t.id === tokenId);
-  if (!token) return;
-  if (!session.document.value.steps.some((s) => s.id === toStepId)) return;
-
-  let changed = fromStepId !== toStepId;
-  const steps = session.document.value.steps.map((step) => {
-    if (step.id === fromStepId && step.id === toStepId) {
-      const fromIndex = step.tokens.findIndex((t) => t.id === tokenId);
-      const withoutToken = step.tokens.filter((t) => t.id !== tokenId);
-      const adjustedIndex = adjustIndexForRemoval(fromIndex, index);
-      const tokens = insertToken(withoutToken, token, adjustedIndex);
-      if (!tokensEqual(tokens, step.tokens)) changed = true;
-      return { ...step, tokens };
-    }
-    if (step.id === fromStepId) {
-      return { ...step, tokens: step.tokens.filter((t) => t.id !== tokenId) };
-    }
-    if (step.id === toStepId) {
-      return { ...step, tokens: insertToken(step.tokens, token, index) };
-    }
-    return step;
-  });
-  if (!changed) return;
-
-  setSteps(session, steps);
-}
-
-/** Moves to a destination index measured after removing the source token. */
-function moveTokenToCore(
   session: DocumentSession,
   fromStepId: string,
   tokenId: string,
@@ -607,7 +516,7 @@ function moveTokenToCore(
   const source = session.document.value.steps.find((step) => step.id === fromStepId);
   const token = source?.tokens.find((item) => item.id === tokenId);
   const destination = session.document.value.steps.find((step) => step.id === toStepId);
-  if (!source || !token || !destination || Number.isNaN(finalIndex)) return;
+  if (!source || !token || !destination || !Number.isFinite(finalIndex)) return;
   const remaining = destination.tokens.filter((item) => item.id !== tokenId);
   const index = Math.max(0, Math.min(Math.trunc(finalIndex), remaining.length));
   const tokens = insertToken(remaining, token, index);
@@ -617,30 +526,12 @@ function moveTokenToCore(
     if (step === source) return { ...step, tokens: step.tokens.filter((item) => item.id !== tokenId) };
     return step;
   });
-  batch(() => {
-    setSteps(session, steps);
-    selectTokenCore(session, toStepId, tokenId);
-  });
+  setSteps(session, steps);
 }
 
-/**
- * Moves a step from `fromIndex` to `toIndex` - dragging a step's reorder
- * handle on the canvas (task 9; the standalone StepList panel this
- * originally served was later folded into InstructionCanvas). `toIndex` is a
- * pre-removal splice target (see `adjustIndexForRemoval`'s comment), not
- * "the index it should end up at" - a fact `moveStepUpCore`/`moveStepDownCore`
- * below exist specifically so no other caller has to rediscover.
- * `InstructionCanvas.tsx`'s drag handler is the one remaining direct caller,
- * since its drop index already comes out of `resolveStepDropIndex` in that
- * same pre-removal convention.
- *
- * No-ops (skipping `setSteps`, so no history entry and no redo wipe) when
- * the drop resolves back to `fromIndex` - finding 2/B5's guard against
- * dropping a step back exactly where it started. Removing the step at
- * `fromIndex` and reinserting it at that same index reconstructs the
- * original order exactly, so `clamped === fromIndex` is a precise stand-in
- * for a full array-value-equality check, not just an approximation of one.
- */
+/** Reorders a group using the internal pre-removal insertion convention.
+ * Stable public anchors are resolved by authoring commands; up/down verbs below
+ * also use this primitive. Equivalent moves preserve document and history. */
 function reorderStepsCore(session: DocumentSession, fromIndex: number, toIndex: number): void {
   const steps = [...session.document.value.steps];
   if (fromIndex < 0 || fromIndex >= steps.length) return;
@@ -818,23 +709,7 @@ function copyTokenCore(session: DocumentSession, stepId: string, tokenId: string
   const step = session.document.value.steps.find((s) => s.id === stepId);
   const token = step?.tokens.find((t) => t.id === tokenId);
   if (!token) return;
-  session.copiedToken.value = { ...token, id: newId() };
-}
-
-/**
- * Appends a fresh-id copy of whatever's in the token clipboard onto the
- * currently selected step - the same "wherever's selected" convention as
- * `addTokenToSelectedStepCore`, which this delegates to. A no-op if nothing's
- * been copied yet, or no step is selected. Reuses the clipboard's own token
- * as-is (deliberately not re-reading it from `document` by id - the source
- * token may since have been edited or removed, and the clipboard is meant to
- * paste back what was copied, not "whatever that token currently looks
- * like"), minting yet another fresh id so repeated pastes never collide.
- */
-function pasteTokenCore(session: DocumentSession): void {
-  const copied = session.copiedToken.value;
-  if (!copied) return;
-  addTokenToSelectedStepCore(session, { ...copied, id: newId() });
+  session.copiedToken.value = { ...structuredClone(token), id: newId() };
 }
 
 export const sessionActions = {
@@ -847,9 +722,7 @@ export const sessionActions = {
   addStep: addStepCore,
   removeStep: removeStepCore,
   addTokenToStep: addTokenToStepCore,
-  addTokenToSelectedStep: addTokenToSelectedStepCore,
   moveToken: moveTokenCore,
-  moveTokenTo: moveTokenToCore,
   reorderSteps: reorderStepsCore,
   moveStepUp: moveStepUpCore,
   moveStepDown: moveStepDownCore,
@@ -864,7 +737,6 @@ export const sessionActions = {
   setTokenTime: setTokenTimeCore,
   setStepTime: setStepTimeCore,
   copyToken: copyTokenCore,
-  pasteToken: pasteTokenCore,
 };
 
 /** The app's one running session; tests can construct independent sessions. */

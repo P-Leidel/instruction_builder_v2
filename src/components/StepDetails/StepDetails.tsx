@@ -16,7 +16,7 @@ export function StepDetails({ session }: { session: DocumentSession }) {
     <details class="editor-actions"><summary>{t(locale, "editor.actions")}</summary>
       <label>{t(locale, "editor.description")}<textarea value={step.description ?? ""} onInput={(event) => sessionActions.updateStepDescription(session, step.id, event.currentTarget.value)} /></label>
       <div class="action-row"><button type="button" disabled={index === 0} onClick={() => sessionActions.moveStepUp(session, step.id)}>{t(locale, "editor.moveGroupEarlier")}</button><button type="button" disabled={index === session.document.value.steps.length - 1} onClick={() => sessionActions.moveStepDown(session, step.id)}>{t(locale, "editor.moveGroupLater")}</button></div>
-      {session.copiedToken.value && <button type="button" onClick={() => { const id = authoring.pastePicture(step.id); if (id) { authoring.close(); focusPicture(id); } }}>{t(locale, "editor.pastePicture")}</button>}
+      {session.copiedToken.value && <button type="button" onClick={() => { const id = authoring.pastePicture(step.id, { panel: "close" }); if (id) focusPicture(id); }}>{t(locale, "editor.pastePicture")}</button>}
       <button type="button" onClick={() => step.tokens.length ? setConfirmRemove(true) : remove()}>{t(locale, "editor.removeGroup")}</button>
     </details>
   </section>;

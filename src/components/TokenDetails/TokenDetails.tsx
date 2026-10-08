@@ -14,7 +14,7 @@ export function TokenDetails({ session }: { session: DocumentSession }) {
   if (!step || !token) return null;
   const index = step.tokens.findIndex((picture) => picture.id === token.id); const locale = pref.uiLocale;
   const label = token.label?.trim() ? token.label : getCatalogEntry(token.iconId)?.labels[locale] ?? t(locale, "catalog.unknownSymbol", { iconId: token.iconId });
-  const move = (destination: string, finalIndex: number) => { authoring.movePicture(step.id, token.id, destination, finalIndex); authoring.close(); focusPicture(token.id); };
+  const move = (destination: string, finalIndex: number) => { const result = authoring.movePicture(step.id, token.id, destination, finalIndex, { panel: "close" }); if (result.status === "changed") focusPicture(result.tokenId); };
   return <section class="token-details"><h2>{t(locale, "editor.pictureDetails", { label })}</h2>
     <label>{t(locale, "editor.pictureLabel")}<textarea autoFocus value={token.label ?? ""} onInput={(event) => sessionActions.updateTokenLabel(session, step.id, token.id, event.currentTarget.value)} /></label>
     <QuantityEditor key={`${token.id}-quantity`} value={token.quantity} locale={locale} libraryId={pref.activeLibraryId} onSave={(value) => value ? sessionActions.attachToToken(session, step.id, token.id, { kind: "quantity", value }) : sessionActions.removeTokenAttachment(session, step.id, token.id, "quantity")} />
@@ -27,7 +27,7 @@ export function TokenDetails({ session }: { session: DocumentSession }) {
       <div class="action-row"><button type="button" disabled={index === 0} onClick={() => move(step.id, index - 1)}>{t(locale, "editor.moveEarlier")}</button><button type="button" disabled={index === step.tokens.length - 1} onClick={() => move(step.id, index + 1)}>{t(locale, "editor.moveLater")}</button></div>
       <label>{t(locale, "editor.moveToGroup")}<select value="" onChange={(event) => { const target = session.document.peek().steps.find((group) => group.id === event.currentTarget.value); if (target) move(target.id, target.tokens.length); }}><option value="">{t(locale, "editor.moveToGroup")}</option>{session.document.value.steps.filter((group) => group.id !== step.id).map((group) => <option value={group.id}>{group.title || t(locale, session.document.value.meta.presentation === "board" ? "editor.groupNumber" : "editor.stepNumber", { number: session.document.value.steps.indexOf(group) + 1 })}</option>)}</select></label>
       <p role="status" aria-live="polite" aria-atomic="true">{copied?.tokenId === token.id && <span key={copied.version}>{t(locale, "editor.copiedPicture", { label: copied.label })}</span>}</p>
-      <div class="action-row"><button type="button" onClick={() => { const id = authoring.duplicatePicture(step.id, token.id); authoring.close(); if (id) focusPicture(id); }}>{t(locale, "editor.duplicatePicture")}</button>
+      <div class="action-row"><button type="button" onClick={() => { const id = authoring.duplicatePicture(step.id, token.id, { panel: "close" }); if (id) focusPicture(id); }}>{t(locale, "editor.duplicatePicture")}</button>
         <button type="button" onClick={() => {
           if (authoring.copyPicture(step.id, token.id)) setCopied(current => ({ tokenId: token.id, label, version: (current?.version ?? 0) + 1 }));
           else setCopied(null);

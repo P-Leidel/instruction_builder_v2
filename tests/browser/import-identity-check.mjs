@@ -50,7 +50,7 @@ try {
     const copied = await page.evaluate(async () => {
       const { documentSession: session, sessionActions } = await import("/src/state/document.ts");
       sessionActions.selectToken(session, " ", " ?[]/ "); sessionActions.copyToken(session, " ", " ?[]/ ");
-      sessionActions.pasteToken(session);
+      (await import("/src/state/ui.ts")).authoring.pastePicture(session.selectedStepId.peek());
       await (await import("/src/state/guides.ts")).flushActiveGuide();
       return session.document.peek().steps[0].tokens;
     });

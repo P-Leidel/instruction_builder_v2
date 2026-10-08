@@ -1,3 +1,4 @@
+import { createAuthoringController } from "./authoring";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createGuideController } from "./guides";
 import { createPreferencesController, PREFERENCES_KEY } from "./preferences";
@@ -243,7 +244,7 @@ describe("local guide controller", () => {
   it("isolatesHistoryAndClipboard", async () => {
     const { controller, session, records } = await fixture();
     sessionActions.updateTitle(session, "A edited"); sessionActions.copyToken(session, records[0].document.steps[0].id, "token-A");
-    await controller.openGuide(records[1].id); sessionActions.undo(session); sessionActions.pasteToken(session);
+    await controller.openGuide(records[1].id); sessionActions.undo(session); createAuthoringController(session).pastePicture(session.selectedStepId.peek()!);
     expect(session.document.value.meta.title).toBe("B"); expect(session.document.value.steps[0].tokens.map((token) => token.label)).toEqual(["B"]);
     expect(session.past.value).toEqual([]); expect(session.copiedToken.value).toBeNull();
     await controller.openGuide(records[0].id); expect(session.document.value.meta.title).toBe("A edited");

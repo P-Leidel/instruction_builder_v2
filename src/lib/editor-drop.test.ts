@@ -2,8 +2,46 @@ import { describe, expect, it } from "vitest";
 import {
   resolveEditorGroupDrop,
   resolveEditorPictureDrop,
+  resolveEditorDropCommand,
+  resolvePicturePlacement,
+  resolveGroupPlacement,
   type EditorGroupRect,
 } from "./editor-drop";
+import { createEmptyDocument } from "../model/instruction";
+
+describe("stable drop placement and permission", () => {
+  const doc = createEmptyDocument();
+  doc.steps = [{ id: "first", tokens: Array.from({ length: 30 }, (_, i) => ({ id: `p${i}`, category: "object", iconId: "object.onion" })) }, { id: "empty", tokens: [] }];
+  const permission = { inViewport: true, blockedTarget: false, modalOpen: false, sourceConnected: true, guideUnchanged: true, documentUnchanged: true };
+  const targets = { pictureDrop: { groupId: "first", anchorId: "p24", edge: "after" as const }, groupDrop: null };
+  it("resolves later page anchors against document order and removes a forward source once", () => {
+    expect(resolvePicturePlacement(doc, { stepId: "first", kind: "anchor", anchorId: "p24", edge: "before" })).toBe(24);
+    expect(resolvePicturePlacement(doc, { stepId: "first", kind: "anchor", anchorId: "p24", edge: "after" })).toBe(25);
+    expect(resolvePicturePlacement(doc, { stepId: "first", kind: "anchor", anchorId: "p24", edge: "after" }, { stepId: "first", tokenId: "p0" })).toBe(24);
+    expect(resolveGroupPlacement(doc, "first", { anchorId: "empty", edge: "after" })).toBe(2);
+  });
+  it("rejects removed anchors and false empty segments", () => {
+    expect(resolvePicturePlacement(doc, { stepId: "first", kind: "empty" })).toBeNull();
+    expect(resolvePicturePlacement(doc, { stepId: "first", kind: "anchor", anchorId: "gone", edge: "before" })).toBeNull();
+    expect(resolvePicturePlacement(doc, { stepId: "empty", kind: "empty" })).toBe(0);
+    expect(resolveGroupPlacement(doc, "first", { anchorId: "gone", edge: "after" })).toBeNull();
+    expect(resolveGroupPlacement(doc, "gone", { anchorId: "first", edge: "after" })).toBeNull();
+  });
+  it.each([
+    { inViewport: false }, { blockedTarget: true }, { modalOpen: true },
+    { sourceConnected: false }, { guideUnchanged: false }, { documentUnchanged: false },
+  ])("blocks permission failure %j", failure => {
+    expect(resolveEditorDropCommand({ kind: "picture", groupId: "first", tokenId: "p0" }, targets, { ...permission, ...failure }, "en")).toBeNull();
+    expect(resolveEditorDropCommand({ kind: "group", groupId: "first" }, { pictureDrop: null, groupDrop: { anchorId: "empty", edge: "after" } }, { ...permission, ...failure }, "en")).toBeNull();
+  });
+  it("does not commit picture sources to group targets or group sources to picture targets", () => {
+    expect(resolveEditorDropCommand({ kind: "group", groupId: "first" }, targets, permission, "en")).toBeNull();
+    expect(resolveEditorDropCommand({ kind: "picture", groupId: "first", tokenId: "p0" }, { pictureDrop: null, groupDrop: { anchorId: "empty", edge: "after" } }, permission, "en")).toBeNull();
+  });
+  it("composes a permitted group drop as a stable group command", () => {
+    expect(resolveEditorDropCommand({ kind: "group", groupId: "first" }, { pictureDrop: null, groupDrop: { anchorId: "empty", edge: "after" } }, permission, "en")).toEqual({ kind: "move-group", sourceStepId: "first", destination: { anchorId: "empty", edge: "after" } });
+  });
+});
 
 const groups: EditorGroupRect[] = [
   {
@@ -33,34 +71,34 @@ const groups: EditorGroupRect[] = [
 describe("resolveEditorPictureDrop", () => {
   it("returns before the first picture when moving backward", () => {
     expect(resolveEditorPictureDrop(groups, 55, 145)).toEqual({
-      groupId: "first", index: 0, anchorId: "a", edge: "before",
+      groupId: "first", anchorId: "a", edge: "before",
     });
   });
 
-  it("returns a pre-removal slot after the last picture when moving forward", () => {
+  it("anchors after the last picture when moving forward", () => {
     expect(resolveEditorPictureDrop(groups, 255, 275)).toEqual({
-      groupId: "first", index: 4, anchorId: "d", edge: "after",
+      groupId: "first", anchorId: "d", edge: "after",
     });
   });
 
   it("uses row alignment when a short picture ends above its taller neighbour", () => {
     expect(resolveEditorPictureDrop(groups, 190, 205)).toEqual({
-      groupId: "first", index: 1, anchorId: "b", edge: "before",
+      groupId: "first", anchorId: "b", edge: "before",
     });
   });
 
-  it("resolves the next wrapped row in document order", () => {
+  it("anchors the next wrapped row", () => {
     expect(resolveEditorPictureDrop(groups, 55, 270)).toEqual({
-      groupId: "first", index: 2, anchorId: "c", edge: "before",
+      groupId: "first", anchorId: "c", edge: "before",
     });
   });
 
   it.each([
-    { y: 230, index: 0, anchorId: "a" },
-    { y: 245, index: 2, anchorId: "c" },
-  ])("chooses the vertically closest row in the row gap at y=$y", ({ y, index, anchorId }) => {
+    { y: 230, anchorId: "a" },
+    { y: 245, anchorId: "c" },
+  ])("chooses the vertically closest row in the row gap at y=$y", ({ y, anchorId }) => {
     expect(resolveEditorPictureDrop(groups, 55, y)).toEqual({
-      groupId: "first", index, anchorId, edge: "before",
+      groupId: "first", anchorId, edge: "before",
     });
   });
 
@@ -69,25 +107,25 @@ describe("resolveEditorPictureDrop", () => {
     { x: 165, anchorId: "b", edge: "before" },
   ])("anchors a horizontal gap to the nearest tile edge at x=$x", ({ x, anchorId, edge }) => {
     expect(resolveEditorPictureDrop(groups, x, 140)).toEqual({
-      groupId: "first", index: 1, anchorId, edge,
+      groupId: "first", anchorId, edge,
     });
   });
 
   it("appends from whitespace below the last row regardless of its horizontal position", () => {
     expect(resolveEditorPictureDrop(groups, 25, 340)).toEqual({
-      groupId: "first", index: 4, anchorId: "d", edge: "after",
+      groupId: "first", anchorId: "d", edge: "after",
     });
   });
 
   it("targets an empty destination group", () => {
     expect(resolveEditorPictureDrop(groups, 200, 440)).toEqual({
-      groupId: "empty", index: 0, edge: "empty",
+      groupId: "empty", edge: "empty",
     });
   });
 
-  it("returns the destination group's index when moving across groups", () => {
+  it("anchors a picture in another group", () => {
     expect(resolveEditorPictureDrop(groups, 110, 580)).toEqual({
-      groupId: "last", index: 1, anchorId: "e", edge: "after",
+      groupId: "last", anchorId: "e", edge: "after",
     });
   });
 
@@ -124,7 +162,7 @@ describe("resolveEditorPictureDrop", () => {
     { left: 170, top: 200, right: 180, bottom: 120 },
     { left: 170, top: 120, right: Number.POSITIVE_INFINITY, bottom: 200 },
     { left: 170, top: Number.NaN, right: 180, bottom: 200 },
-  ])("ignores invalid picture geometry $left,$top,$right,$bottom without renumbering", (rect) => {
+  ])("ignores invalid picture geometry $left,$top,$right,$bottom while keeping its stable anchor", (rect) => {
     const group: EditorGroupRect = {
       id: "filtered",
       rect: groups[0].rect,
@@ -135,7 +173,7 @@ describe("resolveEditorPictureDrop", () => {
       ],
     };
     expect(resolveEditorPictureDrop([group], 170, 140)).toEqual({
-      groupId: "filtered", index: 2, anchorId: "visible", edge: "before",
+      groupId: "filtered", anchorId: "visible", edge: "before",
     });
   });
 
@@ -158,24 +196,24 @@ describe("resolveEditorPictureDrop", () => {
 });
 
 describe("resolveEditorGroupDrop", () => {
-  it("returns the first insertion when moving backward", () => {
+  it("anchors before the first group when moving backward", () => {
     expect(resolveEditorGroupDrop(groups, 200, 100)).toEqual({
-      index: 0, anchorId: "first", edge: "before",
+      anchorId: "first", edge: "before",
     });
   });
 
-  it("returns a pre-removal insertion after the last group when moving forward", () => {
+  it("anchors after the last group when moving forward", () => {
     expect(resolveEditorGroupDrop(groups, 200, 660)).toEqual({
-      index: 3, anchorId: "last", edge: "after",
+      anchorId: "last", edge: "after",
     });
   });
 
   it.each([
-    { y: 430, index: 1, edge: "before" },
-    { y: 450, index: 2, edge: "after" },
-  ])("splits a group at its own vertical midpoint at y=$y", ({ y, index, edge }) => {
+    { y: 430, edge: "before" },
+    { y: 450, edge: "after" },
+  ])("splits a group at its own vertical midpoint at y=$y", ({ y, edge }) => {
     expect(resolveEditorGroupDrop(groups, 200, y)).toEqual({
-      index, anchorId: "empty", edge,
+      anchorId: "empty", edge,
     });
   });
 
@@ -184,7 +222,7 @@ describe("resolveEditorGroupDrop", () => {
     { y: 385, anchorId: "empty", edge: "before" },
   ])("anchors the list gap to the nearest group edge at y=$y", ({ y, anchorId, edge }) => {
     expect(resolveEditorGroupDrop(groups, 200, y)).toEqual({
-      index: 1, anchorId, edge,
+      anchorId, edge,
     });
   });
 
@@ -212,13 +250,13 @@ describe("resolveEditorGroupDrop", () => {
     expect(resolveEditorGroupDrop([{ id: "invalid", rect, pictures: [] }], 20, 80)).toBeNull();
   });
 
-  it("excludes invalid groups from bounds while preserving valid group indices", () => {
+  it("excludes invalid groups from bounds while preserving valid anchors", () => {
     const list: EditorGroupRect[] = [
       { id: "invalid", rect: { left: 0, top: 0, right: Number.NaN, bottom: 0 }, pictures: [] },
       groups[1],
     ];
     expect(resolveEditorGroupDrop(list, 200, 430)).toEqual({
-      index: 1, anchorId: "empty", edge: "before",
+      anchorId: "empty", edge: "before",
     });
   });
 
