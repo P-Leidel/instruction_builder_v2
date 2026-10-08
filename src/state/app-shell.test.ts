@@ -68,23 +68,17 @@ describe("app shell", () => {
     expect(order).toEqual(["flush", "close", "refresh", "guides"]);
   });
 
-  it("list actions are single-flight and give local dialogs distinct result contracts", async () => {
+  it("list actions are single-flight and return success and failure contracts", async () => {
     const f = await fixture(); const gate = deferred(); f.state.pause = gate.promise;
-    let creating = true, deleting = true;
-    const first = f.shell.runGuideAction((controller) => controller.createGuide(createEmptyDocument()), true).then((result) => { if (result?.ok) creating = false; });
+    const first = f.shell.runGuideAction((controller) => controller.createGuide(createEmptyDocument()), true);
     expect(f.shell.guideActionBusy.peek()).toBe(true);
     expect(await f.shell.runGuideAction((controller) => controller.openGuide("missing"), true)).toBeUndefined();
-    // New/delete dialogs remain locally dismissible during operations.
-    creating = false; deleting = false; expect([creating, deleting]).toEqual([false, false]);
-    gate.resolve(); await first; expect(f.view.peek()).toBe("editor"); expect(f.shell.guideActionBusy.peek()).toBe(false);
-    creating = true; f.view.value = "guides";
+    gate.resolve(); expect((await first)?.ok).toBe(true); expect(f.view.peek()).toBe("editor"); expect(f.shell.guideActionBusy.peek()).toBe(false);
+    f.view.value = "guides";
     const missing = await f.shell.runGuideAction((controller) => controller.openGuide("missing"), true);
-    if (missing?.ok) creating = false;
-    expect(creating).toBe(true); expect(missing).toEqual({ ok: false, reason: "not-found" }); expect(f.view.peek()).toBe("guides");
-    deleting = true;
+    expect(missing).toEqual({ ok: false, reason: "not-found" }); expect(f.view.peek()).toBe("guides");
     const deleted = await f.shell.runGuideAction((controller) => controller.deleteGuide("missing", 1));
-    if (deleted) deleting = false;
-    expect(deleting).toBe(false); expect(f.shell.guideActionBusy.peek()).toBe(false);
+    expect(deleted).toEqual({ ok: false, reason: "deleted" }); expect(f.shell.guideActionBusy.peek()).toBe(false);
   });
 
   it("releases creation/list locks when an injected operation throws", async () => {

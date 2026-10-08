@@ -21,7 +21,11 @@ export const storageContractCases: readonly ContractCase[] = [
   } },
   { name: "present undefined values remain distinguishable from missing keys", run: async (store, prefix) => {
     await store.transaction({}, tx => tx.put(prefix + "present", undefined));
-    equal(await store.transaction({ keys: [prefix + "present", prefix + "missing"], mode: "readonly" }, tx => [tx.get(prefix + "present"), tx.get(prefix + "missing"), tx.entries().map(([key]) => key)]), [undefined, undefined, [prefix + "present"]]);
+    await store.transaction({ keys: [prefix + "present", prefix + "missing"], mode: "readonly" }, tx => {
+      assert(tx.get(prefix + "present") === undefined, "Present undefined value must remain undefined");
+      assert(tx.get(prefix + "missing") === undefined, "Missing key must read as undefined");
+      equal(tx.entries().map(([key]) => key), [prefix + "present"]);
+    });
   } },
   { name: "undeclared reads entries and readonly writes reject", run: async (store, prefix) => {
     await rejects(() => store.transaction({}, tx => tx.get(prefix)));
@@ -33,7 +37,10 @@ export const storageContractCases: readonly ContractCase[] = [
   { name: "insert collisions roll back preceding writes", run: async (store, prefix) => {
     await store.transaction({}, tx => tx.put(prefix + "collision", "original"));
     await rejects(() => store.transaction({}, tx => { tx.put(prefix + "earlier", "rollback"); tx.add(prefix + "collision", "replacement"); }));
-    equal(await store.transaction({ keys: [prefix + "earlier", prefix + "collision"], mode: "readonly" }, tx => [tx.get(prefix + "earlier"), tx.get(prefix + "collision")]), [undefined, "original"]);
+    await store.transaction({ keys: [prefix + "earlier", prefix + "collision"], mode: "readonly" }, tx => {
+      assert(tx.get(prefix + "earlier") === undefined, "Rolled-back write must read as undefined");
+      equal(tx.get(prefix + "collision"), "original");
+    });
   } },
   { name: "catching an insert collision cannot allow a transaction to commit", run: async (store, prefix) => {
     await store.transaction({}, tx => tx.put(prefix + "collision", "original"));
@@ -41,7 +48,10 @@ export const storageContractCases: readonly ContractCase[] = [
       tx.put(prefix + "earlier", "rollback");
       try { tx.add(prefix + "collision", "replacement"); } catch { /* Native collisions arrive asynchronously. */ }
     }));
-    equal(await store.transaction({ keys: [prefix + "earlier", prefix + "collision"], mode: "readonly" }, tx => [tx.get(prefix + "earlier"), tx.get(prefix + "collision")]), [undefined, "original"]);
+    await store.transaction({ keys: [prefix + "earlier", prefix + "collision"], mode: "readonly" }, tx => {
+      assert(tx.get(prefix + "earlier") === undefined, "Rolled-back write must read as undefined");
+      equal(tx.get(prefix + "collision"), "original");
+    });
   } },
   { name: "thrown policies and callable thenables roll back", run: async (store, prefix) => {
     await rejects(() => store.transaction({}, tx => { tx.put(prefix, "rollback"); throw new Error("policy failure"); }));
