@@ -19,6 +19,25 @@ function docWithToken(fields: Record<string, unknown>): Record<string, unknown> 
 }
 
 describe("migrate", () => {
+  it.each([1, 2])("rejects empty step identities in schema %s without changing the original", (schemaVersion) => {
+    const raw = { ...createEmptyDocument(), schemaVersion, steps: [{ id: "", tokens: [] }] };
+    const original = structuredClone(raw);
+    expect(() => migrate(raw)).toThrow(/invalid steps/);
+    expect(raw).toEqual(original);
+  });
+
+  it.each([1, 2])("rejects empty token identities in schema %s without changing the original", (schemaVersion) => {
+    const raw = { ...docWithToken({ id: "" }), schemaVersion };
+    const original = structuredClone(raw);
+    expect(() => migrate(raw)).toThrow(/invalid steps/);
+    expect(raw).toEqual(original);
+  });
+
+  it("preserves nonempty identities exactly, including whitespace and punctuation", () => {
+    const raw = { ...createEmptyDocument(), steps: [{ id: " ", tokens: [{ id: " ?[]/ ", iconId: "custom", category: "object" }] }] };
+    expect(migrate(raw)).toEqual(raw);
+  });
+
   it("migratesV1ToSequence", () => {
     const legacy = {
       schemaVersion: 1,

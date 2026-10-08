@@ -35,6 +35,37 @@ function legacy() {
 }
 
 describe("local guide transactions", () => {
+  it.each(["step", "token"] as const)("backs up an empty %s identity in legacy data exactly before allowing creation", async (kind) => {
+    const raw = legacy();
+    if (kind === "step") raw.steps[0].id = ""; else raw.steps[0].tokens[0].id = "";
+    const original = structuredClone(raw);
+    const { state, store } = memoryStore(new Map([[LEGACY_KEY, raw]])); state.failRecovery = true;
+    const repository = createGuideRepository({ store });
+    await expect(repository.list()).rejects.toThrow("backup failed");
+    expect([...state.records]).toEqual([[LEGACY_KEY, original]]);
+    expect(await repository.create(createEmptyDocument())).toEqual({ ok: false, reason: "unavailable" });
+    state.failRecovery = false;
+    expect(await repository.list()).toEqual([]);
+    expect(state.records.get(LEGACY_KEY)).toEqual(original);
+    expect(state.records.has(MIGRATION_KEY)).toBe(false);
+    expect([...state.records].filter(([key]) => key.startsWith("instruction-builder:recovery:")).map(([, value]) => value)).toEqual([original]);
+    expect((await repository.create(createEmptyDocument())).ok).toBe(true);
+  });
+
+  it.each(["step", "token"] as const)("keeps an empty %s identity guide envelope and its exact recovery copy", async (kind) => {
+    const document = createEmptyDocument(); document.steps[0].tokens = [{ id: "token", iconId: "custom", category: "object" }];
+    if (kind === "step") document.steps[0].id = ""; else document.steps[0].tokens[0].id = "";
+    const raw = { id: "broken", revision: 1, createdAt: "2026-10-08", updatedAt: "2026-10-08", document, future: { retained: [1, null] } };
+    const original = structuredClone(raw); const key = GUIDE_PREFIX + raw.id;
+    const { state, store } = memoryStore(new Map([[key, raw]])); state.failRecovery = true;
+    const repository = createGuideRepository({ store });
+    await expect(repository.list()).rejects.toThrow("backup failed"); expect([...state.records]).toEqual([[key, original]]);
+    state.failRecovery = false;
+    expect(await repository.list()).toEqual([]); expect(await repository.load(raw.id)).toBeUndefined();
+    expect(state.records.get(key)).toEqual(original);
+    expect([...state.records].filter(([id]) => id.startsWith("instruction-builder:recovery:")).map(([, value]) => value)).toEqual([original]);
+  });
+
   it("migratesLegacyExactlyOnce", async () => {
     const raw = legacy();
     const { state, store } = memoryStore(new Map([[LEGACY_KEY, raw]]));

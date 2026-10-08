@@ -27,10 +27,12 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
   return prototype === Object.prototype || prototype === null;
 }
 
+// Selection and clipboard actions require truthy identities. Preserve nonempty
+// strings exactly; an empty identity is invalid rather than silently renamed.
 function isValidToken(value: unknown): value is InstructionToken {
   return (
     isPlainObject(value) &&
-    typeof value.id === "string" &&
+    typeof value.id === "string" && value.id.length > 0 &&
     typeof value.iconId === "string" &&
     TOKEN_CATEGORIES.includes(value.category as TokenCategory)
   );
@@ -39,7 +41,7 @@ function isValidToken(value: unknown): value is InstructionToken {
 function isValidStep(value: unknown): value is InstructionStep {
   return (
     isPlainObject(value) &&
-    typeof value.id === "string" &&
+    typeof value.id === "string" && value.id.length > 0 &&
     Array.isArray(value.tokens) &&
     value.tokens.every(isValidToken)
   );
