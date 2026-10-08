@@ -403,11 +403,8 @@ function setTokenAttachment(
  * The functions below (suffixed `Core`) are every mutator/query's real
  * implementation, taking a `DocumentSession` explicitly as their first
  * argument - the module's actual, constructable interface. They're grouped
- * into `sessionActions` for callers that construct their own session
- * (chiefly tests - see document.test.ts). App code should use the
- * zero-argument exports at the bottom of this file instead, which are these
- * same functions bound to `defaultSession` - so every existing call site
- * keeps working unchanged.
+ * into `sessionActions`; app callers pass `documentSession`, while tests
+ * can pass an independent session created with `createDocumentSession()`.
  */
 
 /** Reverts the most recent change (or coalesced run of changes) - a no-op if there's nothing to undo. */
@@ -870,78 +867,5 @@ export const sessionActions = {
   pasteToken: pasteTokenCore,
 };
 
-type SessionAction = (session: DocumentSession, ...args: never[]) => unknown;
-type BoundSessionActions<T extends Record<string, SessionAction>> = {
-  [K in keyof T]: T[K] extends (session: DocumentSession, ...args: infer A) => infer R
-    ? (...args: A) => R
-    : never;
-};
-
-/** Binds every action in `actions` to `session` as its first argument. */
-function bindActionsToSession<T extends Record<string, SessionAction>>(
-  actions: T,
-  session: DocumentSession,
-): BoundSessionActions<T> {
-  const bound = {} as BoundSessionActions<T>;
-  for (const key in actions) {
-    const action = actions[key];
-    bound[key] = ((...args: unknown[]) =>
-      action(session, ...(args as never[]))) as BoundSessionActions<T>[typeof key];
-  }
-  return bound;
-}
-
-/**
- * The app's one running document - see `docs/known-issues.md`'s former
- * "document session tied to module-level singletons" entry (now resolved:
- * this is the one adapter every existing caller keeps using unchanged; a
- * test constructs a second, independent one via `createDocumentSession()`
- * instead of sharing this one).
- *
- * Note: `document` below intentionally shadows the DOM's global `document`.
- * No file in src/ needs both in the same scope today, but if one ever does,
- * import this one under an alias (e.g. `import { document as doc }`).
- */
+/** The app's one running session; tests can construct independent sessions. */
 export const documentSession: DocumentSession = createDocumentSession();
-const defaultSession = documentSession;
-
-export const document = defaultSession.document;
-export const selectedStepId = defaultSession.selectedStepId;
-export const selectedTokenId = defaultSession.selectedTokenId;
-export const copiedToken = defaultSession.copiedToken;
-export const past = defaultSession.past;
-export const future = defaultSession.future;
-export const canUndo = defaultSession.canUndo;
-export const canRedo = defaultSession.canRedo;
-export const selectedStep = defaultSession.selectedStep;
-export const selectedToken = defaultSession.selectedToken;
-
-export const {
-  undo,
-  redo,
-  replaceDocument,
-  setPresentation,
-  selectStep,
-  selectToken,
-  addStep,
-  removeStep,
-  addTokenToStep,
-  addTokenToSelectedStep,
-  moveToken,
-  moveTokenTo,
-  reorderSteps,
-  moveStepUp,
-  moveStepDown,
-  removeTokenFromStep,
-  updateTitle,
-  updateStepTitle,
-  updateStepDescription,
-  updateTokenLabel,
-  updateTokenNote,
-  attachToToken,
-  removeTokenAttachment,
-  setTokenTime,
-  setStepTime,
-  copyToken,
-  pasteToken,
-} = bindActionsToSession(sessionActions, defaultSession);

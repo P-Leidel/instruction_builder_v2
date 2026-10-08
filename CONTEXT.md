@@ -17,7 +17,7 @@ its undo/redo history (`past`/`future`), its selection
 It's constructed by `createDocumentSession()` in
 [src/state/document.ts](./src/state/document.ts).
 
-The running app uses exactly one exported `documentSession`. Its editor/controller call `sessionActions` with that explicit session. Legacy zero-argument bindings (`document`, `addStep`, `undo`, ...) remain aliases to the same instance for retained code. Tests can construct independent sessions through `createDocumentSession()`; components never create a competing live session.
+The running app uses exactly one exported `documentSession`. Its editor/controller call `sessionActions` with that explicit session. Tests can construct independent sessions through `createDocumentSession()`; components never create a competing live session. The unused singleton aliases and legacy single-document persistence implementation were retired during the [8 October architecture follow-up](docs/phase-3/reviews/2026-10-08-architecture-verification.md); the guide repository retains legacy-record migration and recovery.
 
 This term replaces the informal "module-level singleton" phrasing used in
 [docs/known-issues.md](./docs/known-issues.md) while that item was still

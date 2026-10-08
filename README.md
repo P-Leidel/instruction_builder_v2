@@ -35,6 +35,7 @@ Planning and architecture docs live in [docs/](docs/):
 - [8 October P3 remediation](docs/phase-3/progress/2026-10-08-p3-remediation.md) — board semantics, reader attachment notices, Copy feedback, current verification status and UX decisions.
 - [8 October functional remediation](docs/phase-3/progress/2026-10-08-functional-remediation.md) — imported identities, unknown captions, PNG density and navigation focus; prior verified checkpoint.
 - [7 October codebase health review](docs/phase-3/reviews/2026-10-07-codebase-health-review.md) — dated findings and UX decisions, with source references pinned to the reviewed snapshot.
+- [8 October architecture verification](docs/phase-3/reviews/2026-10-08-architecture-verification.md) — assessment of the nine new candidates, legacy-persistence cleanup and remaining remediation batches.
 - [docs/project-plan.md](docs/project-plan.md) — the approved project plan (goals, stack, phased task list, risks, success criteria).
 - [2026-10-06 takeover review](docs/phase-3/audits/2026-10-06-takeover-review.md) — historical baseline UX, graphics, mobile, and reliability findings and verified minor fixes; the overhaul handoff records their resolution.
 - [Agent specification package](docs/superpowers/specs/2026-10-06-overhaul/README.md) — confirmed product choices, shared contracts, and separately owned overhaul deliveries.

@@ -14,7 +14,9 @@ per run (`YYYY-MM-DD-code-review.md`).
   (picture commands, retiring legacy persistence, a drop module, presentation
   labels, screen projection, a storage seam, guide file, app shell, i18n
   surface). Its top recommendation is to retire legacy persistence and then
-  build the picture-commands module. Nothing has been implemented yet.
+  build the picture-commands module. The [verification and initial remediation](./2026-10-08-architecture-verification.md)
+  qualifies its coverage and defect claims, retires the unused legacy writer
+  and singleton aliases, and records the remaining batches.
 
 - [7 October 2026 codebase health review](./2026-10-07-codebase-health-review.md)
   reviews code, architecture and UX across its dated application snapshot. It records

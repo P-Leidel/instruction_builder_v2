@@ -36,6 +36,10 @@ PWA gates pass. Whole-batch review approves the changes; all three commits pass 
 chose automatic saving of valid attachment edits and simpler output controls with named
 advanced sections; implementation is pending. Mobile fitting/readability is the next UX decision.
 No merge or deployment occurred.
+The [8 October architecture verification](./phase-3/reviews/2026-10-08-architecture-verification.md)
+assesses the nine new independent review candidates and starts cleanup by
+retiring the unused legacy writer and singleton aliases. Command, drop and
+presentation consolidation remain later batches; Phase 3 task status is unchanged.
 Participant, actual-print, real-device and screen-reader acceptance remain pending;
 Phase 3 is not complete.
 

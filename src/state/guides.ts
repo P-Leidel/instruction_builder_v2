@@ -242,7 +242,6 @@ function createGuideControllerSignals() {
 export const { activeGuideId, guideSummaries, saveState, guideNotices, failedNewGuide, lastDeletedGuide, startupStorageUnavailable } = uninitialized;
 export function initializeGuides(session: DocumentSession): Promise<void> {
   defaultInitialization ??= (async () => {
-    const { stopLegacyPersistence } = await import("./persistence"); await stopLegacyPersistence();
     defaultController = createGuideController(session, { preferenceController: pref, signals: uninitialized });
     await defaultController.initializeGuides();
   })();

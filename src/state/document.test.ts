@@ -91,7 +91,6 @@ describe("overhaul session contracts", () => {
   it("publishes one default session and undoable presentation actions", () => {
     expect(documentState).toHaveProperty("documentSession");
     expect(sessionActions).toHaveProperty("setPresentation", expect.any(Function));
-    expect(documentState.documentSession.document).toBe(documentState.document);
     const session = createDocumentSession();
     sessionActions.setPresentation(session, "board");
     expect(session.document.value.meta.presentation).toBe("board");
