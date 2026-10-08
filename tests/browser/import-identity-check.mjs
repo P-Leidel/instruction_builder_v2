@@ -24,7 +24,8 @@ try {
     await page.evaluate(async () => {
       const { documentSession: session, sessionActions } = await import("/src/state/document.ts");
       sessionActions.updateTitle(session, "Keep edited authored guide");
-      sessionActions.updateTitle(session, "Redo must retain this edit");
+      // A structural edit forms its own undo step; rapid title edits coalesce.
+      sessionActions.addStep(session);
       sessionActions.undo(session);
       sessionActions.selectToken(session, "group-0", "picture-0-0");
       sessionActions.copyToken(session, "group-0", "picture-0-0");
