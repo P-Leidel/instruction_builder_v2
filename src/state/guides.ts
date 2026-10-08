@@ -4,7 +4,7 @@ import type { InstructionDocument } from "../model/instruction";
 import { openDocumentInSession, type DocumentSession } from "./document";
 import { createGuideRepository, type GuideNotice } from "../lib/guide-repository";
 import { createIndexedDbStorage, type StorageStore } from "../lib/storage";
-import { createPreferencesController, preferences, initializePreferences, retryPreferences, updatePreferences, preferenceSaveState, type PreferencesController } from "./preferences";
+import { createPreferencesController, type PreferencesController } from "./preferences";
 import { migrate } from "../model/migrate";
 import { t } from "../i18n/messages";
 export type { GuideNotice } from "../lib/guide-repository";
@@ -226,32 +226,13 @@ export function createGuideController(session: DocumentSession, options: GuideCo
   };
 }
 
-const pref: GuidePreferencesController = { preferences, initializePreferences, retryPreferences, updatePreferences, preferenceSaveState };
-let defaultController: ReturnType<typeof createGuideController> | undefined;
-let defaultInitialization: Promise<void> | undefined;
-// Export stable signal identities before asynchronous startup.
-const uninitialized = createGuideControllerSignals();
-function createGuideControllerSignals() {
+export type GuideController = ReturnType<typeof createGuideController>;
+export type GuideControllerSignals = ReturnType<typeof createGuideControllerSignals>;
+export function createGuideControllerSignals() {
   return { activeGuideId: signal<string | null>(null), guideSummaries: signal<readonly GuideSummary[]>([]), saveState: signal<SaveState>("loading"),
     guideNotices: signal<readonly GuideNotice[]>([]), failedNewGuide: signal<InstructionDocument | null>(null), lastDeletedGuide: signal<GuideRecord | null>(null),
     startupStorageUnavailable: signal(false) };
 }
-export const { activeGuideId, guideSummaries, saveState, guideNotices, failedNewGuide, lastDeletedGuide, startupStorageUnavailable } = uninitialized;
-export function initializeGuides(session: DocumentSession): Promise<void> {
-  defaultInitialization ??= (async () => {
-    defaultController = createGuideController(session, { preferenceController: pref, signals: uninitialized });
-    await defaultController.initializeGuides();
-  })();
-  return defaultInitialization;
-}
-function controller() { if (!defaultController) throw new Error("initializeGuides must complete before guide actions"); return defaultController; }
-export const refreshGuides = () => controller().refreshGuides();
-export const retryGuideStorage = () => controller().retryGuideStorage();
-export const openGuide = (id: string) => controller().openGuide(id);
-export const reloadActiveGuide = () => controller().reloadActiveGuide();
-export const createGuide = (doc: InstructionDocument) => controller().createGuide(doc);
-export const duplicateGuide = (id: string) => controller().duplicateGuide(id);
-export const deleteGuide = (id: string, revision: number) => controller().deleteGuide(id, revision);
-export const restoreGuide = (id: string, revision: number) => controller().restoreGuide(id, revision);
-export const flushActiveGuide = () => controller().flushActiveGuide();
-export const importRecoveredGuide = (key: string) => controller().importRecoveredGuide(key);
+// These identities exist before bootstrap, without importing the bootstrap back.
+export const guideControllerSignals = createGuideControllerSignals();
+export const { activeGuideId, guideSummaries, saveState, guideNotices, failedNewGuide, lastDeletedGuide, startupStorageUnavailable } = guideControllerSignals;

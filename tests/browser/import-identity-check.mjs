@@ -29,7 +29,7 @@ try {
       sessionActions.undo(session);
       sessionActions.selectToken(session, "group-0", "picture-0-0");
       sessionActions.copyToken(session, "group-0", "picture-0-0");
-      await (await import("/src/state/guides.ts")).flushActiveGuide();
+      await (await import("/src/state/guide-bootstrap.ts")).guideBootstrap.controller().flushActiveGuide();
     });
     const before = await sessionState(page), committed = await records(page);
     assert.ok(before.past.length > 0); assert.ok(before.future.length > 0);
@@ -51,7 +51,7 @@ try {
       const { documentSession: session, sessionActions } = await import("/src/state/document.ts");
       sessionActions.selectToken(session, " ", " ?[]/ "); sessionActions.copyToken(session, " ", " ?[]/ ");
       (await import("/src/state/ui.ts")).authoring.pastePicture(session.selectedStepId.peek());
-      await (await import("/src/state/guides.ts")).flushActiveGuide();
+      await (await import("/src/state/guide-bootstrap.ts")).guideBootstrap.controller().flushActiveGuide();
       return session.document.peek().steps[0].tokens;
     });
     assert.equal(copied.length, 2); assert.equal(copied[0].id, " ?[]/ ");

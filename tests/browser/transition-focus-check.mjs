@@ -93,17 +93,17 @@ try {
     const settings = page.getByRole("dialog", { name: "Settings", exact: true });
     await settled(page);
     checks.push({ label: `${name}: settings retains modal focus`, ok: await settings.evaluate(node => node.contains(document.activeElement)) });
-    await page.evaluate(async () => { (await import("/src/lib/view-entry-focus.ts")).focusViewEntry("editor", () => true); });
+    await page.evaluate(async () => { (await import("/src/lib/view-entry-focus.ts")).shellFocus.enter("editor", () => true); });
     await settled(page);
     checks.push({ label: `${name}: pending entry cannot take focus from an open modal`, ok: await settings.evaluate(node => node.contains(document.activeElement)) });
     await page.keyboard.press("Escape"); await settled(page);
     await expectFocus(page, `${name}: settings returns focus to opener`, page.getByRole("button", { name: "Settings", exact: true }));
-    await page.evaluate(async () => { (await import("/src/lib/view-entry-focus.ts")).focusViewEntry("editor", () => false); });
+    await page.evaluate(async () => { (await import("/src/lib/view-entry-focus.ts")).shellFocus.enter("editor", () => false); });
     await expectFocus(page, `${name}: stale entry request leaves current control focused`, page.getByRole("button", { name: "Settings", exact: true }));
     const retainedScroll = await page.evaluate(async () => {
       window.scrollTo(0, document.documentElement.scrollHeight);
       const before = window.scrollY;
-      (await import("/src/lib/view-entry-focus.ts")).focusViewEntry("editor", () => true);
+      (await import("/src/lib/view-entry-focus.ts")).shellFocus.enter("editor", () => true);
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       return { before, after: window.scrollY };
     });

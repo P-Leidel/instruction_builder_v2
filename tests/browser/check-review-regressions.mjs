@@ -48,7 +48,7 @@ try {
     checks.ENGLISH_UI_SETS_DOCUMENT_LANGUAGE = await page.locator("html").getAttribute("lang") === "en";
     await page.getByRole("dialog").getByRole("button", { name: "Close", exact: true }).click();
     await page.evaluate(async () => {
-      const result = await (await import("/src/state/guides.ts")).flushActiveGuide();
+      const result = await (await import("/src/state/guide-bootstrap.ts")).guideBootstrap.controller().flushActiveGuide();
       if (!result.ok) throw new Error(result.reason);
     });
     const beforeCount = (await records(page)).filter(([key]) => key.startsWith("instruction-builder:guide:")).length;
@@ -80,7 +80,7 @@ try {
       checks.PENDING_IMPORT_REMAINS_VISIBLE = await page.getByRole("dialog").count() === 1;
     } finally { await page.evaluate(() => { window.__releaseReviewWriter = true; }); }
     await page.evaluate(async () => {
-      const result = await (await import("/src/state/guides.ts")).flushActiveGuide();
+      const result = await (await import("/src/state/guide-bootstrap.ts")).guideBootstrap.controller().flushActiveGuide();
       if (!result.ok) throw new Error(result.reason);
     });
     await page.waitForFunction(() => !document.querySelector("dialog[open]"));

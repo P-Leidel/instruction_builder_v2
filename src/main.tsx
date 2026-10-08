@@ -1,6 +1,7 @@
 import { render } from "preact";
 import { App } from "./app";
-import { initializeGuides, activeGuideId } from "./state/guides";
+import { activeGuideId } from "./state/guides";
+import { guideBootstrap } from "./state/guide-bootstrap";
 import { documentSession } from "./state/document";
 import { appView } from "./state/ui";
 import { preferences } from "./state/preferences";
@@ -14,7 +15,7 @@ if (!root) {
 // Task 12: resolve any previously-saved document before the first render,
 // so the default empty document never flashes on screen only to be
 // replaced a moment later once the (async) IndexedDB read completes.
-initializeGuides(documentSession).finally(() => {
+guideBootstrap.initialize(documentSession).finally(() => {
   document.documentElement.dataset.theme = preferences.peek().theme;
   appView.value = activeGuideId.peek() === null ? "guides" : "editor";
   render(<App />, root);

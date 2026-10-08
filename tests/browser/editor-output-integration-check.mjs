@@ -66,7 +66,7 @@ try {
     await opener.click(); await page.locator(".output-dialog").waitFor(); await page.setViewportSize({ width: 320, height: 900 });
     await page.waitForFunction(() => matchMedia("(max-width: 767px)").matches && !document.querySelector(".authoring-panel"));
     equal("OUTPUT_RESIZE_KEEPS_SINGLE_NATIVE_MODAL", await page.locator("dialog:modal").count(), 1);
-    await page.evaluate(async () => { const { createGuide } = await import("/src/state/guides.ts"); const { createEmptyDocument } = await import("/src/model/instruction.ts"); const result = await createGuide(createEmptyDocument("board")); if (!result.ok) throw new Error(result.reason); });
+    await page.evaluate(async () => { const { guideBootstrap } = await import("/src/state/guide-bootstrap.ts"); const { createEmptyDocument } = await import("/src/model/instruction.ts"); const result = await guideBootstrap.controller().createGuide(createEmptyDocument("board")); if (!result.ok) throw new Error(result.reason); });
     await page.waitForFunction(() => !document.querySelector(".output-dialog")); checks.GUIDE_SWITCH_UNMOUNTS_PENDING_OUTPUT = true;
     await page.getByRole("button", { name: "Read", exact: true }).click(); equal("READER_HAS_NO_OUTPUT_OR_EDITOR", await page.locator(".output-dialog,.app__export-canvas,.app-toolbar,[data-editor-picture]").count(), 0);
     checks.NO_CONSOLE_OR_PAGE_ERRORS = errors.length === 0; assertChecks(checks);

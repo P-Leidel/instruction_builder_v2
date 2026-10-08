@@ -28,7 +28,7 @@ Each mutation compares the expected revision and loaded raw baseline in the same
 
 Normal JSON records and comparable structured-clone graphs (including cycles and binary data) use stable comparisons. Opaque non-JSON extras such as Blob/File/Error cannot be compared synchronously inside the transaction; records containing them conservatively conflict instead of risking a stale overwrite. Their original values and any recovery copies remain intact. Ordinary imported JSON and authored fields are unaffected.
 
-Startup calls `await initializeGuides(documentSession)` once. This initializes preferences/repository, opens a valid last guide, and owns one document observer. The unused legacy single-document writer and its compatibility aliases have been removed; legacy-record migration and recovery remain repository responsibilities. See the [8 October architecture verification](phase-3/reviews/2026-10-08-architecture-verification.md).
+Startup calls `await guideBootstrap.initialize(documentSession)` once. This initializes preferences/repository, opens a valid last guide, and owns one document observer. The unused legacy single-document writer and its compatibility aliases have been removed; legacy-record migration and recovery remain repository responsibilities. See the [8 October architecture verification](phase-3/reviews/2026-10-08-architecture-verification.md).
 
 After a failed startup read/migration, **Retry local storage** resumes incomplete initialization in the running app. Failed recovery copies must still commit before creation is enabled; their failure rolls back the entire transaction and retains the original. Retry installs observation once and does not replace document/history edited before or during recovery. It remains on My guides; Open/Create become usable after success. This startup action does not clear active conflicts, deletions or later save failures. **Retry saving preferences** independently retries failed initialization or retained preference writes.
 
@@ -48,20 +48,27 @@ Visibility/pagehide flushing is best effort. Browsers can abandon asynchronous w
 
 Stable signals: `activeGuideId`, `guideSummaries`, `saveState`, `guideNotices`, `failedNewGuide`, and `lastDeletedGuide`. Actions return `GuideActionResult`: success with optional `guideId`, or failure reason `conflict`, `unavailable`, `deleted`, `not-found`, or `cancelled`.
 
+`guideBootstrap` owns the live controller and the idempotent startup promise, including after a failed first storage attempt. `guides.ts` exports the stable signals and controller factory/types; action callers use `guideBootstrap.controller()` instead of forwarding exports. Tests can create an isolated `createGuideBootstrap(options)` with its own stable signals and explicitly supplied session.
+
+`createAppShell(options)` receives that accessor, the existing document session, UI/preference signals, retry/backup functions, authoring close and the focus adapter. It owns synchronous creation/list locks, independent retry busy signals with mutual exclusion, result notices localized at completion, import confirmation and successful navigation. Import cannot dismiss during creation; a returned result clears it, and a suppressed duplicate leaves it open. My guides keeps its new/delete dialogs locally dismissible; new closes after success, while delete closes after any returned result. Failed creation retains the controller's draft.
+
+Successful My guides navigation flushes, closes authoring, refreshes, then changes view and requests focus. A flush failure preserves view/panel/focus. Output captures guide ID and locale and invalidates when the guide or editor view changes. Deferred focus checks the captured view/guide and absence of a modal. Reader return tries selected picture, selected-group Add, connected opener, then first Add; output close restores its captured surviving opener. DOM lookup and scheduling live in `view-entry-focus.ts`.
+
 ```ts
 import { readImportFile, runJsonExport } from "../src/lib/document-file";
+import { guideBootstrap } from "../src/state/guide-bootstrap";
 
-await initializeGuides(documentSession);
+await guideBootstrap.initialize(documentSession);
 // Empty UI uses activeGuideId === null and guideSummaries.length === 0.
-await createGuide(createEmptyDocument("board"));
-await openGuide(id);
+await guideBootstrap.controller().createGuide(createEmptyDocument("board"));
+await guideBootstrap.controller().openGuide(id);
 const imported = await readImportFile(file);
-if (imported.ok) await createGuide(imported.document); // Adds another guide.
+if (imported.ok) await guideBootstrap.controller().createGuide(imported.document); // Adds another guide.
 // Otherwise imported.reason is read-failed, invalid-json or invalid-document.
 
 // After the explicit backup/discard choice:
 const backup = await runJsonExport(documentSession.document.value);
-if (backup.ok) await reloadActiveGuide();
+if (backup.ok) await guideBootstrap.controller().reloadActiveGuide();
 // Otherwise backup.reason is export-failed; retain the draft and retry backup.
 ```
 
@@ -74,10 +81,10 @@ The file API returns typed failure reasons for UI localization. JSON backup down
 Deletion retains content in a revisioned tombstone. Active deletion validates the requested revision against the loaded baseline before its own flush. Requested revision 1 can flush to 2 and delete at 3. `lastDeletedGuide: Signal<GuideRecord | null>` exposes the committed tombstone so Undo uses its exact revision:
 
 ```ts
-const result = await deleteGuide(id, displayedRevision); // UI confirms this guide.
+const result = await guideBootstrap.controller().deleteGuide(id, displayedRevision); // UI confirms this guide.
 if (result.ok && lastDeletedGuide.value) {
   const tombstone = lastDeletedGuide.value;
-  await restoreGuide(tombstone.id, tombstone.revision); // Example: restore 3 -> 4.
+  await guideBootstrap.controller().restoreGuide(tombstone.id, tombstone.revision); // Example: restore 3 -> 4.
 }
 ```
 
