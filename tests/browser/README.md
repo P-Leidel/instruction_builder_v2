@@ -34,6 +34,7 @@ Standalone checks that own a Vite server resolve its root from their file.
 | `transition-focus-check.mjs` | `[url]` | Own dev server when URL is omitted; desktop/mobile keyboard destinations, failed navigation, dialog/stale guards and reader return |
 | `board-semantics-check.mjs` | `[output-directory] [url-or-dash]` | Own dev server when URL is omitted or `-`; board/sequence semantics, switches, overflow repair, continuations and unchanged geometry |
 | `reading-reference-check.mjs` | `[output-directory] [url]` | Own dev server when URL is omitted; localized unknown attachment references and retained values in Read and semantic output preview |
+| `copy-feedback-check.mjs` | `[output-directory] [url]` | Own dev server when URL is omitted; visible localized live feedback, native-modal containment, focus/drafts and clipboard/paste preservation |
 | `check-header-theme.mjs`, `check-editor-drag.mjs`, `check-review-regressions.mjs`, `check-print-faithful-editor.mjs` | `[output-directory] [url]` | Own dev server when URL is omitted |
 | `check-centered-pictograms.mjs` | `[output-directory] [url] [--baseline]` | Own dev server when URL is omitted; `--baseline` keeps the existing baseline comparison mode |
 | `pwa-check.mjs` | `[url] [output-directory]` | Existing production preview; URL defaults to `http://127.0.0.1:4173/` |

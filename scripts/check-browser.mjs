@@ -24,6 +24,7 @@ try {
       ["transition-focus-check.mjs", url],
       ["board-semantics-check.mjs", path.join(output, "board-semantics"), url],
       ["reading-reference-check.mjs", path.join(output, "reading-references"), url],
+      ["copy-feedback-check.mjs", path.join(output, "copy-feedback"), url],
       ["check-header-theme.mjs", path.join(output, "header-theme"), url],
       ["check-review-regressions.mjs", path.join(output, "review-regressions"), url],
       ["check-editor-drag.mjs", path.join(output, "editor-drag"), url],

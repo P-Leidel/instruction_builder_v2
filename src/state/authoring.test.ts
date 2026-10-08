@@ -5,6 +5,24 @@ import { sequenceFixture } from "../test/fixtures/overhaul";
 import { getCatalogEntry } from "../lib/library-catalog";
 function fixture() { const session = createDocumentSession(); const doc = sequenceFixture(); doc.steps.push({ id: "second-group", tokens: [] }); openDocumentInSession(session, doc); return { session, authoring: createAuthoringController(session) }; }
 describe("contextual authoring", () => {
+  it("reports successful copy and rejects missing targets without replacing the clipboard", () => {
+    const { session, authoring } = fixture(); const step = session.document.peek().steps[0]; const token = step.tokens[0];
+    const document = session.document.peek(), past = session.past.peek(), future = session.future.peek();
+    expect(authoring.copyPicture(step.id, token.id)).toBe(true);
+    const copied = session.copiedToken.peek(); expect(copied).not.toBeNull();
+    expect(authoring.copyPicture("missing-group", token.id)).toBe(false);
+    expect(session.copiedToken.peek()).toBe(copied);
+    expect(authoring.copyPicture(step.id, "missing-picture")).toBe(false);
+    expect(session.copiedToken.peek()).toBe(copied);
+    expect(session.document.peek()).toBe(document); expect(session.past.peek()).toBe(past); expect(session.future.peek()).toBe(future);
+  });
+  it("leaves an existing clipboard snapshot intact when a copy target is stale", () => {
+    const { session, authoring } = fixture(); const step = session.document.peek().steps[0];
+    authoring.copyPicture(step.id, step.tokens[0].id); const copied = session.copiedToken.peek();
+    const result = authoring.copyPicture(step.id, "missing-picture");
+    expect(session.copiedToken.peek()).toBe(copied);
+    expect(result).toBe(false);
+  });
   it("inserts exactly once into the captured group regardless of ambient selection", () => {
     const { session, authoring } = fixture(); const [a, b] = session.document.value.steps;
     authoring.openPicker(a.id); sessionActions.selectStep(session, b.id);

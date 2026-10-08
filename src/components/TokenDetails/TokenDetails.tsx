@@ -5,14 +5,17 @@ import { preferences } from "../../state/preferences";
 import { t } from "../../i18n/messages";
 import { getCatalogEntry, getLibrary } from "../../lib/library-catalog";
 import { QuantityEditor, TimeEditor } from "./AttachmentFields";
+import { useState } from "preact/hooks";
 export function TokenDetails({ session }: { session: DocumentSession }) {
+  const [copied, setCopied] = useState<{ tokenId: string; label: string; version: number } | null>(null);
   const panel = authoring.panel.value; const pref = preferences.value;
   if (panel.kind !== "picture") return null;
   const step = session.document.value.steps.find((group) => group.id === panel.stepId); const token = step?.tokens.find((picture) => picture.id === panel.tokenId);
   if (!step || !token) return null;
   const index = step.tokens.findIndex((picture) => picture.id === token.id); const locale = pref.uiLocale;
+  const label = token.label?.trim() ? token.label : getCatalogEntry(token.iconId)?.labels[locale] ?? t(locale, "catalog.unknownSymbol", { iconId: token.iconId });
   const move = (destination: string, finalIndex: number) => { authoring.movePicture(step.id, token.id, destination, finalIndex); authoring.close(); focusPicture(token.id); };
-  return <section class="token-details"><h2>{t(locale, "editor.pictureDetails", { label: token.label || getCatalogEntry(token.iconId)?.labels[locale] || token.iconId })}</h2>
+  return <section class="token-details"><h2>{t(locale, "editor.pictureDetails", { label })}</h2>
     <label>{t(locale, "editor.pictureLabel")}<textarea autoFocus value={token.label ?? ""} onInput={(event) => sessionActions.updateTokenLabel(session, step.id, token.id, event.currentTarget.value)} /></label>
     <QuantityEditor key={`${token.id}-quantity`} value={token.quantity} locale={locale} libraryId={pref.activeLibraryId} onSave={(value) => value ? sessionActions.attachToToken(session, step.id, token.id, { kind: "quantity", value }) : sessionActions.removeTokenAttachment(session, step.id, token.id, "quantity")} />
     <TimeEditor key={`${token.id}-time`} value={token.time} locale={locale} onSave={(value) => sessionActions.setTokenTime(session, step.id, token.id, value)} />
@@ -23,8 +26,12 @@ export function TokenDetails({ session }: { session: DocumentSession }) {
       <button type="button" onClick={() => { armPictureMove(step.id, token.id); closeAuthoringPanel(); }}>{t(locale, "editor.movePicture")}</button>
       <div class="action-row"><button type="button" disabled={index === 0} onClick={() => move(step.id, index - 1)}>{t(locale, "editor.moveEarlier")}</button><button type="button" disabled={index === step.tokens.length - 1} onClick={() => move(step.id, index + 1)}>{t(locale, "editor.moveLater")}</button></div>
       <label>{t(locale, "editor.moveToGroup")}<select value="" onChange={(event) => { const target = session.document.peek().steps.find((group) => group.id === event.currentTarget.value); if (target) move(target.id, target.tokens.length); }}><option value="">{t(locale, "editor.moveToGroup")}</option>{session.document.value.steps.filter((group) => group.id !== step.id).map((group) => <option value={group.id}>{group.title || t(locale, session.document.value.meta.presentation === "board" ? "editor.groupNumber" : "editor.stepNumber", { number: session.document.value.steps.indexOf(group) + 1 })}</option>)}</select></label>
+      <p role="status" aria-live="polite" aria-atomic="true">{copied?.tokenId === token.id && <span key={copied.version}>{t(locale, "editor.copiedPicture", { label: copied.label })}</span>}</p>
       <div class="action-row"><button type="button" onClick={() => { const id = authoring.duplicatePicture(step.id, token.id); authoring.close(); if (id) focusPicture(id); }}>{t(locale, "editor.duplicatePicture")}</button>
-        <button type="button" onClick={() => authoring.copyPicture(step.id, token.id)}>{t(locale, "editor.copyPicture")}</button>
+        <button type="button" onClick={() => {
+          if (authoring.copyPicture(step.id, token.id)) setCopied(current => ({ tokenId: token.id, label, version: (current?.version ?? 0) + 1 }));
+          else setCopied(null);
+        }}>{t(locale, "editor.copyPicture")}</button>
         <button type="button" onClick={() => { sessionActions.removeTokenFromStep(session, step.id, token.id); authoring.close(); requestAnimationFrame(() => window.document.querySelector<HTMLElement>(`[data-add-picture="${CSS.escape(step.id)}"]`)?.focus()); }}>{t(locale, "editor.removePicture")}</button></div>
     </details>
   </section>;

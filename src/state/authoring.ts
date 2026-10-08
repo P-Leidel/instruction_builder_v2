@@ -28,9 +28,11 @@ export function createAuthoringController(session: DocumentSession) {
     const token = group(stepId)?.tokens.find((picture) => picture.id === tokenId); if (!token) return;
     const id = crypto.randomUUID(); sessionActions.addTokenToStep(session, stepId, { ...structuredClone(token), id }); sessionActions.selectToken(session, stepId, id); return id;
   }
-  function copyPicture(stepId: string, tokenId: string) {
+  function copyPicture(stepId: string, tokenId: string): boolean {
+    if (!group(stepId)?.tokens.some((token) => token.id === tokenId)) return false;
     sessionActions.copyToken(session, stepId, tokenId);
     if (session.copiedToken.peek()) session.copiedToken.value = structuredClone(session.copiedToken.peek());
+    return true;
   }
   function pastePicture(stepId: string): string | undefined {
     const copied = session.copiedToken.peek(); if (!copied || !group(stepId)) return;
