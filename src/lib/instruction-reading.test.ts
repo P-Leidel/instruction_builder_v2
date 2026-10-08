@@ -2,6 +2,42 @@ import { describe, it, expect } from "vitest";
 import { toReadingGroups } from "./instruction-reading";
 import { sequenceFixture, boardFixture } from "../test/fixtures/overhaul";
 describe("recipient reading", () => {
+  it.each(["labels", "pictures", "detailed"] as const)("names unresolved quantity, picture-time and group-time references in %s without altering authored content", (mode) => {
+    const doc = sequenceFixture(); const token = doc.steps[0].tokens[0];
+    token.iconId = "custom-picture"; token.label = "Authored unknown picture";
+    token.quantity = { iconId: "vendor.quantity.<raw>-$&", label: "Authored amount", amount: 4, unit: "cups" };
+    token.time = { iconId: "vendor.time.<raw>-$&", label: "Authored interval", seconds: 90 };
+    doc.steps[0].time = { iconId: "vendor.group.<raw>-$&", label: "Authored group interval", seconds: 0 };
+    const raw = structuredClone(doc);
+    for (const [locale, quantity, time, groupTime] of [
+      ["en", "Review quantity reference: vendor.quantity.<raw>-$&", "Review picture time reference: vendor.time.<raw>-$&", "Review group time reference: vendor.group.<raw>-$&"],
+      ["de", "Mengenverweis prüfen: vendor.quantity.<raw>-$&", "Bildzeitverweis prüfen: vendor.time.<raw>-$&", "Gruppenzeitverweis prüfen: vendor.group.<raw>-$&"],
+    ] as const) {
+      const group = toReadingGroups(doc, mode, locale)[0];
+      expect(group).toMatchObject({ time: doc.steps[0].time, groupSeconds: 0, timeReferenceNotice: groupTime });
+      expect(group.pictures[0]).toMatchObject({ accessibleName: "Authored unknown picture", quantity: token.quantity, time: token.time,
+        quantityDisplayLabel: "Authored amount", timeDisplayLabel: "Authored interval", quantityReferenceNotice: quantity, timeReferenceNotice: time });
+      expect(group.time).not.toBe(doc.steps[0].time); expect(group.pictures[0].quantity).not.toBe(token.quantity); expect(group.pictures[0].time).not.toBe(token.time);
+      expect(doc).toEqual(raw);
+    }
+  });
+  it.each(["labels", "pictures", "detailed"] as const)("does not flag resolvable attachment icons or invent an explicit group-time reference in %s", (mode) => {
+    const doc = boardFixture();
+    doc.steps[0].tokens[0].quantity = { iconId: "quantity.amount", amount: 2, unit: "kg", label: "" };
+    doc.steps[0].tokens[1].quantity = { iconId: "object.onion", amount: 3, unit: "cups", label: "3 cups" };
+    doc.steps[0].tokens[1].time = { iconId: "object.onion", seconds: 30, label: "" };
+    for (const locale of ["en", "de"] as const) {
+      const group = toReadingGroups(doc, mode, locale)[0];
+      expect(group.groupSeconds).toBeUndefined(); expect(group.timeReferenceNotice).toBeUndefined();
+      for (const picture of group.pictures) { expect(picture.quantityReferenceNotice).toBeUndefined(); expect(picture.timeReferenceNotice).toBeUndefined(); }
+      doc.meta.presentation = "sequence";
+      const sequence = toReadingGroups(doc, mode, locale)[0];
+      expect(sequence.groupSeconds).toBe(330); expect(sequence.timeReferenceNotice).toBeUndefined();
+      doc.steps[0].time = { iconId: "time.duration", seconds: 60, label: "1m" };
+      expect(toReadingGroups(doc, mode, locale)[0].timeReferenceNotice).toBeUndefined();
+      doc.steps[0].time = undefined; doc.meta.presentation = "board";
+    }
+  });
   it.each(["labels", "pictures", "detailed"] as const)("retains structured blank-label values in %s without changing stored fields", (mode) => {
     const doc = sequenceFixture(); const token = doc.steps[0].tokens[0];
     token.quantity = { iconId: "quantity.amount", label: "  ", amount: 4, unit: "custom scoops" };

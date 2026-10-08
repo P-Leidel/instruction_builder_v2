@@ -28,6 +28,7 @@ export function ReadingContent({ groups, presentation, locale }: { groups: reado
         <h2>{group.title || (board ? t(locale, "output.groupContext") : t(locale, "editor.stepNumber", { number: index + 1 }))}</h2>
         {group.description !== undefined && <p>{group.description}</p>}
         {group.groupSeconds !== undefined && <p>{t(locale, "time.group")}: {group.time ? getDurationDisplayLabel(group.time) : formatDuration(group.groupSeconds)}</p>}
+        {group.timeReferenceNotice && <p class="review-notice">{group.timeReferenceNotice}</p>}
         <ul class="reader__pictures">{group.pictures.map((picture) => <li key={picture.tokenId} class="reader__picture" data-reading-picture={picture.tokenId}>
           <span role="img" aria-label={picture.accessibleName} class="reader__symbol"><Icon iconId={picture.iconId} /></span>
           {picture.label !== undefined && <p>{picture.label}</p>}
@@ -37,6 +38,8 @@ export function ReadingContent({ groups, presentation, locale }: { groups: reado
           {picture.time && <p class="picture__time">{t(locale, "time.picture")}: {getDurationDisplayLabel(picture.time)}</p>}
           {!picture.icon.known && <p class="review-notice">{t(locale, "catalog.unknownSymbol", { iconId: picture.iconId })} — {t(locale, "editor.warningReview")}</p>}
           {picture.reviewWarning && <p class="review-notice">{t(locale, "catalog.reviewWarning", { iconId: picture.warning!.iconId })}</p>}
+          {picture.quantityReferenceNotice && <p class="review-notice">{picture.quantityReferenceNotice}</p>}
+          {picture.timeReferenceNotice && <p class="review-notice">{picture.timeReferenceNotice}</p>}
         </li>)}</ul>
       </li>)}
     </GroupList>

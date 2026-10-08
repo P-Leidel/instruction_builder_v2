@@ -175,6 +175,9 @@ export interface MessageParams {
   "catalog.unknownSymbol": { iconId: string };
   "catalog.unknownWarning": { iconId: string };
   "catalog.reviewWarning": { iconId: string };
+  "catalog.reviewQuantity": { iconId: string };
+  "catalog.reviewPictureTime": { iconId: string };
+  "catalog.reviewGroupTime": { iconId: string };
   "dialog.close": undefined;
   "dialog.cancel": undefined;
   "dialog.confirm": undefined;
