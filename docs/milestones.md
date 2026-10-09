@@ -47,12 +47,13 @@ production cold/update PWA gates pass. Whole-range and scoped test-only fix
 [reviews](./phase-3/reviews/2026-10-08-architecture-batches-review.md) approve the
 delivery with no actionable findings. Both minor suggestions are addressed in
 `7c62dcc`; affected 27 units/typecheck/lint and native/memory contracts pass.
-Product code remains at `be04807`. At the 8 October architecture checkpoint,
+Product code ended at `be04807` at the 8 October architecture checkpoint;
 no push, merge or deployment occurred. On 9 October, the user authorized committing
 and publishing the completed work directly to GitHub `main`. Local merge `3f7ead6`
 preserves both the reviewed delivery history and `origin/main` at `722eeb4`, with
 the same tree as reviewed `4be6ea8`. The [delivery record](./phase-3/progress/2026-10-08-architecture-batches.md)
-records fresh integration evidence and remote status links; remote CI and deployment
+records fresh integration evidence, the 9 October publication follow-up focus fix
+and its verification status, and remote status links; remote CI and deployment
 are separate from local gates. Phase 3 task status is unchanged.
 Participant, actual-print, real-device and screen-reader acceptance remain pending;
 Phase 3 is not complete.

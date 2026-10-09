@@ -6,7 +6,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "playwright";
 import { createServer } from "vite";
-import { boot, fixture, snapshot } from "./editor-browser-helpers.mjs";
+import { boot, createBlank, fixture, importDocument, snapshot } from "./editor-browser-helpers.mjs";
 
 // Removing successful navigation's destination focus must fail these checks.
 // Keyboard activation and the next Tab exercise the actual browser focus order.
@@ -39,7 +39,53 @@ async function library(page) {
   await page.locator(".my-guides").waitFor();
 }
 
+// Font arrival moves repair controls into the physical layout. Losing the
+// focused control, or restoring it after the user moved away, breaks navigation.
+async function fontArrivalFocus(kind, moveFocus) {
+  const { page, context } = await boot(browser, url, errors);
+  let release, requested;
+  const gate = new Promise(resolve => { release = resolve; });
+  const fontRequested = new Promise(resolve => { requested = resolve; });
+  try {
+    await page.route("**/fonts/*.ttf", async route => { requested(); await gate; await route.continue(); });
+    let target;
+    if (kind === "group") {
+      await createBlank(page);
+      const groupId = (await snapshot(page)).steps[0].id;
+      const escaped = await page.evaluate(id => CSS.escape(id), groupId);
+      target = page.locator(`[data-add-picture="${escaped}"]`).first();
+    } else {
+      await importDocument(page, fixture([1]));
+      target = page.locator('[data-editor-picture="picture-0-0"]').first();
+      await target.click(); await page.keyboard.press("Escape");
+    }
+    await fontRequested;
+    await page.getByRole("button", { name: "Read", exact: true }).click();
+    await page.getByRole("button", { name: "Back to editing", exact: true }).click();
+    await target.waitFor();
+    await page.waitForFunction(({ kind, id }) => document.activeElement?.getAttribute(kind === "group" ? "data-add-picture" : "data-editor-picture") === id,
+      { kind, id: await target.getAttribute(kind === "group" ? "data-add-picture" : "data-editor-picture") });
+    const original = await target.elementHandle();
+    let expected = target;
+    if (moveFocus === "external") {
+      expected = page.getByLabel("Guide title", { exact: true }); await expected.focus();
+    } else if (moveFocus === "modal") {
+      await page.getByRole("button", { name: "Settings", exact: true }).click();
+      expected = page.getByRole("dialog", { name: "Settings", exact: true }).getByRole("button", { name: "Close", exact: true });
+      await page.waitForFunction(() => document.activeElement?.closest('dialog[open]') !== null);
+    }
+    release();
+    await page.waitForFunction(() => document.querySelector(".instruction-editor")?.getAttribute("data-editor-layout") === "ready");
+    await expectFocus(page, `font arrival: ${kind} return ${moveFocus ? `preserves ${moveFocus} focus` : "retains its relocated control"}`, expected);
+    checks.at(-1).originalDisconnected = !await original.evaluate(node => node.isConnected);
+    await original.dispose();
+  } finally { release(); await context.close(); }
+}
+
 try {
+  for (const [kind, moveFocus] of [["group", null], ["picture", null], ["group", "external"], ["picture", "modal"]]) {
+    await fontArrivalFocus(kind, moveFocus);
+  }
   for (const [name, viewport] of [["desktop", { width: 1440, height: 1000 }], ["mobile", { width: 390, height: 844 }]]) {
     const { page, context } = await boot(browser, url, errors, viewport);
     await settled(page);

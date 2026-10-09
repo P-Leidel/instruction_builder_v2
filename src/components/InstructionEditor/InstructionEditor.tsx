@@ -25,8 +25,29 @@ function PrintedPage({ page, fonts, onError }: { page: OutputPage; fonts: Prepar
   }, [page, fonts, onError]);
   return <div ref={visual} class="editor-paper__image" aria-hidden="true" />;
 }
+
+function captureProjectionFocus(root: HTMLElement | null) {
+  const element = root?.ownerDocument.activeElement;
+  if (!root || !element || !root.contains(element)) return null;
+  const picture = element.getAttribute("data-editor-picture"), add = element.getAttribute("data-add-picture");
+  const group = element.getAttribute("data-group-edit") ?? element.getAttribute("data-group-drag");
+  const selector = picture !== null ? `[data-editor-picture="${CSS.escape(picture)}"]` :
+    add !== null ? `[data-add-picture="${CSS.escape(add)}"]` :
+    group !== null ? `[data-group-edit="${CSS.escape(group)}"], [data-group-drag="${CSS.escape(group)}"]` : null;
+  return selector ? { element, selector } : null;
+}
+
 export function InstructionEditor({ session, locale }: { session: DocumentSession; locale: AppLocale }) {
   const ref = useRef<HTMLElement>(null);
+  const projectionFocus = captureProjectionFocus(ref.current);
+  useLayoutEffect(() => {
+    const root = ref.current;
+    if (!root || !projectionFocus || projectionFocus.element.isConnected) return;
+    const document = root.ownerDocument;
+    if (document.activeElement !== document.body || document.querySelector("dialog[open]")) return;
+    // Font/zoom replanning can replace a focused repair control with its physical counterpart.
+    root.querySelector<HTMLElement>(projectionFocus.selector)?.focus({ preventScroll: true });
+  });
   const doc = session.document.value, guideId = activeGuideId.value, records = printSettings.records.value;
   const options = useMemo(() => printSettings.getOptions(doc, guideId, locale), [doc, guideId, locale, records]);
   const fonts = preparedPrintFonts.value;

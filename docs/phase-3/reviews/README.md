@@ -12,11 +12,12 @@ per run (`YYYY-MM-DD-code-review.md`).
   archive the whole-range review of `78e42be..5aa90b8` and scoped test-only
   re-review of `5aa90b8..7c62dcc`. Both approve the delivery; the two nonblocking
   test-quality suggestions are addressed, with no new breakage or actionable
-  finding. Product code ends at `be04807`; full integration and affected post-fix
+  finding. Product code ended at `be04807` at the 8 October checkpoint; full integration and affected post-fix
   checks pass. On 9 October, the user authorized committing and publishing the
   completed work directly to GitHub `main`; local merge `3f7ead6` preserves both
   histories and the reviewed tree. The [delivery record](../progress/2026-10-08-architecture-batches.md)
-  records fresh integration evidence and remote status links; remote CI and deployment
+  records fresh integration evidence, the 9 October publication follow-up focus fix
+  and its verification status, and remote status links; remote CI and deployment
   are separate from local gates. Practical/UX acceptance remains open.
 
 - [8 October 2026 architecture review](../audits/2026-10-08-architecture-review.html)
