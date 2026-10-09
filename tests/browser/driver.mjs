@@ -22,6 +22,7 @@ try {
     await page.locator("[data-add-picture]").first().focus(); await page.keyboard.press("Enter");
     await page.getByRole("searchbox").fill("Onion"); await page.locator(".token-picker").getByRole("button", { name: "Onion", exact: true }).focus(); await page.keyboard.press("Enter");
     await page.locator("[data-editor-picture]").first().waitFor();
+    await page.waitForFunction(() => document.activeElement === document.querySelector("[data-editor-picture]"));
     checks.KEYBOARD_CREATION_AND_INSERT_FOCUS = await page.locator("[data-editor-picture]").first().evaluate((node) => node === document.activeElement);
     await page.keyboard.press("Enter"); await page.getByLabel("Picture label", { exact: true }).waitFor();
     const longLabel = "WWWWWWWWWWWWWWWWWW vollständig – Öl & Gemüse \"quoted\"\nSecond line preserved";
