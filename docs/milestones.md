@@ -5,7 +5,7 @@
 > any task's status; see "Documentation status conventions" below for how
 > this doc relates to every other doc in `docs/`.
 
-**Current status (2026-10-08): Phase 3 remains in progress (5 of 7 tasks).**
+**Current status (2026-10-09): Phase 3 remains in progress (5 of 7 tasks).**
 Task 30 (real-user testing) is in progress; task 31 has a reviewed local overhaul, with practical refinement and release acceptance still open.
 The [takeover review](./phase-3/audits/2026-10-06-takeover-review.md) records
 UX/mobile/output risks; [maintenance](./phase-3/progress/2026-10-06-reliability-maintenance.md)
@@ -35,7 +35,7 @@ fresh 569 unit tests / 39 files, 7 tooling tests, lint/build, full browser and p
 PWA gates pass. Whole-batch review approves the changes; all three commits pass CI. The user
 chose automatic saving of valid attachment edits and simpler output controls with named
 advanced sections; implementation is pending. Mobile fitting/readability is the next UX decision.
-No merge or deployment occurred.
+At that P3 checkpoint, no merge or deployment occurred.
 The [8 October architecture verification](./phase-3/reviews/2026-10-08-architecture-verification.md)
 assesses the nine new independent review candidates and starts cleanup by
 retiring the unused legacy writer and singleton aliases. The subsequent
@@ -47,8 +47,13 @@ production cold/update PWA gates pass. Whole-range and scoped test-only fix
 [reviews](./phase-3/reviews/2026-10-08-architecture-batches-review.md) approve the
 delivery with no actionable findings. Both minor suggestions are addressed in
 `7c62dcc`; affected 27 units/typecheck/lint and native/memory contracts pass.
-Product code remains at `be04807`. No push, merge or deployment occurred;
-Phase 3 task status is unchanged.
+Product code remains at `be04807`. At the 8 October architecture checkpoint,
+no push, merge or deployment occurred. On 9 October, the user authorized committing
+and publishing the completed work directly to GitHub `main`. Local merge `3f7ead6`
+preserves both the reviewed delivery history and `origin/main` at `722eeb4`, with
+the same tree as reviewed `4be6ea8`. The [delivery record](./phase-3/progress/2026-10-08-architecture-batches.md)
+records fresh integration evidence and remote status links; remote CI and deployment
+are separate from local gates. Phase 3 task status is unchanged.
 Participant, actual-print, real-device and screen-reader acceptance remain pending;
 Phase 3 is not complete.
 

@@ -8,7 +8,12 @@ production cold/update PWA gates pass. [Final reviews](../reviews/2026-10-08-arc
 approve the whole range and test-only follow-up with no actionable findings;
 both minor suggestions are addressed in `7c62dcc`. Affected 27 units/type/lint and
 native/memory contracts pass; product code remains at `be04807`.
-No push, merge or deployment occurred; Phase 3 and practical/UX acceptance remain open.
+At the 8 October checkpoint, no push, merge or deployment occurred. On 9 October,
+the user authorized committing and publishing the completed work directly to GitHub
+`main`. Local merge `3f7ead6` preserves the reviewed delivery and `origin/main`
+histories without changing the reviewed tree. The [delivery record](./2026-10-08-architecture-batches.md)
+records fresh integration evidence and remote status links; remote CI and deployment
+are separate from local gates. Phase 3 and practical/UX acceptance remain open.
 
 The prior [8 October P3 remediation](./2026-10-08-p3-remediation.md) implements
 board semantics, reader attachment notices and Copy feedback in independently approved,

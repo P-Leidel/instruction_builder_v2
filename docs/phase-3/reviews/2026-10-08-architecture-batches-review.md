@@ -8,7 +8,7 @@ Both suggestions were then fixed in test-only commit `7c62dcc`. The scoped re-re
 
 Root's post-review execution passed 27 covering unit tests, typecheck, lint and whitespace checks, plus 12 shared native contracts, 12 shared memory contracts and 11 retained native checks. Production code is unchanged after `be04807`, so the earlier full integration evidence (682 tests/41 files, tooling 7, build 15 offline assets, browser 22 drivers and PWA 49 cold checks/four formats plus waiting-update/first-use PDF checks) remains applicable. No full-suite rerun after the test-only fix is implied.
 
-This archive establishes local technical review approval. Pending UX, participant, physical-print, real-device, screen-reader and licensing acceptance, and local-only/no remote integration status remain unchanged.
+This archive establishes local technical review approval at the 8 October checkpoint, when remote integration had not occurred. On 9 October, the user authorized committing and publishing the completed work directly to GitHub `main`. Local merge `3f7ead6` preserves both histories and the reviewed tree. The [delivery record](../progress/2026-10-08-architecture-batches.md) records fresh integration evidence and remote status links; remote CI and deployment are separate from local gates. UX, participant, physical-print, real-device, screen-reader and licensing acceptance remain pending. The original review reports below retain their historical scope and verdicts.
 
 ## Archived whole-range report
 
